@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">秀文</string>
+    <string name="vip_info">会员资料</string>
+    <string name="publish_article">发表文章</string>
+    <string name="avail_balance">可用余额</string>
+    <string name="commission_balance">佣金金额</string>
+    <string name="balance_total">总余额</string>
+    <string name="required">*</string>
+    <string name="basic_info">基本资料</string>
+    <string name="banks_setting">银行设置</string>
+    <string name="articles_list">文章列表</string>
+    <string name="password_modify">修改密码</string>
+    <string name="withdraw_deposit">我要提现</string>
+    <string name="vip_center">会员中心</string>
 </resources>
