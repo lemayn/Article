@@ -12,8 +12,23 @@ public class ItemBean extends BaseObservable {
         this.title = title;
     }
 
+    public ItemBean(int icon, String title, Class clazz) {
+        this.icon = icon;
+        this.title = title;
+        this.clazz = clazz;
+    }
+
     private int icon;
     private String title;
+    private Class clazz;
+
+    public Class getClazz() {
+        return clazz;
+    }
+
+    public void setClazz(Class clazz) {
+        this.clazz = clazz;
+    }
 
     @Bindable
     public int getIcon() {

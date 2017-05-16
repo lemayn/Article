@@ -5,11 +5,19 @@
     <string name="avail_balance">可用余额</string>
     <string name="commission_balance">佣金金额</string>
     <string name="balance_total">总余额</string>
-    <string name="required">*</string>
     <string name="basic_info">基本资料</string>
     <string name="banks_setting">银行设置</string>
     <string name="articles_list">文章列表</string>
     <string name="password_modify">修改密码</string>
     <string name="withdraw_deposit">我要提现</string>
     <string name="vip_center">会员中心</string>
+    <string name="type_old_pwd">&#160;输入旧密码</string>
+    <string name="type_new_pwd">&#160;输入新密码</string>
+    <string name="retype_new_pwd">&#160;重复新密码</string>
+    <string name="required">*</string>
+    <string name="confirm_modify">确认修改</string>
+    <string name="attention">注意事项：</string>
+    <string name="modify_pwd_attentions">1.请注意，如果重新设置密码后，请一定牢记新的密码，并建议您定期
+        更新密码保证安全性 \n2.登录密码如不修改，请勿填写。\n3.如忘记密码，请联系客服为您重置密码。\n4
+        .如果操作过程中遇到问题，请于客服联系。</string>
 </resources>

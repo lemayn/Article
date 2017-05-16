@@ -32,7 +32,7 @@ public class VIPCenterActivity extends ToolBarBaseActivity<ActivityVipCenterBind
         data.add(new ItemBean(R.drawable.banks_setting, CommonUtils.getString(R.string.banks_setting)));
         data.add(new ItemBean(R.drawable.banks_setting, CommonUtils.getString(R.string.withdraw_deposit)));
         data.add(new ItemBean(R.drawable.articles_list, CommonUtils.getString(R.string.articles_list)));
-        data.add(new ItemBean(R.drawable.password_modify, CommonUtils.getString(R.string.password_modify)));
+        data.add(new ItemBean(R.drawable.password_modify, CommonUtils.getString(R.string.password_modify), ModifyPasswordActivity.class));
         binding.rvVipCenter.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         binding.rvVipCenter.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
         vipCenterAdapter = new VIPCenterAdapter(data);
