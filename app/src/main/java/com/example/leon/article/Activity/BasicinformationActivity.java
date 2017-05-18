@@ -1,18 +1,13 @@
 package com.example.leon.article.Activity;
 
 import android.os.Bundle;
-import android.support.annotation.LayoutRes;
 import android.support.design.widget.TextInputLayout;
-import android.support.v7.widget.DividerItemDecoration;
-import android.support.v7.widget.LinearLayoutManager;
 import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.leon.article.R;
-import com.example.leon.article.adapter.VIPCenterAdapter;
 import com.example.leon.article.base.ToolBarBaseActivity;
 import com.example.leon.article.databinding.ActivityBasicinformationBinding;
-import com.example.leon.article.databinding.ActivityVipCenterBinding;
 
 /**
  * Basic Information

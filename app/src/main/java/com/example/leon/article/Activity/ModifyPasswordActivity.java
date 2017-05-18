@@ -30,6 +30,7 @@ public class ModifyPasswordActivity extends ToolBarBaseActivity<ActivityModifyPa
     private void initView() {
         setTitle(CommonUtils.getString(R.string.password_modify));
         setNavigationView();
+        hideHeaderInfo();
         mOldPwd = binding.etTypeOldPwd;
         mNewPwd = binding.etTypeNewPwd;
         mRetypePwd = binding.etRetypeNewPwd;

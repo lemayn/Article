@@ -34,6 +34,12 @@
     <string name="user_qq">我的QQ</string>
     <string name="user_weixin">我的微信</string>
     <string name="secure_mailbox">安全邮箱</string>
+    <string name="withdraw_amount">请输入提现金额(单笔金额100元起)</string>
+    <string name="withdraw_pwd">请输入提现密码(默认是登录密码)</string>
+    <string name="withdraw_deposit_attentions">1.每个账号每天有3次取款，单笔不少于100元，体现账号不正确的情况
+        请及时联系我们的客服，提现密码默认是账号登录密码。\n2.体现时间:24小时，3-10分钟内到账，忙时不超过30分钟，
+        若超过时间，请及时练习客服。\n3.偶尔提款高峰期会出现短时间的延时，但平台保证资金会一一到达客户银行账户。</string>
+
     <string name="myarticle">我的文章</string>
     <string name="cue_words">请输入您的银行卡号</string>
     <string name="nav_ui">首页</string>

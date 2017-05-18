@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.leon.article">
+<manifest package="com.example.leon.article"
+          xmlns:android="http://schemas.android.com/apk/res/android">
 
     <application
         android:name=".app"
@@ -27,6 +27,16 @@
         <activity android:name=".Activity.BasicinformationActivity" />
         <activity android:name=".Activity.ForgetPwdActivity" />
         <activity android:name=".Activity.bank.AddCardActivity"></activity>
+        <activity
+            android:name=".Activity.ModifyPasswordActivity"
+            android:windowSoftInputMode="stateHidden">
+        </activity>
+        <activity android:name=".Activity.RegisterActivity"/>
+        <activity android:name=".Activity.MainActivity"/>
+        <activity android:name=".Activity.BasicinformationActivity"/>
+        <activity android:name=".Activity.ForgetPwdActivity"/>
+        <activity android:name=".Activity.WithdrawDepositActivity">
+        </activity>
     </application>
 
 </manifest>
