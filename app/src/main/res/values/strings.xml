@@ -5,6 +5,7 @@
     <string name="avail_balance">可用余额</string>
     <string name="commission_balance">佣金金额</string>
     <string name="balance_total">总余额</string>
+    <string name="required">*</string>
     <string name="basic_info">基本资料</string>
     <string name="banks_setting">银行设置</string>
     <string name="articles_list">文章列表</string>
@@ -20,4 +21,19 @@
     <string name="modify_pwd_attentions">1.请注意，如果重新设置密码后，请一定牢记新的密码，并建议您定期
         更新密码保证安全性 \n2.登录密码如不修改，请勿填写。\n3.如忘记密码，请联系客服为您重置密码。\n4
         .如果操作过程中遇到问题，请于客服联系。</string>
+
+    <string name="register">注册</string>
+
+    <string name="register_username">请使用英文、数字、下划线6-10位字符</string>
+    <string name="register_password">请输入6-16位字符</string>
+    <string name="register_password2">请重复输入密码</string>
+    <string name="register_userphone">请正确输入手机号码，提款将核实</string>
+    <string name="register_userqq">请正确输入QQ号码，提款将核实</string>
+
+    <string name="user_account">我的账号</string>
+    <string name="contact_number">联系电话</string>
+    <string name="user_qq">我的QQ</string>
+    <string name="user_weixin">我的微信</string>
+    <string name="secure_mailbox">安全邮箱</string>
+
 </resources>

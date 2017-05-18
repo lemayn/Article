@@ -22,6 +22,17 @@
             android:name=".Activity.ModifyPasswordActivity"
             android:windowSoftInputMode="stateHidden">
         </activity>
+
+        <activity android:name=".Activity.VIPCenterActivity"/>
+
+        <activity android:name=".Activity.RegisterActivity"/>
+
+        <activity android:name=".Activity.MainActivity"/>
+
+        <activity android:name=".Activity.BasicinformationActivity"/>
+
+        <activity android:name=".Activity.ForgetPwdActivity"/>
+
     </application>
 
 </manifest>

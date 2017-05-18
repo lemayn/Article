@@ -28,18 +28,32 @@ public class VIPCenterActivity extends ToolBarBaseActivity<ActivityVipCenterBind
 
     private void initEvent() {
         ArrayList<ItemBean> data = new ArrayList<>();
-        data.add(new ItemBean(R.drawable.basic_info, CommonUtils.getString(R.string.basic_info)));
-        data.add(new ItemBean(R.drawable.banks_setting, CommonUtils.getString(R.string.banks_setting)));
-        data.add(new ItemBean(R.drawable.banks_setting, CommonUtils.getString(R.string.withdraw_deposit)));
-        data.add(new ItemBean(R.drawable.articles_list, CommonUtils.getString(R.string.articles_list)));
-        data.add(new ItemBean(R.drawable.password_modify, CommonUtils.getString(R.string.password_modify), ModifyPasswordActivity.class));
+        data.add(new ItemBean(R.drawable.basic_info, CommonUtils.getString(R.string.basic_info), BasicinformationActivity.class));
+        data.add(new ItemBean(R.drawable.banks_setting, CommonUtils.getString(R.string.banks_setting), ForgetPwdActivity.class));
+        data.add(new ItemBean(R.drawable.banks_setting, CommonUtils.getString(R.string.withdraw_deposit), ForgetPwdActivity.class));
+        data.add(new ItemBean(R.drawable.articles_list, CommonUtils.getString(R.string.articles_list), ForgetPwdActivity.class));
+        data.add(new ItemBean(R.drawable.password_modify, CommonUtils.getString(R.string.password_modify), ForgetPwdActivity.class));
         binding.rvVipCenter.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         binding.rvVipCenter.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
         vipCenterAdapter = new VIPCenterAdapter(data);
         binding.rvVipCenter.setAdapter(vipCenterAdapter);
+
     }
 
     public void initView() {
         setTitle(getString(R.string.vip_center));
     }
+
+
+    private void onClick() {
+
+        vipCenterAdapter.setOnItemClickListener(new OnItemClickListener<ItemBean>() {
+            @Override
+            public void onClick(ItemBean itemBean, int position) {
+                Toast.makeText(VIPCenterActivity.this, "asd"+position, Toast.LENGTH_LONG).show();
+                startActivity(new Intent(VIPCenterActivity.this, itemBean.getClassname()));
+            }
+        });
+    }
+
 }
