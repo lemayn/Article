@@ -15,7 +15,6 @@
     <string name="type_old_pwd">&#160;输入旧密码</string>
     <string name="type_new_pwd">&#160;输入新密码</string>
     <string name="retype_new_pwd">&#160;重复新密码</string>
-    <string name="required">*</string>
     <string name="confirm_modify">确认修改</string>
     <string name="attention">注意事项：</string>
     <string name="modify_pwd_attentions">1.请注意，如果重新设置密码后，请一定牢记新的密码，并建议您定期
@@ -35,5 +34,18 @@
     <string name="user_qq">我的QQ</string>
     <string name="user_weixin">我的微信</string>
     <string name="secure_mailbox">安全邮箱</string>
-
+    <string name="myarticle">我的文章</string>
+    <string name="cue_words">请输入您的银行卡号</string>
+    <string name="nav_ui">首页</string>
+    <string name="editor_title">请输入标题</string>
+    <string name="titlenotnull">标题不能为空哦</string>
+    <string name="lv_article_empty">您还没有发表过文章</string>
+    <string name="upload_content">上传内容</string>
+    <string name="status">审核状态</string>
+    <string name="notes">注意事项：</string>
+    <string name="create_newArt">新建</string>
+    <string name="article_detail">文章详情</string>
+    <string name="depositBank">开户银行</string>
+    <string name="save">保存</string>
+    <string name="issue">发布</string>
 </resources>
