@@ -10,17 +10,20 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".Activity.LoginActivity">
-        </activity>
-        <activity android:name=".Activity.VIPCenterActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
 
-                <category android:name="android.intent.category.LAUNCHER"/>
+        </activity>
+        <activity android:name=".Activity.art.ArtDetailActivity"></activity>
+        <activity android:name=".Activity.art.ArticleActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".Activity.ModifyPasswordActivity"
-            android:windowSoftInputMode="stateHidden">
+        <activity android:name=".Activity.art.EditorActivity"></activity>
+        <activity android:name=".Activity.art.MySqlActivity"></activity>
+        <activity android:name=".Activity.bank.BankSettingActivity">
+
         </activity>
 
         <activity android:name=".Activity.VIPCenterActivity"/>

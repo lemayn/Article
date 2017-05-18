@@ -88,6 +88,7 @@
                     android:background="@color/center_divider"/>
 
                 <LinearLayout
+                    android:id="@+id/ll_header_money"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/x63"
                     android:gravity="center"

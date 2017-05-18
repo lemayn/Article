@@ -1,11 +1,15 @@
 package com.example.leon.article.Activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
+import android.widget.Toast;
 
+import com.example.leon.article.Activity.art.ArticleActivity;
 import com.example.leon.article.R;
 import com.example.leon.article.adapter.VIPCenterAdapter;
+import com.example.leon.article.base.OnItemClickListener;
 import com.example.leon.article.base.ToolBarBaseActivity;
 import com.example.leon.article.bean.ItemBean;
 import com.example.leon.article.databinding.ActivityVipCenterBinding;
@@ -31,7 +35,7 @@ public class VIPCenterActivity extends ToolBarBaseActivity<ActivityVipCenterBind
         data.add(new ItemBean(R.drawable.basic_info, CommonUtils.getString(R.string.basic_info), BasicinformationActivity.class));
         data.add(new ItemBean(R.drawable.banks_setting, CommonUtils.getString(R.string.banks_setting), ForgetPwdActivity.class));
         data.add(new ItemBean(R.drawable.banks_setting, CommonUtils.getString(R.string.withdraw_deposit), ForgetPwdActivity.class));
-        data.add(new ItemBean(R.drawable.articles_list, CommonUtils.getString(R.string.articles_list), ForgetPwdActivity.class));
+        data.add(new ItemBean(R.drawable.articles_list, CommonUtils.getString(R.string.articles_list), ArticleActivity.class));
         data.add(new ItemBean(R.drawable.password_modify, CommonUtils.getString(R.string.password_modify), ForgetPwdActivity.class));
         binding.rvVipCenter.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         binding.rvVipCenter.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
@@ -51,7 +55,7 @@ public class VIPCenterActivity extends ToolBarBaseActivity<ActivityVipCenterBind
             @Override
             public void onClick(ItemBean itemBean, int position) {
                 Toast.makeText(VIPCenterActivity.this, "asd"+position, Toast.LENGTH_LONG).show();
-                startActivity(new Intent(VIPCenterActivity.this, itemBean.getClassname()));
+                startActivity(new Intent(VIPCenterActivity.this, itemBean.getClazz()));
             }
         });
     }

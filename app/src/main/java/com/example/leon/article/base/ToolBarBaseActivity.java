@@ -64,4 +64,9 @@ public class ToolBarBaseActivity<T extends ViewDataBinding> extends AppCompatAct
     public void hideHeaderInfo() {
         baseBinding.llHeaderInfo.setVisibility(View.GONE);
     }
+
+    public void hideHeaderMoneyInfo(){
+        baseBinding.llHeaderMoney.setVisibility(View.GONE);
+    }
+
 }

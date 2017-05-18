@@ -5,7 +5,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.example.leon.article.Activity.VIPCenterActivity;
 import com.example.leon.article.R;
 import com.example.leon.article.app;
 import com.example.leon.article.base.BaseRecyclerViewAdapter;
@@ -51,7 +50,7 @@ public class VIPCenterAdapter extends BaseRecyclerViewAdapter<ItemBean> implemen
             binding.rlItem.setOnClickListener(new PerfectClickListener() {
                 @Override
                 protected void onNoDoubleClick(View v) {
-                    Intent intent = new Intent(app.getInstance(), itemBean.getClassname());
+                    Intent intent = new Intent(app.getInstance(), itemBean.getClazz());
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     app.getInstance().startActivity(intent);
                     Toast.makeText(app.getInstance(), itemBean.getTitle(), Toast.LENGTH_SHORT).show();
