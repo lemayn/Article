@@ -19,17 +19,17 @@
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:text="开户银行"
-                android:textSize="@dimen/x15"/>
+                android:textSize="@dimen/x14"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/x37"
-                android:layout_marginLeft="@dimen/x15"
+                android:layout_marginLeft="@dimen/x14"
                 android:background="@null"
                 android:gravity="center_vertical"
                 android:text="工商银行"
                 android:textColor="@color/colorPrimary"
-                android:textSize="@dimen/x15"/>
+                android:textSize="@dimen/x14"/>
 
 
         </LinearLayout>
@@ -52,16 +52,16 @@
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:text="户主姓名"
-                android:textSize="@dimen/x15"/>
+                android:textSize="@dimen/x14"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/x37"
-                android:layout_marginLeft="@dimen/x15"
+                android:layout_marginLeft="@dimen/x14"
                 android:background="@null"
                 android:gravity="center_vertical"
                 android:text="阿姨"
-                android:textSize="@dimen/x15"
+                android:textSize="@dimen/x14"
                 />
 
 
@@ -83,16 +83,16 @@
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:text="提现账户"
-                android:textSize="@dimen/x15"/>
+                android:textSize="@dimen/x14"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/x37"
-                android:layout_marginLeft="@dimen/x15"
+                android:layout_marginLeft="@dimen/x14"
                 android:background="@null"
                 android:gravity="center_vertical"
                 android:text="132131313131313"
-                android:textSize="@dimen/x15"/>
+                android:textSize="@dimen/x14"/>
 
 
         </LinearLayout>
@@ -113,16 +113,16 @@
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:text="提现金额"
-                android:textSize="@dimen/x15"/>
+                android:textSize="@dimen/x14"/>
 
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="@dimen/x15"
+                android:layout_marginLeft="@dimen/x14"
                 android:background="@null"
                 android:gravity="center_vertical"
                 android:hint="@string/withdraw_amount"
-                android:textSize="@dimen/x15"/>
+                android:textSize="@dimen/x14"/>
 
 
         </LinearLayout>
@@ -143,17 +143,17 @@
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:text="提现密码"
-                android:textSize="@dimen/x15"/>
+                android:textSize="@dimen/x14"/>
 
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/x37"
-                android:layout_marginLeft="@dimen/x15"
+                android:layout_marginLeft="@dimen/x14"
                 android:background="@null"
                 android:gravity="center_vertical"
                 android:hint="@string/withdraw_pwd"
                 android:inputType="textPassword"
-                android:textSize="@dimen/x15"/>
+                android:textSize="@dimen/x14"/>
 
 
         </LinearLayout>
