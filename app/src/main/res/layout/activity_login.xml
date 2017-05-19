@@ -25,7 +25,6 @@
             android:drawableLeft="@drawable/zhanghao"
             android:drawablePadding="16dp"
             android:hint="账号"
-            android:inputType="phone"
             android:textColor="#000"
             android:textSize="14sp"
             android:layout_marginRight="16dp"

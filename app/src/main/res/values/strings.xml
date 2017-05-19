@@ -5,13 +5,14 @@
     <string name="avail_balance">可用余额</string>
     <string name="commission_balance">佣金金额</string>
     <string name="balance_total">总余额</string>
-    <string name="required">*</string>
     <string name="basic_info">基本资料</string>
     <string name="banks_setting">银行设置</string>
     <string name="articles_list">文章列表</string>
     <string name="password_modify">修改密码</string>
     <string name="withdraw_deposit">我要提现</string>
+    <string name="required">*</string>
     <string name="vip_center">会员中心</string>
+    <string name="add_bankcard">添加银行卡</string>
     <string name="type_old_pwd">&#160;输入旧密码</string>
     <string name="type_new_pwd">&#160;输入新密码</string>
     <string name="retype_new_pwd">&#160;重复新密码</string>
@@ -54,4 +55,10 @@
     <string name="depositBank">开户银行</string>
     <string name="save">保存</string>
     <string name="issue">发布</string>
+
+    <string name="matters_needing_attention">注意事项:</string>
+    <string name="matters_needing_attention1">1.一个游戏账户最多绑定两张银行卡</string>
+    <string name="matters_needing_attention2">2.银行卡信息完成后，已绑定的银行卡信息不能进行修改和删除</string>
+    <string name="matters_needing_attention3">3.所绑定的银行卡必须在使用中</string>
+
 </resources>

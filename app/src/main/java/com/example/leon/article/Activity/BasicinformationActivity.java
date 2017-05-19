@@ -8,6 +8,8 @@ import android.widget.EditText;
 import com.example.leon.article.R;
 import com.example.leon.article.base.ToolBarBaseActivity;
 import com.example.leon.article.databinding.ActivityBasicinformationBinding;
+import com.example.leon.article.databinding.ActivityVipCenterBinding;
+import com.example.leon.article.utils.CommonUtils;
 
 /**
  * Basic Information
@@ -38,6 +40,9 @@ public class BasicinformationActivity extends ToolBarBaseActivity<ActivityBasici
     }
 
     private void bindViews() {
+
+        setTitle(CommonUtils.getString(R.string.basic_info));
+        setNavigationView();
 
 //        mTextinput_layout1 = (TextInputLayout) findViewById(R.id.textinput_layout1);
 //        mEdit_useraccount = (EditText) findViewById(R.id.edit_useraccount);
