@@ -31,7 +31,7 @@
             android:layout_marginLeft="@dimen/x2"
             android:layout_toRightOf="@id/iv_icon"
             android:text="@{item.title}"
-            android:textSize="@dimen/x17"/>
+            android:textSize="@dimen/x14"/>
 
         <ImageView
             android:layout_width="@dimen/x30"

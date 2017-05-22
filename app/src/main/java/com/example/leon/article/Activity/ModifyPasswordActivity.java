@@ -7,11 +7,21 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.leon.article.R;
+import com.example.leon.article.api.ApiFactory;
+import com.example.leon.article.api.bean.ArticleApiBean;
 import com.example.leon.article.base.ToolBarBaseActivity;
 import com.example.leon.article.databinding.ActivityModifyPasswordBinding;
 import com.example.leon.article.utils.CommonUtils;
+import com.example.leon.article.utils.Constant;
 import com.example.leon.article.utils.PerfectClickListener;
 import com.example.leon.article.utils.Validator;
+import com.google.gson.Gson;
+
+import java.util.HashMap;
+
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 public class ModifyPasswordActivity extends ToolBarBaseActivity<ActivityModifyPasswordBinding> {
     private TextInputEditText mOldPwd;
@@ -47,16 +57,39 @@ public class ModifyPasswordActivity extends ToolBarBaseActivity<ActivityModifyPa
                 boolean ispwds = validatorPwd(oldPwd, newPwd, retypePwd);
 
                 if (ispwds) {
-
+                    String oldpwdLocal = "a123456789";
                     //旧密码输入正确
-
                     //新密码两次输入相同
+                    if (oldPwd.equals(oldpwdLocal) && newPwd.equals(retypePwd)) {
+                        //请求接口更新密码
+                        HashMap<String, String> hashMap = new HashMap<>();
+                        hashMap.put("pwd", oldPwd);
+                        hashMap.put("npwd", newPwd);
+                        hashMap.put("renpwd", retypePwd);
+                        hashMap.put("cookie", "90c393a671e233c67cabfe464bc99a6c");
+                        hashMap.put("sid", "c5etakebn6grkst6csqk2a5o62");
+                        ApiFactory.getApi().article(Constant.Api.EDIT_PASSWORD, hashMap)
+                                .subscribeOn(Schedulers.io())
+                                .observeOn(AndroidSchedulers.mainThread())
+                                .subscribe(new Subscriber<ArticleApiBean>() {
+                                    @Override
+                                    public void onCompleted() {
 
-                    //请求接口更新密码
+                                    }
 
-                    //回调成功，更新本地存储密码
+                                    @Override
+                                    public void onError(Throwable e) {
+                                        Toast.makeText(ModifyPasswordActivity.this, e.getMessage(),
+                                                Toast.LENGTH_SHORT).show();
+                                    }
 
-                    //失败，提示用户
+                                    @Override
+                                    public void onNext(ArticleApiBean apiBean) {
+                                        Toast.makeText(ModifyPasswordActivity.this, new Gson().toJson(apiBean),
+                                                Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                    }
                 }
             }
         });

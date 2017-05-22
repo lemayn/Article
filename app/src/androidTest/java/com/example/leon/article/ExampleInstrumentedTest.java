@@ -1,13 +1,24 @@
 package com.example.leon.article;
 
-import android.content.Context;
-import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
+
+import com.example.leon.article.api.ApiFactory;
+import com.example.leon.article.api.bean.ArticleApiBean;
+import com.example.leon.article.utils.Constant;
+import com.google.gson.Gson;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import static org.junit.Assert.*;
+import java.util.HashMap;
+
+import okhttp3.FormBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 /**
  * Instrumentation test, which will execute on an Android device.
@@ -18,9 +29,66 @@ import static org.junit.Assert.*;
 public class ExampleInstrumentedTest {
     @Test
     public void useAppContext() throws Exception {
-        // Context of the app under test.
-        Context appContext = InstrumentationRegistry.getTargetContext();
+        String url = "http://118.89.233.35:8989/?Action=UserData&Key=55a50c1a06f9c1032014112cbd68f34b";
+        String cookie = "2493109ec31930d9205d3e614cd43ced";
 
-        assertEquals("com.example.leon.article", appContext.getPackageName());
+        OkHttpClient client = new OkHttpClient();
+        FormBody body = new FormBody.Builder()
+                .add("cookie", cookie)
+                .build();
+        Request request = new Request.Builder()
+                .url(url)
+                .post(body)
+                .build();
+        Response response = client.newCall(request).execute();
+        System.out.println(response.body().string());
     }
+
+    @Test
+    public void login() {
+        HashMap<String, String> hashMap = new HashMap<>();
+        hashMap.put("name", "test1438");
+        hashMap.put("pwd", "a123456789");
+        ApiFactory.getApi().article(Constant.Api.LOGIN, hashMap)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<ArticleApiBean>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onNext(ArticleApiBean apiBean) {
+                        HashMap<String, String> hashMap = new HashMap<>();
+                        hashMap.put("cookie", apiBean.getData().getCookie());
+                        hashMap.put("sid", apiBean.getData().getSid());
+                        ApiFactory.getApi().article(Constant.Api.USER_DATA, hashMap)
+                                .subscribeOn(Schedulers.io())
+                                .observeOn(AndroidSchedulers.mainThread())
+                                .subscribe(new Subscriber<ArticleApiBean>() {
+                                    @Override
+                                    public void onCompleted() {
+
+                                    }
+
+                                    @Override
+                                    public void onError(Throwable e) {
+
+                                    }
+
+                                    @Override
+                                    public void onNext(ArticleApiBean apiBean) {
+                                        System.out.println(new Gson().toJson(apiBean));
+                                    }
+                                });
+                    }
+                });
+    }
+
 }

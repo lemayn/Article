@@ -163,6 +163,17 @@
             android:layout_height="0.2dp"
             android:background="#ababab"/>
 
+        <Button
+            android:id="@+id/btn_confirm"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x39"
+            android:layout_marginBottom="@dimen/x20"
+            android:layout_marginTop="@dimen/x20"
+            android:background="@drawable/shape_modify_confirm_back"
+            android:text="@string/confirm_withdraw"
+            android:textColor="@color/white"
+            android:textSize="@dimen/x17"/>
+
         <TextView
             android:layout_marginTop="@dimen/x10"
             android:layout_width="wrap_content"

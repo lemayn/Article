@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <data>
+
+        <import type="com.example.leon.article.api.bean.ArticleApiBean"/>
+
+        <variable
+            name="apibean"
+            type="ArticleApiBean"/>
+
+    </data>
+
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -60,7 +71,7 @@
                         android:layout_centerVertical="true"
                         android:layout_toRightOf="@+id/icon_vip"
                         android:text="@string/vip_info"
-                        android:textSize="@dimen/x18"/>
+                        android:textSize="@dimen/x16"/>
 
                     <ImageView
                         android:id="@+id/icon_goto_article"
@@ -78,7 +89,7 @@
                         android:layout_toLeftOf="@+id/icon_goto_article"
                         android:text="@string/publish_article"
                         android:textColor="@color/toolbar_back"
-                        android:textSize="@dimen/x18"/>
+                        android:textSize="@dimen/x16"/>
 
                 </RelativeLayout>
 
@@ -119,14 +130,14 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:text="@string/balance_total"
-                                android:textSize="@dimen/x16"/>
+                                android:textSize="@dimen/x15"/>
 
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="3806"
+                                android:text="@{apibean.data.mmoney}"
                                 android:textColor="@color/toolbar_back"
-                                android:textSize="@dimen/x16"/>
+                                android:textSize="@dimen/x15"/>
 
                         </LinearLayout>
 
@@ -161,14 +172,14 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="@string/avail_balance"
-                                android:textSize="@dimen/x16"/>
+                                android:textSize="@dimen/x15"/>
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="3806"
+                                android:text="@{apibean.data.mmoney}"
                                 android:textColor="@color/toolbar_back"
-                                android:textSize="@dimen/x16"/>
+                                android:textSize="@dimen/x15"/>
 
                         </LinearLayout>
 
@@ -203,14 +214,14 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="@string/commission_balance"
-                                android:textSize="@dimen/x16"/>
+                                android:textSize="@dimen/x15"/>
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="3806"
+                                android:text="@{apibean.data.mmoney}"
                                 android:textColor="@color/toolbar_back"
-                                android:textSize="@dimen/x16"/>
+                                android:textSize="@dimen/x15"/>
 
                         </LinearLayout>
 

@@ -60,5 +60,6 @@
     <string name="matters_needing_attention1">1.一个游戏账户最多绑定两张银行卡</string>
     <string name="matters_needing_attention2">2.银行卡信息完成后，已绑定的银行卡信息不能进行修改和删除</string>
     <string name="matters_needing_attention3">3.所绑定的银行卡必须在使用中</string>
+    <string name="confirm_withdraw">确认提现</string>
 
 </resources>
