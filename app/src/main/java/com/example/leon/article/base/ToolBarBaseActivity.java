@@ -9,13 +9,25 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.Toast;
 
 import com.example.leon.article.R;
+import com.example.leon.article.api.ApiFactory;
+import com.example.leon.article.api.bean.ArticleApiBean;
 import com.example.leon.article.databinding.ActivityToolBarBaseBinding;
+import com.example.leon.article.utils.Constant;
+import com.example.leon.article.widget.CustomDialog;
+
+import java.util.HashMap;
+
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 public class ToolBarBaseActivity<T extends ViewDataBinding> extends AppCompatActivity {
     protected T binding;
     protected ActivityToolBarBaseBinding baseBinding;
+    protected CustomDialog customDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +47,12 @@ public class ToolBarBaseActivity<T extends ViewDataBinding> extends AppCompatAct
         getWindow().setContentView(baseBinding.getRoot());
 
         setToolBar();
+
+        setCustomDialog();
+    }
+
+    private void setCustomDialog() {
+        customDialog = new CustomDialog(this, R.style.CustomDialog);
     }
 
     private void setToolBar() {
@@ -57,16 +75,56 @@ public class ToolBarBaseActivity<T extends ViewDataBinding> extends AppCompatAct
         });
     }
 
-    public void hideNavigationView() {
+    protected void hideNavigationView() {
         baseBinding.ivToolbarBack.setVisibility(View.GONE);
     }
 
-    public void hideHeaderInfo() {
+    protected void hideHeaderInfo() {
         baseBinding.llHeaderInfo.setVisibility(View.GONE);
     }
 
-    public void hideHeaderMoneyInfo(){
+    protected void hideHeaderMoneyInfo() {
         baseBinding.llHeaderMoney.setVisibility(View.GONE);
+    }
+
+    protected void showProgressDialog() {
+        if (customDialog != null && !customDialog.isShowing()) {
+            customDialog.show();
+        }
+    }
+
+    protected void dismissProgressDialog() {
+        if (customDialog != null && customDialog.isShowing()) {
+            customDialog.dismiss();
+        }
+    }
+
+    protected void loadUserData() {
+        HashMap<String, String> hashMap = new HashMap<>();
+        hashMap.put("cookie", "c1c5582ccdd4f5d16e37ae19c03f8dea");
+        hashMap.put("sid", "c5etakebn6grkst6csqk2a5o62");
+        ApiFactory.getApi().article(Constant.Api.USER_DATA, hashMap)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<ArticleApiBean>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Toast.makeText(ToolBarBaseActivity.this, "网络异常", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onNext(ArticleApiBean apiBean) {
+                        Toast.makeText(ToolBarBaseActivity.this, apiBean.getCode(), Toast.LENGTH_SHORT).show();
+                        if ("1".equals(apiBean.getCode())) {
+                            baseBinding.setApibean(apiBean);
+                        }
+                    }
+                });
     }
 
 }
