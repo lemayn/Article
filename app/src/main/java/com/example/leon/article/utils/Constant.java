@@ -66,4 +66,9 @@ public class Constant {
          */
         public static final String WITHDRAW_MONEY = "WithdrawMoney";
     }
+
+    public static class Intent_Extra {
+        public static final String USER_BANK_INFO = "user_bank_info";
+        public static final String USER_BANK_HAS_CHOOSE = "user_bank_has_choose";
+    }
 }

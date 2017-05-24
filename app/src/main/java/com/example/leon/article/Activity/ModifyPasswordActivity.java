@@ -62,7 +62,7 @@ public class ModifyPasswordActivity extends ToolBarBaseActivity<ActivityModifyPa
                     //新密码两次输入相同
                     if (oldPwd.equals(oldpwdLocal) && newPwd.equals(retypePwd)) {
                         //请求接口更新密码
-                        HashMap<String, String> hashMap = new HashMap<>();
+                        HashMap<String, String> hashMap = new HashMap<>(5);
                         hashMap.put("pwd", oldPwd);
                         hashMap.put("npwd", newPwd);
                         hashMap.put("renpwd", retypePwd);

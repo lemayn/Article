@@ -61,7 +61,7 @@ public class VIPCenterActivity extends ToolBarBaseActivity<ActivityVipCenterBind
 
     private void loadUserData() {
         HashMap<String, String> hashMap = new HashMap<>();
-        hashMap.put("cookie", "12cf8d32f7012f8c4e128cfa8a4aa2df");
+        hashMap.put("cookie", "90c393a671e233c67cabfe464bc99a6c");
         hashMap.put("sid", "c5etakebn6grkst6csqk2a5o62");
         ApiFactory.getApi().article(Constant.Api.USER_DATA, hashMap)
                 .subscribeOn(Schedulers.io())

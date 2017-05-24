@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <data>
+
+        <import type="com.example.leon.article.api.bean.BankApiBean.DataBean"/>
+
+        <variable
+            name="bean"
+            type="DataBean"/>
+
+    </data>
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -22,12 +32,15 @@
                 android:textSize="@dimen/x14"/>
 
             <TextView
+                android:id="@+id/tv_banks"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/x37"
                 android:layout_marginLeft="@dimen/x14"
                 android:background="@null"
+                android:clickable="true"
+                android:drawableRight="@drawable/icon_goto"
                 android:gravity="center_vertical"
-                android:text="工商银行"
+                android:text="@{bean.bank}"
                 android:textColor="@color/colorPrimary"
                 android:textSize="@dimen/x14"/>
 
@@ -47,7 +60,6 @@
 
 
             <TextView
-                android:id="@+id/textView"
                 android:layout_width="@dimen/x64"
                 android:layout_height="match_parent"
                 android:gravity="center"
@@ -60,7 +72,7 @@
                 android:layout_marginLeft="@dimen/x14"
                 android:background="@null"
                 android:gravity="center_vertical"
-                android:text="阿姨"
+                android:text="@{bean.account_name}"
                 android:textSize="@dimen/x14"
                 />
 
@@ -91,7 +103,7 @@
                 android:layout_marginLeft="@dimen/x14"
                 android:background="@null"
                 android:gravity="center_vertical"
-                android:text="132131313131313"
+                android:text="@{bean.card}"
                 android:textSize="@dimen/x14"/>
 
 
@@ -116,6 +128,8 @@
                 android:textSize="@dimen/x14"/>
 
             <EditText
+                android:inputType="number"
+                android:id="@+id/et_withdraw_money"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="@dimen/x14"
@@ -146,6 +160,7 @@
                 android:textSize="@dimen/x14"/>
 
             <EditText
+                android:id="@+id/et_withdraw_pwd"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/x37"
                 android:layout_marginLeft="@dimen/x14"
@@ -175,10 +190,10 @@
             android:textSize="@dimen/x17"/>
 
         <TextView
-            android:layout_marginTop="@dimen/x10"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/x5"
+            android:layout_marginTop="@dimen/x10"
             android:text="@string/attention"
             android:textColor="@color/red"
             android:textSize="@dimen/x20"
@@ -189,7 +204,6 @@
             android:layout_height="wrap_content"
             android:text="@string/withdraw_deposit_attentions"
             android:textSize="@dimen/x13"/>
-
 
 
     </LinearLayout>

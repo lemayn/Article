@@ -36,6 +36,9 @@ public class ServiceGenerator {
         return builder.build();
     }
 
+    /**
+     * 添加所有接口共用Key
+     */
     private static void addBasicParamInterceptor() {
         BasicParamsInterceptor basicParamsInterceptor = new BasicParamsInterceptor.Builder()
                 .addQueryParam("Key", Constant.Api.URL_KEY)

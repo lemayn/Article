@@ -1,7 +1,7 @@
 package com.example.leon.article.api;
 
 import com.example.leon.article.api.bean.ArticleApiBean;
-import com.example.leon.article.utils.Constant;
+import com.example.leon.article.api.bean.BankApiBean;
 
 import java.util.HashMap;
 
@@ -14,8 +14,13 @@ import rx.Observable;
 public interface ArticleService {
 
     @FormUrlEncoded
-    @POST(Constant.Api.BASE_URL)
+    @POST("api/")
     Observable<ArticleApiBean> article(@Query("Action") String type,
                                        @FieldMap HashMap<String,String> options);
+
+    @FormUrlEncoded
+    @POST("api/")
+    Observable<BankApiBean> bank(@Query("Action") String type,
+                                 @FieldMap HashMap<String,String> options);
 
 }
