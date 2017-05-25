@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.example.leon.article.R;
 import com.example.leon.article.api.ApiFactory;
+import com.example.leon.article.api.BaseValueValidOperator;
 import com.example.leon.article.api.bean.ArticleApiBean;
 import com.example.leon.article.databinding.ActivityToolBarBaseBinding;
 import com.example.leon.article.utils.Constant;
@@ -104,6 +105,7 @@ public class ToolBarBaseActivity<T extends ViewDataBinding> extends AppCompatAct
         hashMap.put("cookie", "c1c5582ccdd4f5d16e37ae19c03f8dea");
         hashMap.put("sid", "c5etakebn6grkst6csqk2a5o62");
         ApiFactory.getApi().article(Constant.Api.USER_DATA, hashMap)
+                .lift(new BaseValueValidOperator<ArticleApiBean>())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<ArticleApiBean>() {

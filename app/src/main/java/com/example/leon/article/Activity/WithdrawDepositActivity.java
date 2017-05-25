@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import com.example.leon.article.R;
 import com.example.leon.article.api.ApiFactory;
+import com.example.leon.article.api.BaseValueValidOperator;
 import com.example.leon.article.api.bean.BankApiBean;
 import com.example.leon.article.base.ToolBarBaseActivity;
 import com.example.leon.article.databinding.ActivityWithdrawDepositBinding;
@@ -82,9 +83,10 @@ public class WithdrawDepositActivity extends ToolBarBaseActivity<ActivityWithdra
 
     private void getUserBankInfo() {
         HashMap<String, String> hashMap = new HashMap<>();
-        hashMap.put("cookie", "c1c5582ccdd4f5d16e37ae19c03f8dea");
+        hashMap.put("cookie", "4ef27e6f77f47112f7e21d29af7ac1ad");
         hashMap.put("sid", "c5etakebn6grkst6csqk2a5o62");
         ApiFactory.getApi().bank(Constant.Api.USER_BANK, hashMap)
+                .lift(new BaseValueValidOperator<BankApiBean>())
                 .subscribeOn(Schedulers.io())
                 .doOnSubscribe(new Action0() {
                     @Override
@@ -142,6 +144,7 @@ public class WithdrawDepositActivity extends ToolBarBaseActivity<ActivityWithdra
             hashMap.put("money", money);
             hashMap.put("password", pwd);
             ApiFactory.getApi().bank(Constant.Api.WITHDRAW_MONEY, hashMap)
+                    .lift(new BaseValueValidOperator<BankApiBean>())
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(new Subscriber<BankApiBean>() {

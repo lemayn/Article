@@ -7,27 +7,9 @@ import com.example.leon.article.BR;
 
 import java.util.List;
 
-public class BankApiBean extends BaseObservable {
+public class BankApiBean extends ApiBean {
 
-    private String code;
-    private String msg;
     private List<DataBean> data;
-
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
-
-    public String getMsg() {
-        return msg;
-    }
-
-    public void setMsg(String msg) {
-        this.msg = msg;
-    }
 
     @Bindable
     public List<DataBean> getData() {

@@ -1,5 +1,6 @@
 package com.example.leon.article;
 
+import android.os.Build;
 import android.support.test.runner.AndroidJUnit4;
 
 import com.example.leon.article.api.ApiFactory;
@@ -47,8 +48,8 @@ public class ExampleInstrumentedTest {
     @Test
     public void login() {
         HashMap<String, String> hashMap = new HashMap<>();
-        hashMap.put("name", "test1438");
-        hashMap.put("pwd", "a123456789");
+        hashMap.put("name", "test01");
+        hashMap.put("pwd", "1234567");
         ApiFactory.getApi().article(Constant.Api.LOGIN, hashMap)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -68,7 +69,8 @@ public class ExampleInstrumentedTest {
                         HashMap<String, String> hashMap = new HashMap<>();
                         hashMap.put("cookie", apiBean.getData().getCookie());
                         hashMap.put("sid", apiBean.getData().getSid());
-                        ApiFactory.getApi().article(Constant.Api.USER_DATA, hashMap)
+                        hashMap.put("aid", "20");
+                        ApiFactory.getApi().article(Constant.Api.ART_INFO, hashMap)
                                 .subscribeOn(Schedulers.io())
                                 .observeOn(AndroidSchedulers.mainThread())
                                 .subscribe(new Subscriber<ArticleApiBean>() {
@@ -89,6 +91,13 @@ public class ExampleInstrumentedTest {
                                 });
                     }
                 });
+    }
+
+    @Test
+    public void osConfig() {
+        String brand = Build.BRAND;
+        String model = Build.MODEL;
+        System.out.println(brand + " ----- " + model);
     }
 
 }

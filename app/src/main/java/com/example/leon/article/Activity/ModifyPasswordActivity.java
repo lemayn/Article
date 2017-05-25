@@ -8,6 +8,7 @@ import android.widget.Toast;
 
 import com.example.leon.article.R;
 import com.example.leon.article.api.ApiFactory;
+import com.example.leon.article.api.BaseValueValidOperator;
 import com.example.leon.article.api.bean.ArticleApiBean;
 import com.example.leon.article.base.ToolBarBaseActivity;
 import com.example.leon.article.databinding.ActivityModifyPasswordBinding;
@@ -69,6 +70,7 @@ public class ModifyPasswordActivity extends ToolBarBaseActivity<ActivityModifyPa
                         hashMap.put("cookie", "90c393a671e233c67cabfe464bc99a6c");
                         hashMap.put("sid", "c5etakebn6grkst6csqk2a5o62");
                         ApiFactory.getApi().article(Constant.Api.EDIT_PASSWORD, hashMap)
+                                .lift(new BaseValueValidOperator<ArticleApiBean>())
                                 .subscribeOn(Schedulers.io())
                                 .observeOn(AndroidSchedulers.mainThread())
                                 .subscribe(new Subscriber<ArticleApiBean>() {

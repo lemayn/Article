@@ -5,27 +5,9 @@ import android.databinding.Bindable;
 
 import com.example.leon.article.BR;
 
-public class ArticleApiBean extends BaseObservable {
+public class ArticleApiBean extends ApiBean {
 
-    private String code;
-    private String msg;
     private DataBean data;
-
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
-
-    public String getMsg() {
-        return msg;
-    }
-
-    public void setMsg(String msg) {
-        this.msg = msg;
-    }
 
     @Bindable
     public DataBean getData() {
@@ -38,6 +20,15 @@ public class ArticleApiBean extends BaseObservable {
     }
 
     public static class DataBean extends BaseObservable {
+
+        private String aid;
+        private String atitle;
+        private String acontent;
+        private String aaddtime;
+        private String review;
+        private String amoney;
+        private String reason;
+        private String aimg;
 
         private String mid;
         private String mname;

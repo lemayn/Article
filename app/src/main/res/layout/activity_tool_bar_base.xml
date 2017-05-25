@@ -98,6 +98,53 @@
                     android:layout_height="@dimen/x1"
                     android:background="@color/center_divider"/>
 
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/x60"
+                    android:padding="@dimen/x5">
+
+                    <ImageView
+                        android:id="@+id/iv_user_avatar"
+                        android:layout_width="@dimen/x50"
+                        android:layout_height="@dimen/x50"
+                        android:layout_gravity="center_vertical"
+                        android:paddingRight="@dimen/x1"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/total_balance"/>
+
+
+                    <TextView
+                        android:layout_marginBottom="@dimen/x3"
+                        android:layout_marginTop="@dimen/x5"
+                        android:id="@+id/tv_user_nickname"
+                        android:layout_toRightOf="@+id/iv_user_avatar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="1321312313"
+                        android:textSize="@dimen/x14"/>
+
+                    <TextView
+                        android:id="@+id/tv_id"
+                        android:layout_toRightOf="@+id/iv_user_avatar"
+                        android:layout_below="@+id/tv_user_nickname"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="某某ID"
+                        android:layout_marginRight="@dimen/x5"
+                        android:textSize="@dimen/x14"/>
+
+                    <TextView
+                        android:layout_toRightOf="@+id/tv_id"
+                        android:layout_below="@+id/tv_user_nickname"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="123123"
+                        android:textSize="@dimen/x14"/>
+
+
+                </RelativeLayout>
+
+
                 <LinearLayout
                     android:id="@+id/ll_header_money"
                     android:layout_width="match_parent"
