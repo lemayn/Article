@@ -1,41 +1,57 @@
 package com.example.leon.article.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import com.example.leon.article.Activity.art.ArtConstant;
+import com.example.leon.article.Activity.art.ArtDetailActivity;
 import com.example.leon.article.R;
-import com.example.leon.article.utils.TimeUtils;
+import com.example.leon.article.api.bean.ArtListBean;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by Administrator on 2017/5/16.
  */
 
-public class IssueListAdapter extends BaseAdapter{
+public class IssueListAdapter extends BaseAdapter {
 
     private Context context;
-    private List<String> arts;
     private LayoutInflater layoutInflater;
+    private List<ArtListBean.DataBean.ArticleBean> items = new ArrayList<>();
 
     public IssueListAdapter(Context context) {
         this.context = context;
-        layoutInflater = LayoutInflater.from(context);
+        this.layoutInflater = LayoutInflater.from(context);
+    }
+
+    public void addItems(List<ArtListBean.DataBean.ArticleBean> bean){
+        items.addAll(bean);
+        notifyDataSetChanged();
+    }
+
+    public void clearDate(){
+        items.clear();
+        notifyDataSetChanged();
     }
 
     @Override
     public int getCount() {
-        return 20;
+        Log.i("HT", "getCount: "+items.size());
+        return items.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return null;
+        return items.get(position);
     }
 
     @Override
@@ -44,14 +60,51 @@ public class IssueListAdapter extends BaseAdapter{
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         if (convertView == null) {
             convertView = layoutInflater.inflate(R.layout.adapter_issuelist, parent, false);
         }
         IssueItemHolder holder = getHolder(convertView);
-        holder.tv_issue_status.setTextColor(Color.RED);
-        holder.tv_issue_time.setText(TimeUtils.getStringDateShort());
+        String review = items.get(position).getReview();
+        switch (review) {
+            case "0"://未审核 red
+                holder.tv_issue_status.setTextColor(Color.RED);
+                holder.tv_issue_time.setText(context.getString(R.string.in_review));
+                break;
+            case "1"://审核通过 green
+                holder.tv_issue_status.setTextColor(Color.GREEN);
+                holder.tv_issue_status.setText(context.getString(R.string.published));
+                break;
+            case "2"://审核未通过 gray
+                holder.tv_issue_status.setTextColor(Color.GRAY);
+                holder.tv_issue_status.setText(context.getString(R.string.notpass));
+                break;
+        }
+
+
+        holder.tv_issue_content.setText(items.get(position).getAtitle());
+        holder.tv_issue_time.setText(items.get(position).getAaddtime());
+        holder.tv_issue_content.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goArtDetailActivity(position);
+            }
+        });
+        holder.tv_issue_time.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goArtDetailActivity(position);
+            }
+        });
         return convertView;
+    }
+
+    private void goArtDetailActivity(int position) {
+        if (items.get(position).getAid() != null) {
+            Intent intent = new Intent(context, ArtDetailActivity.class);
+            intent.putExtra(ArtConstant.DETAIL_AID,items.get(position).getAid());
+            context.startActivity(intent);
+        }
     }
 
     private IssueItemHolder getHolder(View view) {

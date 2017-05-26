@@ -32,8 +32,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //        hideHeaderInfo();
-        //        hideHeaderMoneyInfo();
+//        hideHeaderInfo();
+//        hideHeaderMoneyInfo();
         initView();
     }
 
@@ -87,13 +87,13 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        //        getViewById(R.id.bt_zouni).setOnClickListener(new View.OnClickListener() {
-        //            @Override
-        //            public void onClick(View v) {
-        //                Intent intent = new Intent(MainActivity.this, ArticleActivity.class);
-        //                startActivity(intent);
-        //            }
-        //        });
+//        getViewById(R.id.bt_zouni).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(MainActivity.this, ArticleActivity.class);
+//                startActivity(intent);
+//            }
+//        });
     }
 
     private void initfragments() {
@@ -106,7 +106,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    private <T extends View> T getViewById(int res) {
+    private <T extends View> T getViewById(int res){
         return (T) findViewById(res);
     }
 

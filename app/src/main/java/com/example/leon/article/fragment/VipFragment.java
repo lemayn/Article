@@ -16,8 +16,6 @@ import com.example.leon.article.Activity.BasicinformationActivity;
 import com.example.leon.article.Activity.ModifyPasswordActivity;
 import com.example.leon.article.Activity.ModifyWithoutPasswordActivity;
 import com.example.leon.article.Activity.SetBankActivity;
-import com.example.leon.article.Activity.WithdrawDepositActivity;
-import com.example.leon.article.Activity.art.ArticleActivity;
 import com.example.leon.article.R;
 import com.example.leon.article.adapter.VIPCenterAdapter;
 import com.example.leon.article.api.ApiFactory;
@@ -70,9 +68,9 @@ public class VipFragment extends Fragment {
         data.add(new ItemBean(R.drawable.banks_setting, CommonUtils.getString(R.string.banks_setting),
                 SetBankActivity.class));
         data.add(new ItemBean(R.drawable.banks_setting, CommonUtils.getString(R.string.withdraw_deposit),
-                WithdrawDepositActivity.class));
+                SetBankActivity.class));
         data.add(new ItemBean(R.drawable.articles_list, CommonUtils.getString(R.string.articles_list),
-                ArticleActivity.class));
+                ArticleFragment.class));
         data.add(new ItemBean(R.drawable.password_modify, CommonUtils.getString(R.string.password_modify),
                 ModifyPasswordActivity.class));
         data.add(new ItemBean(R.drawable.password_modify, CommonUtils.getString(R.string.withdraw_password_modify),

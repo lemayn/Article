@@ -1,31 +1,52 @@
 package com.example.leon.article.Activity.art;
 
+import android.Manifest;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.leon.article.R;
+import com.example.leon.article.fragment.ArticleFragment;
+import com.example.leon.article.presenter.artpresenter.artpresenterImp.ArtPresenterImp;
 import com.example.leon.article.sql.bean.Arts;
 import com.example.leon.article.sql.dao.ArtDao;
+import com.example.leon.article.utils.ImagePathUtils;
 import com.example.leon.article.utils.TimeUtils;
+import com.example.leon.article.view.IEditorActivity;
+import com.example.leon.article.widget.SpinnerDialog;
+
+import java.io.ByteArrayOutputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 import jp.wasabeef.richeditor.RichEditor;
 
-public class EditorActivity extends AppCompatActivity {
+public class EditorActivity extends AppCompatActivity implements IEditorActivity{
 
+    private static final int REQUEST_CODE_PICK_IMAGE = 1001;
+    private static final int REQUEST_CODE_SOME_FEATURES_PERMISSIONS = 100;
     //MySQL传递过来的数据
     private String art_title;
     private String art_content;
+    private String art_imgPath;
 
     private RichEditor mEditor;
     private EditText artTitle;
@@ -35,6 +56,14 @@ public class EditorActivity extends AppCompatActivity {
     private boolean isSave = false;
 
     Arts arts = new Arts();
+    private ArtPresenterImp artPresenter;
+    private Dialog dialog;
+    private Bitmap insertBitmap;
+
+    //用户添加的图片与图片地址
+    private ImageView iv_insert;
+    private String imgpath;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,17 +78,25 @@ public class EditorActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        //获取数据库数据
         initDate();
     }
 
     private void initDate() {
+        artPresenter = new ArtPresenterImp(this);
+
         art_title = getIntent().getStringExtra(ArtConstant.ART_TITLE);
         art_content = getIntent().getStringExtra(ArtConstant.ART_CONTENT);
+        art_imgPath = getIntent().getStringExtra(ArtConstant.ART_IMGPATH);
         if (art_title != null) {
             artTitle.setText(art_title);
         }
         if (art_content != null) {
             mEditor.setHtml(art_content);
+        }
+        if (art_imgPath != null) {
+            iv_insert.setVisibility(View.VISIBLE);
+            iv_insert.setImageBitmap(BitmapFactory.decodeFile(art_imgPath));
         }
     }
 
@@ -67,13 +104,16 @@ public class EditorActivity extends AppCompatActivity {
         mEditor.setOnTextChangeListener(new RichEditor.OnTextChangeListener() {
             @Override
             public void onTextChange(String text) {
-                Log.i("TAG", "onTextChange: " + text);
+                Log.i("HT", "onTextChange: " + text);
                 editDate = text;
             }
         });
     }
 
     private void initView() {
+        iv_insert = (ImageView) findViewById(R.id.iv_editor_insert);
+        dialog = SpinnerDialog.createSpinnerDialog(EditorActivity.this, "文章上传中...");
+
         initEditor();
         initEvent();
     }
@@ -82,8 +122,7 @@ public class EditorActivity extends AppCompatActivity {
         artTitle = (EditText) findViewById(R.id.et_title);
         mEditor = (RichEditor) findViewById(R.id.richEditor);
         mEditor.setClickable(true);
-        mEditor.setEditorHeight(200);
-//        mEditor.setEditorFontSize(22);
+        mEditor.setEditorHeight(100);
         mEditor.setEditorFontColor(Color.BLACK);
         mEditor.setPadding(10, 10, 10, 10);
         mEditor.setPlaceholder("请开始你的表演...");
@@ -94,9 +133,16 @@ public class EditorActivity extends AppCompatActivity {
         findViewById(R.id.tv_issue).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //点击之后将软键盘隐藏
                 InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                 imm.hideSoftInputFromWindow(mEditor.getWindowToken(), 0);
+
+                String title = artTitle.getText().toString();
+                String cookie = "addbc7e46fc79010bc3d5730b45b6065";
+                String sid = "qsdae92r495qf9mpa4kjgbk065";
+
+                String bytesFromBitmap = getBytesFromBitmap(insertBitmap);
+                artPresenter.uploadUserArt(cookie,title,editDate,sid,bytesFromBitmap);
+
             }
         });
 
@@ -116,10 +162,19 @@ public class EditorActivity extends AppCompatActivity {
                         arts.setContent(editDate);
                         arts.setTitle(title);
                         arts.setTime(TimeUtils.getStringDateShort());
+                        arts.setImgPath(imgpath);
                         ArtDao.insertArts(arts);
                         goMySqlActivity();
                     }
                 }
+            }
+        });
+
+        iv_insert.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                showifDelDialog();
+                return true;
             }
         });
 
@@ -276,6 +331,64 @@ public class EditorActivity extends AppCompatActivity {
                 mEditor.insertTodo();
             }
         });
+
+        //点击添加图片
+        findViewById(R.id.bt_editor_addImg).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    int hasReadPermission = checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE);
+                    List<String> permissions = new ArrayList<String>();
+                    if (hasReadPermission != PackageManager.PERMISSION_GRANTED) {
+                        permissions.add(Manifest.permission.READ_EXTERNAL_STORAGE);
+                    } else {
+                        //从相册中选择图片
+                        pickImgfromPhoto();
+                    }
+                    if (!permissions.isEmpty()) {
+                        requestPermissions(permissions.toArray(new String[permissions.size()]),REQUEST_CODE_SOME_FEATURES_PERMISSIONS);
+                    }
+                }else{
+                    pickImgfromPhoto();
+                }
+
+            }
+        });
+
+    }
+
+    private void pickImgfromPhoto() {
+        Intent intent = new Intent();
+        intent.addCategory(Intent.CATEGORY_OPENABLE);
+        intent.setType("image/*");
+        //根据版本号不同使用不同的Action
+        if (Build.VERSION.SDK_INT <19) {
+            intent.setAction(Intent.ACTION_GET_CONTENT);
+        }else {
+            intent.setAction(Intent.ACTION_OPEN_DOCUMENT);
+        }
+        startActivityForResult(intent,REQUEST_CODE_PICK_IMAGE);
+    }
+
+    private void showifDelDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("提示：")
+                .setMessage("是否删除该图片")
+                .setPositiveButton("确认", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        if (iv_insert!=null && iv_insert.getVisibility() == View.VISIBLE){
+                            iv_insert.setVisibility(View.GONE);
+                        }
+                    }
+                })
+                .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        //do nothing or what you want
+                    }
+                })
+                .create().show();
     }
 
     private void goMySqlActivity() {
@@ -285,7 +398,7 @@ public class EditorActivity extends AppCompatActivity {
     }
 
     private void goArticleActivity() {
-        Intent intent = new Intent(this, ArticleActivity.class);
+        Intent intent = new Intent(this, ArticleFragment.class);
         startActivity(intent);
         finish();
     }
@@ -300,22 +413,22 @@ public class EditorActivity extends AppCompatActivity {
                 final AlertDialog.Builder builder = new AlertDialog.Builder(this);
                 builder.setTitle("还没有保存哦，确定退出吗")
                         .setMessage("退出可能就白写咯")
-                        .setNegativeButton("确定", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                finish();
-                            }
-                        })
-                        .setPositiveButton("取消", new DialogInterface.OnClickListener() {
+                        .setNegativeButton("取消", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 //do nothing or what you want
                             }
                         })
+                        .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                                finish();
+                            }
+                        })
                         .create()
                         .show();
             } else {  //点击了保存
-                // do nothing
                 super.onBackPressed();
             }
         }
@@ -334,5 +447,88 @@ public class EditorActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         mEditor.destroy();
+        artPresenter.unsubcrible();
+        if (dialog != null) {
+            dialog.cancel();
+            dialog = null;
+        }
     }
+
+    @Override
+    public void showProgress() {
+        if (dialog != null) {
+            dialog.show();
+        }
+    }
+
+    @Override
+    public void hideProgress() {
+        if (dialog != null) {
+            dialog.dismiss();
+        }
+    }
+
+    @Override
+    public void showSuccess() {
+        Toast.makeText(this,"上传成功",Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void showError() {
+        Toast.makeText(this,"服务器繁忙，请稍后重试",Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void showFailure() {
+        Toast.makeText(this,"上传失败了，请稍后重试",Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode != RESULT_OK) {
+            return;
+        }
+        if (requestCode == REQUEST_CODE_PICK_IMAGE) {
+            if (data != null) {
+                imgpath = ImagePathUtils.getImageAbsolutePath(this, data.getData());
+                // 如下方法可以在编辑界面添加图片
+                //  mEditor.insertImage(imgpath,"userImg");
+                insertBitmap = BitmapFactory.decodeFile(imgpath);
+                if (insertBitmap != null) {
+                    iv_insert.setVisibility(View.VISIBLE);
+                    iv_insert.setImageBitmap(insertBitmap);
+                }
+            }
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        switch (requestCode) {
+            case REQUEST_CODE_SOME_FEATURES_PERMISSIONS: {
+                for (int i = 0; i < permissions.length; i++) {
+                    if (grantResults[i] == PackageManager.PERMISSION_GRANTED) {
+                        System.out.println("Permissions --> " + "Permission Granted: " + permissions[i]);
+                    } else if (grantResults[i] == PackageManager.PERMISSION_DENIED) {
+                        System.out.println("Permissions --> " + "Permission Denied: " + permissions[i]);
+                    }
+                }
+            }
+            break;
+            default: {
+                super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+            }
+        }
+    }
+
+    public String getBytesFromBitmap(Bitmap bitmap){
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG,80,baos);
+        byte[] bytes = baos.toByteArray();
+        String imgString = new String(Base64.encodeToString(bytes,Base64.DEFAULT));
+        return imgString;
+    }
+
 }

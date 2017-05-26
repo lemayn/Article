@@ -2,13 +2,16 @@ package com.example.leon.article.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,64 +19,78 @@ import com.example.leon.article.Activity.art.EditorActivity;
 import com.example.leon.article.Activity.art.MySqlActivity;
 import com.example.leon.article.R;
 import com.example.leon.article.adapter.IssueListAdapter;
+import com.example.leon.article.api.bean.ArtListBean;
+import com.example.leon.article.presenter.artpresenter.artpresenterImp.ArtPresenterImp;
+import com.example.leon.article.utils.Constant;
+import com.example.leon.article.utils.SPUtil;
+import com.example.leon.article.view.IArticleFragment;
 
-public class ArticleFragment extends Fragment implements View.OnClickListener{
+import java.util.List;
 
-    View view = null;
+public class ArticleFragment extends Fragment implements View.OnClickListener, IArticleFragment {
 
     private TextView tv_myArt;
     private TextView tv_createArt;
     private ListView lv_article;
     private TextView lv_empty;
+    private ProgressBar progressBar;
+    private IssueListAdapter adapter;
+    private ArtPresenterImp artPresenter;
+    private SwipeRefreshLayout refreshActicle;
+    private int page = 1;
+    private String cookie;
+    private String sid;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
-        view = inflater.inflate(R.layout.activity_article, container, false);
-        initView();
-        //从服务器获取数据
-        initDate();
-
+        View view = inflater.inflate(R.layout.activity_article, container, false);
+        initView(view);
+        //get cookie sid
+        cookie = (String) SPUtil.get(Constant.Share_prf.COOKIE, "");
+        sid = (String) SPUtil.get(Constant.Share_prf.SID, "");
+        initDate(view);
         initEvent();
-
         return view;
     }
-//
-//    @Override
-//    protected void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_article);
-//
-//        initView();
-//        //从服务器获取数据
-//        initDate();
-//
-//        initEvent();
-//    }
 
     private void initEvent() {
         tv_myArt.setOnClickListener(this);
         tv_createArt.setOnClickListener(this);
-        lv_article.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        refreshActicle.setProgressBackgroundColorSchemeResource(android.R.color.white);
+        refreshActicle.setColorSchemeResources(R.color.colorAccent, R.color.colorPrimary, R.color.colorPrimaryDark);
+        refreshActicle.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getActivity(),"点击了第"+position+"个位置",Toast.LENGTH_SHORT).show();
+            public void onRefresh() {
+                refreshActicle.setRefreshing(true);
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (adapter.getCount() > 0) {
+                            adapter.clearDate();
+                            artPresenter.getuserArtList(cookie, sid,page);
+                            lv_article.setAdapter(adapter);
+                        }
+                        refreshActicle.setRefreshing(false);
+                        Toast.makeText(getContext(),"刷新成功",Toast.LENGTH_SHORT).show();
+                    }
+                },2000);
             }
         });
     }
 
-    private void initDate() {
-        View headerView = getActivity().getLayoutInflater().inflate(R.layout.listview_article_headerview, null);
+    private void initDate(View view) {
+        artPresenter = new ArtPresenterImp(this);
+        adapter = new IssueListAdapter(getContext());
+        View headerView = view.inflate(getContext(),R.layout.listview_article_headerview, null);
         lv_article.addHeaderView(headerView);
-
-        IssueListAdapter adapter = new IssueListAdapter(getActivity());
+        artPresenter.getuserArtList(cookie, sid,page);
         lv_article.setAdapter(adapter);
-
-
     }
 
-    private void initView() {
+    private void initView(View view) {
+        progressBar = (ProgressBar)view.findViewById(R.id.progressBar);
+        refreshActicle = (SwipeRefreshLayout) view.findViewById(R.id.swipeRefresh_acticle);
         lv_empty = (TextView) view.findViewById(R.id.lv_article_empty);
         lv_article = (ListView) view.findViewById(R.id.lv_article);
         lv_article.setEmptyView(lv_empty);
@@ -94,13 +111,43 @@ public class ArticleFragment extends Fragment implements View.OnClickListener{
     }
 
     private void goEditorActivity() {
-        Intent intent = new Intent(getActivity(),EditorActivity.class);
+        Intent intent = new Intent(getContext(), EditorActivity.class);
         startActivity(intent);
     }
 
     private void goMySqlActivity() {
-        Intent intent = new Intent(getActivity(),MySqlActivity.class);
+        Intent intent = new Intent(getContext(), MySqlActivity.class);
         startActivity(intent);
     }
 
+    @Override
+    public void showProgress() {
+        if (progressBar != null) {
+            progressBar.setVisibility(View.VISIBLE);
+        }
+    }
+
+    @Override
+    public void hideProgress() {
+        if (progressBar != null) {
+            progressBar.setVisibility(View.GONE);
+        }
+    }
+
+    @Override
+    public void showError() {
+
+    }
+
+    @Override
+    public void setArtDate(List<ArtListBean.DataBean.ArticleBean> date) {
+        Log.i("HT", "setArtDate: 数据来啦来啦------>");
+        adapter.addItems(date);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        artPresenter.unsubcrible();
+    }
 }

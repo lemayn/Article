@@ -24,14 +24,17 @@ public class Arts {
     private String title;
     private String content;
     private String time;
+    private String imgPath;
 
-    @Generated(hash = 1575552889)
-    public Arts(Long id, String author, String title, String content, String time) {
+    @Generated(hash = 1317383939)
+    public Arts(Long id, String author, String title, String content, String time,
+            String imgPath) {
         this.id = id;
         this.author = author;
         this.title = title;
         this.content = content;
         this.time = time;
+        this.imgPath = imgPath;
     }
     @Generated(hash = 1692251737)
     public Arts() {
@@ -65,6 +68,12 @@ public class Arts {
     }
     public void setTitle(String title) {
         this.title = title;
+    }
+    public String getImgPath() {
+        return this.imgPath;
+    }
+    public void setImgPath(String imgPath) {
+        this.imgPath = imgPath;
     }
 
 }

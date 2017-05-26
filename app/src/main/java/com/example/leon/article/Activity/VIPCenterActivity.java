@@ -6,7 +6,7 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.widget.Toast;
 
-import com.example.leon.article.Activity.art.ArticleActivity;
+import com.example.leon.article.fragment.ArticleFragment;
 import com.example.leon.article.R;
 import com.example.leon.article.adapter.VIPCenterAdapter;
 import com.example.leon.article.base.OnItemClickListener;
@@ -39,7 +39,7 @@ public class VIPCenterActivity extends ToolBarBaseActivity<ActivityVipCenterBind
         data.add(new ItemBean(R.drawable.banks_setting, CommonUtils.getString(R.string.withdraw_deposit),
                 WithdrawDepositActivity.class));
         data.add(new ItemBean(R.drawable.articles_list, CommonUtils.getString(R.string.articles_list),
-                ArticleActivity.class));
+                ArticleFragment.class));
         data.add(new ItemBean(R.drawable.password_modify, CommonUtils.getString(R.string.password_modify),
                 ModifyPasswordActivity.class));
         binding.rvVipCenter.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));

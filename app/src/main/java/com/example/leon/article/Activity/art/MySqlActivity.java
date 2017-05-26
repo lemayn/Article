@@ -38,9 +38,11 @@ public class MySqlActivity extends ToolBarBaseActivity<ActivityMySqlBinding> {
                 if (artsList.size() > 0 && artsList != null) {
                     String title = artsList.get(position).getTitle();
                     String content = artsList.get(position).getContent();
+                    String imgPath = artsList.get(position).getImgPath();
                     Intent intent = new Intent(MySqlActivity.this,EditorActivity.class);
                     intent.putExtra(ArtConstant.ART_TITLE,title);
                     intent.putExtra(ArtConstant.ART_CONTENT,content);
+                    intent.putExtra(ArtConstant.ART_IMGPATH,imgPath);
                     startActivity(intent);
                 }
             }
