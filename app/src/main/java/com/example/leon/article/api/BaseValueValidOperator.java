@@ -10,6 +10,7 @@ import android.os.Looper;
 import com.example.leon.article.Activity.LoginActivity;
 import com.example.leon.article.api.bean.ApiBean;
 import com.example.leon.article.app;
+import com.example.leon.article.utils.Constant;
 
 import rx.Observable;
 import rx.Subscriber;
@@ -74,6 +75,7 @@ public class BaseValueValidOperator<T extends ApiBean>
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 Intent intent = new Intent(taskTop, LoginActivity.class);
+                                intent.putExtra(Constant.Intent_Extra.IS_CONSTRAINT_LOIN, true);
                                 taskTop.startActivity(intent);
                                 dialog.dismiss();
                             }

@@ -1,11 +1,9 @@
 package com.example.leon.article.Activity;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -13,22 +11,20 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 
-
-import com.example.leon.article.Activity.art.ArticleActivity;
 import com.example.leon.article.R;
-import com.example.leon.article.base.ToolBarBaseActivity;
 import com.example.leon.article.fragment.ArticleFragment;
 import com.example.leon.article.fragment.HomeFragment;
 import com.example.leon.article.fragment.MoreFragment;
 import com.example.leon.article.fragment.VipFragment;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
     private FragmentPagerAdapter mAdapter;
     private ArrayList<Fragment> mFragments = new ArrayList<>();
+    private ViewPager viewpager;
+    private BottomNavigationView navigationview;
 
 
     @Override
@@ -36,16 +32,16 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-//        hideHeaderInfo();
-//        hideHeaderMoneyInfo();
+        //        hideHeaderInfo();
+        //        hideHeaderMoneyInfo();
         initView();
     }
 
     private void initView() {
 
         initfragments();
-        final ViewPager viewpager = (ViewPager) findViewById(R.id.viewpager);
-        BottomNavigationView navigationview = (BottomNavigationView) findViewById(R.id.navigationview);
+        viewpager = (ViewPager) findViewById(R.id.viewpager);
+        navigationview = (BottomNavigationView) findViewById(R.id.navigationview);
 
         mAdapter = new FragmentPagerAdapter(getSupportFragmentManager()) {
             @Override
@@ -91,13 +87,13 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-//        getViewById(R.id.bt_zouni).setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(MainActivity.this, ArticleActivity.class);
-//                startActivity(intent);
-//            }
-//        });
+        //        getViewById(R.id.bt_zouni).setOnClickListener(new View.OnClickListener() {
+        //            @Override
+        //            public void onClick(View v) {
+        //                Intent intent = new Intent(MainActivity.this, ArticleActivity.class);
+        //                startActivity(intent);
+        //            }
+        //        });
     }
 
     private void initfragments() {
@@ -110,8 +106,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    private <T extends View> T getViewById(int res){
+    private <T extends View> T getViewById(int res) {
         return (T) findViewById(res);
+    }
+
+    public void gotoArticle() {
+        viewpager.setCurrentItem(1);
+        navigationview.setSelectedItemId(R.id.menu_article);
     }
 
 }

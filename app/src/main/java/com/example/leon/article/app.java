@@ -9,11 +9,15 @@ import android.util.Log;
 import com.example.leon.article.sql.bean.DaoMaster;
 import com.example.leon.article.sql.bean.DaoSession;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class app extends Application {
     private static app mInstance;
     private static DaoSession daoSession;
     private Activity top_activity;
+    private List<Activity> activityList = new ArrayList<>();
 
     @Override
     public void onCreate() {
@@ -46,11 +50,13 @@ public class app extends Application {
             @Override
             public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
                 top_activity = activity;
+                activityList.add(activity);
                 Log.e("onActivityCreated===", top_activity + "");
             }
 
             @Override
             public void onActivityDestroyed(Activity activity) {
+                activityList.remove(activity);
                 Log.e("onActivityDestroyed===", top_activity + "");
             }
 
@@ -84,5 +90,13 @@ public class app extends Application {
 
     public Activity getCurrentActivity() {
         return top_activity;
+    }
+
+    public void exit() {
+        for (Activity activity : activityList) {
+            if (activity != null) {
+                activity.finish();
+            }
+        }
     }
 }

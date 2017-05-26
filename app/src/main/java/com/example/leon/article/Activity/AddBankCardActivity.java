@@ -22,6 +22,7 @@ public class AddBankCardActivity extends ToolBarBaseActivity<ActivityAddbankcard
         setContentView(R.layout.activity_addbankcard);
 
         bindviews();
+        initData();
     }
 
     private void bindviews() {
@@ -35,5 +36,9 @@ public class AddBankCardActivity extends ToolBarBaseActivity<ActivityAddbankcard
 
             }
         });
+    }
+
+    private void initData() {
+        loadUserData();
     }
 }

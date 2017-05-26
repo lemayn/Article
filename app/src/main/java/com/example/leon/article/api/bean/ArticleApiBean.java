@@ -33,6 +33,8 @@ public class ArticleApiBean extends ApiBean {
         private String mid;
         private String mname;
         private String nickname;
+        private String mimg;
+
         private String cookie;
         private String sid;
 
@@ -41,6 +43,78 @@ public class ArticleApiBean extends ApiBean {
         private String mmoney;
         private String weixin;
         private String email;
+
+        public String getAid() {
+            return aid;
+        }
+
+        public void setAid(String aid) {
+            this.aid = aid;
+        }
+
+        public String getAtitle() {
+            return atitle;
+        }
+
+        public void setAtitle(String atitle) {
+            this.atitle = atitle;
+        }
+
+        public String getAcontent() {
+            return acontent;
+        }
+
+        public void setAcontent(String acontent) {
+            this.acontent = acontent;
+        }
+
+        public String getAaddtime() {
+            return aaddtime;
+        }
+
+        public void setAaddtime(String aaddtime) {
+            this.aaddtime = aaddtime;
+        }
+
+        public String getReview() {
+            return review;
+        }
+
+        public void setReview(String review) {
+            this.review = review;
+        }
+
+        public String getAmoney() {
+            return amoney;
+        }
+
+        public void setAmoney(String amoney) {
+            this.amoney = amoney;
+        }
+
+        public String getReason() {
+            return reason;
+        }
+
+        public void setReason(String reason) {
+            this.reason = reason;
+        }
+
+        public String getAimg() {
+            return aimg;
+        }
+
+        public void setAimg(String aimg) {
+            this.aimg = aimg;
+        }
+
+        public String getMimg() {
+            return mimg;
+        }
+
+        public void setMimg(String mimg) {
+            this.mimg = mimg;
+        }
 
         public String getSid() {
             return sid;

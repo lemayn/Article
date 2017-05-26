@@ -5,6 +5,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.example.leon.article.Activity.MainActivity;
 import com.example.leon.article.R;
 import com.example.leon.article.app;
 import com.example.leon.article.base.BaseRecyclerViewAdapter;
@@ -16,7 +17,7 @@ import com.example.leon.article.utils.PerfectClickListener;
 import java.util.List;
 
 
-public class VIPCenterAdapter extends BaseRecyclerViewAdapter<ItemBean> implements View.OnClickListener{
+public class VIPCenterAdapter extends BaseRecyclerViewAdapter<ItemBean> implements View.OnClickListener {
 
     public VIPCenterAdapter(List<ItemBean> list) {
         data.addAll(list);
@@ -50,11 +51,15 @@ public class VIPCenterAdapter extends BaseRecyclerViewAdapter<ItemBean> implemen
             binding.rlItem.setOnClickListener(new PerfectClickListener() {
                 @Override
                 protected void onNoDoubleClick(View v) {
+                    if (position == 3) {
+                        MainActivity mainActivity = (MainActivity) app.getInstance().getCurrentActivity();
+                        mainActivity.gotoArticle();
+                        return;
+                    }
                     Intent intent = new Intent(app.getInstance(), itemBean.getClazz());
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     app.getInstance().startActivity(intent);
                     Toast.makeText(app.getInstance(), itemBean.getTitle(), Toast.LENGTH_SHORT).show();
-
                 }
             });
         }

@@ -1,13 +1,299 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginLeft="200dp"
-        android:text="@string/vip_center"/>
+    <data>
 
-</LinearLayout>
+        <import type="com.example.leon.article.api.bean.ArticleApiBean"/>
+
+        <variable
+            name="apibean"
+            type="ArticleApiBean"/>
+
+        <variable
+            name="userinfo"
+            type="ArticleApiBean"/>
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
+        <TextView
+            android:id="@+id/tv_toolbar_title"
+            style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:layout_gravity="center"
+            android:background="@color/toolbar_back"
+            android:gravity="center"
+            android:text="@string/vip_center"
+            android:textColor="@android:color/white"/>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/ll_header_info"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/x55"
+                        android:padding="@dimen/x5">
+
+                        <ImageView
+                            android:id="@+id/icon_vip"
+                            android:layout_width="@dimen/x26"
+                            android:layout_height="@dimen/x26"
+                            android:layout_alignParentLeft="true"
+                            android:layout_centerVertical="true"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/icon_vip"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_toRightOf="@+id/icon_vip"
+                            android:text="@string/vip_info"
+                            android:textSize="@dimen/x16"/>
+
+                        <ImageView
+                            android:id="@+id/icon_goto_article"
+                            android:layout_width="@dimen/x26"
+                            android:layout_height="@dimen/x26"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/goto_article"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_toLeftOf="@+id/icon_goto_article"
+                            android:text="@string/publish_article"
+                            android:textColor="@color/toolbar_back"
+                            android:textSize="@dimen/x16"/>
+
+                    </RelativeLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/x1"
+                        android:background="@color/center_divider"/>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/x60"
+                        android:padding="@dimen/x5">
+
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:id="@+id/iv_user_avatar"
+                            android:layout_width="@dimen/x50"
+                            android:layout_height="@dimen/x50"
+                            android:layout_gravity="center_vertical"
+                            android:paddingRight="@dimen/x1"
+                            app:image="@{userinfo.data.mimg}"/>
+
+
+                        <TextView
+                            android:id="@+id/tv_user_nickname"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="@dimen/x3"
+                            android:layout_marginTop="@dimen/x5"
+                            android:layout_toRightOf="@+id/iv_user_avatar"
+                            android:text="@{userinfo.data.nickname}"
+                            android:textSize="@dimen/x14"/>
+
+                        <TextView
+                            android:id="@+id/tv_id"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/tv_user_nickname"
+                            android:layout_marginRight="@dimen/x5"
+                            android:layout_toRightOf="@+id/iv_user_avatar"
+                            android:text="某某ID"
+                            android:textSize="@dimen/x14"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/tv_user_nickname"
+                            android:layout_toRightOf="@+id/tv_id"
+                            android:text="@{userinfo.data.mid}"
+                            android:textSize="@dimen/x14"/>
+
+
+                    </RelativeLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/x1"
+                        android:background="@color/center_divider"/>
+
+
+                    <LinearLayout
+                        android:id="@+id/ll_header_money"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/x63"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:padding="@dimen/x5">
+
+                            <ImageView
+                                android:layout_width="@dimen/x30"
+                                android:layout_height="@dimen/x30"
+                                android:layout_gravity="center_vertical"
+                                android:paddingRight="@dimen/x1"
+                                android:scaleType="centerCrop"
+                                android:src="@drawable/total_balance"/>
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_vertical"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/balance_total"
+                                    android:textSize="@dimen/x15"/>
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="@{apibean.data.mmoney}"
+                                    android:textColor="@color/toolbar_back"
+                                    android:textSize="@dimen/x15"/>
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="@dimen/x1"
+                            android:layout_height="match_parent"
+                            android:background="@color/center_divider"/>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:padding="@dimen/x5">
+
+                            <ImageView
+                                android:layout_width="@dimen/x30"
+                                android:layout_height="@dimen/x30"
+                                android:layout_gravity="center_vertical"
+                                android:paddingRight="@dimen/x1"
+                                android:scaleType="centerCrop"
+                                android:src="@drawable/available_balance"/>
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_vertical"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/avail_balance"
+                                    android:textSize="@dimen/x15"/>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@{apibean.data.mmoney}"
+                                    android:textColor="@color/toolbar_back"
+                                    android:textSize="@dimen/x15"/>
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="@dimen/x1"
+                            android:layout_height="match_parent"
+                            android:background="@color/center_divider"/>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:padding="@dimen/x5">
+
+                            <ImageView
+                                android:layout_width="@dimen/x30"
+                                android:layout_height="@dimen/x30"
+                                android:layout_gravity="center_vertical"
+                                android:paddingRight="@dimen/x1"
+                                android:scaleType="centerCrop"
+                                android:src="@drawable/commission_balance"/>
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_vertical"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/commission_balance"
+                                    android:textSize="@dimen/x15"/>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@{apibean.data.mmoney}"
+                                    android:textColor="@color/toolbar_back"
+                                    android:textSize="@dimen/x15"/>
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/x1"
+                        android:background="@color/center_divider"/>
+
+                </LinearLayout>
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rv_vip_center"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+
+            </LinearLayout>
+
+        </ScrollView>
+
+
+    </LinearLayout>
+
+</layout>

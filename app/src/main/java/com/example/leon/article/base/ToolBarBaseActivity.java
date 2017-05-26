@@ -5,6 +5,7 @@ import android.databinding.ViewDataBinding;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +18,8 @@ import com.example.leon.article.api.BaseValueValidOperator;
 import com.example.leon.article.api.bean.ArticleApiBean;
 import com.example.leon.article.databinding.ActivityToolBarBaseBinding;
 import com.example.leon.article.utils.Constant;
+import com.example.leon.article.utils.GsonUtil;
+import com.example.leon.article.utils.SPUtil;
 import com.example.leon.article.widget.CustomDialog;
 
 import java.util.HashMap;
@@ -101,9 +104,11 @@ public class ToolBarBaseActivity<T extends ViewDataBinding> extends AppCompatAct
     }
 
     protected void loadUserData() {
+        loadUserInfo();
+
         HashMap<String, String> hashMap = new HashMap<>();
-        hashMap.put("cookie", "c1c5582ccdd4f5d16e37ae19c03f8dea");
-        hashMap.put("sid", "c5etakebn6grkst6csqk2a5o62");
+        hashMap.put("cookie", (String) SPUtil.get(Constant.Share_prf.COOKIE, ""));
+        hashMap.put("sid", (String) SPUtil.get(Constant.Share_prf.SID, ""));
         ApiFactory.getApi().article(Constant.Api.USER_DATA, hashMap)
                 .lift(new BaseValueValidOperator<ArticleApiBean>())
                 .subscribeOn(Schedulers.io())
@@ -127,6 +132,14 @@ public class ToolBarBaseActivity<T extends ViewDataBinding> extends AppCompatAct
                         }
                     }
                 });
+    }
+
+    private void loadUserInfo() {
+        String loginResponse = (String) SPUtil.get(Constant.Share_prf.LOGIN_RESPONSE, "");
+        if (!TextUtils.isEmpty(loginResponse)) {
+            ArticleApiBean userInfoBean = GsonUtil.GsonToBean(loginResponse, ArticleApiBean.class);
+            baseBinding.setUserinfo(userInfoBean);
+        }
     }
 
 }

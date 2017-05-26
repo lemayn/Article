@@ -65,10 +65,22 @@ public class Constant {
          * 提现
          */
         public static final String WITHDRAW_MONEY = "WithdrawMoney";
+        /**
+         * 修改提现密码
+         */
+        public static final String EDIT_MONEY_PASSWORD = "EditMoneyPassword";
+    }
+
+    public static class Share_prf {
+        public static final String LOGIN_RESPONSE = "login_response";
+        public static final String COOKIE = "cookie";
+        public static final String SID = "sid";
+        public static final String PWD = "pwd";
+        public static final String NAME = "name";
+        public static final String WITHOUT_PWD = "without_pwd";
     }
 
     public static class Intent_Extra {
-        public static final String USER_BANK_INFO = "user_bank_info";
-        public static final String USER_BANK_HAS_CHOOSE = "user_bank_has_choose";
+        public static final String IS_CONSTRAINT_LOIN = "is_constraint_loin";
     }
 }

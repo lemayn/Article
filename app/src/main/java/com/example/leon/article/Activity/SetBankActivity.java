@@ -8,7 +8,6 @@ import com.example.leon.article.R;
 import com.example.leon.article.base.ToolBarBaseActivity;
 import com.example.leon.article.databinding.ActivitySetbankBinding;
 import com.example.leon.article.utils.CommonUtils;
-import com.example.leon.article.utils.DataBindingUtil;
 
 /**
  * 银行设置
@@ -23,14 +22,17 @@ public class SetBankActivity extends ToolBarBaseActivity<ActivitySetbankBinding>
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setbank);
         bindViews();
+        initData();
+    }
+
+    private void initData() {
+        loadUserData();
     }
 
     private void bindViews() {
 
-        setTitle(CommonUtils.getString(R.string.basic_info));
+        setTitle(CommonUtils.getString(R.string.banks_setting));
         setNavigationView();
-
-//        binding.linLayout1
 
         //添加银行卡
 

@@ -16,6 +16,7 @@ import com.example.leon.article.databinding.ActivityWithdrawDepositBinding;
 import com.example.leon.article.utils.CommonUtils;
 import com.example.leon.article.utils.Constant;
 import com.example.leon.article.utils.PerfectClickListener;
+import com.example.leon.article.utils.SPUtil;
 
 import java.util.HashMap;
 
@@ -83,8 +84,8 @@ public class WithdrawDepositActivity extends ToolBarBaseActivity<ActivityWithdra
 
     private void getUserBankInfo() {
         HashMap<String, String> hashMap = new HashMap<>();
-        hashMap.put("cookie", "4ef27e6f77f47112f7e21d29af7ac1ad");
-        hashMap.put("sid", "c5etakebn6grkst6csqk2a5o62");
+        hashMap.put("cookie", (String) SPUtil.get(Constant.Share_prf.COOKIE, ""));
+        hashMap.put("sid", (String) SPUtil.get(Constant.Share_prf.SID, ""));
         ApiFactory.getApi().bank(Constant.Api.USER_BANK, hashMap)
                 .lift(new BaseValueValidOperator<BankApiBean>())
                 .subscribeOn(Schedulers.io())
@@ -137,8 +138,8 @@ public class WithdrawDepositActivity extends ToolBarBaseActivity<ActivityWithdra
         }
         if (hasData) {
             HashMap<String, String> hashMap = new HashMap<>();
-            hashMap.put("cookie", "c1c5582ccdd4f5d16e37ae19c03f8dea");
-            hashMap.put("sid", "c5etakebn6grkst6csqk2a5o62");
+            hashMap.put("cookie", (String) SPUtil.get(Constant.Share_prf.COOKIE, ""));
+            hashMap.put("sid", (String) SPUtil.get(Constant.Share_prf.SID, ""));
             hashMap.put("cid", mBankApiBean.getData().get(mDefaultChoice).getCid());
             hashMap.put("account_name", mBankApiBean.getData().get(mDefaultChoice).getAccount_name());
             hashMap.put("money", money);
