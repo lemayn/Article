@@ -9,6 +9,7 @@
     <color name="colorWhite">#ffffff</color>
     <color name="toolbar_back">#E11B03</color>
     <color name="red">#FF0000</color>
+    <color name="sred">#EC4A4A</color>
     <color name="center_divider">#DCDCDC</color>
     <color name="white">#FFFFFF</color>
 </resources>

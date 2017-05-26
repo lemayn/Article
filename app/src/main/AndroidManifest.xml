@@ -19,7 +19,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".Activity.art.ArtDetailActivity" />
-        <activity android:name=".Activity.art.ArticleActivity" />
+        <!--<activity android:name=".Activity.art.ArticleActivity" />-->
         <activity android:name=".Activity.art.EditorActivity" />
         <activity android:name=".Activity.art.MySqlActivity" />
         <activity android:name=".Activity.VIPCenterActivity" />

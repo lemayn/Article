@@ -1,10 +1,9 @@
-package com.example.leon.article.Activity.art;
+package com.example.leon.article.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,10 +12,12 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.leon.article.Activity.art.EditorActivity;
+import com.example.leon.article.Activity.art.MySqlActivity;
 import com.example.leon.article.R;
 import com.example.leon.article.adapter.IssueListAdapter;
 
-public class ArticleActivity extends Fragment implements View.OnClickListener{
+public class ArticleFragment extends Fragment implements View.OnClickListener{
 
     View view = null;
 

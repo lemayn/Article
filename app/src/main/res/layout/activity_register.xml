@@ -1,143 +1,153 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android="http://schemas.android.com/apk/res/android">
+<RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
 
     <LinearLayout
-        android:id="@+id/line1"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:orientation="vertical"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        >
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:orientation="vertical">
 
-
-        <EditText
-            android:id="@+id/edittext_name"
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/textinput_layout1"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:background="@null"
-            android:drawableLeft="@drawable/zhanghao"
-            android:drawablePadding="16dp"
-            android:hint="@string/register_username"
-            android:textColor="#000"
-            android:textSize="14sp"
-            android:layout_marginRight="16dp"
-            android:layout_marginLeft="16dp"
-            />
+            android:layout_height="46dp"
+            android:paddingLeft="10dp"
+            >
+
+            <EditText
+                android:id="@+id/edittext_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:hint="@string/register_username"
+                android:drawableLeft="@drawable/zhanghao"
+                android:drawablePadding="16dp"
+                android:background="@null"
+                android:inputType="textWebEmailAddress"/>
+        </android.support.design.widget.TextInputLayout>
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="0.1dp"
-            android:background="@color/colorPrimary"
-            />
+            android:layout_height="0.2dp"
+            android:background="#ababab"/>
 
-        <EditText
-            android:id="@+id/edittext_pwd"
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/textinput_layout2"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:background="@null"
-            android:drawableLeft="@drawable/mima"
-            android:drawablePadding="16dp"
-            android:hint="@string/register_password"
-            android:inputType="textPassword"
-            android:textColor="#000"
-            android:textSize="14sp"
-            android:layout_marginRight="16dp"
-            android:layout_marginLeft="16dp"
-            />
+            android:layout_height="46dp"
+            android:paddingLeft="10dp"
+            android:layout_below="@+id/textinput_layout1">
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0.1dp"
-            android:background="@color/colorPrimary"
-            />
+            <EditText
+                android:id="@+id/edittext_pwd"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/mima"
+                android:drawablePadding="16dp"
+                android:hint="@string/register_password"
+                android:background="@null"
+                android:inputType="textPassword"/>
+        </android.support.design.widget.TextInputLayout>
 
-        <EditText
-            android:id="@+id/edittext_pwd2"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:background="@null"
-            android:drawableLeft="@drawable/mima"
-            android:drawablePadding="16dp"
-            android:hint="@string/register_password2"
-            android:inputType="textPassword"
-            android:textColor="#000"
-            android:textSize="14sp"
-            android:layout_marginRight="16dp"
-            android:layout_marginLeft="16dp"
-            />
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="0.1dp"
-            android:background="@color/colorPrimary"
-            />
+            android:layout_height="0.2dp"
+            android:background="#ababab"/>
 
-        <EditText
-            android:id="@+id/edittext_phone"
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/textinput_layout3"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:background="@null"
-            android:drawableLeft="@drawable/shouji"
-            android:drawablePadding="16dp"
-            android:hint="@string/register_userphone"
-            android:inputType="phone"
-            android:textColor="#000"
-            android:textSize="14sp"
-            android:layout_marginRight="16dp"
-            android:layout_marginLeft="16dp"
-            />
+            android:layout_height="46dp"
+            android:paddingLeft="10dp"
+            android:layout_below="@+id/textinput_layout2">
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0.1dp"
-            android:background="@color/colorPrimary"
-            />
-
-        <EditText
-            android:id="@+id/edittext_qq"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:background="@null"
-            android:drawableLeft="@drawable/qq"
-            android:drawablePadding="16dp"
-            android:hint="@string/register_userqq"
-            android:inputType="phone"
-            android:textColor="#000"
-            android:textSize="14sp"
-            android:layout_marginRight="16dp"
-            android:layout_marginLeft="16dp"
-            />
+            <EditText
+                android:id="@+id/edittext_pwd2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/mima"
+                android:drawablePadding="16dp"
+                android:hint="@string/register_password2"
+                android:background="@null"
+                android:inputType="textPassword"/>
+        </android.support.design.widget.TextInputLayout>
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="0.1dp"
-            android:background="@color/colorPrimary"
-            />
+            android:layout_height="0.2dp"
+            android:background="#ababab"/>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/textinput_layout4"
+            android:layout_width="match_parent"
+            android:layout_height="46dp"
+            android:paddingLeft="10dp"
+            android:layout_below="@+id/textinput_layout3">
+
+            <EditText
+                android:id="@+id/edittext_phone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/shouji"
+                android:drawablePadding="16dp"
+                android:hint="@string/register_userphone"
+                android:background="@null"
+                android:inputType="phone"/>
+        </android.support.design.widget.TextInputLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.2dp"
+            android:background="#ababab"/>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/textinput_layout5"
+            android:layout_width="match_parent"
+            android:layout_height="46dp"
+            android:paddingLeft="10dp"
+            android:layout_below="@+id/textinput_layout4">
+
+            <EditText
+                android:id="@+id/edittext_qq"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/qq"
+                android:drawablePadding="16dp"
+                android:hint="@string/register_userqq"
+                android:background="@null"
+                android:inputType="textWebEmailAddress"/>
+        </android.support.design.widget.TextInputLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.2dp"
+            android:background="#ababab"/>
+
+
+        <Button
+            android:id="@+id/btn_register"
+            android:layout_width="match_parent"
+            android:layout_height="46dp"
+            android:layout_below="@+id/line1"
+            android:text="注册"
+            android:textColor="#fff"
+            android:background="@drawable/login_btn"
+            android:layout_marginRight="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"/>
 
     </LinearLayout>
 
 
-    <Button
-        android:id="@+id/btn_register"
-        android:layout_width="match_parent"
-        android:layout_height="46dp"
-        android:layout_below="@+id/line1"
-        android:text="注册"
-        android:textColor="#fff"
-        android:background="@drawable/login_btn"
-        android:layout_marginRight="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="16dp"/>
-
 </RelativeLayout>
+</layout>

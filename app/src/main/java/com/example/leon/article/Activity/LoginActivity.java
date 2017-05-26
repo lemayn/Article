@@ -4,12 +4,23 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.example.leon.article.Http.Api;
+import com.example.leon.article.Http.XHttpUtils;
 import com.example.leon.article.R;
+import com.example.leon.article.base.ToolBarBaseActivity;
+import com.example.leon.article.databinding.ActivityLoginBinding;
+import com.google.gson.Gson;
+
+import java.io.IOException;
+
+import okhttp3.FormBody;
+import okhttp3.Request;
 
 /**
  *
@@ -17,33 +28,28 @@ import com.example.leon.article.R;
  * Created by leonseven on 2017/5/9.
  */
 
-public class LoginActivity extends AppCompatActivity implements View.OnClickListener{
+public class LoginActivity extends ToolBarBaseActivity<ActivityLoginBinding> implements View.OnClickListener{
 
-    private EditText mEdittext_phone;
-    private EditText mEdittext_pwd;
-    private Button mBtn_login;
-    private Button mBtn_register;
-    private TextView tv_forgetpwd;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        hideHeaderInfo();
+        hideHeaderMoneyInfo();
         bindViews();
     }
 
-
     private void bindViews() {
 
-        mEdittext_phone = (EditText) findViewById(R.id.edittext_phone);
-        mEdittext_pwd = (EditText) findViewById(R.id.edittext_pwd);
-        mBtn_login = (Button) findViewById(R.id.btn_login);mBtn_login.setOnClickListener(this);
-        mBtn_register = (Button) findViewById(R.id.btn_register);mBtn_register.setOnClickListener(this);
-        tv_forgetpwd = (TextView) findViewById(R.id.tv_forgetpwd);tv_forgetpwd.setOnClickListener(this);
+        setTitle(getString(R.string.login));
+
+        binding.btnLogin.setOnClickListener(this);
+        binding.btnRegister.setOnClickListener(this);
+        binding.tvForgetpwd.setOnClickListener(this);
 
     }
-
 
     @Override
     public void onClick(View v) {
@@ -66,9 +72,28 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private void Login() {
 
-        mEdittext_phone.getText().toString().trim();
-        mEdittext_pwd.getText().toString().trim();
+        String name = binding.edittextPhone.getText().toString().trim();
+        String pwd = binding.tvForgetpwd.getText().toString().trim();
 
-        startActivity(new Intent(LoginActivity.this, VIPCenterActivity.class));
+        FormBody formBody = new FormBody.Builder()
+                .add("name", name)
+                .add("pwd", pwd)
+                .build();
+        XHttpUtils.getInstance().asyncPost(Api.baseurl + Api.Login,
+                formBody, new XHttpUtils.HttpCallBack() {
+                    @Override
+                    public void onError(Request request, IOException e) {
+                        Log.i("MyTest", "请求失败");
+                    }
+
+                    @Override
+                    public void onSuccess(Request request, String result) {
+                        Gson gson = new Gson();
+                        Log.i("MyTest", "请求成功" + result.toString());
+                    }
+                });
+
+
+        startActivity(new Intent(LoginActivity.this, MainActivity.class));
     }
 }

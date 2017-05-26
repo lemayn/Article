@@ -23,6 +23,7 @@
         .如果操作过程中遇到问题，请于客服联系。</string>
 
     <string name="register">注册</string>
+    <string name="login">登录</string>
 
     <string name="register_username">请使用英文、数字、下划线6-10位字符</string>
     <string name="register_password">请输入6-16位字符</string>

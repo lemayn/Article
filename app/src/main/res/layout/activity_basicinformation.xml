@@ -50,7 +50,7 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/contact_number"
                 android:background="@null"
-                android:inputType="textWebEmailAddress"/>
+                android:inputType="phone"/>
         </android.support.design.widget.TextInputLayout>
 
 

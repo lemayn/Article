@@ -4,53 +4,114 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
+import com.example.leon.article.Http.Api;
+import com.example.leon.article.Http.XHttpUtils;
 import com.example.leon.article.R;
+import com.example.leon.article.base.ToolBarBaseActivity;
+import com.example.leon.article.databinding.ActivityRegisterBinding;
+import com.google.gson.Gson;
+
+import java.io.IOException;
+
+import okhttp3.FormBody;
+import okhttp3.Request;
 
 /**
  * RegisterActivity
  * Created by leonseven on 2017/5/15.
  */
 
-public class RegisterActivity extends AppCompatActivity {
-
-    private LinearLayout mLine1;
-    private EditText mEdittext_name;
-    private EditText mEdittext_pwd;
-    private EditText mEdittext_pwd2;
-    private EditText mEdittext_phone;
-    private EditText mEdittext_qq;
-    private Button mBtn_register;
+public class RegisterActivity extends ToolBarBaseActivity<ActivityRegisterBinding> {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
+        hideHeaderInfo();
+        hideHeaderMoneyInfo();
         bindViews();
     }
 
 
     private void bindViews() {
+        setTitle(getString(R.string.register));
 
-        mLine1 = (LinearLayout) findViewById(R.id.line1);
-        mEdittext_name = (EditText) findViewById(R.id.edittext_name);
-        mEdittext_pwd = (EditText) findViewById(R.id.edittext_pwd);
-        mEdittext_pwd2 = (EditText) findViewById(R.id.edittext_pwd2);
-        mEdittext_phone = (EditText) findViewById(R.id.edittext_phone);
-        mEdittext_qq = (EditText) findViewById(R.id.edittext_qq);
-        mBtn_register = (Button) findViewById(R.id.btn_register);
-
-        mBtn_register.setOnClickListener(new View.OnClickListener() {
+        binding.btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
+
+                register();
             }
+
         });
+
+    }
+
+    private void register() {
+
+        String account = binding.edittextName.getText().toString().trim();
+        String pwd = binding.edittextPwd.getText().toString().trim();
+        String pwd2 = binding.edittextPwd2.getText().toString().trim();
+        String phone = binding.edittextPhone.getText().toString().trim();
+        String qq =  binding.edittextQq.getText().toString().trim();
+
+        Log.i("MyTest", account + pwd +" = " + pwd2 + phone + qq);
+
+        if (account == null || account.equals("")){
+            binding.edittextName.setError("账号不能为空");
+        }
+        if (account.length() < 6 || account.length() > 10){
+            binding.edittextName.setError("账号不正确");
+        }
+        else if (pwd == null || pwd.equals("")){
+            binding.edittextPwd.setError("密码不能为空");
+        }
+        if (pwd.length() < 6 || pwd.length() > 16){
+            binding.edittextPwd.setError("密码长度不正确");
+        }
+        else if (pwd2 == null || pwd2.equals("")){
+            binding.edittextPwd2.setError("重复密码不能为空");
+        }
+        else if (!pwd.equals(pwd2)){
+            binding.edittextPwd2.setError("两次密码不一致");
+        }
+        else if (phone == null || phone.equals("")){
+            binding.edittextPhone.setError("手机号不能为空");
+        }
+        else if (qq == null || qq.equals("")){
+            binding.edittextQq.setError("QQ账号不能为空");
+        }
+
+        FormBody formBody = new FormBody.Builder()
+                .add("name", account)
+                .add("pwd", pwd)
+                .add("repwd", pwd2)
+                .add("tell", phone)
+                .add("qq", qq)
+                .build();
+        XHttpUtils.getInstance().asyncPost(Api.baseurl + Api.Reg,
+                formBody, new XHttpUtils.HttpCallBack() {
+                    @Override
+                    public void onError(Request request, IOException e) {
+                        Log.i("MyTest", "请求失败");
+                    }
+
+                    @Override
+                    public void onSuccess(Request request, String result) {
+                        Gson gson = new Gson();
+                        Log.i("MyTest", "请求成功" + result.toString());
+
+                        startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
+                    }
+                });
 
     }
 
