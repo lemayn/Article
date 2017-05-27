@@ -34,17 +34,23 @@ public class MainActivity extends AppCompatActivity {
 
 //        hideHeaderInfo();
 //        hideHeaderMoneyInfo();
+
         initView();
+        ifShowArticle();
     }
 
     //发表文章后跳转到当前页面
-    @Override
-    protected void onResume() {
-        super.onResume();
+    private void ifShowArticle() {
         int position = getIntent().getIntExtra(ArtConstant.SHOW_ARTICLEFRAGMENT, 0);
         viewpager.setCurrentItem(position);
-        navigationview.setSelectedItemId(R.id.menu_article);
+        if (position == 0) {
+            navigationview.setSelectedItemId(R.id.menu_home);
+        }
+        if (position == 1){
+            navigationview.setSelectedItemId(R.id.menu_article);
+        }
     }
+
 
     private void initView() {
 
@@ -115,7 +121,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    private <T extends View> T getViewById(int res){
+    private <T extends View> T getViewById(int res) {
         return (T) findViewById(res);
     }
 

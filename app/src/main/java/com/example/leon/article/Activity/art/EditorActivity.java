@@ -16,6 +16,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Base64;
+import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
@@ -152,15 +153,19 @@ public class EditorActivity extends AppCompatActivity implements IEditorActivity
 
     private void initEvent() {
         //点击发布后,做提交处理
+
         findViewById(R.id.bt_editor_send).setOnClickListener(new View.OnClickListener() {
+
+            private String bytesFromBitmap;
+
             @Override
             public void onClick(View v) {
-                /*InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                imm.hideSoftInputFromWindow(mEditor.getWindowToken(), 0);*/
                 //隐藏软键盘
                 hideKeyboard();
                 String title = artTitle.getText().toString();
-                String bytesFromBitmap = getBytesFromBitmap(insertBitmap);
+                if (insertBitmap != null) {
+                    bytesFromBitmap = getBytesFromBitmap(insertBitmap);
+                }
                 artPresenter.uploadUserArt(cookie,title,editDate,sid,bytesFromBitmap);
             }
         });
