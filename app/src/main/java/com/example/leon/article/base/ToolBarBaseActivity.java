@@ -1,5 +1,6 @@
 package com.example.leon.article.base;
 
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
 import android.os.Bundle;
@@ -12,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
+import com.example.leon.article.Activity.art.EditorActivity;
 import com.example.leon.article.R;
 import com.example.leon.article.api.ApiFactory;
 import com.example.leon.article.api.BaseValueValidOperator;
@@ -19,6 +21,7 @@ import com.example.leon.article.api.bean.ArticleApiBean;
 import com.example.leon.article.databinding.ActivityToolBarBaseBinding;
 import com.example.leon.article.utils.Constant;
 import com.example.leon.article.utils.GsonUtil;
+import com.example.leon.article.utils.PerfectClickListener;
 import com.example.leon.article.utils.SPUtil;
 import com.example.leon.article.widget.CustomDialog;
 
@@ -51,8 +54,8 @@ public class ToolBarBaseActivity<T extends ViewDataBinding> extends AppCompatAct
         getWindow().setContentView(baseBinding.getRoot());
 
         setToolBar();
-
         setCustomDialog();
+        gotoArticle();
     }
 
     private void setCustomDialog() {
@@ -121,15 +124,13 @@ public class ToolBarBaseActivity<T extends ViewDataBinding> extends AppCompatAct
 
                     @Override
                     public void onError(Throwable e) {
-                        Toast.makeText(ToolBarBaseActivity.this, "网络异常", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ToolBarBaseActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
                     public void onNext(ArticleApiBean apiBean) {
-                        Toast.makeText(ToolBarBaseActivity.this, apiBean.getCode(), Toast.LENGTH_SHORT).show();
-                        if ("1".equals(apiBean.getCode())) {
-                            baseBinding.setApibean(apiBean);
-                        }
+                        baseBinding.setApibean(apiBean);
+                        SPUtil.put(Constant.Share_prf.USER_DATA, GsonUtil.GsonString(apiBean));
                     }
                 });
     }
@@ -140,6 +141,16 @@ public class ToolBarBaseActivity<T extends ViewDataBinding> extends AppCompatAct
             ArticleApiBean userInfoBean = GsonUtil.GsonToBean(loginResponse, ArticleApiBean.class);
             baseBinding.setUserinfo(userInfoBean);
         }
+    }
+
+    protected void gotoArticle() {
+        baseBinding.tvGotoArticle.setOnClickListener(new PerfectClickListener() {
+            @Override
+            protected void onNoDoubleClick(View v) {
+                Intent intent = new Intent(ToolBarBaseActivity.this, EditorActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
 }

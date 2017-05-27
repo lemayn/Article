@@ -3,7 +3,6 @@ package com.example.leon.article.adapter;
 import android.content.Intent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.example.leon.article.Activity.MainActivity;
 import com.example.leon.article.R;
@@ -59,7 +58,6 @@ public class VIPCenterAdapter extends BaseRecyclerViewAdapter<ItemBean> implemen
                     Intent intent = new Intent(app.getInstance(), itemBean.getClazz());
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     app.getInstance().startActivity(intent);
-                    Toast.makeText(app.getInstance(), itemBean.getTitle(), Toast.LENGTH_SHORT).show();
                 }
             });
         }

@@ -182,12 +182,14 @@ public class ArticleApiBean extends ApiBean {
             this.mname = mname;
         }
 
+        @Bindable
         public String getNickname() {
             return nickname;
         }
 
         public void setNickname(String nickname) {
             this.nickname = nickname;
+            notifyPropertyChanged(BR.nickname);
         }
 
         public String getCookie() {

@@ -1,6 +1,8 @@
 package com.example.leon.article.utils;
 
 import android.databinding.BindingAdapter;
+import android.text.TextUtils;
+import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
@@ -23,5 +25,13 @@ public class DataBindingUtil {
                 .crossFade()
                 .placeholder(R.drawable.timg).error(R.drawable.timg)
                 .into(imageView);
+    }
+
+    @BindingAdapter("data")
+    public static void loadUserData(EditText et, String data) {
+        if (!TextUtils.isEmpty(data)) {
+            et.setText(data);
+            et.setKeyListener(null);
+        }
     }
 }

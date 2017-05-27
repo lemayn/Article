@@ -72,15 +72,36 @@ public class Constant {
     }
 
     public static class Share_prf {
+        /**
+         * 登录返回数据，内包含用户昵称、ID、头像等信息
+         */
         public static final String LOGIN_RESPONSE = "login_response";
+        /**
+         * cookie
+         */
         public static final String COOKIE = "cookie";
+        /**
+         * sid
+         */
         public static final String SID = "sid";
+        /**
+         * pwd
+         */
         public static final String PWD = "pwd";
+        /**
+         * name
+         */
         public static final String NAME = "name";
-        public static final String WITHOUT_PWD = "without_pwd";
+        /**
+         * 用户信息
+         */
+        public static final String USER_DATA = "user_data";
     }
 
     public static class Intent_Extra {
+        /**
+         * 是否强制登录
+         */
         public static final String IS_CONSTRAINT_LOIN = "is_constraint_loin";
     }
 }

@@ -1,5 +1,6 @@
 package com.example.leon.article.fragment;
 
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -16,6 +17,8 @@ import com.example.leon.article.Activity.BasicinformationActivity;
 import com.example.leon.article.Activity.ModifyPasswordActivity;
 import com.example.leon.article.Activity.ModifyWithoutPasswordActivity;
 import com.example.leon.article.Activity.SetBankActivity;
+import com.example.leon.article.Activity.WithdrawDepositActivity;
+import com.example.leon.article.Activity.art.EditorActivity;
 import com.example.leon.article.R;
 import com.example.leon.article.adapter.VIPCenterAdapter;
 import com.example.leon.article.api.ApiFactory;
@@ -27,6 +30,7 @@ import com.example.leon.article.databinding.FragmentVipcenterBinding;
 import com.example.leon.article.utils.CommonUtils;
 import com.example.leon.article.utils.Constant;
 import com.example.leon.article.utils.GsonUtil;
+import com.example.leon.article.utils.PerfectClickListener;
 import com.example.leon.article.utils.SPUtil;
 
 import java.util.ArrayList;
@@ -61,6 +65,13 @@ public class VipFragment extends Fragment {
         return view;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        loadUserData();
+        loadUserInfo();
+    }
+
     private void initEvent() {
         ArrayList<ItemBean> data = new ArrayList<>();
         data.add(new ItemBean(R.drawable.basic_info, CommonUtils.getString(R.string.basic_info),
@@ -68,9 +79,9 @@ public class VipFragment extends Fragment {
         data.add(new ItemBean(R.drawable.banks_setting, CommonUtils.getString(R.string.banks_setting),
                 SetBankActivity.class));
         data.add(new ItemBean(R.drawable.banks_setting, CommonUtils.getString(R.string.withdraw_deposit),
-                SetBankActivity.class));
+                WithdrawDepositActivity.class));
         data.add(new ItemBean(R.drawable.articles_list, CommonUtils.getString(R.string.articles_list),
-                ArticleFragment.class));
+                WithdrawDepositActivity.class));
         data.add(new ItemBean(R.drawable.password_modify, CommonUtils.getString(R.string.password_modify),
                 ModifyPasswordActivity.class));
         data.add(new ItemBean(R.drawable.password_modify, CommonUtils.getString(R.string.withdraw_password_modify),
@@ -87,6 +98,7 @@ public class VipFragment extends Fragment {
     }
 
     public void initView() {
+        gotoArticle();
     }
 
 
@@ -119,9 +131,19 @@ public class VipFragment extends Fragment {
 
                     @Override
                     public void onNext(ArticleApiBean apiBean) {
-                        Toast.makeText(app.getInstance(), apiBean.getCode(), Toast.LENGTH_SHORT).show();
                         binding.setApibean(apiBean);
+                        SPUtil.put(Constant.Share_prf.USER_DATA, GsonUtil.GsonString(apiBean));
                     }
                 });
+    }
+
+    protected void gotoArticle() {
+        binding.tvGotoArticle.setOnClickListener(new PerfectClickListener() {
+            @Override
+            protected void onNoDoubleClick(View v) {
+                Intent intent = new Intent(getActivity(), EditorActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 }
