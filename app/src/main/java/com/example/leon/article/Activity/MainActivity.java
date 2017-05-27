@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 
+import com.example.leon.article.Activity.art.ArtConstant;
 import com.example.leon.article.R;
 import com.example.leon.article.fragment.ArticleFragment;
 import com.example.leon.article.fragment.HomeFragment;
@@ -26,7 +27,6 @@ public class MainActivity extends AppCompatActivity {
     private ViewPager viewpager;
     private BottomNavigationView navigationview;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +35,15 @@ public class MainActivity extends AppCompatActivity {
 //        hideHeaderInfo();
 //        hideHeaderMoneyInfo();
         initView();
+    }
+
+    //发表文章后跳转到当前页面
+    @Override
+    protected void onResume() {
+        super.onResume();
+        int position = getIntent().getIntExtra(ArtConstant.SHOW_ARTICLEFRAGMENT, 0);
+        viewpager.setCurrentItem(position);
+        navigationview.setSelectedItemId(R.id.menu_article);
     }
 
     private void initView() {

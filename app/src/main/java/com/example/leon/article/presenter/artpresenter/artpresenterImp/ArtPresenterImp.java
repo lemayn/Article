@@ -1,12 +1,16 @@
 package com.example.leon.article.presenter.artpresenter.artpresenterImp;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Handler;
 import android.util.Log;
 
+import com.example.leon.article.Activity.MainActivity;
+import com.example.leon.article.Activity.art.ArtConstant;
 import com.example.leon.article.api.ApiManager;
+import com.example.leon.article.api.BaseValueValidOperator;
 import com.example.leon.article.api.bean.ArtInfoBean;
 import com.example.leon.article.api.bean.ArtListBean;
-import com.example.leon.article.api.BaseValueValidOperator;
 import com.example.leon.article.api.bean.UpLoadArtBean;
 import com.example.leon.article.presenter.artpresenter.IArtPresenter;
 import com.example.leon.article.view.IArtDetailActivity;
@@ -24,15 +28,17 @@ import rx.schedulers.Schedulers;
 
 public class ArtPresenterImp extends BasepresenterImp implements IArtPresenter{
 
-    private IArticleFragment articleActivity;
+    private Context context;
+    private IArticleFragment articleFragment;
     private IEditorActivity editorActivity;
     private IArtDetailActivity detailActivity;
 
-    public ArtPresenterImp(IArticleFragment articleActivity) {
-        this.articleActivity = articleActivity;
+    public ArtPresenterImp(IArticleFragment articleFragment) {
+        this.articleFragment = articleFragment;
     }
 
-    public ArtPresenterImp(IEditorActivity editorActivity) {
+    public ArtPresenterImp(Context context,IEditorActivity editorActivity) {
+        this.context = context;
         this.editorActivity = editorActivity;
     }
 
@@ -42,7 +48,7 @@ public class ArtPresenterImp extends BasepresenterImp implements IArtPresenter{
 
     @Override
     public void getuserArtList(String cookie,String sid,int page) {
-        articleActivity.showProgress();
+        articleFragment.showProgress();
         Subscription subscribe = ApiManager.getInstance().getArtApiService()
                 .getArtList(cookie,sid,page)
                 .lift(new BaseValueValidOperator<ArtListBean>())
@@ -57,15 +63,14 @@ public class ArtPresenterImp extends BasepresenterImp implements IArtPresenter{
 
                     @Override
                     public void onError(Throwable e) {
-                        articleActivity.hideProgress();
-                        articleActivity.showError();
+                        articleFragment.hideProgress();
+                        articleFragment.showError();
                     }
 
                     @Override
                     public void onNext(ArtListBean artListBean) {
-                        Log.i("HT", "onNext:------>"+artListBean.getData().getArticle());
-                        articleActivity.hideProgress();
-                        articleActivity.setArtDate(artListBean.getData().getArticle());
+                        articleFragment.hideProgress();
+                        articleFragment.setArtDate(artListBean.getData().getArticle());
                     }
                 });
             addSubscription(subscribe);
@@ -126,17 +131,24 @@ public class ArtPresenterImp extends BasepresenterImp implements IArtPresenter{
                             @Override
                             public void run() {
                                 editorActivity.hideProgress();
-                                Log.i("HT", "ArtPresenterImp  onNext: ---->"+upLoadArtBean.getCode()+upLoadArtBean.getMsg()+upLoadArtBean.getData());
                                 if (upLoadArtBean.getCode().equals("1")) {
                                     editorActivity.showSuccess();
+                                    goArticleFragment();
                                 } else {
                                     editorActivity.showFailure();
                                 }
                             }
                         },2500);
+
                     }
                 });
             addSubscription(subscribe);
+    }
+
+    private void goArticleFragment() {
+        Intent intent = new Intent(context, MainActivity.class);
+        intent.putExtra(ArtConstant.SHOW_ARTICLEFRAGMENT,1);
+        context.startActivity(intent);
     }
 
 }

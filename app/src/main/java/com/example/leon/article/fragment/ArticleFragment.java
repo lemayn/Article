@@ -6,7 +6,6 @@ import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +17,7 @@ import android.widget.Toast;
 import com.example.leon.article.Activity.art.EditorActivity;
 import com.example.leon.article.Activity.art.MySqlActivity;
 import com.example.leon.article.R;
-import com.example.leon.article.adapter.IssueListAdapter;
+import com.example.leon.article.adapter.ArtListAdapter;
 import com.example.leon.article.api.bean.ArtListBean;
 import com.example.leon.article.presenter.artpresenter.artpresenterImp.ArtPresenterImp;
 import com.example.leon.article.utils.Constant;
@@ -34,7 +33,7 @@ public class ArticleFragment extends Fragment implements View.OnClickListener, I
     private ListView lv_article;
     private TextView lv_empty;
     private ProgressBar progressBar;
-    private IssueListAdapter adapter;
+    private ArtListAdapter adapter;
     private ArtPresenterImp artPresenter;
     private SwipeRefreshLayout refreshActicle;
     private int page = 1;
@@ -81,7 +80,7 @@ public class ArticleFragment extends Fragment implements View.OnClickListener, I
 
     private void initDate(View view) {
         artPresenter = new ArtPresenterImp(this);
-        adapter = new IssueListAdapter(getContext());
+        adapter = new ArtListAdapter(getContext());
         View headerView = view.inflate(getContext(),R.layout.listview_article_headerview, null);
         lv_article.addHeaderView(headerView);
         artPresenter.getuserArtList(cookie, sid,page);
@@ -141,7 +140,6 @@ public class ArticleFragment extends Fragment implements View.OnClickListener, I
 
     @Override
     public void setArtDate(List<ArtListBean.DataBean.ArticleBean> date) {
-        Log.i("HT", "setArtDate: 数据来啦来啦------>");
         adapter.addItems(date);
     }
 

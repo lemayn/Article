@@ -33,7 +33,8 @@ public interface ArtApi {
      */
     @FormUrlEncoded
     @POST("?Key=55a50c1a06f9c1032014112cbd68f34b&Action=ArtInfo")
-    Observable<ArtInfoBean> getArtInfo(@Field("cookie") String cookie, @Field("aid") String aid, @Field("sid") String sid);
+    Observable<ArtInfoBean> getArtInfo(@Field("cookie") String cookie, @Field("aid") String aid,
+                                       @Field("sid") String sid);
 
     /**
      * 上传用户文章
@@ -44,7 +45,9 @@ public interface ArtApi {
      */
     @FormUrlEncoded
     @POST("?Key=55a50c1a06f9c1032014112cbd68f34b&Action=ArtAdd")
-    Observable<UpLoadArtBean> uploadArt(@Field("cookie") String cookie, @Field("title") String title, @Field("content") String content
-            , @Field("sid")String sid, @Field("img") String imgBase64);
-
+    Observable<UpLoadArtBean> uploadArt(@Field("cookie") String cookie,
+                                        @Field("title") String title,
+                                        @Field("content") String content,
+                                        @Field("sid")String sid,
+                                        @Field("img") String imgBase64);
 }

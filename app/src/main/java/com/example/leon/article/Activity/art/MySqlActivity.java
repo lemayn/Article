@@ -7,7 +7,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.example.leon.article.R;
-import com.example.leon.article.adapter.ArtListAdapter;
+import com.example.leon.article.adapter.SQLListAdapter;
 import com.example.leon.article.base.ToolBarBaseActivity;
 import com.example.leon.article.databinding.ActivityMySqlBinding;
 import com.example.leon.article.sql.bean.Arts;
@@ -60,7 +60,7 @@ public class MySqlActivity extends ToolBarBaseActivity<ActivityMySqlBinding> {
         artsList = ArtDao.queryArts();
         Collections.reverse(artsList);//将集合中的元素倒叙，实现最新编写的排列在最上面
         if (!artsList.isEmpty()) {
-            mListView.setAdapter(new ArtListAdapter(MySqlActivity.this, artsList));
+            mListView.setAdapter(new SQLListAdapter(MySqlActivity.this, artsList));
         }
     }
 

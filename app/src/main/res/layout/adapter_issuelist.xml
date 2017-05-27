@@ -10,6 +10,7 @@
         android:gravity="center">
 
         <LinearLayout
+            android:id="@+id/ll_adapter_artlist"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -30,8 +31,6 @@
                 android:id="@+id/tv_issue_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentRight="true"
                 android:text="2017-5-16" />
 
         </LinearLayout>
@@ -47,8 +46,7 @@
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
             android:text="审核中"
-            android:textSize="15sp"
-            android:textStyle="bold" />
+            android:textSize="15sp" />
 
     </LinearLayout>
 

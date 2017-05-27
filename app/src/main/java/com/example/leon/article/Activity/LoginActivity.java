@@ -119,7 +119,6 @@ public class LoginActivity extends ToolBarBaseActivity<ActivityLoginBinding> imp
                         SPUtil.put(Constant.Share_prf.SID, apiBean.getData().getSid());
                         SPUtil.put(Constant.Share_prf.NAME, apiBean.getData().getMname());
                         SPUtil.put(Constant.Share_prf.PWD, pwd);
-
                         if (!is_constraint_loin) {
                             startActivity(new Intent(LoginActivity.this, MainActivity.class));
                         }

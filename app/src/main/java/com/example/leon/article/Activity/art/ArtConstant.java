@@ -19,4 +19,7 @@ public class ArtConstant {
     public static final String DETAIL_CONTENT = "DETAIL_CONTENT";
     //Article 2 ArtDetail
     public static final String DETAIL_AID = "DETAIL_AID";
+
+    //ArtPresenterImp 2 Main
+    public static final String SHOW_ARTICLEFRAGMENT = "SHOW_ARTICLE";
 }

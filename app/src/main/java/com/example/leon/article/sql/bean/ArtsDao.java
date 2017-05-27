@@ -27,6 +27,7 @@ public class ArtsDao extends AbstractDao<Arts, Long> {
         public final static Property Title = new Property(2, String.class, "title", false, "userArts");
         public final static Property Content = new Property(3, String.class, "content", false, "CONTENT");
         public final static Property Time = new Property(4, String.class, "time", false, "TIME");
+        public final static Property ImgPath = new Property(5, String.class, "imgPath", false, "IMG_PATH");
     }
 
 
@@ -46,7 +47,8 @@ public class ArtsDao extends AbstractDao<Arts, Long> {
                 "\"AUTHOR\" TEXT UNIQUE ," + // 1: author
                 "\"userArts\" TEXT," + // 2: title
                 "\"CONTENT\" TEXT," + // 3: content
-                "\"TIME\" TEXT);"); // 4: time
+                "\"TIME\" TEXT," + // 4: time
+                "\"IMG_PATH\" TEXT);"); // 5: imgPath
     }
 
     /** Drops the underlying database table. */
@@ -83,6 +85,11 @@ public class ArtsDao extends AbstractDao<Arts, Long> {
         if (time != null) {
             stmt.bindString(5, time);
         }
+ 
+        String imgPath = entity.getImgPath();
+        if (imgPath != null) {
+            stmt.bindString(6, imgPath);
+        }
     }
 
     @Override
@@ -113,6 +120,11 @@ public class ArtsDao extends AbstractDao<Arts, Long> {
         if (time != null) {
             stmt.bindString(5, time);
         }
+ 
+        String imgPath = entity.getImgPath();
+        if (imgPath != null) {
+            stmt.bindString(6, imgPath);
+        }
     }
 
     @Override
@@ -127,7 +139,8 @@ public class ArtsDao extends AbstractDao<Arts, Long> {
             cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // author
             cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // title
             cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // content
-            cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4) // time
+            cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4), // time
+            cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5) // imgPath
         );
         return entity;
     }
@@ -139,6 +152,7 @@ public class ArtsDao extends AbstractDao<Arts, Long> {
         entity.setTitle(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
         entity.setContent(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
         entity.setTime(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
+        entity.setImgPath(cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5));
      }
     
     @Override

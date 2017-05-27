@@ -16,11 +16,11 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Base64;
-import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.leon.article.R;
@@ -28,7 +28,9 @@ import com.example.leon.article.fragment.ArticleFragment;
 import com.example.leon.article.presenter.artpresenter.artpresenterImp.ArtPresenterImp;
 import com.example.leon.article.sql.bean.Arts;
 import com.example.leon.article.sql.dao.ArtDao;
+import com.example.leon.article.utils.Constant;
 import com.example.leon.article.utils.ImagePathUtils;
+import com.example.leon.article.utils.SPUtil;
 import com.example.leon.article.utils.TimeUtils;
 import com.example.leon.article.view.IEditorActivity;
 import com.example.leon.article.widget.SpinnerDialog;
@@ -52,6 +54,7 @@ public class EditorActivity extends AppCompatActivity implements IEditorActivity
     private EditText artTitle;
     //输入的内容
     private String editDate;
+    private TextView tv_clear;
     //记录是否点击了保存
     private boolean isSave = false;
 
@@ -63,6 +66,8 @@ public class EditorActivity extends AppCompatActivity implements IEditorActivity
     //用户添加的图片与图片地址
     private ImageView iv_insert;
     private String imgpath;
+    private String cookie;
+    private String sid;
 
 
     @Override
@@ -71,7 +76,7 @@ public class EditorActivity extends AppCompatActivity implements IEditorActivity
         setContentView(R.layout.activity_editor);
 
         initView();
-        //获取用户输入
+        //获取用户输入，cookie，sid
         GetDate();
     }
 
@@ -83,7 +88,7 @@ public class EditorActivity extends AppCompatActivity implements IEditorActivity
     }
 
     private void initDate() {
-        artPresenter = new ArtPresenterImp(this);
+        artPresenter = new ArtPresenterImp(this,this);
 
         art_title = getIntent().getStringExtra(ArtConstant.ART_TITLE);
         art_content = getIntent().getStringExtra(ArtConstant.ART_CONTENT);
@@ -101,16 +106,33 @@ public class EditorActivity extends AppCompatActivity implements IEditorActivity
     }
 
     private void GetDate() {
+        cookie = (String) SPUtil.get(Constant.Share_prf.COOKIE,"");
+        sid = (String) SPUtil.get(Constant.Share_prf.SID,"");
         mEditor.setOnTextChangeListener(new RichEditor.OnTextChangeListener() {
             @Override
             public void onTextChange(String text) {
-                Log.i("HT", "onTextChange: " + text);
                 editDate = text;
+                if (!TextUtils.isEmpty(text)) {
+                    tv_clear.setVisibility(View.VISIBLE);
+                    clearEditor();
+                }else{
+                    tv_clear.setVisibility(View.GONE);
+                }
+            }
+        });
+    }
+
+    private void clearEditor() {
+        tv_clear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mEditor.setHtml("");
             }
         });
     }
 
     private void initView() {
+        tv_clear = (TextView) findViewById(R.id.tv_clear);
         iv_insert = (ImageView) findViewById(R.id.iv_editor_insert);
         dialog = SpinnerDialog.createSpinnerDialog(EditorActivity.this, "文章上传中...");
 
@@ -125,24 +147,21 @@ public class EditorActivity extends AppCompatActivity implements IEditorActivity
         mEditor.setEditorHeight(100);
         mEditor.setEditorFontColor(Color.BLACK);
         mEditor.setPadding(10, 10, 10, 10);
-        mEditor.setPlaceholder("请开始你的表演...");
+        mEditor.setPlaceholder("请输入内容...");
     }
 
     private void initEvent() {
         //点击发布后,做提交处理
-        findViewById(R.id.tv_issue).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.bt_editor_send).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                imm.hideSoftInputFromWindow(mEditor.getWindowToken(), 0);
-
+                /*InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(mEditor.getWindowToken(), 0);*/
+                //隐藏软键盘
+                hideKeyboard();
                 String title = artTitle.getText().toString();
-                String cookie = "addbc7e46fc79010bc3d5730b45b6065";
-                String sid = "qsdae92r495qf9mpa4kjgbk065";
-
                 String bytesFromBitmap = getBytesFromBitmap(insertBitmap);
                 artPresenter.uploadUserArt(cookie,title,editDate,sid,bytesFromBitmap);
-
             }
         });
 
@@ -405,14 +424,14 @@ public class EditorActivity extends AppCompatActivity implements IEditorActivity
 
     @Override
     public void onBackPressed() {
-        if (editDate == null) {//如果输入的内容为空
+        if (TextUtils.isEmpty(editDate)) {//如果输入的内容为空
             super.onBackPressed();
         } else {//用户输入的内容不为空
 
             if (!isSave) {//没有点击保存
                 final AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                builder.setTitle("还没有保存哦，确定退出吗")
-                        .setMessage("退出可能就白写咯")
+                builder.setTitle("您还没有保存，确定退出吗？")
+                        .setMessage("退出后数据将不会保存")
                         .setNegativeButton("取消", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
@@ -470,17 +489,17 @@ public class EditorActivity extends AppCompatActivity implements IEditorActivity
 
     @Override
     public void showSuccess() {
-        Toast.makeText(this,"上传成功",Toast.LENGTH_SHORT).show();
+        Toast.makeText(this,getString(R.string.upload_success),Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void showError() {
-        Toast.makeText(this,"服务器繁忙，请稍后重试",Toast.LENGTH_SHORT).show();
+        Toast.makeText(this,getString(R.string.retry_letter),Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void showFailure() {
-        Toast.makeText(this,"上传失败了，请稍后重试",Toast.LENGTH_SHORT).show();
+        Toast.makeText(this,getString(R.string.retry_letter),Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -492,7 +511,7 @@ public class EditorActivity extends AppCompatActivity implements IEditorActivity
         if (requestCode == REQUEST_CODE_PICK_IMAGE) {
             if (data != null) {
                 imgpath = ImagePathUtils.getImageAbsolutePath(this, data.getData());
-                // 如下方法可以在编辑界面添加图片
+                // 如下方法可以在编辑界面添加图片,会把图片路径一起上传
                 //  mEditor.insertImage(imgpath,"userImg");
                 insertBitmap = BitmapFactory.decodeFile(imgpath);
                 if (insertBitmap != null) {

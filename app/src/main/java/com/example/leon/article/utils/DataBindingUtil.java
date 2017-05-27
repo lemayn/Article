@@ -20,7 +20,8 @@ public class DataBindingUtil {
     @BindingAdapter("image")
     public static void imageLoader(ImageView imageView, String imageUrls) {
         Glide.with(imageView.getContext()).load(BASE_IMAGE_URL + imageUrls)
-                .crossFade().placeholder(R.drawable.timg).error(R.drawable.timg)
+                .crossFade()
+                .placeholder(R.drawable.timg).error(R.drawable.timg)
                 .into(imageView);
     }
 }

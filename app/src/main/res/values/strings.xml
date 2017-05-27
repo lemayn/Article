@@ -5,13 +5,13 @@
     <string name="avail_balance">可用余额</string>
     <string name="commission_balance">佣金金额</string>
     <string name="balance_total">总余额</string>
+    <string name="required">*</string>
     <string name="basic_info">基本资料</string>
     <string name="banks_setting">银行设置</string>
     <string name="articles_list">文章列表</string>
     <string name="password_modify">修改密码</string>
     <string name="withdraw_password_modify">修改提现密码</string>
     <string name="withdraw_deposit">我要提现</string>
-    <string name="required">*</string>
     <string name="vip_center">会员中心</string>
     <string name="add_bankcard">添加银行卡</string>
     <string name="type_old_pwd">&#160;输入旧密码</string>
@@ -37,12 +37,6 @@
     <string name="user_qq">我的QQ</string>
     <string name="user_weixin">我的微信</string>
     <string name="secure_mailbox">安全邮箱</string>
-    <string name="withdraw_amount">请输入提现金额(单笔金额100元起)</string>
-    <string name="withdraw_pwd">请输入提现密码(默认是登录密码)</string>
-    <string name="withdraw_deposit_attentions">1.每个账号每天有3次取款，单笔不少于100元，提现账号不正确的情况
-        请及时联系我们的客服，提现密码默认是账号登录密码。\n2.提现时间:24小时，3-10分钟内到账，忙时不超过30分钟，
-        若超过时间，请及时练习客服。\n3.偶尔提款高峰期会出现短时间的延时，但平台保证资金会一一到达客户银行账户。</string>
-
     <string name="myarticle">我的文章</string>
     <string name="cue_words">请输入您的银行卡号</string>
     <string name="nav_ui">首页</string>
@@ -56,8 +50,16 @@
     <string name="article_detail">文章详情</string>
     <string name="depositBank">开户银行</string>
     <string name="save">保存</string>
-    <string name="issue">发布</string>
-
+    <string name="issue">发送</string>
+    <string name="addImg">添加图片</string>
+    <string name="newslist">新闻列表</string>
+    <string name="send">发送</string>
+    <string name="editorContent">正文</string>
+    <string name="withdraw_amount">请输入提现金额(单笔金额100元起)</string>
+    <string name="withdraw_pwd">请输入提现密码(默认是登录密码)</string>
+    <string name="withdraw_deposit_attentions">1.每个账号每天有3次取款，单笔不少于100元，提现账号不正确的情况
+        请及时联系我们的客服，提现密码默认是账号登录密码。\n2.提现时间:24小时，3-10分钟内到账，忙时不超过30分钟，
+        若超过时间，请及时练习客服。\n3.偶尔提款高峰期会出现短时间的延时，但平台保证资金会一一到达客户银行账户。</string>
     <string name="matters_needing_attention">注意事项:</string>
     <string name="matters_needing_attention1">1.一个游戏账户最多绑定两张银行卡</string>
     <string name="matters_needing_attention2">2.银行卡信息完成后，已绑定的银行卡信息不能进行修改和删除</string>
@@ -78,5 +80,11 @@
         &#160;&#160;1、文章必须是原创作品，一旦发现作品抄袭将不予发表。\n
         &#160;&#160;2、发表的文章字数在200字以上。\n
         &#160;&#160;3、发表的文章内容是积极向上的。</string>
+    <string name="in_review">审核中</string>
+    <string name="notpass">未通过</string>
+    <string name="published">已发表</string>
+    <string name="upload_success">上传成功</string>
+    <string name="retry_letter">服务器繁忙，请稍后重试</string>
+    <string name="clear">清空</string>
 
 </resources>
