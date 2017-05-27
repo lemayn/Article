@@ -31,7 +31,7 @@ public class SpinnerDialog {
         textView.setText(msg);
 
         Dialog dialog = new Dialog(context, R.style.loading_dialog);
-        dialog.setCancelable(true);         // 设置按返回键时取消对话框
+        dialog.setCancelable(false);         // 设置按返回键时取消对话框,默认true，false设置为不可以
         dialog.setCanceledOnTouchOutside(false);    // 设置点击对话框外部时不取消对话框，默认为true
         dialog.setContentView(linearLayout, new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,

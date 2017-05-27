@@ -37,6 +37,35 @@ public class MainActivity extends AppCompatActivity {
 
         initView();
         ifShowArticle();
+        initEvent();
+    }
+
+    private void initEvent() {
+        viewpager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+            }
+            @Override
+            public void onPageSelected(int position) {
+                switch (position) {
+                    case 0:
+                        navigationview.setSelectedItemId(R.id.menu_home);
+                        break;
+                    case 1:
+                        navigationview.setSelectedItemId(R.id.menu_article);
+                        break;
+                    case 2:
+                        navigationview.setSelectedItemId(R.id.menu_vip);
+                        break;
+                    case 3:
+                        navigationview.setSelectedItemId(R.id.menu_more);
+                        break;
+                }
+            }
+            @Override
+            public void onPageScrollStateChanged(int state) {
+            }
+        });
     }
 
     //发表文章后跳转到当前页面
@@ -75,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
         viewpager.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                return true;
+                return false;
             }
         });
 
@@ -101,14 +130,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
-//        getViewById(R.id.bt_zouni).setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(MainActivity.this, ArticleActivity.class);
-//                startActivity(intent);
-//            }
-//        });
     }
 
     private void initfragments() {
@@ -118,11 +139,6 @@ public class MainActivity extends AppCompatActivity {
         mFragments.add(new VipFragment());
         mFragments.add(new MoreFragment());
 
-    }
-
-
-    private <T extends View> T getViewById(int res) {
-        return (T) findViewById(res);
     }
 
     public void gotoArticle() {

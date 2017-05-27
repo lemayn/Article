@@ -23,6 +23,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.leon.article.Activity.MainActivity;
 import com.example.leon.article.R;
 import com.example.leon.article.fragment.ArticleFragment;
 import com.example.leon.article.presenter.artpresenter.artpresenterImp.ArtPresenterImp;
@@ -74,7 +75,7 @@ public class EditorActivity extends AppCompatActivity implements IEditorActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_editor);
-        
+
         initView();
         //获取用户输入，cookie，sid
         GetDate();
@@ -374,7 +375,14 @@ public class EditorActivity extends AppCompatActivity implements IEditorActivity
                 }else{
                     pickImgfromPhoto();
                 }
+            }
+        });
 
+        //点击新闻列表
+        findViewById(R.id.bt_editor_newslist).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(EditorActivity.this, MainActivity.class));
             }
         });
 
