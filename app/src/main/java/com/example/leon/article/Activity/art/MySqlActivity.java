@@ -2,21 +2,20 @@ package com.example.leon.article.Activity.art;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.example.leon.article.R;
 import com.example.leon.article.adapter.SQLListAdapter;
-import com.example.leon.article.base.ToolBarBaseActivity;
-import com.example.leon.article.databinding.ActivityMySqlBinding;
 import com.example.leon.article.sql.bean.Arts;
 import com.example.leon.article.sql.dao.ArtDao;
 
 import java.util.Collections;
 import java.util.List;
 
-public class MySqlActivity extends ToolBarBaseActivity<ActivityMySqlBinding> {
+public class MySqlActivity extends AppCompatActivity {
 
     private ListView mListView;
     private List<Arts> artsList;
@@ -50,7 +49,6 @@ public class MySqlActivity extends ToolBarBaseActivity<ActivityMySqlBinding> {
     }
 
     private void initView() {
-        hideHeaderMoneyInfo();//隐藏钱包布局
         setTitle(getString(R.string.myarticle));
         mListView = getViewById(R.id.lv_sql);
         mListView.setEmptyView(getViewById(R.id.lv_sql_empty));
