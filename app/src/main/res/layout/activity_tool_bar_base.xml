@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -91,6 +92,7 @@
                             android:src="@drawable/goto_article"/>
 
                         <TextView
+                            android:id="@+id/tv_goto_article"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
@@ -127,7 +129,7 @@
                             android:layout_marginBottom="@dimen/x3"
                             android:layout_marginTop="@dimen/x5"
                             android:layout_toRightOf="@+id/iv_user_avatar"
-                            android:text="@{userinfo.data.nickname}"
+                            android:text="@{apibean.data.nickname}"
                             android:textSize="@dimen/x14"/>
 
                         <TextView
