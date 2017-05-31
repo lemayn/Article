@@ -11,6 +11,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -153,11 +154,8 @@ public class EditorActivity extends AppCompatActivity implements IEditorActivity
 
     private void initEvent() {
         //点击发布后,做提交处理
-
         findViewById(R.id.bt_editor_send).setOnClickListener(new View.OnClickListener() {
-
             private String bytesFromBitmap;
-
             @Override
             public void onClick(View v) {
                 //隐藏软键盘
@@ -382,10 +380,13 @@ public class EditorActivity extends AppCompatActivity implements IEditorActivity
         findViewById(R.id.bt_editor_newslist).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(EditorActivity.this, MainActivity.class));
+                if (mEditor != null) {
+                    showifSaveDialog();
+                }else{
+                    startActivity(new Intent(EditorActivity.this, MainActivity.class));
+                }
             }
         });
-
     }
 
     private void pickImgfromPhoto() {
@@ -439,30 +440,33 @@ public class EditorActivity extends AppCompatActivity implements IEditorActivity
         if (TextUtils.isEmpty(editDate)) {//如果输入的内容为空
             super.onBackPressed();
         } else {//用户输入的内容不为空
-
             if (!isSave) {//没有点击保存
-                final AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                builder.setTitle("您还没有保存，确定退出吗？")
-                        .setMessage("退出后数据将不会保存")
-                        .setNegativeButton("取消", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                //do nothing or what you want
-                            }
-                        })
-                        .setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-
-                                finish();
-                            }
-                        })
-                        .create()
-                        .show();
+                showifSaveDialog();
             } else {  //点击了保存
                 super.onBackPressed();
             }
         }
+    }
+
+    private void showifSaveDialog() {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("您还没有保存，确定退出吗？")
+                .setMessage("退出后数据将不会保存")
+                .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        //do nothing or what you want
+                    }
+                })
+                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        finish();
+                    }
+                })
+                .create()
+                .show();
     }
 
     //隐藏虚拟键盘
@@ -502,6 +506,19 @@ public class EditorActivity extends AppCompatActivity implements IEditorActivity
     @Override
     public void showSuccess() {
         Toast.makeText(this,getString(R.string.upload_success),Toast.LENGTH_SHORT).show();
+        goArticleFragment();
+        finish();
+    }
+
+    private void goArticleFragment() {
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Intent intent = new Intent(EditorActivity.this, MainActivity.class);
+                intent.putExtra(ArtConstant.SHOW_ARTICLEFRAGMENT,1);
+                startActivity(intent);
+            }
+        },800);
     }
 
     @Override

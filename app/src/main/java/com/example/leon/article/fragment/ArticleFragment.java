@@ -67,7 +67,7 @@ public class ArticleFragment extends Fragment implements View.OnClickListener, I
                     public void run() {
                         if (adapter.getCount() > 0) {
                             adapter.clearDate();
-                            artPresenter.getuserArtList(cookie, sid,page);
+                            artPresenter.getuserArtList(cookie, sid,1);
                             lv_article.setAdapter(adapter);
                         }
                         refreshActicle.setRefreshing(false);
@@ -76,12 +76,13 @@ public class ArticleFragment extends Fragment implements View.OnClickListener, I
                 },2000);
             }
         });
+        
     }
 
     private void initDate(View view) {
         artPresenter = new ArtPresenterImp(this);
         adapter = new ArtListAdapter(getContext());
-        View headerView = view.inflate(getContext(),R.layout.listview_article_headerview, null);
+        View headerView = View.inflate(getContext(),R.layout.listview_article_headerview, null);
         lv_article.addHeaderView(headerView);
         artPresenter.getuserArtList(cookie, sid,page);
         lv_article.setAdapter(adapter);

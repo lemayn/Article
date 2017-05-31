@@ -51,6 +51,7 @@ public class ApiManager {
             .build();
 
     private ArtApi artApi;
+    private BankApi bankApi;
     private final Object artMonitor = new Object();
     private static ApiManager apiManager;
 
@@ -82,5 +83,21 @@ public class ApiManager {
         return artApi;
     }
 
+    public BankApi getBankApiService(){
+        if (bankApi == null) {
+            synchronized (artMonitor) {
+                if (bankApi == null) {
+                    bankApi = new Retrofit.Builder()
+                            .baseUrl("http://118.89.233.35:8989/api/")
+                            .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                            .addConverterFactory(GsonConverterFactory.create())
+                            .client(client)
+                            .build()
+                            .create(BankApi.class);
+                }
+            }
+        }
+        return bankApi;
+    }
 
 }

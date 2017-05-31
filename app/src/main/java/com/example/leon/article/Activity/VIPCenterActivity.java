@@ -6,6 +6,7 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.widget.Toast;
 
+import com.example.leon.article.Activity.bank.BankSettingActivity;
 import com.example.leon.article.fragment.ArticleFragment;
 import com.example.leon.article.R;
 import com.example.leon.article.adapter.VIPCenterAdapter;
@@ -35,7 +36,7 @@ public class VIPCenterActivity extends ToolBarBaseActivity<ActivityVipCenterBind
         data.add(new ItemBean(R.drawable.basic_info, CommonUtils.getString(R.string.basic_info),
                 BasicinformationActivity.class));
         data.add(new ItemBean(R.drawable.banks_setting, CommonUtils.getString(R.string.banks_setting),
-                SetBankActivity.class));
+                BankSettingActivity.class));
         data.add(new ItemBean(R.drawable.banks_setting, CommonUtils.getString(R.string.withdraw_deposit),
                 WithdrawDepositActivity.class));
         data.add(new ItemBean(R.drawable.articles_list, CommonUtils.getString(R.string.articles_list),

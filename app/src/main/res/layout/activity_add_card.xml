@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context="com.example.leon.article.Activity.bank.AddCardActivity">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/testStyle"
+                android:text="开户银行" />
+
+            <TextView
+                android:id="@+id/tv_choose_bank"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:text="请选择开户银行"
+                android:textColor="#00E5EE"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:orientation="horizontal"
+            android:focusable="true"
+            android:focusableInTouchMode="true">
+
+            <TextView
+                style="@style/testStyle"
+                android:text="户主姓名" />
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/textInput_account_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:background="@drawable/etbg_bindcard"
+                    android:hint="请输入户主姓名"
+                    />
+
+            </android.support.design.widget.TextInputLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/testStyle"
+                android:text="银行卡号" />
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/textInput_cardNub"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.example.leon.article.widget.EditTextWithClear
+                    android:id="@+id/et_card_numb"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:background="@drawable/etbg_bindcard"
+                    android:hint="请输入银行卡号"
+                    android:inputType="number"
+                    android:maxLength="23"
+                    android:paddingRight="10dp" />
+
+            </android.support.design.widget.TextInputLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/testStyle"
+                android:text="开户所在地" />
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/textInput_address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:background="@drawable/etbg_bindcard"
+                    android:hint="请输入开户所在地"
+                    />
+
+            </android.support.design.widget.TextInputLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:orientation="horizontal"
+            android:gravity="bottom">
+
+            <TextView
+                style="@style/testStyle"
+                android:text="提现密码" />
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/textInput_withdrawPwd"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:passwordToggleEnabled="true">
+                <EditText
+                    android:id="@+id/et_withdrawPwd"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/etbg_bindcard"
+                    android:hint="请输入提现密码(6位数)"
+                    android:inputType="textPassword"
+                    android:maxLength="6"/>
+            </android.support.design.widget.TextInputLayout>
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/bt_addConfirm"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="确认添加"
+            android:layout_margin="10dp"
+            android:textColor="@color/colorWhite"
+            android:background="@drawable/shape_bt_addcard_bg"/>
+
+    </LinearLayout>
+</layout>
+

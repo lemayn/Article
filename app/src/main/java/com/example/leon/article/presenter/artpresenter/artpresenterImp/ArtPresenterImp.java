@@ -65,6 +65,7 @@ public class ArtPresenterImp extends BasepresenterImp implements IArtPresenter{
                     public void onError(Throwable e) {
                         articleFragment.hideProgress();
                         articleFragment.showError();
+                        Log.i("HT", "ArtPresenterImp getuserArtList--->onError: "+e.getMessage());
                     }
 
                     @Override
@@ -133,17 +134,16 @@ public class ArtPresenterImp extends BasepresenterImp implements IArtPresenter{
                                 editorActivity.hideProgress();
                                 if (upLoadArtBean.getCode().equals("1")) {
                                     editorActivity.showSuccess();
-                                    goArticleFragment();
                                 } else {
                                     editorActivity.showFailure();
                                 }
                             }
                         },2500);
-
                     }
                 });
             addSubscription(subscribe);
     }
+
 
     private void goArticleFragment() {
         Intent intent = new Intent(context, MainActivity.class);

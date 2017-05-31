@@ -16,9 +16,9 @@ import android.widget.Toast;
 import com.example.leon.article.Activity.BasicinformationActivity;
 import com.example.leon.article.Activity.ModifyPasswordActivity;
 import com.example.leon.article.Activity.ModifyWithoutPasswordActivity;
-import com.example.leon.article.Activity.SetBankActivity;
 import com.example.leon.article.Activity.WithdrawDepositActivity;
 import com.example.leon.article.Activity.art.EditorActivity;
+import com.example.leon.article.Activity.bank.BankSettingActivity;
 import com.example.leon.article.R;
 import com.example.leon.article.adapter.VIPCenterAdapter;
 import com.example.leon.article.api.ApiFactory;
@@ -77,7 +77,7 @@ public class VipFragment extends Fragment {
         data.add(new ItemBean(R.drawable.basic_info, CommonUtils.getString(R.string.basic_info),
                 BasicinformationActivity.class));
         data.add(new ItemBean(R.drawable.banks_setting, CommonUtils.getString(R.string.banks_setting),
-                SetBankActivity.class));
+                BankSettingActivity.class));
         data.add(new ItemBean(R.drawable.banks_setting, CommonUtils.getString(R.string.withdraw_deposit),
                 WithdrawDepositActivity.class));
         data.add(new ItemBean(R.drawable.articles_list, CommonUtils.getString(R.string.articles_list),
