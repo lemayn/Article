@@ -57,9 +57,9 @@ public class BasicinformationActivity extends ToolBarBaseActivity<ActivityBasici
         binding.btnRegister.setOnClickListener(new PerfectClickListener() {
             @Override
             protected void onNoDoubleClick(View v) {
-                boolean shouldEdit = userData.getData().getNickname() == null ||
-                        userData.getData().getWeixin() == null ||
-                        userData.getData().getEmail() == null;
+                boolean shouldEdit = TextUtils.isEmpty(userData.getData().getNickname()) ||
+                        TextUtils.isEmpty(userData.getData().getWeixin()) ||
+                        TextUtils.isEmpty(userData.getData().getEmail());
                 if (shouldEdit) {
                     editUserData();
                 } else {

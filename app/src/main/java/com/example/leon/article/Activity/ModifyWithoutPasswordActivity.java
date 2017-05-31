@@ -58,6 +58,9 @@ public class ModifyWithoutPasswordActivity extends ToolBarBaseActivity<ActivityM
                 boolean ispwds = validatorPwd(oldPwd, newPwd, retypePwd);
 
                 if (ispwds) {
+                    oldPwd = CommonUtils.getMD5Str(oldPwd);
+                    newPwd = CommonUtils.getMD5Str(newPwd);
+                    retypePwd = CommonUtils.getMD5Str(retypePwd);
                     //旧密码输入正确
                     //新密码两次输入相同
                     if (newPwd.equals(retypePwd)) {

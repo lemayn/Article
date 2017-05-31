@@ -3,19 +3,15 @@ package com.example.leon.article.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import com.example.leon.article.Http.Api;
 import com.example.leon.article.Http.XHttpUtils;
 import com.example.leon.article.R;
 import com.example.leon.article.base.ToolBarBaseActivity;
 import com.example.leon.article.databinding.ActivityRegisterBinding;
+import com.example.leon.article.utils.CommonUtils;
 import com.google.gson.Gson;
 
 import java.io.IOException;
@@ -92,8 +88,8 @@ public class RegisterActivity extends ToolBarBaseActivity<ActivityRegisterBindin
 
         FormBody formBody = new FormBody.Builder()
                 .add("name", account)
-                .add("pwd", pwd)
-                .add("repwd", pwd2)
+                .add("pwd", CommonUtils.getMD5Str(pwd))
+                .add("repwd", CommonUtils.getMD5Str(pwd2))
                 .add("tell", phone)
                 .add("qq", qq)
                 .build();

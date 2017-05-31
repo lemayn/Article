@@ -14,9 +14,11 @@ import com.example.leon.article.api.bean.ArticleApiBean;
 import com.example.leon.article.app;
 import com.example.leon.article.base.ToolBarBaseActivity;
 import com.example.leon.article.databinding.ActivityLoginBinding;
+import com.example.leon.article.utils.CommonUtils;
 import com.example.leon.article.utils.Constant;
 import com.example.leon.article.utils.GsonUtil;
 import com.example.leon.article.utils.SPUtil;
+import com.example.leon.article.utils.Validator;
 
 import java.util.HashMap;
 
@@ -87,16 +89,23 @@ public class LoginActivity extends ToolBarBaseActivity<ActivityLoginBinding> imp
     private void Login() {
 
         String name = binding.edittextPhone.getText().toString().trim();
-        final String pwd = binding.edittextPwd.getText().toString().trim();
+        String pwd = binding.edittextPwd.getText().toString().trim();
 
         if (TextUtils.isEmpty(name) || TextUtils.isEmpty(pwd)) {
             Toast.makeText(LoginActivity.this, "用户名或密码不能为空", Toast.LENGTH_SHORT).show();
             return;
         }
 
+        if (!Validator.isPassword(pwd)) {
+            Toast.makeText(LoginActivity.this, "请输入正确的6~16位密码", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        final String finalPwd = CommonUtils.getMD5Str(pwd);
+
         HashMap<String, String> hashMap = new HashMap<>();
         hashMap.put("name", name);
-        hashMap.put("pwd", pwd);
+        hashMap.put("pwd", finalPwd);
         ApiFactory.getApi().article(Constant.Api.LOGIN, hashMap)
                 .lift(new BaseValueValidOperator<ArticleApiBean>())
                 .subscribeOn(Schedulers.io())
@@ -118,7 +127,7 @@ public class LoginActivity extends ToolBarBaseActivity<ActivityLoginBinding> imp
                         SPUtil.put(Constant.Share_prf.COOKIE, apiBean.getData().getCookie());
                         SPUtil.put(Constant.Share_prf.SID, apiBean.getData().getSid());
                         SPUtil.put(Constant.Share_prf.NAME, apiBean.getData().getMname());
-                        SPUtil.put(Constant.Share_prf.PWD, pwd);
+                        SPUtil.put(Constant.Share_prf.PWD, finalPwd);
                         if (!is_constraint_loin) {
                             startActivity(new Intent(LoginActivity.this, MainActivity.class));
                         }

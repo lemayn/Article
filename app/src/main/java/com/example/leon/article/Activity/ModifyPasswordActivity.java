@@ -52,13 +52,16 @@ public class ModifyPasswordActivity extends ToolBarBaseActivity<ActivityModifyPa
             @Override
             protected void onNoDoubleClick(View v) {
                 String oldPwd = mOldPwd.getText().toString();
-                final String newPwd = mNewPwd.getText().toString();
+                String newPwd = mNewPwd.getText().toString();
                 String retypePwd = mRetypePwd.getText().toString();
 
                 boolean ispwds = validatorPwd(oldPwd, newPwd, retypePwd);
 
                 if (ispwds) {
                     String oldpwdLocal = (String) SPUtil.get(Constant.Share_prf.PWD, "");
+                    oldPwd = CommonUtils.getMD5Str(oldPwd);
+                    newPwd = CommonUtils.getMD5Str(newPwd);
+                    retypePwd = CommonUtils.getMD5Str(retypePwd);
                     //旧密码输入正确
                     //新密码两次输入相同
                     if (oldPwd.equals(oldpwdLocal) && newPwd.equals(retypePwd)) {
@@ -69,6 +72,7 @@ public class ModifyPasswordActivity extends ToolBarBaseActivity<ActivityModifyPa
                         hashMap.put("renpwd", retypePwd);
                         hashMap.put("cookie", (String) SPUtil.get(Constant.Share_prf.COOKIE, ""));
                         hashMap.put("sid", (String) SPUtil.get(Constant.Share_prf.SID, ""));
+                        final String finalNewPwd = newPwd;
                         ApiFactory.getApi().article(Constant.Api.EDIT_PASSWORD, hashMap)
                                 .lift(new BaseValueValidOperator<ArticleApiBean>())
                                 .subscribeOn(Schedulers.io())
@@ -90,7 +94,7 @@ public class ModifyPasswordActivity extends ToolBarBaseActivity<ActivityModifyPa
                                     public void onNext(ArticleApiBean apiBean) {
                                         Toast.makeText(ModifyPasswordActivity.this, apiBean.getMsg(),
                                                 Toast.LENGTH_SHORT).show();
-                                        SPUtil.put(Constant.Share_prf.PWD, newPwd);
+                                        SPUtil.put(Constant.Share_prf.PWD, finalNewPwd);
                                         EmptyTexts();
                                     }
                                 });

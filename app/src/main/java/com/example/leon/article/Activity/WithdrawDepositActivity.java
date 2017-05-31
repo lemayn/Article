@@ -143,7 +143,7 @@ public class WithdrawDepositActivity extends ToolBarBaseActivity<ActivityWithdra
             hashMap.put("cid", mBankApiBean.getData().get(mDefaultChoice).getCid());
             hashMap.put("account_name", mBankApiBean.getData().get(mDefaultChoice).getAccount_name());
             hashMap.put("money", money);
-            hashMap.put("password", pwd);
+            hashMap.put("password", CommonUtils.getMD5Str(pwd));
             ApiFactory.getApi().bank(Constant.Api.WITHDRAW_MONEY, hashMap)
                     .lift(new BaseValueValidOperator<BankApiBean>())
                     .subscribeOn(Schedulers.io())
@@ -156,7 +156,7 @@ public class WithdrawDepositActivity extends ToolBarBaseActivity<ActivityWithdra
 
                         @Override
                         public void onError(Throwable e) {
-
+                            Toast.makeText(WithdrawDepositActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                         }
 
                         @Override
