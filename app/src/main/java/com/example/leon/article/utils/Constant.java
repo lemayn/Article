@@ -69,6 +69,11 @@ public class Constant {
          * 修改提现密码
          */
         public static final String EDIT_MONEY_PASSWORD = "EditMoneyPassword";
+        /**
+         * 广告接口
+         */
+        public static final String AD = "Ad";
+
     }
 
     public static class Share_prf {

@@ -57,6 +57,10 @@
             android:name=".Activity.AddBankCardActivity"
             android:windowSoftInputMode="adjustUnspecified|stateHidden"/>
 
+        <activity
+            android:name=".Activity.NoticeActivity"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"/>
+
     </application>
 
 </manifest>

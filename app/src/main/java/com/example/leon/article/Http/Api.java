@@ -11,4 +11,14 @@ public class Api {
     public static String Login = "Login";
 
     public static String Reg = "Reg";
+
+    public static String Ad = "Ad";
+
+    public static String Index = "Index";
+    public static String Good = "Good";
+
+    public static String Notice = "Notice";
+    public static String Ncontent = "Ncontent";
+
+
 }
