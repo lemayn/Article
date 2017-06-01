@@ -11,4 +11,5 @@ public interface IAddCardActivity {
 
     void setBankConfig(BankConfigBean bankConfig);
 
+    void showResult();
 }

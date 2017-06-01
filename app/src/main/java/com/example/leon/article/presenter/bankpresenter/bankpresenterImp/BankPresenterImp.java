@@ -1,11 +1,8 @@
 package com.example.leon.article.presenter.bankpresenter.bankpresenterImp;
 
 import android.content.Context;
-import android.content.Intent;
-import android.os.Handler;
 import android.widget.Toast;
 
-import com.example.leon.article.Activity.bank.BankSettingActivity;
 import com.example.leon.article.api.ApiManager;
 import com.example.leon.article.api.BaseValueValidOperator;
 import com.example.leon.article.api.bean.BankConfigBean;
@@ -92,22 +89,13 @@ public class BankPresenterImp extends BasepresenterImp implements IBankPresenter
                     public void onNext(BindBankBean bindBankBean) {
                         if (bindBankBean.getMsg() != null) {
                             Toast.makeText(context,bindBankBean.getMsg(),Toast.LENGTH_LONG).show();
-                            goBankSettingActivity();
+                            addCardActivity.showResult();
                         }
                     }
                 });
         addSubscription(subscribe);
     }
 
-    private void goBankSettingActivity() {
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                Intent intent = new Intent(context, BankSettingActivity.class);
-                context.startActivity(intent);
-            }
-        },1500);
-    }
 
     @Override
     public void getUserBankInfo(String cookie, String sid) {

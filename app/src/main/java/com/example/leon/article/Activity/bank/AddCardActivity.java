@@ -2,6 +2,7 @@ package com.example.leon.article.Activity.bank;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
 import android.text.Editable;
@@ -241,6 +242,17 @@ public class AddCardActivity extends ToolBarBaseActivity<ActivityAddCardBinding>
         for (BankConfigBean.DataBean dataBean : bankList) {
             banks.add(dataBean.getBank());
         }
+    }
+
+    @Override
+    public void showResult() {
+        goBankSettingActivity();
+    }
+
+    private void goBankSettingActivity() {
+        Intent intent = new Intent(AddCardActivity.this, BankSettingActivity.class);
+        startActivity(intent);
+        finish();
     }
 
     @Override

@@ -72,6 +72,7 @@ public class BankSettingActivity extends ToolBarBaseActivity<ActivityBankSetting
     private void goAddCardActivity() {
         Intent intent = new Intent(this,AddCardActivity.class);
         startActivity(intent);
+        finish();
     }
 
     private <T extends View> T getViewById(int res){

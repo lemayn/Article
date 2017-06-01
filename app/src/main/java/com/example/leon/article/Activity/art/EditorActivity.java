@@ -9,9 +9,9 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -31,6 +31,7 @@ import com.example.leon.article.presenter.artpresenter.artpresenterImp.ArtPresen
 import com.example.leon.article.sql.bean.Arts;
 import com.example.leon.article.sql.dao.ArtDao;
 import com.example.leon.article.utils.Constant;
+import com.example.leon.article.utils.ImageCompress;
 import com.example.leon.article.utils.ImagePathUtils;
 import com.example.leon.article.utils.SPUtil;
 import com.example.leon.article.utils.TimeUtils;
@@ -38,6 +39,7 @@ import com.example.leon.article.view.IEditorActivity;
 import com.example.leon.article.widget.SpinnerDialog;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -507,18 +509,13 @@ public class EditorActivity extends AppCompatActivity implements IEditorActivity
     public void showSuccess() {
         Toast.makeText(this,getString(R.string.upload_success),Toast.LENGTH_SHORT).show();
         goArticleFragment();
-        finish();
     }
 
     private void goArticleFragment() {
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                Intent intent = new Intent(EditorActivity.this, MainActivity.class);
-                intent.putExtra(ArtConstant.SHOW_ARTICLEFRAGMENT,1);
-                startActivity(intent);
-            }
-        },800);
+        Intent intent = new Intent(EditorActivity.this, MainActivity.class);
+        intent.putExtra(ArtConstant.SHOW_ARTICLEFRAGMENT,1);
+        startActivity(intent);
+        finish();
     }
 
     @Override
@@ -542,7 +539,16 @@ public class EditorActivity extends AppCompatActivity implements IEditorActivity
                 imgpath = ImagePathUtils.getImageAbsolutePath(this, data.getData());
                 // 如下方法可以在编辑界面添加图片,会把图片路径一起上传
                 //  mEditor.insertImage(imgpath,"userImg");
-                insertBitmap = BitmapFactory.decodeFile(imgpath);
+
+                //压缩图片
+                ImageCompress imageCompress = new ImageCompress();
+                ImageCompress.CompressOptions options = new ImageCompress.CompressOptions();
+                options.uri = Uri.fromFile(new File(imgpath));
+                options.maxHeight = 250;
+                options.maxWidth = 250;
+                insertBitmap = imageCompress.compressFromUri(EditorActivity.this, options);
+
+//              insertBitmap = BitmapFactory.decodeFile(imgpath);
                 if (insertBitmap != null) {
                     iv_insert.setVisibility(View.VISIBLE);
                     iv_insert.setImageBitmap(insertBitmap);

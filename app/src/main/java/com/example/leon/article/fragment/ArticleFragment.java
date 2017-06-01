@@ -65,31 +65,29 @@ public class ArticleFragment extends Fragment implements View.OnClickListener, I
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        if (adapter.getCount() > 0) {
-                            adapter.clearDate();
-                            artPresenter.getuserArtList(cookie, sid,1);
-                            lv_article.setAdapter(adapter);
-                        }
+                        adapter.clearDate();
+                        artPresenter.getuserArtList(cookie, sid, 1);
+                        lv_article.setAdapter(adapter);
                         refreshActicle.setRefreshing(false);
-                        Toast.makeText(getContext(),"刷新成功",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), "刷新成功", Toast.LENGTH_SHORT).show();
                     }
-                },2000);
+                }, 1500);
             }
         });
-        
+
     }
 
     private void initDate(View view) {
         artPresenter = new ArtPresenterImp(this);
         adapter = new ArtListAdapter(getContext());
-        View headerView = View.inflate(getContext(),R.layout.listview_article_headerview, null);
+        View headerView = View.inflate(getContext(), R.layout.listview_article_headerview, null);
         lv_article.addHeaderView(headerView);
-        artPresenter.getuserArtList(cookie, sid,page);
+        artPresenter.getuserArtList(cookie, sid, page);
         lv_article.setAdapter(adapter);
     }
 
     private void initView(View view) {
-        progressBar = (ProgressBar)view.findViewById(R.id.progressBar);
+        progressBar = (ProgressBar) view.findViewById(R.id.progressBar);
         refreshActicle = (SwipeRefreshLayout) view.findViewById(R.id.swipeRefresh_acticle);
         lv_empty = (TextView) view.findViewById(R.id.lv_article_empty);
         lv_article = (ListView) view.findViewById(R.id.lv_article);

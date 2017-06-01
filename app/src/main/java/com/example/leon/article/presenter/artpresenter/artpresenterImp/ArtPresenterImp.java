@@ -1,12 +1,9 @@
 package com.example.leon.article.presenter.artpresenter.artpresenterImp;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Handler;
 import android.util.Log;
 
-import com.example.leon.article.Activity.MainActivity;
-import com.example.leon.article.Activity.art.ArtConstant;
 import com.example.leon.article.api.ApiManager;
 import com.example.leon.article.api.BaseValueValidOperator;
 import com.example.leon.article.api.bean.ArtInfoBean;
@@ -138,17 +135,10 @@ public class ArtPresenterImp extends BasepresenterImp implements IArtPresenter{
                                     editorActivity.showFailure();
                                 }
                             }
-                        },2500);
+                        },2000);
                     }
                 });
             addSubscription(subscribe);
-    }
-
-
-    private void goArticleFragment() {
-        Intent intent = new Intent(context, MainActivity.class);
-        intent.putExtra(ArtConstant.SHOW_ARTICLEFRAGMENT,1);
-        context.startActivity(intent);
     }
 
 }
