@@ -38,6 +38,7 @@ public class BankSettingActivity extends ToolBarBaseActivity<ActivityBankSetting
 
     private void initEvent() {
         bt_addCard.setOnClickListener(this);
+        loadUserData();
     }
 
     private void initDate() {
