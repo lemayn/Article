@@ -6,7 +6,6 @@ import android.databinding.ViewDataBinding;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.v7.app.AppCompatActivity;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -107,8 +106,6 @@ public class ToolBarBaseActivity<T extends ViewDataBinding> extends AppCompatAct
     }
 
     protected void loadUserData() {
-        loadUserInfo();
-
         HashMap<String, String> hashMap = new HashMap<>();
         hashMap.put("cookie", (String) SPUtil.get(Constant.Share_prf.COOKIE, ""));
         hashMap.put("sid", (String) SPUtil.get(Constant.Share_prf.SID, ""));
@@ -133,14 +130,6 @@ public class ToolBarBaseActivity<T extends ViewDataBinding> extends AppCompatAct
                         SPUtil.put(Constant.Share_prf.USER_DATA, GsonUtil.GsonString(apiBean));
                     }
                 });
-    }
-
-    private void loadUserInfo() {
-        String loginResponse = (String) SPUtil.get(Constant.Share_prf.LOGIN_RESPONSE, "");
-        if (!TextUtils.isEmpty(loginResponse)) {
-            ArticleApiBean userInfoBean = GsonUtil.GsonToBean(loginResponse, ArticleApiBean.class);
-            baseBinding.setUserinfo(userInfoBean);
-        }
     }
 
     protected void gotoArticle() {

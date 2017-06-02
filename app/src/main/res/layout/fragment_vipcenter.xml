@@ -107,7 +107,7 @@
                             android:layout_height="@dimen/x50"
                             android:layout_gravity="center_vertical"
                             android:paddingRight="@dimen/x1"
-                            app:image="@{userinfo.data.mimg}"/>
+                            app:image="@{apibean.data.mimg}"/>
 
 
                         <TextView
@@ -135,7 +135,7 @@
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/tv_user_nickname"
                             android:layout_toRightOf="@+id/tv_id"
-                            android:text="@{userinfo.data.mid}"
+                            android:text="@{apibean.data.mid}"
                             android:textSize="@dimen/x14"/>
 
 

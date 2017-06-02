@@ -69,7 +69,6 @@ public class VipFragment extends Fragment {
     public void onResume() {
         super.onResume();
         loadUserData();
-        loadUserInfo();
     }
 
     private void initEvent() {
@@ -92,9 +91,6 @@ public class VipFragment extends Fragment {
                 DividerItemDecoration.VERTICAL));
         vipCenterAdapter = new VIPCenterAdapter(data);
         binding.rvVipCenter.setAdapter(vipCenterAdapter);
-
-        loadUserData();
-        loadUserInfo();
     }
 
     public void initView() {
