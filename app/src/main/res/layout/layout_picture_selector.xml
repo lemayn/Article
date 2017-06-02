@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="#444"
+    android:gravity="center_horizontal">
+
+    <Button
+        android:id="@+id/picture_selector_take_photo_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dip"
+        android:layout_marginRight="10dip"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/shape_popwindow_bt_bg"
+        android:padding="10dp"
+        android:text="拍照"
+        android:textColor="#CEC9E7"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/picture_selector_pick_picture_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dip"
+        android:layout_marginRight="10dip"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/shape_popwindow_bt_bg"
+        android:padding="10dp"
+        android:text="从相册选择"
+        android:textColor="#CEC9E7"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/picture_selector_cancel_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="15dip"
+        android:layout_marginLeft="10dip"
+        android:layout_marginRight="10dip"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/etbg_bindcard"
+        android:padding="10dp"
+        android:text="取消"
+        android:textColor="#373447"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+</LinearLayout>

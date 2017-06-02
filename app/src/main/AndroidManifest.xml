@@ -5,6 +5,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.CAMERA"/>
 
     <application
         android:name=".app"
@@ -24,8 +25,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".Activity.art.ArtDetailActivity"/>
-        <activity android:name=".Activity.art.EditorActivity"/>
-        <activity android:name=".Activity.art.MySqlActivity"/>
+        <activity android:name=".Activity.art.EditorActivity" android:windowSoftInputMode="adjustPan"/>
+        <activity android:name=".Activity.art.MySqlActivity" android:launchMode="singleTask"/>
         <activity android:name=".Activity.VIPCenterActivity"/>
         <activity android:name=".Activity.RegisterActivity"/>
         <activity android:name=".Activity.MainActivity" android:launchMode="singleTask"/>

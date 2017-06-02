@@ -90,6 +90,7 @@
 
     <string name="recommend_article">推荐文章(默认)</string>
     <string name="excellent_article">优秀文章</string>
+    <string name="contentnotbull">您还没有输入内容</string>
 
 
 </resources>

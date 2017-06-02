@@ -5,18 +5,17 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Base64;
+import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
@@ -24,31 +23,31 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.leon.article.Activity.MainActivity;
 import com.example.leon.article.R;
-import com.example.leon.article.fragment.ArticleFragment;
 import com.example.leon.article.presenter.artpresenter.artpresenterImp.ArtPresenterImp;
 import com.example.leon.article.sql.bean.Arts;
 import com.example.leon.article.sql.dao.ArtDao;
 import com.example.leon.article.utils.Constant;
 import com.example.leon.article.utils.ImageCompress;
-import com.example.leon.article.utils.ImagePathUtils;
+import com.example.leon.article.utils.PhotoSelectUtils;
 import com.example.leon.article.utils.SPUtil;
 import com.example.leon.article.utils.TimeUtils;
 import com.example.leon.article.view.IEditorActivity;
+import com.example.leon.article.widget.SelectPicturePopupWindow;
 import com.example.leon.article.widget.SpinnerDialog;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
 
 import jp.wasabeef.richeditor.RichEditor;
+import kr.co.namee.permissiongen.PermissionFail;
+import kr.co.namee.permissiongen.PermissionGen;
+import kr.co.namee.permissiongen.PermissionSuccess;
 
-public class EditorActivity extends AppCompatActivity implements IEditorActivity{
+public class EditorActivity extends AppCompatActivity implements IEditorActivity,SelectPicturePopupWindow.OnSelectedListener{
 
-    private static final int REQUEST_CODE_PICK_IMAGE = 1001;
-    private static final int REQUEST_CODE_SOME_FEATURES_PERMISSIONS = 100;
     //MySQL传递过来的数据
     private String art_title;
     private String art_content;
@@ -72,7 +71,8 @@ public class EditorActivity extends AppCompatActivity implements IEditorActivity
     private String imgpath;
     private String cookie;
     private String sid;
-
+    private SelectPicturePopupWindow picturePopupWindow;
+    private PhotoSelectUtils photoSelectUtils;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,15 +80,38 @@ public class EditorActivity extends AppCompatActivity implements IEditorActivity
         setContentView(R.layout.activity_editor);
 
         initView();
-        //获取用户输入，cookie，sid
-        GetDate();
-    }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
         //获取数据库数据
         initDate();
+
+        //获取用户输入，cookie，sid
+        GetDate();
+
+        initPic();
+    }
+
+    private void initPic() {
+        photoSelectUtils = new PhotoSelectUtils(this, new PhotoSelectUtils.PhotoSelectListener() {
+            @Override
+            public void onFinish(File outputFile, Uri outputUri) {
+                if (outputUri != null) {
+                    imgpath = outputFile.getAbsolutePath();
+//                    insertBitmap = BitmapFactory.decodeFile(outputFile.getAbsolutePath());
+                    iv_insert.setVisibility(View.VISIBLE);
+                    Glide.with(EditorActivity.this)
+                            .load(outputUri)
+                            .into(iv_insert);
+
+                    //压缩图片
+                    ImageCompress imageCompress = new ImageCompress();
+                    ImageCompress.CompressOptions options = new ImageCompress.CompressOptions();
+                    options.uri = Uri.fromFile(outputFile);
+                    options.maxHeight = 250;
+                    options.maxWidth = 250;
+                    insertBitmap = imageCompress.compressFromUri(EditorActivity.this, options);
+                }
+            }
+        },false);
     }
 
     private void initDate() {
@@ -104,8 +127,18 @@ public class EditorActivity extends AppCompatActivity implements IEditorActivity
             mEditor.setHtml(art_content);
         }
         if (art_imgPath != null) {
+            Log.i("HT", "数据库的 art_imgPath"+art_imgPath);
             iv_insert.setVisibility(View.VISIBLE);
-            iv_insert.setImageBitmap(BitmapFactory.decodeFile(art_imgPath));
+//            iv_insert.setImageBitmap(BitmapFactory.decodeFile(art_imgPath));
+            //使用Glide加载图片
+            Glide.with(this).load(art_imgPath).into(iv_insert);
+            if (imgpath != null) {
+                art_imgPath = imgpath;
+                Glide.with(this)
+                        .load(art_imgPath)
+                        .centerCrop()
+                        .into(iv_insert);
+            }
         }
     }
 
@@ -139,6 +172,9 @@ public class EditorActivity extends AppCompatActivity implements IEditorActivity
         tv_clear = (TextView) findViewById(R.id.tv_clear);
         iv_insert = (ImageView) findViewById(R.id.iv_editor_insert);
         dialog = SpinnerDialog.createSpinnerDialog(EditorActivity.this, "文章上传中...");
+        //图片选择的popWindown
+        picturePopupWindow = new SelectPicturePopupWindow(this);
+        picturePopupWindow.setOnSelectedListener(this);
 
         initEditor();
         initEvent();
@@ -155,6 +191,18 @@ public class EditorActivity extends AppCompatActivity implements IEditorActivity
     }
 
     private void initEvent() {
+        //设置点击空白处消失popwindow
+        picturePopupWindow.setTouchInterceptor(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_OUTSIDE) {
+                    picturePopupWindow.dismissPopupWindow();
+                    return true;
+                }
+                return false;
+            }
+        });
+
         //点击发布后,做提交处理
         findViewById(R.id.bt_editor_send).setOnClickListener(new View.OnClickListener() {
             private String bytesFromBitmap;
@@ -176,17 +224,23 @@ public class EditorActivity extends AppCompatActivity implements IEditorActivity
             public void onClick(View v) {
                 isSave = true;
                 String title = artTitle.getText().toString().trim();
+                String editorContent = mEditor.getHtml();
                 if (TextUtils.isEmpty(title)){
                     Toast.makeText(EditorActivity.this,getString(R.string.titlenotnull),Toast.LENGTH_SHORT).show();
-                    artTitle.setFocusable(true);
+                    artTitle.requestFocus();
                 }else {
-                    if (editDate == null) {
-                        goArticleActivity();
+                    if (TextUtils.isEmpty(editorContent)) {
+                        Toast.makeText(EditorActivity.this,getString(R.string.contentnotbull),Toast.LENGTH_SHORT).show();
                     } else {    //不为空存入数据库
-                        arts.setContent(editDate);
+                        arts.setContent(editorContent);
                         arts.setTitle(title);
                         arts.setTime(TimeUtils.getStringDateShort());
-                        arts.setImgPath(imgpath);
+                        if (imgpath != null) {//用户更改图片后使用新地址
+                            arts.setImgPath(imgpath);
+                        }else{//没有更换图片则用之前图片地址
+                            arts.setImgPath(art_imgPath);
+
+                        }
                         ArtDao.insertArts(arts);
                         goMySqlActivity();
                     }
@@ -360,21 +414,7 @@ public class EditorActivity extends AppCompatActivity implements IEditorActivity
         findViewById(R.id.bt_editor_addImg).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    int hasReadPermission = checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE);
-                    List<String> permissions = new ArrayList<String>();
-                    if (hasReadPermission != PackageManager.PERMISSION_GRANTED) {
-                        permissions.add(Manifest.permission.READ_EXTERNAL_STORAGE);
-                    } else {
-                        //从相册中选择图片
-                        pickImgfromPhoto();
-                    }
-                    if (!permissions.isEmpty()) {
-                        requestPermissions(permissions.toArray(new String[permissions.size()]),REQUEST_CODE_SOME_FEATURES_PERMISSIONS);
-                    }
-                }else{
-                    pickImgfromPhoto();
-                }
+                picturePopupWindow.showPopupWindow(EditorActivity.this);
             }
         });
 
@@ -389,19 +429,6 @@ public class EditorActivity extends AppCompatActivity implements IEditorActivity
                 }
             }
         });
-    }
-
-    private void pickImgfromPhoto() {
-        Intent intent = new Intent();
-        intent.addCategory(Intent.CATEGORY_OPENABLE);
-        intent.setType("image/*");
-        //根据版本号不同使用不同的Action
-        if (Build.VERSION.SDK_INT <19) {
-            intent.setAction(Intent.ACTION_GET_CONTENT);
-        }else {
-            intent.setAction(Intent.ACTION_OPEN_DOCUMENT);
-        }
-        startActivityForResult(intent,REQUEST_CODE_PICK_IMAGE);
     }
 
     private void showifDelDialog() {
@@ -427,12 +454,6 @@ public class EditorActivity extends AppCompatActivity implements IEditorActivity
 
     private void goMySqlActivity() {
         Intent intent = new Intent(this, MySqlActivity.class);
-        startActivity(intent);
-        finish();
-    }
-
-    private void goArticleActivity() {
-        Intent intent = new Intent(this, ArticleFragment.class);
         startActivity(intent);
         finish();
     }
@@ -531,7 +552,7 @@ public class EditorActivity extends AppCompatActivity implements IEditorActivity
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode != RESULT_OK) {
+        /*if (resultCode != RESULT_OK) {
             return;
         }
         if (requestCode == REQUEST_CODE_PICK_IMAGE) {
@@ -554,28 +575,16 @@ public class EditorActivity extends AppCompatActivity implements IEditorActivity
                     iv_insert.setImageBitmap(insertBitmap);
                 }
             }
-        }
+        }*/
+        // 在Activity中的onActivityResult()方法里与LQRPhotoSelectUtils关联
+        photoSelectUtils.attachToActivityForResult(requestCode,resultCode,data);
     }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        switch (requestCode) {
-            case REQUEST_CODE_SOME_FEATURES_PERMISSIONS: {
-                for (int i = 0; i < permissions.length; i++) {
-                    if (grantResults[i] == PackageManager.PERMISSION_GRANTED) {
-                        System.out.println("Permissions --> " + "Permission Granted: " + permissions[i]);
-                    } else if (grantResults[i] == PackageManager.PERMISSION_DENIED) {
-                        System.out.println("Permissions --> " + "Permission Denied: " + permissions[i]);
-                    }
-                }
-            }
-            break;
-            default: {
-                super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-            }
-        }
+        PermissionGen.onRequestPermissionsResult(this,requestCode,permissions,grantResults);
     }
+
 
     public String getBytesFromBitmap(Bitmap bitmap){
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -583,6 +592,94 @@ public class EditorActivity extends AppCompatActivity implements IEditorActivity
         byte[] bytes = baos.toByteArray();
         String imgString = new String(Base64.encodeToString(bytes,Base64.DEFAULT));
         return imgString;
+    }
+
+    @Override
+    public void OnSelected(View v, int position) {
+        switch (position) {
+            case 0:
+                // "拍照"按钮被点击了
+                takePhoto();
+                picturePopupWindow.dismissPopupWindow();
+                break;
+            case 1:
+                // "从相册选择"按钮被点击了
+                pickFromGallery();
+                picturePopupWindow.dismissPopupWindow();
+                break;
+            case 2:
+                // "取消"按钮被点击了
+                picturePopupWindow.dismissPopupWindow();
+                break;
+        }
+    }
+
+    private void pickFromGallery() {
+        //从图库选取
+        PermissionGen.needPermission(this,
+                PhotoSelectUtils.REQ_SELECT_PHOTO,
+                new String[]{Manifest.permission.READ_EXTERNAL_STORAGE,
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE});
+    }
+
+    private void takePhoto() {
+        //调用拍照方法
+        PermissionGen.with(this)
+                .addRequestCode(PhotoSelectUtils.REQ_TAKE_PHOTO)
+                .permissions(Manifest.permission.READ_EXTERNAL_STORAGE,
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                        Manifest.permission.CAMERA)
+                .request();
+    }
+
+    @PermissionSuccess(requestCode = PhotoSelectUtils.REQ_TAKE_PHOTO)
+    private void takephoto(){
+        photoSelectUtils.takePhoto();
+    }
+
+    @PermissionSuccess(requestCode = PhotoSelectUtils.REQ_SELECT_PHOTO)
+    private void selectphoto(){
+        photoSelectUtils.selectPhoto();
+//        pickImgfromPhoto();
+    }
+
+    @PermissionFail(requestCode = PhotoSelectUtils.REQ_TAKE_PHOTO)
+    private void showTip1(){
+        showRequestDialog();
+    }
+
+    @PermissionFail(requestCode = PhotoSelectUtils.REQ_SELECT_PHOTO)
+    private void showTip2(){
+        showRequestDialog();
+    }
+
+
+    private void showRequestDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        //设置对话框显示小图标
+        builder.setIcon(android.R.drawable.ic_dialog_alert)
+                .setTitle("申请权限")
+                .setMessage("在设置-应用-RichText-权限 中开启相机、存储权限，才能正常使用拍照或图片选择功能")
+                //添加确定按钮点击事件
+                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        //这里用来跳到手机设置页，方便用户开启权限
+                        Intent intent = new Intent(android.provider.Settings.ACTION_MANAGE_WRITE_SETTINGS);
+                        intent.setData(Uri.parse("package:" + EditorActivity.this.getPackageName()));
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(intent);
+                    }
+                })
+                //取消按钮点击事件
+                .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        //do nothing or what you want
+                    }
+                })
+                .create()
+                .show();
     }
 
 }
