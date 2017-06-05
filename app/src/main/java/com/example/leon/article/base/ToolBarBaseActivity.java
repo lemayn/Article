@@ -4,8 +4,10 @@ import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.support.annotation.LayoutRes;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,6 +30,7 @@ import java.util.HashMap;
 
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action0;
 import rx.schedulers.Schedulers;
 
 public class ToolBarBaseActivity<T extends ViewDataBinding> extends AppCompatActivity {
@@ -111,6 +114,14 @@ public class ToolBarBaseActivity<T extends ViewDataBinding> extends AppCompatAct
         hashMap.put("sid", (String) SPUtil.get(Constant.Share_prf.SID, ""));
         ApiFactory.getApi().article(Constant.Api.USER_DATA, hashMap)
                 .lift(new BaseValueValidOperator<ArticleApiBean>())
+                .doOnSubscribe(new Action0() {
+                    @Override
+                    public void call() {
+                        Log.e("Retrofit_", "BASE: USER_DATA");
+                        SystemClock.sleep(500);
+                        Log.e("Retrofit_", "BASE: USER_DATA   500");
+                    }
+                })
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<ArticleApiBean>() {

@@ -1,16 +1,17 @@
 package com.example.leon.article.api;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
 
 import com.example.leon.article.Activity.LoginActivity;
 import com.example.leon.article.api.bean.ApiBean;
 import com.example.leon.article.app;
 import com.example.leon.article.utils.Constant;
+import com.example.leon.article.utils.DialogHelper;
 
 import rx.Observable;
 import rx.Subscriber;
@@ -40,6 +41,7 @@ public class BaseValueValidOperator<T extends ApiBean>
 
             @Override
             public void onNext(T data) {
+                Log.e("Retrofit_", "data: " + data);
                 if (!subscriber.isUnsubscribed()) {
                     if (data == null) {
                         subscriber.onError(new Exception("网络异常"));
@@ -63,27 +65,23 @@ public class BaseValueValidOperator<T extends ApiBean>
      * 被踢下线处理
      */
     private void onConnectionConflict() {
-        final Activity taskTop = app.getInstance().getCurrentActivity();
-        if (taskTop == null)
+        final Activity topActivity = app.getInstance().getCurrentActivity();
+        if (topActivity == null) {
             return;
+        }
         new Handler(Looper.getMainLooper()).post(new Runnable() {
             @Override
             public void run() {
-                AlertDialog dialog = new AlertDialog.Builder(taskTop)
-                        .setMessage("您的账号已在其他终端登录,请重新登录")
-                        .setNegativeButton("确定", new DialogInterface.OnClickListener() {
+                DialogHelper.showDialog(topActivity, null, "您的账号已在其他终端登录,请重新登录",
+                        new DialogHelper.OnClickYesListener() {
                             @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                Intent intent = new Intent(taskTop, LoginActivity.class);
+                            public void onClickYes(DialogInterface dialog, int which) {
+                                Intent intent = new Intent(topActivity, LoginActivity.class);
                                 intent.putExtra(Constant.Intent_Extra.IS_CONSTRAINT_LOIN, true);
-                                taskTop.startActivity(intent);
+                                topActivity.startActivity(intent);
                                 dialog.dismiss();
                             }
-                        })
-                        .create();
-                dialog.setCancelable(false);
-                dialog.setCanceledOnTouchOutside(false);
-                dialog.show();
+                        }, null);
             }
         });
     }

@@ -78,10 +78,6 @@ public class Constant {
 
     public static class Share_prf {
         /**
-         * 登录返回数据，内包含用户昵称、ID、头像等信息
-         */
-        public static final String LOGIN_RESPONSE = "login_response";
-        /**
          * cookie
          */
         public static final String COOKIE = "cookie";
