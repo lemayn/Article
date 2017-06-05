@@ -12,6 +12,8 @@ public class ArtConstant {
     public static final String ART_CONTENT = "ART_CONTENT";
     //MySQL 2 Editor
     public static final String ART_IMGPATH = "ART_IMGPATH";
+    //MySQL 2 Editor
+    public static final String ART_ID = "ART_ID";
 
     //Article 2 ArtDetail
     public static final String DETAIL_TITLE = "DETAIL_TITLE";

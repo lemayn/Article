@@ -15,9 +15,6 @@ import com.example.leon.article.api.bean.UserBankBean;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Hu on 2017/5/30.
- */
 
 public class BankSettingAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements View.OnClickListener {
 

@@ -46,6 +46,8 @@ import kr.co.namee.permissiongen.PermissionFail;
 import kr.co.namee.permissiongen.PermissionGen;
 import kr.co.namee.permissiongen.PermissionSuccess;
 
+import static android.R.attr.id;
+
 public class EditorActivity extends AppCompatActivity implements IEditorActivity,SelectPicturePopupWindow.OnSelectedListener{
 
     //MySQL传递过来的数据
@@ -73,6 +75,7 @@ public class EditorActivity extends AppCompatActivity implements IEditorActivity
     private String sid;
     private SelectPicturePopupWindow picturePopupWindow;
     private PhotoSelectUtils photoSelectUtils;
+    private long art_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -120,6 +123,9 @@ public class EditorActivity extends AppCompatActivity implements IEditorActivity
         art_title = getIntent().getStringExtra(ArtConstant.ART_TITLE);
         art_content = getIntent().getStringExtra(ArtConstant.ART_CONTENT);
         art_imgPath = getIntent().getStringExtra(ArtConstant.ART_IMGPATH);
+        art_id = getIntent().getLongExtra(ArtConstant.ART_ID, 0 );
+        Log.i("HT", "initDate: Id是：--------->"+id);
+
         if (art_title != null) {
             artTitle.setText(art_title);
         }
@@ -127,9 +133,7 @@ public class EditorActivity extends AppCompatActivity implements IEditorActivity
             mEditor.setHtml(art_content);
         }
         if (art_imgPath != null) {
-            Log.i("HT", "数据库的 art_imgPath"+art_imgPath);
             iv_insert.setVisibility(View.VISIBLE);
-        //  iv_insert.setImageBitmap(BitmapFactory.decodeFile(art_imgPath));
             //使用Glide加载图片
             Glide.with(this).load(art_imgPath).into(iv_insert);
             if (imgpath != null) {
@@ -232,16 +236,31 @@ public class EditorActivity extends AppCompatActivity implements IEditorActivity
                     if (TextUtils.isEmpty(editorContent)) {
                         Toast.makeText(EditorActivity.this,getString(R.string.contentnotbull),Toast.LENGTH_SHORT).show();
                     } else {    //不为空存入数据库
-                        arts.setContent(editorContent);
-                        arts.setTitle(title);
-                        arts.setTime(TimeUtils.getStringDateShort());
-                        if (imgpath != null) {//用户更改图片后使用新地址
-                            arts.setImgPath(imgpath);
-                        }else{//没有更换图片则用之前图片地址
-                            arts.setImgPath(art_imgPath);
+                        if (TextUtils.equals(art_title, title) && TextUtils.equals(art_content, editorContent)
+                                && TextUtils.equals(art_imgPath, imgpath)) {//如果重新保存与之前的相同
+                            arts.setId(art_id);
+                            arts.setTitle(title);
+                            arts.setContent(editorContent);
+                            arts.setTime(TimeUtils.getStringDateShort());
+                            if (imgpath != null) {//用户更改图片后使用新地址
+                                arts.setImgPath(imgpath);
+                            } else {//没有更换图片则用之前图片地址
+                                arts.setImgPath(art_imgPath);
+                            }
+                            ArtDao.updateArts(arts);
+                            goMySqlActivity();
+                        } else {
+                            arts.setContent(editorContent);
+                            arts.setTitle(title);
+                            arts.setTime(TimeUtils.getStringDateShort());
+                            if (imgpath != null) {//用户更改图片后使用新地址
+                                arts.setImgPath(imgpath);
+                            }else{//没有更换图片则用之前图片地址
+                                arts.setImgPath(art_imgPath);
+                            }
+                            ArtDao.insertArts(arts);
+                            goMySqlActivity();
                         }
-                        ArtDao.insertArts(arts);
-                        goMySqlActivity();
                     }
                 }
             }

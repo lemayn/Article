@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
 
 import com.example.leon.article.R;
@@ -19,6 +20,7 @@ public class MySqlActivity extends AppCompatActivity {
 
     private ListView mListView;
     private List<Arts> artsList;
+    private ImageView iv_back;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,12 +45,21 @@ public class MySqlActivity extends AppCompatActivity {
                     String title = artsList.get(position).getTitle();
                     String content = artsList.get(position).getContent();
                     String imgPath = artsList.get(position).getImgPath();
+                    Long artid = artsList.get(position).getId();
                     Intent intent = new Intent(MySqlActivity.this,EditorActivity.class);
                     intent.putExtra(ArtConstant.ART_TITLE,title);
                     intent.putExtra(ArtConstant.ART_CONTENT,content);
                     intent.putExtra(ArtConstant.ART_IMGPATH,imgPath);
+                    intent.putExtra(ArtConstant.ART_ID,artid);
                     startActivity(intent);
                 }
+            }
+        });
+
+        iv_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
     }
@@ -57,6 +68,7 @@ public class MySqlActivity extends AppCompatActivity {
         setTitle(getString(R.string.myarticle));
         mListView = getViewById(R.id.lv_sql);
         mListView.setEmptyView(getViewById(R.id.lv_sql_empty));
+        iv_back = getViewById(R.id.iv_sql_back);
     }
 
     private void initData() {

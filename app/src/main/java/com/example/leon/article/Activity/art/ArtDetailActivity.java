@@ -48,6 +48,7 @@ public class ArtDetailActivity extends ToolBarBaseActivity<ActivityArtDetailBind
     private void initView() {
         setTitle(getString(R.string.article_detail));
         hideHeaderInfo();
+        setNavigationView();
         //标题头
         tv_title = (TextView) findViewById(R.id.tv_art_detail_title);
         tv_content = (TextView) findViewById(R.id.tv_art_detail_content);
@@ -74,6 +75,7 @@ public class ArtDetailActivity extends ToolBarBaseActivity<ActivityArtDetailBind
         if (artImg != null) {
             Glide.with(this)
                     .load(imgUrl+artImg)
+                    .centerCrop()
                     .into(iv_detail);
         }
         tv_title.setText(atitle);

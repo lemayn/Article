@@ -36,7 +36,8 @@ public class ArtDao {
      * @param arts
      */
     public static void updateArts(Arts arts){
-        app.getDaoSession().getArtsDao().update(arts);
+//        app.getDaoSession().getArtsDao().update(arts);
+        app.getDaoSession().getArtsDao().updateInTx(arts);
     }
 
     /**
