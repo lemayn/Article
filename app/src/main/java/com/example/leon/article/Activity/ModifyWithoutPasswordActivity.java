@@ -66,9 +66,9 @@ public class ModifyWithoutPasswordActivity extends ToolBarBaseActivity<ActivityM
                     if (newPwd.equals(retypePwd)) {
                         //请求接口更新密码
                         HashMap<String, String> hashMap = new HashMap<>(5);
-                        hashMap.put("password", oldPwd);
-                        hashMap.put("npassword", newPwd);
-                        hashMap.put("renpassword", retypePwd);
+                        hashMap.put("pwd", oldPwd);
+                        hashMap.put("npwd", newPwd);
+                        hashMap.put("renpwd", retypePwd);
                         hashMap.put("cookie", (String) SPUtil.get(Constant.Share_prf.COOKIE, ""));
                         hashMap.put("sid", (String) SPUtil.get(Constant.Share_prf.SID, ""));
                         ApiFactory.getApi().article(Constant.Api.EDIT_MONEY_PASSWORD, hashMap)

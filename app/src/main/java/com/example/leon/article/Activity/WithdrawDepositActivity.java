@@ -115,6 +115,8 @@ public class WithdrawDepositActivity extends ToolBarBaseActivity<ActivityWithdra
                             hasData = mBankApiBean.getData() != null && mBankApiBean.getData().size() > 0;
                             if (hasData) {
                                 binding.setBean(mBankApiBean.getData().get(mDefaultChoice));
+                            } else {
+                                Toast.makeText(WithdrawDepositActivity.this, "您还未绑定银行卡！", Toast.LENGTH_SHORT).show();
                             }
                         }
                     }

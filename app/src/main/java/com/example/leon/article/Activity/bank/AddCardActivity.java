@@ -62,6 +62,7 @@ public class AddCardActivity extends ToolBarBaseActivity<ActivityAddCardBinding>
     }
 
     private void initEvent() {
+        loadUserData();
         tv_choose_bank.setOnClickListener(this);
         bt_addConfirm.setOnClickListener(this);
     }
