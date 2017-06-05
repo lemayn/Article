@@ -37,8 +37,6 @@ public class HomePresenter extends BasePresenter<IHomePre> {
     public void AdvData() {
 
         FormBody formBody = new FormBody.Builder()
-                .add("sid", (String) SPUtil.get(Constant.Share_prf.SID, ""))
-                .add("cookie", (String) SPUtil.get(Constant.Share_prf.COOKIE, ""))
                 .build();
         XHttpUtils.getInstance().asyncPost(Api.baseurl+Api.Ad,
                 formBody, new XHttpUtils.HttpCallBack() {
@@ -138,8 +136,6 @@ public class HomePresenter extends BasePresenter<IHomePre> {
     public void SystemNotice() {
 
         FormBody formBody = new FormBody.Builder()
-                .add("sid", (String) SPUtil.get(Constant.Share_prf.SID, ""))
-                .add("cookie", (String) SPUtil.get(Constant.Share_prf.COOKIE, ""))
                 .build();
         XHttpUtils.getInstance().asyncPost(Api.baseurl+Api.Ncontent,
                 formBody, new XHttpUtils.HttpCallBack() {

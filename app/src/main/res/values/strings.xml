@@ -95,5 +95,11 @@
     <string name="confirm_your_bans">请确定您的所属银行</string>
     <string name="please_choose_yourbank">请选择您的银行</string>
 
+    <string name="back_password">找回密码</string>
+    <string name="back_account">您登陆使用的账号</string>
+    <string name="back_phone">您注册使用的手机号码</string>
+
+    <string name="back_submit">确认提交</string>
+    <string name="back_login">返回登录</string>
 
 </resources>

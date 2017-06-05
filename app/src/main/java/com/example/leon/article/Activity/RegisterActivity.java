@@ -13,6 +13,7 @@ import com.example.leon.article.R;
 import com.example.leon.article.api.bean.ArticleApiBean;
 import com.example.leon.article.base.ToolBarBaseActivity;
 import com.example.leon.article.databinding.ActivityRegisterBinding;
+import com.example.leon.article.utils.CommonUtils;
 import com.example.leon.article.utils.Validator;
 import com.google.gson.Gson;
 

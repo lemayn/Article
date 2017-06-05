@@ -32,7 +32,6 @@ import okhttp3.Request;
 
 public class NoticeActivity extends ToolBarBaseActivity<ActivityNoticeBinding> {
 
-    private RecyclerView recyclerview_notice;
     NoticeBean bean = new NoticeBean();
     List<NoticeBean.DataBean> beanlsit = new ArrayList<NoticeBean.DataBean>();
     private NoticeAdapter adapter;
@@ -50,21 +49,18 @@ public class NoticeActivity extends ToolBarBaseActivity<ActivityNoticeBinding> {
         setNavigationView();
         hideHeaderInfo();
 
-        recyclerview_notice = (RecyclerView) findViewById(R.id.recyclerview_notice);
-        recyclerview_notice.setLayoutManager(new LinearLayoutManager(recyclerview_notice.getContext(), LinearLayoutManager.VERTICAL, false));
+        binding.recyclerviewNotice.setLayoutManager(new LinearLayoutManager(binding.recyclerviewNotice.getContext(), LinearLayoutManager.VERTICAL, false));
 
         loadData();
     }
 
     private void setAdapter() {
-        recyclerview_notice.setAdapter(adapter = new NoticeAdapter(beanlsit, this));
+        binding.recyclerviewNotice.setAdapter(adapter = new NoticeAdapter(beanlsit, this));
     }
 
     private void loadData() {
         final Gson gson = new Gson();
         FormBody formBody = new FormBody.Builder()
-                .add("sid", (String) SPUtil.get(Constant.Share_prf.SID, ""))
-                .add("cookie", (String) SPUtil.get(Constant.Share_prf.COOKIE, ""))
                 .build();
         XHttpUtils.getInstance().asyncPost(Api.baseurl+Api.Ncontent,
                 formBody, new XHttpUtils.HttpCallBack() {

@@ -166,7 +166,7 @@ public class HomeRecycleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             text = noticeBean.get(i).getNtitle();
             text = text + text;
         }
-        Log.i("MyTest", "text"+text);
+//        Log.i("MyTest", "text"+text);
 
        if (noticeBean.size()>0){
            holder.text_notice.setText(text);

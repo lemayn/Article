@@ -19,5 +19,6 @@ public class Api {
 
     public static String Ncontent = "Ncontent";
 
+    public static String RetPwd = "RetPwd";
 
 }
