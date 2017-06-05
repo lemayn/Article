@@ -3,6 +3,7 @@ package com.example.leon.article.fragment;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DividerItemDecoration;
@@ -38,6 +39,7 @@ import java.util.HashMap;
 
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action0;
 import rx.schedulers.Schedulers;
 
 /**
@@ -112,6 +114,12 @@ public class VipFragment extends Fragment {
         hashMap.put("sid", (String) SPUtil.get(Constant.Share_prf.SID, ""));
         ApiFactory.getApi().article(Constant.Api.USER_DATA, hashMap)
                 .lift(new BaseValueValidOperator<ArticleApiBean>())
+                .doOnSubscribe(new Action0() {
+                    @Override
+                    public void call() {
+                        SystemClock.sleep(500);
+                    }
+                })
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<ArticleApiBean>() {

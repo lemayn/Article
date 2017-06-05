@@ -5,14 +5,16 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import com.example.leon.article.Http.Api;
 import com.example.leon.article.Http.XHttpUtils;
 import com.example.leon.article.R;
+import com.example.leon.article.api.bean.ArticleApiBean;
 import com.example.leon.article.base.ToolBarBaseActivity;
 import com.example.leon.article.databinding.ActivityRegisterBinding;
 import com.example.leon.article.utils.CommonUtils;
-import com.google.gson.Gson;
+import com.example.leon.article.utils.GsonUtil;
 
 import java.io.IOException;
 
@@ -57,32 +59,27 @@ public class RegisterActivity extends ToolBarBaseActivity<ActivityRegisterBindin
         String pwd = binding.edittextPwd.getText().toString().trim();
         String pwd2 = binding.edittextPwd2.getText().toString().trim();
         String phone = binding.edittextPhone.getText().toString().trim();
-        String qq =  binding.edittextQq.getText().toString().trim();
+        String qq = binding.edittextQq.getText().toString().trim();
 
-        Log.i("MyTest", account + pwd +" = " + pwd2 + phone + qq);
+        Log.i("MyTest", account + pwd + " = " + pwd2 + phone + qq);
 
-        if (account == null || account.equals("")){
+        if (account == null || account.equals("")) {
             binding.edittextName.setError("账号不能为空");
         }
-        if (account.length() < 6 || account.length() > 10){
+        if (account.length() < 6 || account.length() > 10) {
             binding.edittextName.setError("账号不正确");
-        }
-        else if (pwd == null || pwd.equals("")){
+        } else if (pwd == null || pwd.equals("")) {
             binding.edittextPwd.setError("密码不能为空");
         }
-        if (pwd.length() < 6 || pwd.length() > 16){
+        if (pwd.length() < 6 || pwd.length() > 16) {
             binding.edittextPwd.setError("密码长度不正确");
-        }
-        else if (pwd2 == null || pwd2.equals("")){
+        } else if (pwd2 == null || pwd2.equals("")) {
             binding.edittextPwd2.setError("重复密码不能为空");
-        }
-        else if (!pwd.equals(pwd2)){
+        } else if (!pwd.equals(pwd2)) {
             binding.edittextPwd2.setError("两次密码不一致");
-        }
-        else if (phone == null || phone.equals("")){
+        } else if (phone == null || phone.equals("")) {
             binding.edittextPhone.setError("手机号不能为空");
-        }
-        else if (qq == null || qq.equals("")){
+        } else if (qq == null || qq.equals("")) {
             binding.edittextQq.setError("QQ账号不能为空");
         }
 
@@ -102,7 +99,11 @@ public class RegisterActivity extends ToolBarBaseActivity<ActivityRegisterBindin
 
                     @Override
                     public void onSuccess(Request request, String result) {
-                        Gson gson = new Gson();
+                        ArticleApiBean bean = GsonUtil.GsonToBean(result, ArticleApiBean.class);
+                        if ("2".equals(bean.getCode())) {
+                            Toast.makeText(RegisterActivity.this, bean.getMsg(), Toast.LENGTH_SHORT).show();
+                            return;
+                        }
                         Log.i("MyTest", "请求成功" + result.toString());
 
                         startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
