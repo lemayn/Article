@@ -19,6 +19,13 @@ public class ArticleApiBean extends ApiBean {
         notifyPropertyChanged(BR.data);
     }
 
+    @Override
+    public String toString() {
+        return "ArticleApiBean{" +
+                "data=" + data +
+                '}';
+    }
+
     public static class DataBean extends BaseObservable {
 
         private String aid;
@@ -200,5 +207,29 @@ public class ArticleApiBean extends ApiBean {
             this.cookie = cookie;
         }
 
+        @Override
+        public String toString() {
+            return "DataBean{" +
+                    "aid='" + aid + '\'' +
+                    ", atitle='" + atitle + '\'' +
+                    ", acontent='" + acontent + '\'' +
+                    ", aaddtime='" + aaddtime + '\'' +
+                    ", review='" + review + '\'' +
+                    ", amoney='" + amoney + '\'' +
+                    ", reason='" + reason + '\'' +
+                    ", aimg='" + aimg + '\'' +
+                    ", mid='" + mid + '\'' +
+                    ", mname='" + mname + '\'' +
+                    ", nickname='" + nickname + '\'' +
+                    ", mimg='" + mimg + '\'' +
+                    ", cookie='" + cookie + '\'' +
+                    ", sid='" + sid + '\'' +
+                    ", mtell='" + mtell + '\'' +
+                    ", mqq='" + mqq + '\'' +
+                    ", mmoney='" + mmoney + '\'' +
+                    ", weixin='" + weixin + '\'' +
+                    ", email='" + email + '\'' +
+                    '}';
+        }
     }
 }

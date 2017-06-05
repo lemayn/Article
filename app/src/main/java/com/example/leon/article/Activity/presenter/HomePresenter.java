@@ -49,7 +49,7 @@ public class HomePresenter extends BasePresenter<IHomePre> {
 
                     @Override
                     public void onSuccess(Request request, String result) {
-                        Log.i("MyTest", "AdvData请求成功01" + result.toString());
+//                        Log.i("MyTest", "AdvData请求成功01" + result.toString());
 
                         AdvBean bean = new AdvBean();
                         bean = gson.fromJson(result, AdvBean.class);
@@ -72,8 +72,6 @@ public class HomePresenter extends BasePresenter<IHomePre> {
 
         FormBody formBody = new FormBody.Builder()
                 .add("page", "1")
-                .add("sid", (String) SPUtil.get(Constant.Share_prf.SID, ""))
-                .add("cookie", (String) SPUtil.get(Constant.Share_prf.COOKIE, ""))
                 .build();
         XHttpUtils.getInstance().asyncPost(Api.baseurl+Api.Index,
                 formBody, new XHttpUtils.HttpCallBack() {
@@ -84,7 +82,7 @@ public class HomePresenter extends BasePresenter<IHomePre> {
 
                     @Override
                     public void onSuccess(Request request, String result) {
-                        Log.i("MyTest", "RecommendArticle请求成功01" + result.toString());
+//                        Log.i("MyTest", "RecommendArticle请求成功01" + result.toString());
 
                         RecomArtBean bean = new RecomArtBean();
                         bean = gson.fromJson(result, RecomArtBean.class);
@@ -106,8 +104,6 @@ public class HomePresenter extends BasePresenter<IHomePre> {
 
         FormBody formBody = new FormBody.Builder()
                 .add("page", "1")
-                .add("sid", (String) SPUtil.get(Constant.Share_prf.SID, ""))
-                .add("cookie", (String) SPUtil.get(Constant.Share_prf.COOKIE, ""))
                 .build();
         XHttpUtils.getInstance().asyncPost(Api.baseurl+Api.Good,
                 formBody, new XHttpUtils.HttpCallBack() {
@@ -118,9 +114,9 @@ public class HomePresenter extends BasePresenter<IHomePre> {
 
                     @Override
                     public void onSuccess(Request request, String result) {
-                        Log.i("MyTest", "excellentArticle请求成功01" + result.toString());
+//                        Log.i("MyTest", "excellentArticle请求成功01" + result.toString());
 
-                        RecomArtBean bean1 = new RecomArtBean();
+//                        RecomArtBean bean1 = new RecomArtBean();
                         ExcellentBean bean = new ExcellentBean();
                         bean = gson.fromJson(result, ExcellentBean.class);
 
@@ -145,7 +141,7 @@ public class HomePresenter extends BasePresenter<IHomePre> {
                 .add("sid", (String) SPUtil.get(Constant.Share_prf.SID, ""))
                 .add("cookie", (String) SPUtil.get(Constant.Share_prf.COOKIE, ""))
                 .build();
-        XHttpUtils.getInstance().asyncPost(Api.baseurl+Api.Notice,
+        XHttpUtils.getInstance().asyncPost(Api.baseurl+Api.Ncontent,
                 formBody, new XHttpUtils.HttpCallBack() {
                     @Override
                     public void onError(Request request, IOException e) {
@@ -154,7 +150,7 @@ public class HomePresenter extends BasePresenter<IHomePre> {
 
                     @Override
                     public void onSuccess(Request request, String result) {
-                        Log.i("MyTest", "SystemNotice请求成功01" + result.toString());
+//                        Log.i("MyTest", "SystemNotice请求成功01" + result.toString());
 
                         NoticeBean bean = new NoticeBean();
                         bean = gson.fromJson(result, NoticeBean.class);

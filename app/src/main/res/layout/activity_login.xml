@@ -1,11 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android="http://schemas.android.com/apk/res/android">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+
+        <com.jude.rollviewpager.RollPagerView
+            android:id="@+id/rollpagerview_login"
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            app:rollviewpager_play_delay="3000"
+            app:rollviewpager_hint_paddingBottom="8dp"/>
 
 
         <LinearLayout
@@ -13,9 +20,10 @@
             android:layout_width="match_parent"
             android:layout_height="140dp"
             android:orientation="vertical"
-            android:layout_marginTop="100dp"
+            android:layout_marginTop="20dp"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
+            android:layout_below="@+id/rollpagerview_login"
             >
 
 

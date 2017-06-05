@@ -111,19 +111,16 @@ public class HomeFragment extends Fragment implements IHomePre {
     public void showAdvList(List<AdvBean.DataBean> List) {
 //        DatabeanList.addAll(List);
         adapter.addAdvItems(List);
-        Log.i("MyTest", "beanList02  请求成功" + List.toString());
     }
 
     @Override
     public void showRecommendList(List<RecomArtBean.DataBean.TuijianBean> List) {
 //        reBeanlist.addAll(List);
         adapter.addArtItems(List);
-        Log.i("MyTest", "reBeanlist02  请求成功" + List.toString());
     }
 
     @Override
     public void showGoodList(List<ExcellentBean.DataBean.GoodBean> List) {
-        Log.i("MyTest", "ExcellentBean01  请求成功" + List.toString());
         goodBean.addAll(List);
         adapter.notifyDataSetChanged();
     }
@@ -131,7 +128,6 @@ public class HomeFragment extends Fragment implements IHomePre {
     @Override
     public void showNoticeList(List<NoticeBean.DataBean> List) {
         adapter.addNotItems(List);
-        Log.i("MyTest", "noticeBean02  请求成功" + List.toString());
     }
 
     @Override

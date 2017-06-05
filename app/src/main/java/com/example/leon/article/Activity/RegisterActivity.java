@@ -14,7 +14,8 @@ import com.example.leon.article.api.bean.ArticleApiBean;
 import com.example.leon.article.base.ToolBarBaseActivity;
 import com.example.leon.article.databinding.ActivityRegisterBinding;
 import com.example.leon.article.utils.CommonUtils;
-import com.example.leon.article.utils.GsonUtil;
+import com.example.leon.article.utils.Validator;
+import com.google.gson.Gson;
 
 import java.io.IOException;
 
@@ -59,28 +60,35 @@ public class RegisterActivity extends ToolBarBaseActivity<ActivityRegisterBindin
         String pwd = binding.edittextPwd.getText().toString().trim();
         String pwd2 = binding.edittextPwd2.getText().toString().trim();
         String phone = binding.edittextPhone.getText().toString().trim();
-        String qq = binding.edittextQq.getText().toString().trim();
+        String qq =  binding.edittextQq.getText().toString().trim();
 
-        Log.i("MyTest", account + pwd + " = " + pwd2 + phone + qq);
-
-        if (account == null || account.equals("")) {
+        if (account == null || account.equals("")){
             binding.edittextName.setError("账号不能为空");
+            return;
         }
-        if (account.length() < 6 || account.length() > 10) {
+        if (account.length() < 6 || account.length() > 10){
             binding.edittextName.setError("账号不正确");
-        } else if (pwd == null || pwd.equals("")) {
-            binding.edittextPwd.setError("密码不能为空");
+            return;
         }
-        if (pwd.length() < 6 || pwd.length() > 16) {
-            binding.edittextPwd.setError("密码长度不正确");
-        } else if (pwd2 == null || pwd2.equals("")) {
+        if (!Validator.isPassword(pwd)) {
+            binding.edittextPwd2.setError("请输入正确的6~16位密码");
+            return;
+        }
+        if (pwd2 == null || pwd2.equals("")){
             binding.edittextPwd2.setError("重复密码不能为空");
-        } else if (!pwd.equals(pwd2)) {
+            return;
+        }
+        if (!pwd.equals(pwd2)){
             binding.edittextPwd2.setError("两次密码不一致");
-        } else if (phone == null || phone.equals("")) {
-            binding.edittextPhone.setError("手机号不能为空");
-        } else if (qq == null || qq.equals("")) {
+            return;
+        }
+        if (!Validator.isMobile(phone)){
+            binding.edittextPhone.setError("请输入正确的手机号");
+            return;
+        }
+        if (qq == null || qq.equals("")){
             binding.edittextQq.setError("QQ账号不能为空");
+            return;
         }
 
         FormBody formBody = new FormBody.Builder()
@@ -99,14 +107,22 @@ public class RegisterActivity extends ToolBarBaseActivity<ActivityRegisterBindin
 
                     @Override
                     public void onSuccess(Request request, String result) {
-                        ArticleApiBean bean = GsonUtil.GsonToBean(result, ArticleApiBean.class);
-                        if ("2".equals(bean.getCode())) {
-                            Toast.makeText(RegisterActivity.this, bean.getMsg(), Toast.LENGTH_SHORT).show();
-                            return;
-                        }
-                        Log.i("MyTest", "请求成功" + result.toString());
+                        Gson gson = new Gson();
+//                        Log.i("MyTest", "bean 请求成功01" + result.toString());
+                        ArticleApiBean bean = new ArticleApiBean();
+                        bean = gson.fromJson(result, ArticleApiBean.class);
 
-                        startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
+                        if (bean.getCode().equals("0")){
+                            Toast.makeText(RegisterActivity.this, bean.getMsg(), Toast.LENGTH_SHORT).show();
+                        }
+                        else if(bean.getCode().equals("2")){
+                            Toast.makeText(RegisterActivity.this, bean.getMsg(), Toast.LENGTH_SHORT).show();
+                        }
+                        else if(bean.getCode().equals("1")) {
+                            Toast.makeText(RegisterActivity.this, bean.getMsg(), Toast.LENGTH_SHORT).show();
+                            startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
+                        }
+
                     }
                 });
 

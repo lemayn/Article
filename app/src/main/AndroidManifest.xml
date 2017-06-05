@@ -48,10 +48,14 @@
             android:windowSoftInputMode="stateHidden">
         </activity>
 
+        <activity
+            android:name=".Activity.NoticeActivity"
+            android:windowSoftInputMode="stateHidden">
+        </activity>
+
         <activity android:name=".Activity.ForgetPwdActivity"/>
         <activity android:name=".Activity.bank.BankSettingActivity"/>
         <activity android:name=".Activity.bank.AddCardActivity"/>
-        <activity android:name=".Activity.NoticeActivity"/>
     </application>
 
 </manifest>

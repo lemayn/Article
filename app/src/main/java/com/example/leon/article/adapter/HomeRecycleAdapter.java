@@ -146,8 +146,6 @@ public class HomeRecycleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
      */
     private void bindTypeHead1(HolderTypeHead1 holder, int position){
 
-        holder.rollpagerview.clearFocus();
-
         holder.rollpagerview.setAnimationDurtion(500);    //设置切换时间
         holder.rollpagerview.setAdapter(new TestLoopAdapter(holder.rollpagerview, DatabeanList)); //设置适配器
         holder.rollpagerview.setHintView(new ColorPointHintView(context, Color.WHITE, Color.GRAY));// 设置圆点指示器颜色

@@ -17,7 +17,6 @@ public class Api {
     public static String Index = "Index";
     public static String Good = "Good";
 
-    public static String Notice = "Notice";
     public static String Ncontent = "Ncontent";
 
 

@@ -47,6 +47,7 @@ public class NoticeActivity extends ToolBarBaseActivity<ActivityNoticeBinding> {
 
     private void initview() {
         setTitle(getString(R.string.system_notice));
+        setNavigationView();
         hideHeaderInfo();
 
         recyclerview_notice = (RecyclerView) findViewById(R.id.recyclerview_notice);

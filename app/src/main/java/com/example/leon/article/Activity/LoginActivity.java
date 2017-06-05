@@ -1,26 +1,39 @@
 package com.example.leon.article.Activity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.example.leon.article.Activity.presenter.ILoginPre;
+import com.example.leon.article.Activity.presenter.LoginPresenter;
 import com.example.leon.article.R;
 import com.example.leon.article.api.ApiFactory;
 import com.example.leon.article.api.BaseValueValidOperator;
 import com.example.leon.article.api.bean.ArticleApiBean;
 import com.example.leon.article.app;
 import com.example.leon.article.base.ToolBarBaseActivity;
+import com.example.leon.article.bean.AdvBean;
 import com.example.leon.article.databinding.ActivityLoginBinding;
 import com.example.leon.article.utils.CommonUtils;
 import com.example.leon.article.utils.Constant;
 import com.example.leon.article.utils.GsonUtil;
 import com.example.leon.article.utils.SPUtil;
 import com.example.leon.article.utils.Validator;
+import com.jude.rollviewpager.RollPagerView;
+import com.jude.rollviewpager.adapter.LoopPagerAdapter;
+import com.jude.rollviewpager.hintview.ColorPointHintView;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
@@ -31,8 +44,11 @@ import rx.schedulers.Schedulers;
  * Created by leonseven on 2017/5/9.
  */
 
-public class LoginActivity extends ToolBarBaseActivity<ActivityLoginBinding> implements View.OnClickListener {
+public class LoginActivity extends ToolBarBaseActivity<ActivityLoginBinding> implements View.OnClickListener, ILoginPre {
+
     private boolean is_constraint_loin;
+    private LoginPresenter presenter;
+    List<AdvBean.DataBean> advlist = new ArrayList<AdvBean.DataBean>();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -41,9 +57,10 @@ public class LoginActivity extends ToolBarBaseActivity<ActivityLoginBinding> imp
 
         is_constraint_loin = getIntent().getBooleanExtra(Constant.Intent_Extra.IS_CONSTRAINT_LOIN, false);
 
+        presenter = new LoginPresenter(LoginActivity.this, this);
         hideHeaderInfo();
         hideHeaderMoneyInfo();
-        bindViews();
+        init();
 
         boolean isLogin = !TextUtils.isEmpty((String) SPUtil.get(Constant.Share_prf.COOKIE, "")) ||
                 !TextUtils.isEmpty((String) SPUtil.get(Constant.Share_prf.SID, ""));
@@ -57,15 +74,17 @@ public class LoginActivity extends ToolBarBaseActivity<ActivityLoginBinding> imp
         }
     }
 
-    private void bindViews() {
-
+    @Override
+    public void init() {
         setTitle(getString(R.string.login));
+
+        presenter.AdvData();
 
         binding.btnLogin.setOnClickListener(this);
         binding.btnRegister.setOnClickListener(this);
         binding.tvForgetpwd.setOnClickListener(this);
-
     }
+
 
     @Override
     public void onClick(View v) {
@@ -139,5 +158,64 @@ public class LoginActivity extends ToolBarBaseActivity<ActivityLoginBinding> imp
     @Override
     public void onBackPressed() {
         app.getInstance().exit();
+    }
+
+    @Override
+    public void showAdvList(List<AdvBean.DataBean> List) {
+//        Log.i("MyTest", "advlist001  请求成功" + List.toString());
+        advlist.addAll(List);
+        rollview();
+    }
+
+    private void rollview() {
+
+        binding.rollpagerviewLogin.setAnimationDurtion(500);    //设置切换时间
+        binding.rollpagerviewLogin.setAdapter(new TestLoopAdapter(binding.rollpagerviewLogin, advlist)); //设置适配器
+        binding.rollpagerviewLogin.setHintView(new ColorPointHintView(this, Color.WHITE, Color.GRAY));// 设置圆点指示器颜色
+    }
+
+    /**
+     * 轮播图adapter
+     */
+    class TestLoopAdapter extends LoopPagerAdapter {
+        String headurl = Constant.Api.BASE_URL;
+        List<AdvBean.DataBean> list;
+
+        public TestLoopAdapter(RollPagerView viewPager, List<AdvBean.DataBean> list) {
+            super(viewPager);
+            this.list = list;
+        }
+
+        @Override
+        public View getView(ViewGroup container, int position) {
+
+            final int picNo = position + 1;
+            ImageView view = new ImageView(container.getContext());
+
+            Glide.with(LoginActivity.this)
+                    .load(headurl+list.get(position).getImg())
+                    .fitCenter()
+                    .into(view);
+//            view.setImageResource(list[position]);
+            view.setScaleType(ImageView.ScaleType.CENTER_CROP);
+            view.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+
+            view.setOnClickListener(new View.OnClickListener()      // 点击事件
+            {
+                @Override
+                public void onClick(View v)
+                {
+                    Toast.makeText(LoginActivity.this, "点击了第" + picNo + "张图片", Toast.LENGTH_SHORT).show();
+                }
+
+            });
+
+            return view;
+        }
+
+        @Override
+        public int getRealCount() {
+            return list.size();
+        }
     }
 }
