@@ -2,6 +2,7 @@ package com.example.leon.article.Activity;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
 import android.view.View;
@@ -145,9 +146,15 @@ public class WithdrawDepositActivity extends ToolBarBaseActivity<ActivityWithdra
             hashMap.put("cid", mBankApiBean.getData().get(mDefaultChoice).getCid());
             hashMap.put("account_name", mBankApiBean.getData().get(mDefaultChoice).getAccount_name());
             hashMap.put("money", money);
-            hashMap.put("password", CommonUtils.getMD5Str(pwd));
+            hashMap.put("password", pwd);
             ApiFactory.getApi().bank(Constant.Api.WITHDRAW_MONEY, hashMap)
                     .lift(new BaseValueValidOperator<BankApiBean>())
+                    .doOnSubscribe(new Action0() {
+                        @Override
+                        public void call() {
+                            SystemClock.sleep(500);
+                        }
+                    })
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(new Subscriber<BankApiBean>() {

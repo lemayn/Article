@@ -59,9 +59,6 @@ public class ModifyPasswordActivity extends ToolBarBaseActivity<ActivityModifyPa
 
                 if (ispwds) {
                     String oldpwdLocal = (String) SPUtil.get(Constant.Share_prf.PWD, "");
-                    oldPwd = CommonUtils.getMD5Str(oldPwd);
-                    newPwd = CommonUtils.getMD5Str(newPwd);
-                    retypePwd = CommonUtils.getMD5Str(retypePwd);
                     //旧密码输入正确
                     //新密码两次输入相同
                     if (oldPwd.equals(oldpwdLocal) && newPwd.equals(retypePwd)) {

@@ -13,7 +13,6 @@ import com.example.leon.article.R;
 import com.example.leon.article.api.bean.ArticleApiBean;
 import com.example.leon.article.base.ToolBarBaseActivity;
 import com.example.leon.article.databinding.ActivityRegisterBinding;
-import com.example.leon.article.utils.CommonUtils;
 import com.example.leon.article.utils.Validator;
 import com.google.gson.Gson;
 
@@ -93,8 +92,8 @@ public class RegisterActivity extends ToolBarBaseActivity<ActivityRegisterBindin
 
         FormBody formBody = new FormBody.Builder()
                 .add("name", account)
-                .add("pwd", CommonUtils.getMD5Str(pwd))
-                .add("repwd", CommonUtils.getMD5Str(pwd2))
+                .add("pwd", pwd)
+                .add("repwd", pwd2)
                 .add("tell", phone)
                 .add("qq", qq)
                 .build();

@@ -5,7 +5,6 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -22,9 +21,7 @@ import com.example.leon.article.app;
 import com.example.leon.article.base.ToolBarBaseActivity;
 import com.example.leon.article.bean.AdvBean;
 import com.example.leon.article.databinding.ActivityLoginBinding;
-import com.example.leon.article.utils.CommonUtils;
 import com.example.leon.article.utils.Constant;
-import com.example.leon.article.utils.GsonUtil;
 import com.example.leon.article.utils.SPUtil;
 import com.example.leon.article.utils.Validator;
 import com.jude.rollviewpager.RollPagerView;
@@ -44,7 +41,8 @@ import rx.schedulers.Schedulers;
  * Created by leonseven on 2017/5/9.
  */
 
-public class LoginActivity extends ToolBarBaseActivity<ActivityLoginBinding> implements View.OnClickListener, ILoginPre {
+public class LoginActivity extends ToolBarBaseActivity<ActivityLoginBinding> implements View.OnClickListener,
+        ILoginPre {
 
     private boolean is_constraint_loin;
     private LoginPresenter presenter;
@@ -108,7 +106,7 @@ public class LoginActivity extends ToolBarBaseActivity<ActivityLoginBinding> imp
     private void Login() {
 
         String name = binding.edittextPhone.getText().toString().trim();
-        String pwd = binding.edittextPwd.getText().toString().trim();
+        final String pwd = binding.edittextPwd.getText().toString().trim();
 
         if (TextUtils.isEmpty(name) || TextUtils.isEmpty(pwd)) {
             Toast.makeText(LoginActivity.this, "用户名或密码不能为空", Toast.LENGTH_SHORT).show();
@@ -120,11 +118,9 @@ public class LoginActivity extends ToolBarBaseActivity<ActivityLoginBinding> imp
             return;
         }
 
-        final String finalPwd = CommonUtils.getMD5Str(pwd);
-
         HashMap<String, String> hashMap = new HashMap<>();
         hashMap.put("name", name);
-        hashMap.put("pwd", finalPwd);
+        hashMap.put("pwd", pwd);
         ApiFactory.getApi().article(Constant.Api.LOGIN, hashMap)
                 .lift(new BaseValueValidOperator<ArticleApiBean>())
                 .subscribeOn(Schedulers.io())
@@ -142,11 +138,10 @@ public class LoginActivity extends ToolBarBaseActivity<ActivityLoginBinding> imp
 
                     @Override
                     public void onNext(ArticleApiBean apiBean) {
-                        SPUtil.put(Constant.Share_prf.LOGIN_RESPONSE, GsonUtil.GsonString(apiBean));
                         SPUtil.put(Constant.Share_prf.COOKIE, apiBean.getData().getCookie());
                         SPUtil.put(Constant.Share_prf.SID, apiBean.getData().getSid());
                         SPUtil.put(Constant.Share_prf.NAME, apiBean.getData().getMname());
-                        SPUtil.put(Constant.Share_prf.PWD, finalPwd);
+                        SPUtil.put(Constant.Share_prf.PWD, pwd);
                         if (!is_constraint_loin) {
                             startActivity(new Intent(LoginActivity.this, MainActivity.class));
                         }
@@ -162,7 +157,7 @@ public class LoginActivity extends ToolBarBaseActivity<ActivityLoginBinding> imp
 
     @Override
     public void showAdvList(List<AdvBean.DataBean> List) {
-//        Log.i("MyTest", "advlist001  请求成功" + List.toString());
+        //        Log.i("MyTest", "advlist001  请求成功" + List.toString());
         advlist.addAll(List);
         rollview();
     }
@@ -193,18 +188,18 @@ public class LoginActivity extends ToolBarBaseActivity<ActivityLoginBinding> imp
             ImageView view = new ImageView(container.getContext());
 
             Glide.with(LoginActivity.this)
-                    .load(headurl+list.get(position).getImg())
+                    .load(headurl + list.get(position).getImg())
                     .fitCenter()
                     .into(view);
-//            view.setImageResource(list[position]);
+            //            view.setImageResource(list[position]);
             view.setScaleType(ImageView.ScaleType.CENTER_CROP);
-            view.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+            view.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup
+                    .LayoutParams.MATCH_PARENT));
 
             view.setOnClickListener(new View.OnClickListener()      // 点击事件
             {
                 @Override
-                public void onClick(View v)
-                {
+                public void onClick(View v) {
                     Toast.makeText(LoginActivity.this, "点击了第" + picNo + "张图片", Toast.LENGTH_SHORT).show();
                 }
 
