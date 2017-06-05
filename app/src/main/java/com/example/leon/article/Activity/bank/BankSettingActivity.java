@@ -37,8 +37,15 @@ public class BankSettingActivity extends ToolBarBaseActivity<ActivityBankSetting
     }
 
     private void initEvent() {
-        bt_addCard.setOnClickListener(this);
         loadUserData();
+        bt_addCard.setOnClickListener(this);
+        //RV for user bind BankCard to click item (My holy light!)
+        adapter.setOnItemClickListener(new BankSettingAdapter.RvItemClickListener() {
+            @Override
+            public void onItemClick(View v, int position, UserBankBean.DataBean date) {
+
+            }
+        });
     }
 
     private void initDate() {

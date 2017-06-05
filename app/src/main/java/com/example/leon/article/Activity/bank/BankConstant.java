@@ -6,6 +6,7 @@ package com.example.leon.article.Activity.bank;
 
 public class BankConstant {
 
+    public static final String BankIconUrl = "http://118.89.233.35:8989/";
     public static final String CHINESE_BANK = "中国银行";
     public static final String Merchants_BANK = "招商银行";
     public static final String  Agricultural_BANK = "农业银行";

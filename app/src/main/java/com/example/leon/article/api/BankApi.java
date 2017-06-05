@@ -30,7 +30,8 @@ public interface BankApi {
     @POST("?Key=55a50c1a06f9c1032014112cbd68f34b&Action=BanksSetAdd")
     Observable<BindBankBean> bindBankCard(@Field("cookie") String cookie, @Field("bid") String bid, @Field("card") String card
             , @Field("sid") String sid, @Field("account_name") String account_name,
-                                          @Field("address") String address);
+                                          @Field("address") String address,
+                                          @Field("password") String password);
 
 
     /**

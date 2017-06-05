@@ -67,9 +67,9 @@ public class BankPresenterImp extends BasepresenterImp implements IBankPresenter
     }
 
     @Override
-    public void bindBankCard(String cookie, String bid, String card, String sid, String account_name, String address) {
+    public void bindBankCard(String cookie, String bid, String card, String sid, String account_name, String address,String password) {
         Subscription subscribe = ApiManager.getInstance().getBankApiService()
-                .bindBankCard(cookie, bid, card, sid, account_name, address)
+                .bindBankCard(cookie, bid, card, sid, account_name, address,password)
                 .lift(new BaseValueValidOperator<BindBankBean>())
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
@@ -82,7 +82,7 @@ public class BankPresenterImp extends BasepresenterImp implements IBankPresenter
 
                     @Override
                     public void onError(Throwable e) {
-
+                        Toast.makeText(context,e.getMessage(),Toast.LENGTH_LONG).show();
                     }
 
                     @Override

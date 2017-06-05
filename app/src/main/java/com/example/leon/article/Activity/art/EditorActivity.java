@@ -129,7 +129,7 @@ public class EditorActivity extends AppCompatActivity implements IEditorActivity
         if (art_imgPath != null) {
             Log.i("HT", "数据库的 art_imgPath"+art_imgPath);
             iv_insert.setVisibility(View.VISIBLE);
-//            iv_insert.setImageBitmap(BitmapFactory.decodeFile(art_imgPath));
+        //  iv_insert.setImageBitmap(BitmapFactory.decodeFile(art_imgPath));
             //使用Glide加载图片
             Glide.with(this).load(art_imgPath).into(iv_insert);
             if (imgpath != null) {
@@ -239,7 +239,6 @@ public class EditorActivity extends AppCompatActivity implements IEditorActivity
                             arts.setImgPath(imgpath);
                         }else{//没有更换图片则用之前图片地址
                             arts.setImgPath(art_imgPath);
-
                         }
                         ArtDao.insertArts(arts);
                         goMySqlActivity();
@@ -552,30 +551,6 @@ public class EditorActivity extends AppCompatActivity implements IEditorActivity
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        /*if (resultCode != RESULT_OK) {
-            return;
-        }
-        if (requestCode == REQUEST_CODE_PICK_IMAGE) {
-            if (data != null) {
-                imgpath = ImagePathUtils.getImageAbsolutePath(this, data.getData());
-                // 如下方法可以在编辑界面添加图片,会把图片路径一起上传
-                //  mEditor.insertImage(imgpath,"userImg");
-
-                //压缩图片
-                ImageCompress imageCompress = new ImageCompress();
-                ImageCompress.CompressOptions options = new ImageCompress.CompressOptions();
-                options.uri = Uri.fromFile(new File(imgpath));
-                options.maxHeight = 250;
-                options.maxWidth = 250;
-                insertBitmap = imageCompress.compressFromUri(EditorActivity.this, options);
-
-//              insertBitmap = BitmapFactory.decodeFile(imgpath);
-                if (insertBitmap != null) {
-                    iv_insert.setVisibility(View.VISIBLE);
-                    iv_insert.setImageBitmap(insertBitmap);
-                }
-            }
-        }*/
         // 在Activity中的onActivityResult()方法里与LQRPhotoSelectUtils关联
         photoSelectUtils.attachToActivityForResult(requestCode,resultCode,data);
     }
@@ -681,5 +656,4 @@ public class EditorActivity extends AppCompatActivity implements IEditorActivity
                 .create()
                 .show();
     }
-
 }

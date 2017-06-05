@@ -107,7 +107,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:background="@drawable/shape_bt_addcard_bg"
-            android:text="添加银行卡"
+            android:text="@string/add_bankcard"
             android:textColor="@color/colorWhite"
             android:textSize="17sp" />
 
@@ -135,18 +135,18 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="3dp"
-            android:text="1.一个游戏账户最绑定2张银行卡." />
+            android:text="@string/matters_needing_attention1" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="3dp"
-            android:text="2.银行卡信息完成后，已绑定的银行卡信息不能进行修改和删除." />
+            android:text="@string/matters_needing_attention2" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="3dp"
-            android:text="3.所绑定的银行卡必须在在使用中." />
+            android:text="@string/matters_needing_attention3" />
     </LinearLayout>
 </layout>

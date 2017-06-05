@@ -134,9 +134,9 @@
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="10dp"
                     android:background="@drawable/etbg_bindcard"
-                    android:hint="请输入提现密码(6位数)"
+                    android:hint="请输入提现密码(默认为登录密码)"
                     android:inputType="textPassword"
-                    android:maxLength="6"/>
+                    />
             </android.support.design.widget.TextInputLayout>
 
         </LinearLayout>

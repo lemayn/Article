@@ -10,7 +10,8 @@ public interface IBankPresenter {
     void getBankConfig(String cookie, String sid);
 
     //绑定用户银行卡
-    void bindBankCard(String cookie, String bid, String card, String sid, String account_name, String address);
+    void bindBankCard(String cookie, String bid, String card, String sid,
+                      String account_name, String address,String password);
 
     //获取用户绑定的银行卡信息
     void getUserBankInfo(String cookie, String sid);

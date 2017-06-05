@@ -91,6 +91,9 @@
     <string name="recommend_article">推荐文章(默认)</string>
     <string name="excellent_article">优秀文章</string>
     <string name="contentnotbull">您还没有输入内容</string>
+    <string name="please_fill_in">请确认您填写的是否有误</string>
+    <string name="confirm_your_bans">请确定您的所属银行</string>
+    <string name="please_choose_yourbank">请选择您的银行</string>
 
 
 </resources>

@@ -69,6 +69,7 @@ public class ArtPresenterImp extends BasepresenterImp implements IArtPresenter{
                     public void onNext(ArtListBean artListBean) {
                         articleFragment.hideProgress();
                         articleFragment.setArtDate(artListBean.getData().getArticle());
+                        articleFragment.getTotalPager(artListBean.getData().getTotalpage());
                     }
                 });
             addSubscription(subscribe);

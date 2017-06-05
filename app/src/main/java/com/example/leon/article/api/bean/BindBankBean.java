@@ -5,9 +5,13 @@ package com.example.leon.article.api.bean;
  */
 
 public class BindBankBean extends ApiBean{
+    /**
+     * code : 1
+     * msg : 绑定成功
+     * data : null
+     */
 
     private Object data;
-
 
     public Object getData() {
         return data;

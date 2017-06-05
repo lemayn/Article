@@ -32,6 +32,15 @@ public class BankConfigBean extends ApiBean{
 
         private String bid;
         private String bank;
+        private String bimg;
+
+        public String getBimg() {
+            return bimg;
+        }
+
+        public void setBimg(String bimg) {
+            this.bimg = bimg;
+        }
 
         public String getBid() {
             return bid;

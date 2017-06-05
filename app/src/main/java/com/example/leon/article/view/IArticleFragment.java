@@ -12,4 +12,5 @@ public interface IArticleFragment extends IBaseActivity{
 
     void setArtDate(List<ArtListBean.DataBean.ArticleBean> date);
 
+    void getTotalPager(int totalPager);
 }

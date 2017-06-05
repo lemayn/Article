@@ -3,7 +3,6 @@ package com.example.leon.article.adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,7 +45,6 @@ public class ArtListAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        Log.i("HT", "getCount: "+items.size());
         return items.size();
     }
 

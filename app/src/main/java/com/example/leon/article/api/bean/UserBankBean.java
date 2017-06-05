@@ -36,6 +36,15 @@ public class UserBankBean extends ApiBean{
         private String bank;
         private String card;
         private String account_name;
+        private String bimg;
+
+        public String getBimg() {
+            return bimg;
+        }
+
+        public void setBimg(String bimg) {
+            this.bimg = bimg;
+        }
 
         public String getCid() {
             return cid;

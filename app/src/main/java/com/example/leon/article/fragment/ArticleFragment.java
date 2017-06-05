@@ -9,6 +9,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -36,7 +37,8 @@ public class ArticleFragment extends Fragment implements View.OnClickListener, I
     private ArtListAdapter adapter;
     private ArtPresenterImp artPresenter;
     private SwipeRefreshLayout refreshActicle;
-    private int page = 1;
+    private int page = 1;   //当前页数
+    private int totalpager; //总页数
     private String cookie;
     private String sid;
 
@@ -75,23 +77,41 @@ public class ArticleFragment extends Fragment implements View.OnClickListener, I
             }
         });
 
+        lv_article.setOnScrollListener(new AbsListView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(AbsListView view, int scrollState) {
+
+            }
+
+            @Override
+            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+
+            }
+        });
+    }
+
+    private void loadMore() {
+
     }
 
     private void initDate(View view) {
         artPresenter = new ArtPresenterImp(this);
         adapter = new ArtListAdapter(getContext());
-        View headerView = View.inflate(getContext(), R.layout.listview_article_headerview, null);
-        lv_article.addHeaderView(headerView);
+
         artPresenter.getuserArtList(cookie, sid, page);
         lv_article.setAdapter(adapter);
     }
 
     private void initView(View view) {
+        View headerView = View.inflate(getContext(), R.layout.listview_article_headerview, null);
+        View footerView = View.inflate(getContext(), R.layout.listview_article_footerview, null);
         progressBar = (ProgressBar) view.findViewById(R.id.progressBar);
         refreshActicle = (SwipeRefreshLayout) view.findViewById(R.id.swipeRefresh_acticle);
         lv_empty = (TextView) view.findViewById(R.id.lv_article_empty);
         lv_article = (ListView) view.findViewById(R.id.lv_article);
         lv_article.setEmptyView(lv_empty);
+        lv_article.addHeaderView(headerView);
+        lv_article.addFooterView(footerView);
         tv_myArt = (TextView) view.findViewById(R.id.tv_myArt);
         tv_createArt = (TextView) view.findViewById(R.id.tv_createArt);
     }
@@ -140,6 +160,13 @@ public class ArticleFragment extends Fragment implements View.OnClickListener, I
     @Override
     public void setArtDate(List<ArtListBean.DataBean.ArticleBean> date) {
         adapter.addItems(date);
+    }
+
+    @Override
+    public void getTotalPager(int totalPager) {
+        if (totalPager != -1) {
+            this.totalpager = totalPager;
+        }
     }
 
     @Override
