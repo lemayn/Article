@@ -14,7 +14,6 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Base64;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -46,19 +45,11 @@ import kr.co.namee.permissiongen.PermissionFail;
 import kr.co.namee.permissiongen.PermissionGen;
 import kr.co.namee.permissiongen.PermissionSuccess;
 
-import static android.R.attr.id;
-
 public class EditorActivity extends AppCompatActivity implements IEditorActivity,SelectPicturePopupWindow.OnSelectedListener{
-
-    //MySQL传递过来的数据
-    private String art_title;
-    private String art_content;
-    private String art_imgPath;
 
     private RichEditor mEditor;
     private EditText artTitle;
     //输入的内容
-    private String editDate;
     private TextView tv_clear;
     //记录是否点击了保存
     private boolean isSave = false;
@@ -109,22 +100,21 @@ public class EditorActivity extends AppCompatActivity implements IEditorActivity
                     ImageCompress imageCompress = new ImageCompress();
                     ImageCompress.CompressOptions options = new ImageCompress.CompressOptions();
                     options.uri = Uri.fromFile(outputFile);
-                    options.maxHeight = 250;
-                    options.maxWidth = 250;
+                    options.maxHeight = 960;
+                    options.maxWidth = 540;
                     insertBitmap = imageCompress.compressFromUri(EditorActivity.this, options);
                 }
             }
-        },false);
+        },false);//图像裁剪功能 false不开启，true开启
     }
 
     private void initDate() {
         artPresenter = new ArtPresenterImp(this,this);
 
-        art_title = getIntent().getStringExtra(ArtConstant.ART_TITLE);
-        art_content = getIntent().getStringExtra(ArtConstant.ART_CONTENT);
-        art_imgPath = getIntent().getStringExtra(ArtConstant.ART_IMGPATH);
+        String art_title = getIntent().getStringExtra(ArtConstant.ART_TITLE);
+        String art_content = getIntent().getStringExtra(ArtConstant.ART_CONTENT);
+        imgpath = getIntent().getStringExtra(ArtConstant.ART_IMGPATH);
         art_id = getIntent().getLongExtra(ArtConstant.ART_ID, 0 );
-        Log.i("HT", "initDate: Id是：--------->"+id);
 
         if (art_title != null) {
             artTitle.setText(art_title);
@@ -132,17 +122,10 @@ public class EditorActivity extends AppCompatActivity implements IEditorActivity
         if (art_content != null) {
             mEditor.setHtml(art_content);
         }
-        if (art_imgPath != null) {
+        if (imgpath != null) {
             iv_insert.setVisibility(View.VISIBLE);
             //使用Glide加载图片
-            Glide.with(this).load(art_imgPath).into(iv_insert);
-            if (imgpath != null) {
-                art_imgPath = imgpath;
-                Glide.with(this)
-                        .load(art_imgPath)
-                        .centerCrop()
-                        .into(iv_insert);
-            }
+            Glide.with(this).load(imgpath).into(iv_insert);
         }
     }
 
@@ -152,7 +135,6 @@ public class EditorActivity extends AppCompatActivity implements IEditorActivity
         mEditor.setOnTextChangeListener(new RichEditor.OnTextChangeListener() {
             @Override
             public void onTextChange(String text) {
-                editDate = text;
                 if (!TextUtils.isEmpty(text)) {
                     tv_clear.setVisibility(View.VISIBLE);
                     clearEditor();
@@ -215,10 +197,22 @@ public class EditorActivity extends AppCompatActivity implements IEditorActivity
                 //隐藏软键盘
                 hideKeyboard();
                 String title = artTitle.getText().toString();
+                String mEditorHtml = mEditor.getHtml();
                 if (insertBitmap != null) {
                     bytesFromBitmap = getBytesFromBitmap(insertBitmap);
+                }else{
+                    if (!TextUtils.isEmpty(imgpath)) {
+                        //压缩图片
+                        ImageCompress imageCompress = new ImageCompress();
+                        ImageCompress.CompressOptions options = new ImageCompress.CompressOptions();
+                        options.uri = Uri.fromFile(new File(imgpath));
+                        options.maxHeight = 960;
+                        options.maxWidth = 540;
+                        insertBitmap = imageCompress.compressFromUri(EditorActivity.this, options);
+                        bytesFromBitmap = getBytesFromBitmap(insertBitmap);
+                    }
                 }
-                artPresenter.uploadUserArt(cookie,title,editDate,sid,bytesFromBitmap);
+                artPresenter.uploadUserArt(cookie,title,mEditorHtml,sid,bytesFromBitmap);
             }
         });
 
@@ -235,29 +229,20 @@ public class EditorActivity extends AppCompatActivity implements IEditorActivity
                 }else {
                     if (TextUtils.isEmpty(editorContent)) {
                         Toast.makeText(EditorActivity.this,getString(R.string.contentnotbull),Toast.LENGTH_SHORT).show();
-                    } else {    //不为空存入数据库
-                        if (TextUtils.equals(art_title, title) && TextUtils.equals(art_content, editorContent)
-                                && TextUtils.equals(art_imgPath, imgpath)) {//如果重新保存与之前的相同
+                    } else {                        //不为空存入数据库
+                        if (art_id != 0 ) {         //更新数据库
                             arts.setId(art_id);
                             arts.setTitle(title);
                             arts.setContent(editorContent);
                             arts.setTime(TimeUtils.getStringDateShort());
-                            if (imgpath != null) {//用户更改图片后使用新地址
-                                arts.setImgPath(imgpath);
-                            } else {//没有更换图片则用之前图片地址
-                                arts.setImgPath(art_imgPath);
-                            }
+                            arts.setImgPath(imgpath);
                             ArtDao.updateArts(arts);
                             goMySqlActivity();
-                        } else {
+                        } else {                    //存入新数据
                             arts.setContent(editorContent);
                             arts.setTitle(title);
                             arts.setTime(TimeUtils.getStringDateShort());
-                            if (imgpath != null) {//用户更改图片后使用新地址
-                                arts.setImgPath(imgpath);
-                            }else{//没有更换图片则用之前图片地址
-                                arts.setImgPath(art_imgPath);
-                            }
+                            arts.setImgPath(imgpath);
                             ArtDao.insertArts(arts);
                             goMySqlActivity();
                         }
@@ -458,6 +443,7 @@ public class EditorActivity extends AppCompatActivity implements IEditorActivity
                     public void onClick(DialogInterface dialog, int which) {
                         if (iv_insert!=null && iv_insert.getVisibility() == View.VISIBLE){
                             iv_insert.setVisibility(View.GONE);
+                            imgpath = "";
                         }
                     }
                 })
@@ -478,7 +464,7 @@ public class EditorActivity extends AppCompatActivity implements IEditorActivity
 
     @Override
     public void onBackPressed() {
-        if (TextUtils.isEmpty(editDate)) {//如果输入的内容为空
+        if (TextUtils.isEmpty(mEditor.getHtml())) {//如果输入的内容为空
             super.onBackPressed();
         } else {//用户输入的内容不为空
             if (!isSave) {//没有点击保存

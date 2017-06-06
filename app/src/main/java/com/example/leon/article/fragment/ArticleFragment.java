@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -32,7 +33,6 @@ public class ArticleFragment extends Fragment implements View.OnClickListener, I
     private TextView tv_myArt;
     private TextView tv_createArt;
     private ListView lv_article;
-    private TextView lv_empty;
     private ProgressBar progressBar;
     private ArtListAdapter adapter;
     private ArtPresenterImp artPresenter;
@@ -41,6 +41,7 @@ public class ArticleFragment extends Fragment implements View.OnClickListener, I
     private int totalpager; //总页数
     private String cookie;
     private String sid;
+    private LinearLayout ll_empty;
 
     @Nullable
     @Override
@@ -50,9 +51,18 @@ public class ArticleFragment extends Fragment implements View.OnClickListener, I
         //get cookie sid
         cookie = (String) SPUtil.get(Constant.Share_prf.COOKIE, "");
         sid = (String) SPUtil.get(Constant.Share_prf.SID, "");
-        initDate(view);
+        initDate();
         initEvent();
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (adapter.getCount() > 0) {
+            adapter.clearDate();
+            artPresenter.getuserArtList(cookie,sid,page);
+        }
     }
 
     private void initEvent() {
@@ -94,7 +104,7 @@ public class ArticleFragment extends Fragment implements View.OnClickListener, I
 
     }
 
-    private void initDate(View view) {
+    private void initDate() {
         artPresenter = new ArtPresenterImp(this);
         adapter = new ArtListAdapter(getContext());
 
@@ -107,9 +117,9 @@ public class ArticleFragment extends Fragment implements View.OnClickListener, I
         View footerView = View.inflate(getContext(), R.layout.listview_article_footerview, null);
         progressBar = (ProgressBar) view.findViewById(R.id.progressBar);
         refreshActicle = (SwipeRefreshLayout) view.findViewById(R.id.swipeRefresh_acticle);
-        lv_empty = (TextView) view.findViewById(R.id.lv_article_empty);
+        ll_empty = (LinearLayout) view.findViewById(R.id.lv_article_empty);
         lv_article = (ListView) view.findViewById(R.id.lv_article);
-        lv_article.setEmptyView(lv_empty);
+        lv_article.setEmptyView(ll_empty);
         lv_article.addHeaderView(headerView);
         lv_article.addFooterView(footerView);
         tv_myArt = (TextView) view.findViewById(R.id.tv_myArt);

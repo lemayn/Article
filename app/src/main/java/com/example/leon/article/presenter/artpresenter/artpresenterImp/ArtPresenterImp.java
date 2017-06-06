@@ -62,7 +62,6 @@ public class ArtPresenterImp extends BasepresenterImp implements IArtPresenter{
                     public void onError(Throwable e) {
                         articleFragment.hideProgress();
                         articleFragment.showError();
-                        Log.i("HT", "ArtPresenterImp getuserArtList--->onError: "+e.getMessage());
                     }
 
                     @Override

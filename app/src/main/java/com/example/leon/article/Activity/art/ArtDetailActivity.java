@@ -1,6 +1,8 @@
 package com.example.leon.article.Activity.art;
 
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -72,7 +74,8 @@ public class ArtDetailActivity extends ToolBarBaseActivity<ActivityArtDetailBind
     public void showArtDetail(ArtInfoBean bean) {
         String atitle = bean.getData().getAtitle();
         String artImg = (String) bean.getData().getAimg();
-        if (artImg != null) {
+        if (!TextUtils.isEmpty(artImg)) {
+            iv_detail.setVisibility(View.VISIBLE);
             Glide.with(this)
                     .load(imgUrl+artImg)
                     .centerCrop()

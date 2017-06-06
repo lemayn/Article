@@ -43,7 +43,7 @@
     <string name="nav_ui">首页</string>
     <string name="editor_title">请输入标题</string>
     <string name="titlenotnull">标题不能为空哦</string>
-    <string name="lv_article_empty">您还没有发表过文章</string>
+    <string name="lv_article_empty">快去发表您的文章吧</string>
     <string name="upload_content">上传内容</string>
     <string name="status">审核状态</string>
     <string name="notes">注意事项：</string>
