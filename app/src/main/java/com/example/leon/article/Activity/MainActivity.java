@@ -19,6 +19,7 @@ import com.example.leon.article.fragment.ArticleFragment;
 import com.example.leon.article.fragment.HomeFragment;
 import com.example.leon.article.fragment.MoreFragment;
 import com.example.leon.article.fragment.VipFragment;
+import com.example.leon.article.widget.BottomNavigationViewHelper;
 
 import java.util.ArrayList;
 
@@ -88,6 +89,7 @@ public class MainActivity extends AppCompatActivity {
         initfragments();
         viewpager = (ViewPager) findViewById(R.id.viewpager);
         navigationview = (BottomNavigationView) findViewById(R.id.navigationview);
+        BottomNavigationViewHelper.disableShiftMode(navigationview);
 
         mAdapter = new FragmentPagerAdapter(getSupportFragmentManager()) {
             @Override
