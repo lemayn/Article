@@ -78,7 +78,7 @@ public class ArticleFragment extends Fragment implements View.OnClickListener, I
                     @Override
                     public void run() {
                         adapter.clearDate();
-                        artPresenter.getuserArtList(cookie, sid, 1);
+                        artPresenter.getuserArtList(cookie, sid, page);
                         lv_article.setAdapter(adapter);
                         refreshActicle.setRefreshing(false);
                         Toast.makeText(getContext(), "刷新成功", Toast.LENGTH_SHORT).show();
@@ -150,21 +150,17 @@ public class ArticleFragment extends Fragment implements View.OnClickListener, I
 
     @Override
     public void showProgress() {
-        if (progressBar != null) {
-            progressBar.setVisibility(View.VISIBLE);
-        }
+        progressBar.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void hideProgress() {
-        if (progressBar != null) {
-            progressBar.setVisibility(View.GONE);
-        }
+        progressBar.setVisibility(View.GONE);
     }
 
     @Override
     public void showError() {
-
+//        Toast.makeText(getContext(),"服务器繁忙，刷新一下试试吧",Toast.LENGTH_SHORT).show();
     }
 
     @Override
