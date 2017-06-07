@@ -10,13 +10,12 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="@color/toolbar_back"
-            >
+            android:background="@color/toolbar_back">
 
             <ImageView
                 android:id="@+id/iv_sql_back"
                 android:layout_width="wrap_content"
-                android:layout_height="40dp"
+                android:layout_height="26dp"
                 android:src="@drawable/back"
                 android:layout_margin="5dp"
                 android:layout_centerVertical="true"/>
@@ -28,10 +27,9 @@
                 android:layout_centerInParent="true"
                 android:textColor="@color/colorWhite"
                 android:textSize="20sp"/>
-
         </RelativeLayout>
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
@@ -45,12 +43,13 @@
 
             <ImageView
                 android:id="@+id/lv_sql_empty"
-                android:layout_width="200dp"
-                android:layout_height="200dp"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
                 android:src="@drawable/nodate"
+                android:layout_centerInParent="true"
                 android:visibility="gone"/>
 
-        </LinearLayout>
+        </RelativeLayout>
 
     </LinearLayout>
 </layout>
