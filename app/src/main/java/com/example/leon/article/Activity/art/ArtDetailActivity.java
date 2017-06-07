@@ -13,6 +13,7 @@ import com.example.leon.article.base.ToolBarBaseActivity;
 import com.example.leon.article.databinding.ActivityArtDetailBinding;
 import com.example.leon.article.presenter.artpresenter.artpresenterImp.ArtPresenterImp;
 import com.example.leon.article.utils.Constant;
+import com.example.leon.article.utils.CornersTransform;
 import com.example.leon.article.utils.SPUtil;
 import com.example.leon.article.view.IArtDetailActivity;
 import com.zzhoujay.richtext.RichText;
@@ -79,6 +80,8 @@ public class ArtDetailActivity extends ToolBarBaseActivity<ActivityArtDetailBind
             Glide.with(this)
                     .load(imgUrl+artImg)
                     .centerCrop()
+                    .transform(new CornersTransform(ArtDetailActivity.this))
+                    .crossFade()
                     .into(iv_detail);
         }
         tv_title.setText(atitle);

@@ -21,7 +21,8 @@
             android:layout_margin="10dp"
             android:text="@string/save"
             android:textColor="#ffffff"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            />
 
         <View
             android:layout_width="0dp"
@@ -294,7 +295,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            >
 
             <jp.wasabeef.richeditor.RichEditor
                 android:id="@+id/richEditor"
@@ -335,7 +337,7 @@
             android:layout_height="wrap_content"
             android:layout_marginRight="10dp"
             android:layout_weight="1"
-            android:background="@drawable/login_btn"
+            android:background="@drawable/selecte_editorbt_bg"
             android:text="@string/addImg"
             android:textColor="@color/white" />
 
@@ -345,7 +347,7 @@
             android:layout_height="wrap_content"
             android:layout_marginRight="10dp"
             android:layout_weight="1"
-            android:background="@drawable/login_btn"
+            android:background="@drawable/selecte_editorbt_bg"
             android:text="@string/newslist"
             android:textColor="@color/white" />
 
@@ -355,7 +357,7 @@
             android:layout_height="wrap_content"
             android:layout_marginRight="3dp"
             android:layout_weight="1"
-            android:background="@drawable/login_btn"
+            android:background="@drawable/selecte_editorbt_bg"
             android:text="@string/send"
             android:textColor="@color/white" />
 

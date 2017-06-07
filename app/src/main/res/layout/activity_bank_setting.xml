@@ -106,7 +106,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:background="@drawable/shape_bt_addcard_bg"
+            android:background="@drawable/selecte_editorbt_bg"
             android:text="@string/add_bankcard"
             android:textColor="@color/colorWhite"
             android:textSize="17sp" />

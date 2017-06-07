@@ -3,6 +3,7 @@ package com.example.leon.article.presenter.artpresenter.artpresenterImp;
 import android.content.Context;
 import android.os.Handler;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.example.leon.article.api.ApiManager;
 import com.example.leon.article.api.BaseValueValidOperator;
@@ -120,7 +121,8 @@ public class ArtPresenterImp extends BasepresenterImp implements IArtPresenter{
                     public void onError(Throwable e) {
                         editorActivity.hideProgress();
                         Log.i("HT", "onError: "+e.getMessage());
-                        editorActivity.showError();
+//                        editorActivity.showError();
+                        Toast.makeText(context,e.getMessage(),Toast.LENGTH_SHORT).show();
                     }
 
                     @Override

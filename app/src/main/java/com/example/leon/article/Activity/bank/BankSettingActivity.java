@@ -43,7 +43,8 @@ public class BankSettingActivity extends ToolBarBaseActivity<ActivityBankSetting
         adapter.setOnItemClickListener(new BankSettingAdapter.RvItemClickListener() {
             @Override
             public void onItemClick(View v, int position, UserBankBean.DataBean date) {
-
+                /*Toast.makeText(BankSettingActivity.this,"绑定银行为："+date.getBank()+"   用户名为："+date.getAccount_name(),
+                        Toast.LENGTH_LONG).show();*/
             }
         });
     }

@@ -29,6 +29,7 @@ import com.example.leon.article.presenter.artpresenter.artpresenterImp.ArtPresen
 import com.example.leon.article.sql.bean.Arts;
 import com.example.leon.article.sql.dao.ArtDao;
 import com.example.leon.article.utils.Constant;
+import com.example.leon.article.utils.CornersTransform;
 import com.example.leon.article.utils.ImageCompress;
 import com.example.leon.article.utils.PhotoSelectUtils;
 import com.example.leon.article.utils.SPUtil;
@@ -72,15 +73,11 @@ public class EditorActivity extends AppCompatActivity implements IEditorActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_editor);
-
         initView();
-
         //获取数据库数据
         initDate();
-
         //获取用户输入，cookie，sid
         GetDate();
-
         initPic();
     }
 
@@ -94,6 +91,9 @@ public class EditorActivity extends AppCompatActivity implements IEditorActivity
                     iv_insert.setVisibility(View.VISIBLE);
                     Glide.with(EditorActivity.this)
                             .load(outputUri)
+                            .centerCrop()
+                            .transform(new CornersTransform(EditorActivity.this))
+                            .crossFade()
                             .into(iv_insert);
 
                     //压缩图片
@@ -125,7 +125,10 @@ public class EditorActivity extends AppCompatActivity implements IEditorActivity
         if (imgpath != null) {
             iv_insert.setVisibility(View.VISIBLE);
             //使用Glide加载图片
-            Glide.with(this).load(imgpath).into(iv_insert);
+            Glide.with(this).load(imgpath).centerCrop()
+                    .transform(new CornersTransform(EditorActivity.this))
+                    .crossFade()
+                    .into(iv_insert);
         }
     }
 
