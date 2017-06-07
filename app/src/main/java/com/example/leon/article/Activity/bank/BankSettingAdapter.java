@@ -70,17 +70,23 @@ public class BankSettingAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             for (int i = 0; i < bankCard.length(); i++) {
                 char c = bankCard.charAt(i);
                 if (i <= bankCard.length() - 7) {
-                    sb.append("*");
+                    if (String.valueOf(c) .equals("\t")){
+                        sb.append("\t");
+                    }else{
+                        sb.append("*");
+                    }
                 } else {
                     sb.append(c);
                 }
             }
             String s = sb.toString();
-            holder.tv_bankName.setText(bank);
             holder.tv_bankCard.setText(s);
+            holder.tv_bankName.setText(bank);
             //设置银行图片
             Glide.with(context)
                     .load(BankConstant.BankIconUrl+banks.get(position).getBimg())
+                    .centerCrop()
+                    .crossFade()
                     .into(holder.iv_bankIcon);
         }
     }

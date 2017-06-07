@@ -2,6 +2,7 @@ package com.example.leon.article.Activity.bank;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -63,8 +64,8 @@ public class BankSettingActivity extends ToolBarBaseActivity<ActivityBankSetting
         bt_addCard = getViewById(R.id.bt_addCard);
         rv_list = getViewById(R.id.rv_bank_list);
         rv_list.setLayoutManager(new LinearLayoutManager(this));
+        rv_list.addItemDecoration(new DividerItemDecoration(this,DividerItemDecoration.HORIZONTAL));
         adapter = new BankSettingAdapter(this);
-
         rv_list.setAdapter(adapter);
     }
 
