@@ -42,6 +42,8 @@ public class ArticleFragment extends Fragment implements View.OnClickListener, I
     private String cookie;
     private String sid;
     private LinearLayout ll_empty;
+    private boolean isBottom = false;
+    private LinearLayout ll_footer_contain;
 
     @Nullable
     @Override
@@ -59,10 +61,10 @@ public class ArticleFragment extends Fragment implements View.OnClickListener, I
     @Override
     public void onResume() {
         super.onResume();
-        if (adapter.getCount() > 0) {
+        /*if (adapter.getCount() > 0) {
             adapter.clearDate();
-            artPresenter.getuserArtList(cookie,sid,page);
-        }
+            artPresenter.getuserArtList(cookie,sid,1);
+        }*/
     }
 
     private void initEvent() {
@@ -78,6 +80,7 @@ public class ArticleFragment extends Fragment implements View.OnClickListener, I
                     @Override
                     public void run() {
                         adapter.clearDate();
+                        page = 1;
                         artPresenter.getuserArtList(cookie, sid, page);
                         lv_article.setAdapter(adapter);
                         refreshActicle.setRefreshing(false);
@@ -90,18 +93,32 @@ public class ArticleFragment extends Fragment implements View.OnClickListener, I
         lv_article.setOnScrollListener(new AbsListView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(AbsListView view, int scrollState) {
-
+                if (scrollState == SCROLL_STATE_IDLE && isBottom) {
+                    if (page < totalpager) {
+                        page ++;
+                        loadMore();
+                    }
+                }
             }
 
             @Override
             public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-
+                if ((firstVisibleItem + visibleItemCount) >= 20) {
+                    isBottom = true;
+                }
             }
         });
     }
 
     private void loadMore() {
-
+        ll_footer_contain.setVisibility(View.VISIBLE);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                artPresenter.getuserArtList(cookie,sid,page);
+                ll_footer_contain.setVisibility(View.GONE);
+            }
+        },2000);
     }
 
     private void initDate() {
@@ -115,7 +132,8 @@ public class ArticleFragment extends Fragment implements View.OnClickListener, I
     private void initView(View view) {
         View headerView = View.inflate(getContext(), R.layout.listview_article_headerview, null);
         View footerView = View.inflate(getContext(), R.layout.listview_article_footerview, null);
-        progressBar = (ProgressBar) view.findViewById(R.id.progressBar);
+        ll_footer_contain = (LinearLayout) footerView.findViewById(R.id.ll_lv_footer_contain);
+        progressBar = (ProgressBar) view.findViewById(R.id.article_progressBar);
         refreshActicle = (SwipeRefreshLayout) view.findViewById(R.id.swipeRefresh_acticle);
         ll_empty = (LinearLayout) view.findViewById(R.id.lv_article_empty);
         lv_article = (ListView) view.findViewById(R.id.lv_article);

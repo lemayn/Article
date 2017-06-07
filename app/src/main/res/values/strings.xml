@@ -101,5 +101,6 @@
 
     <string name="back_submit">确认提交</string>
     <string name="back_login">返回登录</string>
+    <string name="title">标题</string>
 
 </resources>

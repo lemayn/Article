@@ -105,7 +105,7 @@ public class EditorActivity extends AppCompatActivity implements IEditorActivity
                     insertBitmap = imageCompress.compressFromUri(EditorActivity.this, options);
                 }
             }
-        },false);//图像裁剪功能 false不开启，true开启
+        },true);//图像裁剪功能 false不开启，true开启
     }
 
     private void initDate() {
@@ -175,7 +175,7 @@ public class EditorActivity extends AppCompatActivity implements IEditorActivity
         mEditor.setClickable(true);
         mEditor.setEditorHeight(100);
         mEditor.setEditorFontColor(Color.BLACK);
-        mEditor.setPadding(10, 10, 10, 10);
+        mEditor.setPadding(5, 10, 10, 10);
         mEditor.setPlaceholder("请输入内容...");
     }
 

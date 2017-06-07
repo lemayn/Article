@@ -21,7 +21,7 @@
                 android:id="@+id/tv_issue_content"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="3dp"
+                android:layout_marginLeft="5dp"
                 android:layout_weight="1"
                 android:ellipsize="end"
                 android:maxLines="1"
