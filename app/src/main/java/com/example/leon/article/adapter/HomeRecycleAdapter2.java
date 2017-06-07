@@ -321,7 +321,7 @@ public class HomeRecycleAdapter2 extends RecyclerView.Adapter<RecyclerView.ViewH
                 @Override
                 public void onClick(View v)
                 {
-                    Toast.makeText(context, "点击了第" + picNo + "张图片", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(context, "点击了第" + picNo + "张图片", Toast.LENGTH_SHORT).show();
                 }
 
             });
