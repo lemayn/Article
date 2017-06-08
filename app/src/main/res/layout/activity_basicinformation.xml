@@ -30,14 +30,19 @@
             android:layout_marginTop="20dp"
             android:orientation="vertical">
 
-
-
-            <android.support.design.widget.TextInputLayout
-                android:id="@+id/textinput_layout0"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="46dp"
-                android:paddingLeft="10dp"
-                >
+                android:layout_height="@dimen/x37"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="@dimen/x64"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="@dimen/x10"
+                    android:gravity="center"
+                    android:text="@string/user_account"
+                    android:textSize="@dimen/x14"/>
 
                 <EditText
                     android:id="@+id/edit_nickname"
@@ -45,22 +50,29 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:background="@null"
-                    android:hint="@string/user_account"
-                    android:inputType="textWebEmailAddress"
                     app:data="@{userdata.data.mname}"/>
-            </android.support.design.widget.TextInputLayout>
+
+
+            </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="0.2dp"
                 android:background="#ababab"/>
 
-            <android.support.design.widget.TextInputLayout
-                android:id="@+id/textinput_layout1"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="46dp"
-                android:paddingLeft="10dp"
-                >
+                android:layout_height="@dimen/x37"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="@dimen/x64"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="@dimen/x10"
+                    android:gravity="center"
+                    android:text="@string/user_nickname"
+                    android:textSize="@dimen/x14"/>
 
                 <EditText
                     android:id="@+id/edit_useraccount"
@@ -68,116 +80,149 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:background="@null"
-                    android:hint="@string/user_nickname"
-                    android:inputType="textWebEmailAddress"
                     app:data="@{userdata.data.nickname}"/>
-            </android.support.design.widget.TextInputLayout>
+
+            </LinearLayout>
+
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="0.2dp"
                 android:background="#ababab"/>
 
-            <RelativeLayout
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="46dp"
-                android:layout_below="@+id/textinput_layout1">
+                android:layout_height="@dimen/x37"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
 
-                <android.support.design.widget.TextInputLayout
-                    android:id="@+id/textinput_layout2"
+                <TextView
+                    android:layout_width="@dimen/x64"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="@dimen/x10"
+                    android:gravity="center"
+                    android:text="@string/contact_number"
+                    android:textSize="@dimen/x14"/>
+
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="46dp"
-                    android:paddingLeft="10dp">
+                    android:layout_height="match_parent">
 
                     <EditText
                         android:id="@+id/edit_number"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
                         android:background="@null"
-                        android:hint="@string/contact_number"
                         android:inputType="phone"
                         app:data="@{userdata.data.mtell}"/>
 
-                </android.support.design.widget.TextInputLayout>
 
-                <Button
-                    android:id="@+id/btn_tell_test"
-                    android:layout_width="wrap_content"
-                    android:layout_height="32dp"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:background="@drawable/shape_modify_confirm_bg"
-                    android:text="@string/tell_test"
-                    android:textColor="@color/white"
-                    android:visibility="@{userdata.data.tell_test}"/>
+                    <Button
+                        android:id="@+id/btn_tell_test"
+                        android:layout_width="wrap_content"
+                        android:layout_height="32dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:background="@drawable/shape_modify_confirm_bg"
+                        android:text="@string/tell_test"
+                        android:textColor="@color/white"
+                        android:visibility="@{userdata.data.tell_test}"/>
 
-            </RelativeLayout>
+                </RelativeLayout>
+
+
+            </LinearLayout>
+
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="0.2dp"
                 android:background="#ababab"/>
 
-            <android.support.design.widget.TextInputLayout
-                android:id="@+id/textinput_layout3"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="46dp"
-                android:layout_below="@+id/textinput_layout2"
-                android:paddingLeft="10dp">
+                android:layout_height="@dimen/x37"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="@dimen/x64"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="@dimen/x10"
+                    android:gravity="center"
+                    android:text="@string/user_qq"
+                    android:textSize="@dimen/x14"/>
 
                 <EditText
                     android:id="@+id/edit_qq"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@null"
-                    android:hint="@string/user_qq"
-                    android:inputType="textWebEmailAddress"
+                    android:inputType="number"
                     app:data="@{userdata.data.mqq}"/>
-            </android.support.design.widget.TextInputLayout>
+
+
+            </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="0.2dp"
                 android:background="#ababab"/>
 
-            <android.support.design.widget.TextInputLayout
-                android:id="@+id/textinput_layout4"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="46dp"
-                android:layout_below="@+id/textinput_layout3"
-                android:paddingLeft="10dp">
+                android:layout_height="@dimen/x37"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="@dimen/x64"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="@dimen/x10"
+                    android:gravity="center"
+                    android:text="@string/user_weixin"
+                    android:textSize="@dimen/x14"/>
 
                 <EditText
                     android:id="@+id/edit_weixin"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@null"
-                    android:hint="@string/user_weixin"
-                    android:inputType="textWebEmailAddress"
                     app:data="@{userdata.data.weixin}"/>
-            </android.support.design.widget.TextInputLayout>
+
+
+            </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="0.2dp"
                 android:background="#ababab"/>
 
-            <android.support.design.widget.TextInputLayout
-                android:id="@+id/textinput_layout5"
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="46dp"
-                android:layout_below="@+id/textinput_layout4"
-                android:paddingLeft="10dp">
+                android:layout_height="@dimen/x37"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="@dimen/x64"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="@dimen/x10"
+                    android:gravity="center"
+                    android:text="@string/secure_mailbox"
+                    android:textSize="@dimen/x14"/>
 
                 <EditText
                     android:id="@+id/edit_email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@null"
-                    android:hint="@string/secure_mailbox"
                     android:inputType="textWebEmailAddress"
                     app:data="@{userdata.data.email}"/>
-            </android.support.design.widget.TextInputLayout>
+
+            </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
@@ -210,8 +255,8 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
             android:layout_marginBottom="50dp"
+            android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:lineSpacingExtra="@dimen/x3"
             android:text="@string/basic_info_attention"
