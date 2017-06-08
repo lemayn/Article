@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/ll_rootview"
@@ -261,7 +262,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="3dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"
         android:gravity="center_vertical"
         android:orientation="horizontal">
 
@@ -277,17 +280,19 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="6dp"
+            android:background="@drawable/edit_editor_bg"
             android:hint="@string/editor_title"
-            android:maxLength="20"/>
+            android:maxLength="20"
+            android:padding="5dp" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="4dp"
+        android:background="@color/colorWhite"
         android:gravity="start"
-        android:orientation="horizontal"
-        android:background="@color/colorWhite">
+        android:orientation="horizontal">
 
         <TextView
             android:layout_width="wrap_content"
@@ -305,13 +310,14 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginRight="8dp"
         android:layout_weight="1"
         android:orientation="horizontal">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="3dp"
+            android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
             android:layout_marginTop="8dp"
             android:text="@string/editorContent"
@@ -327,22 +333,12 @@
                 android:id="@+id/et_eritor"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
+                android:layout_margin="3dp"
                 android:layout_weight="1"
                 android:background="@drawable/edit_editor_bg"
                 android:gravity="start"
                 android:padding="3dp"
-                android:layout_margin="3dp"
                 android:scrollbars="vertical" />
-
-            <ImageView
-                android:id="@+id/iv_editor_insert"
-                android:layout_width="300dp"
-                android:layout_height="290dp"
-                android:layout_gravity="center"
-                android:adjustViewBounds="true"
-                android:padding="10dp"
-                android:scaleType="centerCrop"
-                android:visibility="gone" />
 
         </LinearLayout>
 
@@ -390,5 +386,16 @@
             android:textColor="@color/white" />
 
     </LinearLayout>
+
+    <ImageView
+        android:id="@+id/iv_editor_insert"
+        android:layout_width="280dp"
+        android:layout_height="280dp"
+        android:layout_gravity="center"
+        android:layout_margin="10dp"
+        android:adjustViewBounds="true"
+        android:padding="10dp"
+        android:scaleType="centerCrop"
+        android:visibility="gone" />
 
 </LinearLayout>
