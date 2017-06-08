@@ -305,8 +305,7 @@
             <com.jaredrummler.materialspinner.MaterialSpinner
                 android:id="@+id/spinner_editor"
                 android:layout_width="100dp"
-                android:layout_height="45dp"
-                />
+                android:layout_height="45dp" />
 
     </LinearLayout>
 
@@ -394,8 +393,8 @@
 
     <ImageView
         android:id="@+id/iv_editor_insert"
-        android:layout_width="280dp"
-        android:layout_height="280dp"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
         android:layout_gravity="center"
         android:layout_margin="10dp"
         android:adjustViewBounds="true"
