@@ -15,4 +15,5 @@ public interface IBankPresenter {
 
     //获取用户绑定的银行卡信息
     void getUserBankInfo(String cookie, String sid);
+
 }

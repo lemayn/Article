@@ -29,6 +29,7 @@ public class ArtDetailActivity extends ToolBarBaseActivity<ActivityArtDetailBind
     private TextView tv_content;
     private String imgUrl = "http://118.89.233.35:8989";
     private ImageView iv_detail;
+    private TextView tv_time;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +56,7 @@ public class ArtDetailActivity extends ToolBarBaseActivity<ActivityArtDetailBind
         //标题头
         tv_title = (TextView) findViewById(R.id.tv_art_detail_title);
         tv_content = (TextView) findViewById(R.id.tv_art_detail_content);
+        tv_time = (TextView) findViewById(R.id.tv_art_detail_time);
         iv_detail = (ImageView) findViewById(R.id.iv_art_detail);
     }
 
@@ -75,6 +77,7 @@ public class ArtDetailActivity extends ToolBarBaseActivity<ActivityArtDetailBind
     public void showArtDetail(ArtInfoBean bean) {
         String atitle = bean.getData().getAtitle();
         String artImg = (String) bean.getData().getAimg();
+        String addtime = bean.getData().getAaddtime();
         if (!TextUtils.isEmpty(artImg)) {
             iv_detail.setVisibility(View.VISIBLE);
             Glide.with(this)
@@ -85,6 +88,7 @@ public class ArtDetailActivity extends ToolBarBaseActivity<ActivityArtDetailBind
                     .into(iv_detail);
         }
         tv_title.setText(atitle);
+        tv_time.setText(addtime);
         editorDate = bean.getData().getAcontent();
         RichText.fromHtml(editorDate)
                 .into(tv_content);

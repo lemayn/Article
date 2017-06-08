@@ -12,7 +12,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
 
             <TextView
                 style="@style/testStyle"
@@ -22,7 +23,7 @@
                 android:id="@+id/tv_choose_bank"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
+                android:layout_marginLeft="10dp"
                 android:text="请选择开户银行"
                 android:textColor="#00E5EE"
                 android:textSize="20sp" />
@@ -32,44 +33,59 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:orientation="horizontal"
             android:focusable="true"
-            android:focusableInTouchMode="true">
+            android:focusableInTouchMode="true"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
 
             <TextView
                 style="@style/testStyle"
                 android:text="户主姓名" />
 
-            <android.support.design.widget.TextInputLayout
-                android:id="@+id/textInput_account_name"
-                android:layout_width="match_parent"
+            <RelativeLayout
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="@string/required"
+                    android:textColor="@color/red" />
+
                 <EditText
+                    android:id="@+id/et_userbankName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
                     android:background="@drawable/etbg_bindcard"
-                    android:hint="请输入户主姓名"
-                    />
+                    android:hint="请输入户主姓名" />
 
-            </android.support.design.widget.TextInputLayout>
+            </RelativeLayout>
+
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
 
             <TextView
                 style="@style/testStyle"
                 android:text="银行卡号" />
 
-            <android.support.design.widget.TextInputLayout
-                android:id="@+id/textInput_cardNub"
-                android:layout_width="match_parent"
+            <RelativeLayout
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="@string/required"
+                    android:textColor="@color/red" />
 
                 <com.example.leon.article.widget.EditTextWithClear
                     android:id="@+id/et_card_numb"
@@ -82,33 +98,9 @@
                     android:maxLength="23"
                     android:paddingRight="10dp" />
 
-            </android.support.design.widget.TextInputLayout>
-        </LinearLayout>
+            </RelativeLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:orientation="horizontal">
 
-            <TextView
-                style="@style/testStyle"
-                android:text="开户所在地" />
-
-            <android.support.design.widget.TextInputLayout
-                android:id="@+id/textInput_address"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:background="@drawable/etbg_bindcard"
-                    android:hint="请输入开户所在地"
-                    />
-
-            </android.support.design.widget.TextInputLayout>
         </LinearLayout>
 
         <LinearLayout
@@ -116,28 +108,67 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:orientation="horizontal"
-            android:gravity="bottom">
+            android:gravity="center_vertical">
+
+            <TextView
+                style="@style/testStyle"
+                android:text="开户所在地" />
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="@string/required"
+                    android:textColor="@color/red" />
+
+                <EditText
+                    android:id="@+id/et_userAdress"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:background="@drawable/etbg_bindcard"
+                    android:hint="请输入开户所在地" />
+            </RelativeLayout>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
 
             <TextView
                 style="@style/testStyle"
                 android:text="提现密码" />
 
-            <android.support.design.widget.TextInputLayout
-                android:id="@+id/textInput_withdrawPwd"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:passwordToggleEnabled="true">
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="@string/required"
+                    android:textColor="@color/red" />
+
                 <EditText
                     android:id="@+id/et_withdrawPwd"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
-                    android:layout_marginTop="10dp"
                     android:background="@drawable/etbg_bindcard"
                     android:hint="请输入提现密码(默认为登录密码)"
-                    android:inputType="textPassword"
-                    />
-            </android.support.design.widget.TextInputLayout>
+                    android:inputType="textPassword" />
+            </RelativeLayout>
+
 
         </LinearLayout>
 
@@ -145,10 +176,10 @@
             android:id="@+id/bt_addConfirm"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="确认添加"
             android:layout_margin="10dp"
-            android:textColor="@color/colorWhite"
-            android:background="@drawable/selecte_editorbt_bg"/>
+            android:background="@drawable/selecte_editorbt_bg"
+            android:text="确认添加"
+            android:textColor="@color/colorWhite" />
 
     </LinearLayout>
 </layout>

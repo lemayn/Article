@@ -60,7 +60,7 @@ public class BankSettingActivity extends ToolBarBaseActivity<ActivityBankSetting
 
     private void initView() {
         setTitle("银行设置");
-//        hideHeaderMoneyInfo();
+        setNavigationView();
         bt_addCard = getViewById(R.id.bt_addCard);
         rv_list = getViewById(R.id.rv_bank_list);
         rv_list.setLayoutManager(new LinearLayoutManager(this));

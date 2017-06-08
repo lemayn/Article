@@ -5,7 +5,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.design.widget.TextInputLayout;
 import android.text.Editable;
 import android.text.Selection;
 import android.text.TextUtils;
@@ -34,14 +33,13 @@ import java.util.List;
 public class AddCardActivity extends ToolBarBaseActivity<ActivityAddCardBinding> implements IAddCardActivity,View.OnClickListener {
 
     private EditTextWithClear et_cardNum;
+    private EditText et_userbankName;
+    private EditText et_userAdress;
+    private EditText et_withdrawPwd;
     private TextView tv_choose_bank;
-    private TextInputLayout textInput_withdrawPwd;
     private Button bt_addConfirm;
     private List<BankConfigBean.DataBean> bankList = new ArrayList<>();
     private BankPresenterImp presenterImp;
-    private TextInputLayout textInput_account_name;
-    private TextInputLayout textInput_cardNub;
-    private TextInputLayout textInput_address;
     private String sid;
     private String cookie;
     private ListViewDialogAdapter dialogAdapter;
@@ -74,11 +72,10 @@ public class AddCardActivity extends ToolBarBaseActivity<ActivityAddCardBinding>
     private void initView() {
         setTitle(getString(R.string.add_bankcard));
         et_cardNum = (EditTextWithClear) findViewById(R.id.et_card_numb);
+        et_userbankName = (EditText) findViewById(R.id.et_userbankName);
+        et_userAdress = (EditText) findViewById(R.id.et_userAdress);
+        et_withdrawPwd = (EditText) findViewById(R.id.et_withdrawPwd);
         bankCardNumAddSpace(et_cardNum);
-        textInput_withdrawPwd = getViewById(R.id.textInput_withdrawPwd);
-        textInput_account_name = getViewById(R.id.textInput_account_name);
-        textInput_cardNub = getViewById(R.id.textInput_cardNub);
-        textInput_address = getViewById(R.id.textInput_address);
         tv_choose_bank = getViewById(R.id.tv_choose_bank);
         bt_addConfirm = getViewById(R.id.bt_addConfirm);
     }
@@ -180,13 +177,13 @@ public class AddCardActivity extends ToolBarBaseActivity<ActivityAddCardBinding>
                 showListDialog();
                 break;
             case R.id.bt_addConfirm:
-                String accountName = textInput_account_name.getEditText().getText().toString();
-                String address = textInput_address.getEditText().getText().toString();
+                String accountName = et_userbankName.getText().toString().trim();
+                String address = et_userAdress.getText().toString();
                 //提现密码
-                String withdrawPwd = textInput_withdrawPwd.getEditText().getText().toString();
+                String withdrawPwd = et_withdrawPwd.getText().toString();
                 //加密后的密码
 //                String md5Pwd = CommonUtils.getMD5Str(withdrawPwd);
-                String cardNumWithClear = textInput_cardNub.getEditText().getText().toString().trim();
+                String cardNumWithClear = et_cardNum.getText().toString().trim();
                 String cardNumb = cardNumWithClear.replace(" ", "");
                 String nameOfBank = BankUtils.getNameOfBank(cardNumb);
                 if (!TextUtils.isEmpty(cardNumb) && !TextUtils.isEmpty(withdrawPwd) && !TextUtils.isEmpty(accountName) && !TextUtils.isEmpty(address)) {

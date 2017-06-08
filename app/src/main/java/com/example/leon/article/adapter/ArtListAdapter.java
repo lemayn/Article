@@ -43,6 +43,7 @@ public class ArtListAdapter extends BaseAdapter {
         notifyDataSetChanged();
     }
 
+
     @Override
     public int getCount() {
         return items.size();
@@ -68,7 +69,7 @@ public class ArtListAdapter extends BaseAdapter {
         switch (review) {
             case "0"://未审核 red
                 holder.tv_issue_status.setTextColor(Color.RED);
-                holder.tv_issue_time.setText(context.getString(R.string.in_review));
+                holder.tv_issue_status.setText(context.getString(R.string.in_review));
                 break;
             case "1"://审核通过 green
                 holder.tv_issue_status.setTextColor(Color.GREEN);
@@ -83,18 +84,6 @@ public class ArtListAdapter extends BaseAdapter {
 
         holder.tv_issue_content.setText(items.get(position).getAtitle());
         holder.tv_issue_time.setText(items.get(position).getAaddtime());
-        /*holder.tv_issue_content.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                goArtDetailActivity(position);
-            }
-        });
-        holder.tv_issue_time.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                goArtDetailActivity(position);
-            }
-        });*/
         holder.ll_artList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

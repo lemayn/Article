@@ -6,13 +6,14 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.Base64;
 import android.view.MotionEvent;
 import android.view.View;
@@ -25,37 +26,34 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.example.leon.article.Activity.MainActivity;
 import com.example.leon.article.R;
+import com.example.leon.article.api.bean.UploadClassifyBean;
 import com.example.leon.article.presenter.artpresenter.artpresenterImp.ArtPresenterImp;
-import com.example.leon.article.sql.bean.Arts;
-import com.example.leon.article.sql.dao.ArtDao;
 import com.example.leon.article.utils.Constant;
 import com.example.leon.article.utils.CornersTransform;
 import com.example.leon.article.utils.ImageCompress;
 import com.example.leon.article.utils.PhotoSelectUtils;
 import com.example.leon.article.utils.SPUtil;
-import com.example.leon.article.utils.TimeUtils;
 import com.example.leon.article.view.IEditorActivity;
 import com.example.leon.article.widget.SelectPicturePopupWindow;
 import com.example.leon.article.widget.SpinnerDialog;
+import com.jaredrummler.materialspinner.MaterialSpinner;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
-import jp.wasabeef.richeditor.RichEditor;
 import kr.co.namee.permissiongen.PermissionFail;
 import kr.co.namee.permissiongen.PermissionGen;
 import kr.co.namee.permissiongen.PermissionSuccess;
 
 public class EditorActivity extends AppCompatActivity implements IEditorActivity,SelectPicturePopupWindow.OnSelectedListener{
 
-    private RichEditor mEditor;
+    private EditText mEditor;
     private EditText artTitle;
     //输入的内容
     private TextView tv_clear;
-    //记录是否点击了保存
-    private boolean isSave = false;
 
-    Arts arts = new Arts();
     private ArtPresenterImp artPresenter;
     private Dialog dialog;
     private Bitmap insertBitmap;
@@ -67,17 +65,20 @@ public class EditorActivity extends AppCompatActivity implements IEditorActivity
     private String sid;
     private SelectPicturePopupWindow picturePopupWindow;
     private PhotoSelectUtils photoSelectUtils;
-    private long art_id;
+    private ImageView iv_back;
+    //获取上传类型集合
+    private List<UploadClassifyBean.DataBean> classifys= new ArrayList<>();
+    private MaterialSpinner spinner;
+    private int selectPosition = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_editor);
         initView();
-        //获取数据库数据
-        initDate();
         //获取用户输入，cookie，sid
         GetDate();
+
         initPic();
     }
 
@@ -87,7 +88,6 @@ public class EditorActivity extends AppCompatActivity implements IEditorActivity
             public void onFinish(File outputFile, Uri outputUri) {
                 if (outputUri != null) {
                     imgpath = outputFile.getAbsolutePath();
-//                    insertBitmap = BitmapFactory.decodeFile(outputFile.getAbsolutePath());
                     iv_insert.setVisibility(View.VISIBLE);
                     Glide.with(EditorActivity.this)
                             .load(outputUri)
@@ -99,51 +99,39 @@ public class EditorActivity extends AppCompatActivity implements IEditorActivity
                     //压缩图片
                     ImageCompress imageCompress = new ImageCompress();
                     ImageCompress.CompressOptions options = new ImageCompress.CompressOptions();
-                    options.uri = Uri.fromFile(outputFile);
+                    options.uri = Uri.fromFile(new File(imgpath));
                     options.maxHeight = 960;
                     options.maxWidth = 540;
                     insertBitmap = imageCompress.compressFromUri(EditorActivity.this, options);
+                    /*//设置图片缩放比例
+                    ImageResizeUtil.resizeImage(insertBitmap,500,500);*/
                 }
             }
-        },true);//图像裁剪功能 false不开启，true开启
+        },false);//图像裁剪功能 false不开启，true开启
     }
 
-    private void initDate() {
-        artPresenter = new ArtPresenterImp(this,this);
-
-        String art_title = getIntent().getStringExtra(ArtConstant.ART_TITLE);
-        String art_content = getIntent().getStringExtra(ArtConstant.ART_CONTENT);
-        imgpath = getIntent().getStringExtra(ArtConstant.ART_IMGPATH);
-        art_id = getIntent().getLongExtra(ArtConstant.ART_ID, 0 );
-
-        if (art_title != null) {
-            artTitle.setText(art_title);
-        }
-        if (art_content != null) {
-            mEditor.setHtml(art_content);
-        }
-        if (imgpath != null) {
-            iv_insert.setVisibility(View.VISIBLE);
-            //使用Glide加载图片
-            Glide.with(this).load(imgpath).centerCrop()
-                    .transform(new CornersTransform(EditorActivity.this))
-                    .crossFade()
-                    .into(iv_insert);
-        }
-    }
 
     private void GetDate() {
+        artPresenter = new ArtPresenterImp(this,this);
         cookie = (String) SPUtil.get(Constant.Share_prf.COOKIE,"");
         sid = (String) SPUtil.get(Constant.Share_prf.SID,"");
-        mEditor.setOnTextChangeListener(new RichEditor.OnTextChangeListener() {
+        //获取上传类型
+        artPresenter.getUploadClassify(cookie,sid);
+        mEditor.addTextChangedListener(new TextWatcher() {
             @Override
-            public void onTextChange(String text) {
-                if (!TextUtils.isEmpty(text)) {
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (!TextUtils.isEmpty(s)) {
                     tv_clear.setVisibility(View.VISIBLE);
                     clearEditor();
                 }else{
                     tv_clear.setVisibility(View.GONE);
                 }
+            }
+            @Override
+            public void afterTextChanged(Editable s) {
             }
         });
     }
@@ -152,7 +140,7 @@ public class EditorActivity extends AppCompatActivity implements IEditorActivity
         tv_clear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mEditor.setHtml("");
+                mEditor.setText("");
             }
         });
     }
@@ -160,23 +148,37 @@ public class EditorActivity extends AppCompatActivity implements IEditorActivity
     private void initView() {
         tv_clear = (TextView) findViewById(R.id.tv_clear);
         iv_insert = (ImageView) findViewById(R.id.iv_editor_insert);
+        iv_back = (ImageView) findViewById(R.id.iv_editor_back);
         dialog = SpinnerDialog.createSpinnerDialog(EditorActivity.this, "文章上传中...");
         //图片选择的popWindown
         picturePopupWindow = new SelectPicturePopupWindow(this);
         picturePopupWindow.setOnSelectedListener(this);
-
+        //上传状态选择器
+        spinner = (MaterialSpinner) findViewById(R.id.spinner_editor);
         initEditor();
         initEvent();
     }
 
+    private void initSpinner() {
+        List<String> items = new ArrayList<>();
+        for (UploadClassifyBean.DataBean classify : classifys) {
+            items.add(classify.getClass_name());
+        }
+        spinner.setItems(items);
+        spinner.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener<String>() {
+            @Override
+            public void onItemSelected(MaterialSpinner view, int position, long id, String item) {
+                selectPosition = position + 1;
+            }
+        });
+    }
+
     private void initEditor() {
         artTitle = (EditText) findViewById(R.id.et_title);
-        mEditor = (RichEditor) findViewById(R.id.richEditor);
-        mEditor.setClickable(true);
-        mEditor.setEditorHeight(100);
-        mEditor.setEditorFontColor(Color.BLACK);
-        mEditor.setPadding(5, 10, 10, 10);
-        mEditor.setPlaceholder("请输入内容...");
+        mEditor = (EditText) findViewById(R.id.et_eritor);
+        mEditor.setText("\t\t");
+        mEditor.setSelection(mEditor.getText().length());
+
     }
 
     private void initEvent() {
@@ -200,10 +202,11 @@ public class EditorActivity extends AppCompatActivity implements IEditorActivity
                 //隐藏软键盘
                 hideKeyboard();
                 String title = artTitle.getText().toString();
-                String mEditorHtml = mEditor.getHtml();
+                String mEditorDate = mEditor.getText().toString();
                 if (insertBitmap != null) {
                     bytesFromBitmap = getBytesFromBitmap(insertBitmap);
-                }else{
+                }
+                else{
                     if (!TextUtils.isEmpty(imgpath)) {
                         //压缩图片
                         ImageCompress imageCompress = new ImageCompress();
@@ -215,42 +218,7 @@ public class EditorActivity extends AppCompatActivity implements IEditorActivity
                         bytesFromBitmap = getBytesFromBitmap(insertBitmap);
                     }
                 }
-                artPresenter.uploadUserArt(cookie,title,mEditorHtml,sid,bytesFromBitmap);
-            }
-        });
-
-        //点击保存后
-        findViewById(R.id.tv_save).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                isSave = true;
-                String title = artTitle.getText().toString().trim();
-                String editorContent = mEditor.getHtml();
-                if (TextUtils.isEmpty(title)){
-                    Toast.makeText(EditorActivity.this,getString(R.string.titlenotnull),Toast.LENGTH_SHORT).show();
-                    artTitle.requestFocus();
-                }else {
-                    if (TextUtils.isEmpty(editorContent)) {
-                        Toast.makeText(EditorActivity.this,getString(R.string.contentnotbull),Toast.LENGTH_SHORT).show();
-                    } else {                        //不为空存入数据库
-                        if (art_id != 0 ) {         //更新数据库
-                            arts.setId(art_id);
-                            arts.setTitle(title);
-                            arts.setContent(editorContent);
-                            arts.setTime(TimeUtils.getStringDateShort());
-                            arts.setImgPath(imgpath);
-                            ArtDao.updateArts(arts);
-                            goMySqlActivity();
-                        } else {                    //存入新数据
-                            arts.setContent(editorContent);
-                            arts.setTitle(title);
-                            arts.setTime(TimeUtils.getStringDateShort());
-                            arts.setImgPath(imgpath);
-                            ArtDao.insertArts(arts);
-                            goMySqlActivity();
-                        }
-                    }
-                }
+                artPresenter.uploadUserArt(cookie,title,mEditorDate,sid,bytesFromBitmap,String.valueOf(selectPosition));
             }
         });
 
@@ -262,157 +230,15 @@ public class EditorActivity extends AppCompatActivity implements IEditorActivity
             }
         });
 
-        findViewById(R.id.action_undo).setOnClickListener(new View.OnClickListener() {
+        //点击返回按钮
+        iv_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mEditor.undo();
-            }
-        });
-
-        findViewById(R.id.action_redo).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mEditor.redo();
-            }
-        });
-
-        findViewById(R.id.action_bold).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mEditor.setBold();
-            }
-        });
-
-        findViewById(R.id.action_italic).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mEditor.setItalic();
-            }
-        });
-
-        findViewById(R.id.action_subscript).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mEditor.setSubscript();
-            }
-        });
-
-        findViewById(R.id.action_superscript).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mEditor.setSuperscript();
-            }
-        });
-
-        findViewById(R.id.action_strikethrough).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mEditor.setStrikeThrough();
-            }
-        });
-
-        findViewById(R.id.action_underline).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mEditor.setUnderline();
-            }
-        });
-
-        findViewById(R.id.action_heading1).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mEditor.setHeading(1);
-            }
-        });
-
-        findViewById(R.id.action_heading2).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mEditor.setHeading(2);
-            }
-        });
-
-        findViewById(R.id.action_heading3).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mEditor.setHeading(3);
-            }
-        });
-
-        findViewById(R.id.action_heading4).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mEditor.setHeading(4);
-            }
-        });
-
-        findViewById(R.id.action_heading5).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mEditor.setHeading(5);
-            }
-        });
-
-        findViewById(R.id.action_heading6).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mEditor.setHeading(6);
-            }
-        });
-
-        findViewById(R.id.action_indent).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mEditor.setIndent();
-            }
-        });
-
-        findViewById(R.id.action_outdent).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mEditor.setOutdent();
-            }
-        });
-
-        findViewById(R.id.action_align_left).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mEditor.setAlignLeft();
-            }
-        });
-
-        findViewById(R.id.action_align_center).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mEditor.setAlignCenter();
-            }
-        });
-
-        findViewById(R.id.action_align_right).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mEditor.setAlignRight();
-            }
-        });
-
-        findViewById(R.id.action_insert_bullets).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mEditor.setBullets();
-            }
-        });
-
-        findViewById(R.id.action_insert_numbers).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mEditor.setNumbers();
-            }
-        });
-
-        findViewById(R.id.action_insert_checkbox).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mEditor.insertTodo();
+                if (TextUtils.isEmpty(mEditor.getText().toString())){
+                    finish();
+                }else{
+                    showifSaveDialog();
+                }
             }
         });
 
@@ -447,6 +273,7 @@ public class EditorActivity extends AppCompatActivity implements IEditorActivity
                         if (iv_insert!=null && iv_insert.getVisibility() == View.VISIBLE){
                             iv_insert.setVisibility(View.GONE);
                             imgpath = "";
+                            insertBitmap = null;
                         }
                     }
                 })
@@ -459,28 +286,18 @@ public class EditorActivity extends AppCompatActivity implements IEditorActivity
                 .create().show();
     }
 
-    private void goMySqlActivity() {
-        Intent intent = new Intent(this, MySqlActivity.class);
-        startActivity(intent);
-        finish();
-    }
-
     @Override
     public void onBackPressed() {
-        if (TextUtils.isEmpty(mEditor.getHtml())) {//如果输入的内容为空
+        if (TextUtils.isEmpty(mEditor.getText().toString().trim()) && TextUtils.isEmpty(artTitle.getText().toString())) {//如果输入的内容为空
             super.onBackPressed();
         } else {//用户输入的内容不为空
-            if (!isSave) {//没有点击保存
-                showifSaveDialog();
-            } else {  //点击了保存
-                super.onBackPressed();
-            }
+            showifSaveDialog();
         }
     }
 
     private void showifSaveDialog() {
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("您还没有保存，确定退出吗？")
+        builder.setTitle("您还没有发布哦，确定退出吗？")
                 .setMessage("退出后数据将不会保存")
                 .setNegativeButton("取消", new DialogInterface.OnClickListener() {
                     @Override
@@ -491,7 +308,6 @@ public class EditorActivity extends AppCompatActivity implements IEditorActivity
                 .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-
                         finish();
                     }
                 })
@@ -511,7 +327,6 @@ public class EditorActivity extends AppCompatActivity implements IEditorActivity
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        mEditor.destroy();
         artPresenter.unsubcrible();
         if (dialog != null) {
             dialog.cancel();
@@ -554,6 +369,15 @@ public class EditorActivity extends AppCompatActivity implements IEditorActivity
     @Override
     public void showFailure() {
         Toast.makeText(this,getString(R.string.retry_letter),Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void setUploadClassfiy(UploadClassifyBean classifyBean) {
+        if (classifyBean != null) {
+            classifys.addAll(classifyBean.getData());
+        }
+        //类型选择框
+        initSpinner();
     }
 
     @Override

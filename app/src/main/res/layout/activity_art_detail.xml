@@ -16,6 +16,12 @@
             android:textSize="20sp"
             android:textStyle="bold" />
 
+        <TextView
+            android:id="@+id/tv_art_detail_time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"/>
+
         <ImageView
             android:layout_gravity="center"
             android:id="@+id/iv_art_detail"
