@@ -6,7 +6,7 @@
                   android:layout_height="match_parent"
                   android:orientation="vertical">
 
-        <ScrollView
+        <!--<ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:padding="@dimen/x5">
@@ -37,7 +37,12 @@
                     android:textSize="@dimen/x13"/>
             </LinearLayout>
 
-        </ScrollView>
+        </ScrollView>-->
+
+        <WebView
+            android:id="@+id/webView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
 
     </LinearLayout>
 

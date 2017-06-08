@@ -54,6 +54,16 @@ public class ArticleApiBean extends ApiBean {
         private String use_money;
         private String get_money;
 
+        private String explain;
+
+        public String getExplain() {
+            return explain;
+        }
+
+        public void setExplain(String explain) {
+            this.explain = explain;
+        }
+
         @Bindable
         public String getUse_money() {
             return use_money;

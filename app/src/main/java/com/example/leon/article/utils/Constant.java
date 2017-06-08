@@ -73,6 +73,10 @@ public class Constant {
          * 广告接口
          */
         public static final String AD = "Ad";
+        /**
+         * 说明介绍接口
+         */
+        public static final String EXPLAIN = "Explain";
 
     }
 
