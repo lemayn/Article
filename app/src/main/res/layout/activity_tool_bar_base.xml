@@ -29,19 +29,19 @@
 
             <ImageView
                 android:id="@+id/iv_toolbar_back"
-                android:layout_width="@dimen/x30"
-                android:layout_height="@dimen/x30"
+                android:layout_width="@dimen/x22"
+                android:layout_height="@dimen/x22"
                 android:scaleType="centerInside"
                 android:src="@drawable/icon_back"
                 android:visibility="gone"/>
 
             <TextView
                 android:id="@+id/tv_toolbar_title"
-                style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:textColor="@android:color/white"/>
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/x18"/>
 
         </android.support.v7.widget.Toolbar>
 
@@ -118,6 +118,8 @@
                             android:layout_width="@dimen/x50"
                             android:layout_height="@dimen/x50"
                             android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="@dimen/x15"
+                            android:layout_marginRight="@dimen/x15"
                             android:paddingRight="@dimen/x1"
                             app:image="@{apibean.data.mimg}"/>
 
@@ -129,7 +131,6 @@
                             android:layout_marginBottom="@dimen/x3"
                             android:layout_marginTop="@dimen/x5"
                             android:layout_toRightOf="@+id/iv_user_avatar"
-                            android:layout_marginLeft="@dimen/x10"
                             android:text="@{apibean.data.nickname}"
                             android:textSize="@dimen/x14"/>
 
@@ -140,7 +141,7 @@
                             android:layout_below="@+id/tv_user_nickname"
                             android:layout_marginRight="@dimen/x5"
                             android:layout_toRightOf="@+id/iv_user_avatar"
-                            android:text="某某ID"
+                            android:text="@string/id"
                             android:textSize="@dimen/x14"/>
 
                         <TextView
@@ -177,7 +178,7 @@
                                 android:layout_width="@dimen/x30"
                                 android:layout_height="@dimen/x30"
                                 android:layout_gravity="center_vertical"
-                                android:paddingRight="@dimen/x1"
+                                android:layout_marginRight="@dimen/x5"
                                 android:scaleType="centerCrop"
                                 android:src="@drawable/total_balance"/>
 
@@ -191,7 +192,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:text="@string/balance_total"
-                                    android:textSize="@dimen/x14"/>
+                                    android:textSize="@dimen/x13"/>
 
                                 <TextView
                                     android:layout_width="match_parent"
@@ -219,7 +220,7 @@
                                 android:layout_width="@dimen/x30"
                                 android:layout_height="@dimen/x30"
                                 android:layout_gravity="center_vertical"
-                                android:paddingRight="@dimen/x1"
+                                android:layout_marginRight="@dimen/x5"
                                 android:scaleType="centerCrop"
                                 android:src="@drawable/available_balance"/>
 
@@ -233,7 +234,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="@string/avail_balance"
-                                    android:textSize="@dimen/x14"/>
+                                    android:textSize="@dimen/x13"/>
 
                                 <TextView
                                     android:layout_width="wrap_content"
@@ -261,7 +262,7 @@
                                 android:layout_width="@dimen/x30"
                                 android:layout_height="@dimen/x30"
                                 android:layout_gravity="center_vertical"
-                                android:paddingRight="@dimen/x1"
+                                android:layout_marginRight="@dimen/x5"
                                 android:scaleType="centerCrop"
                                 android:src="@drawable/commission_balance"/>
 
@@ -275,7 +276,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="@string/commission_balance"
-                                    android:textSize="@dimen/x14"/>
+                                    android:textSize="@dimen/x13"/>
 
                                 <TextView
                                     android:layout_width="wrap_content"

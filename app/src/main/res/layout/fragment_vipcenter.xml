@@ -24,12 +24,12 @@
 
         <TextView
             android:id="@+id/tv_toolbar_title"
-            style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:layout_gravity="center"
             android:background="@color/toolbar_back"
             android:gravity="center"
+            android:textSize="@dimen/x18"
             android:text="@string/vip_center"
             android:textColor="@android:color/white"/>
 
@@ -106,6 +106,8 @@
                             android:layout_width="@dimen/x50"
                             android:layout_height="@dimen/x50"
                             android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="@dimen/x15"
+                            android:layout_marginRight="@dimen/x15"
                             android:paddingRight="@dimen/x1"
                             app:image="@{apibean.data.mimg}"/>
 
@@ -127,7 +129,7 @@
                             android:layout_below="@+id/tv_user_nickname"
                             android:layout_marginRight="@dimen/x5"
                             android:layout_toRightOf="@+id/iv_user_avatar"
-                            android:text="某某ID"
+                            android:text="@string/id"
                             android:textSize="@dimen/x14"/>
 
                         <TextView
@@ -165,7 +167,7 @@
                                 android:layout_width="@dimen/x30"
                                 android:layout_height="@dimen/x30"
                                 android:layout_gravity="center_vertical"
-                                android:paddingRight="@dimen/x1"
+                                android:layout_marginRight="@dimen/x5"
                                 android:scaleType="centerCrop"
                                 android:src="@drawable/total_balance"/>
 
@@ -179,7 +181,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:text="@string/balance_total"
-                                    android:textSize="@dimen/x14"/>
+                                    android:textSize="@dimen/x13"/>
 
                                 <TextView
                                     android:layout_width="match_parent"
@@ -207,7 +209,7 @@
                                 android:layout_width="@dimen/x30"
                                 android:layout_height="@dimen/x30"
                                 android:layout_gravity="center_vertical"
-                                android:paddingRight="@dimen/x1"
+                                android:layout_marginRight="@dimen/x5"
                                 android:scaleType="centerCrop"
                                 android:src="@drawable/available_balance"/>
 
@@ -249,7 +251,7 @@
                                 android:layout_width="@dimen/x30"
                                 android:layout_height="@dimen/x30"
                                 android:layout_gravity="center_vertical"
-                                android:paddingRight="@dimen/x1"
+                                android:layout_marginRight="@dimen/x5"
                                 android:scaleType="centerCrop"
                                 android:src="@drawable/commission_balance"/>
 
@@ -290,16 +292,24 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"/>
 
-                <Button
-                    android:id="@+id/btn_logout"
-                    android:textColor="@color/white"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/x5"
-                    android:layout_marginBottom="@dimen/x10"
-                    android:layout_marginTop="@dimen/x10"
-                    android:background="@drawable/shape_modify_confirm_bg"
-                    android:text="@string/logout"/>
+                <RelativeLayout
+                    android:layout_marginBottom="@dimen/x30"
+                    android:layout_marginTop="@dimen/x20"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <Button
+                        android:id="@+id/btn_logout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/x5"
+                        android:layout_marginBottom="@dimen/x30"
+                        android:layout_marginTop="@dimen/x20"
+                        android:background="@drawable/shape_modify_confirm_bg"
+                        android:text="@string/logout"
+                        android:textColor="@color/white"/>
+
+                </RelativeLayout>
 
             </LinearLayout>
 

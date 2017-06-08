@@ -33,12 +33,12 @@
     <string name="register_userphone">请正确输入手机号码，提款将核实</string>
     <string name="register_userqq">请正确输入QQ号码，提款将核实</string>
 
-    <string name="user_account">我的账号</string>
-    <string name="user_nickname">我的昵称</string>
-    <string name="contact_number">联系电话</string>
-    <string name="user_qq">我的QQ</string>
-    <string name="user_weixin">我的微信</string>
-    <string name="secure_mailbox">安全邮箱</string>
+    <string name="user_account">&#160;我的账号</string>
+    <string name="user_nickname">&#160;我的昵称</string>
+    <string name="contact_number">&#160;联系电话</string>
+    <string name="user_qq">&#160;我的QQ</string>
+    <string name="user_weixin">&#160;我的微信</string>
+    <string name="secure_mailbox">&#160;安全邮箱</string>
     <string name="myarticle">我的文章</string>
     <string name="cue_words">请输入您的银行卡号</string>
     <string name="nav_ui">首页</string>
@@ -82,6 +82,7 @@
         &#160;&#160;1、文章必须是原创作品，一旦发现作品抄袭将不予发表。\n
         &#160;&#160;2、发表的文章字数在200字以上。\n
         &#160;&#160;3、发表的文章内容是积极向上的。</string>
+
     <string name="in_review">审核中</string>
     <string name="notpass">未通过</string>
     <string name="published">已发表</string>
@@ -106,5 +107,7 @@
     <string name="logout">退出登录</string>
     <string name="app_intro">软件说明</string>
     <string name="tell_test">验证手机</string>
+    <string name="id">ID：</string>
+    <string name="basic_info_attention">基本资料设置后无法修改，请务必真实填写，\n谨慎提交.</string>
 
 </resources>
