@@ -88,7 +88,7 @@ public class ArtDetailActivity extends ToolBarBaseActivity<ActivityArtDetailBind
                     .into(iv_detail);
         }
         tv_title.setText(atitle);
-        tv_time.setText(addtime);
+        tv_time.setText("更新时间："+addtime);
         editorDate = bean.getData().getAcontent();
         RichText.fromHtml(editorDate)
                 .into(tv_content);
