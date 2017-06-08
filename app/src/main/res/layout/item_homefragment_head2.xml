@@ -11,12 +11,13 @@
         android:layout_width="match_parent"
         android:layout_height="35dp"
         android:gravity="center_vertical"
+        android:background="@color/white"
         >
 
         <ImageView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="2"
+            android:layout_weight="1"
             android:src="@drawable/laban"/>
 
         <com.example.leon.article.widget.MarqueTextView
@@ -33,11 +34,17 @@
         <ImageView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="2"
+            android:layout_weight="1"
             android:src="@drawable/rowback"
             android:layout_marginRight="0dp"/>
 
     </LinearLayout>
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.005dp"
+        android:background="@color/colorGrey"/>
 
     <LinearLayout
         android:id="@+id/lin1"
@@ -67,6 +74,7 @@
                 android:layout_height="wrap_content"
                 android:drawablePadding="5dp"
                 android:text="@string/recommend_article"
+                android:textSize="16sp"
                 android:textColor="@color/colorRed"/>
 
         </LinearLayout>
@@ -97,9 +105,10 @@
                 android:id="@+id/textveiw_good"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:drawablePadding="5dp"
+                android:textSize="16sp"
                 android:text="@string/excellent_article"
-                android:textColor="@color/colorGrey"
-                android:drawablePadding="5dp" />
+                android:textColor="@color/colorGrey" />
 
         </LinearLayout>
 
@@ -107,7 +116,7 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="0.5dp"
+        android:layout_height="0.005dp"
         android:background="@color/colorGrey"/>
 
 </LinearLayout>

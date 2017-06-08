@@ -1,23 +1,35 @@
 package com.example.leon.article.Activity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.example.leon.article.Activity.presenter.ILoginPre;
+import com.example.leon.article.Activity.presenter.LoginPresenter;
 import com.example.leon.article.Http.Api;
 import com.example.leon.article.Http.XHttpUtils;
 import com.example.leon.article.R;
 import com.example.leon.article.api.bean.ArticleApiBean;
 import com.example.leon.article.base.ToolBarBaseActivity;
+import com.example.leon.article.bean.AdvBean;
 import com.example.leon.article.databinding.ActivityRegisterBinding;
-import com.example.leon.article.utils.CommonUtils;
+import com.example.leon.article.utils.Constant;
 import com.example.leon.article.utils.Validator;
 import com.google.gson.Gson;
+import com.jude.rollviewpager.RollPagerView;
+import com.jude.rollviewpager.adapter.LoopPagerAdapter;
+import com.jude.rollviewpager.hintview.ColorPointHintView;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import okhttp3.FormBody;
 import okhttp3.Request;
@@ -27,21 +39,30 @@ import okhttp3.Request;
  * Created by leonseven on 2017/5/15.
  */
 
-public class RegisterActivity extends ToolBarBaseActivity<ActivityRegisterBinding> {
+public class RegisterActivity extends ToolBarBaseActivity<ActivityRegisterBinding> implements ILoginPre {
+
+    private LoginPresenter presenter;
+    List<AdvBean.DataBean> advlist = new ArrayList<AdvBean.DataBean>();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
+        presenter = new LoginPresenter(RegisterActivity.this, this);
+
         hideHeaderInfo();
         hideHeaderMoneyInfo();
-        bindViews();
+        setNavigationView();
+        init();
     }
 
 
-    private void bindViews() {
+    @Override
+    public void init() {
         setTitle(getString(R.string.register));
+
+        presenter.AdvData();
 
         binding.btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,8 +72,9 @@ public class RegisterActivity extends ToolBarBaseActivity<ActivityRegisterBindin
             }
 
         });
-
     }
+
+
 
     private void register() {
 
@@ -129,4 +151,60 @@ public class RegisterActivity extends ToolBarBaseActivity<ActivityRegisterBindin
     }
 
 
+    @Override
+    public void showAdvList(List<AdvBean.DataBean> List) {
+        advlist.addAll(List);
+        rollview();
+    }
+
+
+    private void rollview() {
+
+        binding.rollpagerviewRegister.setAnimationDurtion(500);    //设置切换时间
+        binding.rollpagerviewRegister.setAdapter(new TestLoopAdapter(binding.rollpagerviewRegister, advlist)); //设置适配器
+        binding.rollpagerviewRegister.setHintView(new ColorPointHintView(this, Color.WHITE, Color.GRAY));// 设置圆点指示器颜色
+    }
+    /**
+     * 轮播图adapter
+     */
+    class TestLoopAdapter extends LoopPagerAdapter {
+        String headurl = Constant.Api.BASE_URL;
+        List<AdvBean.DataBean> list;
+
+        public TestLoopAdapter(RollPagerView viewPager, List<AdvBean.DataBean> list) {
+            super(viewPager);
+            this.list = list;
+        }
+
+        @Override
+        public View getView(ViewGroup container, int position) {
+
+            final int picNo = position + 1;
+            ImageView view = new ImageView(container.getContext());
+
+            Glide.with(RegisterActivity.this)
+                    .load(headurl + list.get(position).getImg())
+                    .fitCenter()
+                    .into(view);
+            //            view.setImageResource(list[position]);
+            view.setScaleType(ImageView.ScaleType.CENTER_CROP);
+            view.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup
+                    .LayoutParams.MATCH_PARENT));
+
+            view.setOnClickListener(new View.OnClickListener()      // 点击事件
+            {
+                @Override
+                public void onClick(View v) {
+                }
+
+            });
+
+            return view;
+        }
+
+        @Override
+        public int getRealCount() {
+            return list.size();
+        }
+    }
 }

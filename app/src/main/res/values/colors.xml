@@ -4,8 +4,11 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="colorBlack">#000000</color>
+    <color name="textcolorbalck">#101010</color>
     <color name="colorGrey">#828282</color>
-    <color name="colorGrey2">#f2f2f2</color>
+    <color name="color_line">#cbc9c9</color>
+    <color name="colorGrey2">#e9e9e9</color>
+    <color name="colorGrey3">#494949</color>
     <color name="colorRed">#FF0000</color>
     <color name="colorWhite">#ffffff</color>
     <color name="toolbar_back">#E11B03</color>

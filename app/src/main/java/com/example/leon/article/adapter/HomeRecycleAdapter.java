@@ -212,6 +212,12 @@ public class HomeRecycleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     private void bindTypeArticle3(final HolderTypeArticle3 holder, final int position){
 
         if (reBeanlist.size()>0) {
+
+            if ((position - 2) == 0){
+                holder.text_contect.setTextColor(context.getResources().getColor(R.color.colorRed));
+                holder.text_date.setTextColor(context.getResources().getColor(R.color.colorRed));
+            }
+
             holder.text_contect.setText(reBeanlist.get(position - 2).getAtitle());
             holder.text_date.setText(reBeanlist.get(position - 2).getAaddtime());
             Glide.with(context)
@@ -219,11 +225,19 @@ public class HomeRecycleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                     .centerCrop()
                     .into(holder.img);
 
+            if (reBeanlist.get(position - 2).getAimg()==null||reBeanlist.get(position - 2).getAimg().equals("")){
+                Glide.with(context)
+                        .load(R.drawable.adv2)
+                        .centerCrop()
+                        .into(holder.img);
+            }
+
             //文章详情
             holder.lin1.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    String aid = reBeanlist.get(position-2).getAid();
+                    String aid = reBeanlist.get(position - 2).getAid();
+                    Log.i("MyTest1", "aid + "+aid);
                     Intent intent = new Intent(context, ArtDetailActivity.class);
                     intent.putExtra(ArtConstant.DETAIL_AID, aid);
                     context.startActivity(intent);

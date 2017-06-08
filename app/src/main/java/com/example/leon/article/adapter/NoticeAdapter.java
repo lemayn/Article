@@ -34,12 +34,14 @@ public class NoticeAdapter extends RecyclerView.Adapter<NoticeAdapter.ViewHolder
         public TextView notice_title;
         public TextView notice_date;
         public TextView notice_contect;
+        public View line;
 
         public ViewHolder(View itemView) {
             super(itemView);
             notice_title = (TextView) itemView.findViewById(R.id.notice_title);
             notice_date = (TextView) itemView.findViewById(R.id.notice_date);
             notice_contect = (TextView) itemView.findViewById(R.id.notice_contect);
+            line = (View) itemView.findViewById(R.id.view_line);
         }
     }
 
@@ -59,6 +61,10 @@ public class NoticeAdapter extends RecyclerView.Adapter<NoticeAdapter.ViewHolder
             String contect = beanlsit.get(position).getNcontent();
             RichText.fromHtml(contect)
                     .into(holder.notice_contect);
+
+            if (position==0){
+                holder.line.setVisibility(View.GONE);
+            }
         }
     }
 

@@ -8,11 +8,12 @@
         android:id="@+id/lin1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/white"
         android:visibility="visible">
 
         <LinearLayout
             android:layout_width="0dp"
-            android:layout_height="50dp"
+            android:layout_height="60dp"
             android:layout_weight="8"
             android:orientation="vertical"
             android:gravity="center_vertical"
@@ -23,6 +24,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="dsddadaadsdasdasdadadasdasdasda"
+                android:textColor="@color/textcolorbalck"
                 android:singleLine="true"
                 android:lines="1"/>
 
@@ -30,7 +32,10 @@
                 android:id="@+id/text_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="2017:10:6"/>
+                android:text="2017:10:6"
+                android:textColor="@color/textcolorbalck"
+                android:textSize="12sp"
+                android:layout_marginTop="5dp"/>
 
         </LinearLayout>
 
@@ -45,6 +50,7 @@
                 android:id="@+id/img"
                 android:layout_width="65dp"
                 android:layout_height="50dp"
+                android:layout_margin="5dp"
                 />
 
         </LinearLayout>
@@ -103,6 +109,6 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
-        android:background="@color/colorGrey"/>
+        android:background="@color/color_line"/>
 
 </LinearLayout>

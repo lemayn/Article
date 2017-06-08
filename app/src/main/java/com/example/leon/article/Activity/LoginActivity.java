@@ -1,12 +1,15 @@
 package com.example.leon.article.Activity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -24,6 +27,7 @@ import com.example.leon.article.databinding.ActivityLoginBinding;
 import com.example.leon.article.utils.Constant;
 import com.example.leon.article.utils.SPUtil;
 import com.example.leon.article.utils.Validator;
+import com.example.leon.article.widget.ForgetPwdDialog;
 import com.jude.rollviewpager.RollPagerView;
 import com.jude.rollviewpager.adapter.LoopPagerAdapter;
 import com.jude.rollviewpager.hintview.ColorPointHintView;
@@ -47,6 +51,8 @@ public class LoginActivity extends ToolBarBaseActivity<ActivityLoginBinding> imp
     private boolean is_constraint_loin;
     private LoginPresenter presenter;
     List<AdvBean.DataBean> advlist = new ArrayList<AdvBean.DataBean>();
+
+    ForgetPwdDialog dialog;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -97,11 +103,47 @@ public class LoginActivity extends ToolBarBaseActivity<ActivityLoginBinding> imp
                 break;
 
             case R.id.tv_forgetpwd:
-                startActivity(new Intent(LoginActivity.this, ForgetPwdActivity.class));
+//                startActivity(new Intent(LoginActivity.this, ForgetPwdActivity.class));
+                inputTitleDialog();
                 break;
         }
 
     }
+
+
+    /**
+     * 找回密码弹窗
+     */
+    private void inputTitleDialog() {
+
+        dialog = new ForgetPwdDialog(this,R.style.loading_dialog,onClickListener);
+        dialog.show();
+
+    }
+
+    private View.OnClickListener onClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+
+            switch (v.getId()) {
+                case R.id.btn_login:
+                    dialog.cancel();
+                    break;
+
+                case R.id.btn_submit:
+
+                    String account = dialog.edittext_account.getText().toString().trim();
+                    String mobilephone = dialog.edittext_phone.getText().toString().trim();
+
+                    presenter.Backpwd(account, mobilephone);
+                    dialog.cancel();
+                    break;
+            }
+        }
+    };
+
+
+
 
     private void Login() {
 
@@ -200,7 +242,6 @@ public class LoginActivity extends ToolBarBaseActivity<ActivityLoginBinding> imp
             {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(LoginActivity.this, "点击了第" + picNo + "张图片", Toast.LENGTH_SHORT).show();
                 }
 
             });

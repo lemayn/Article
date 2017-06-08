@@ -11,8 +11,15 @@
         android:id="@+id/viewpager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/navigationview"
+        android:layout_above="@+id/view"
         />
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:background="#f0eff4"
+        android:layout_above="@+id/navigationview"/>
 
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/navigationview"
