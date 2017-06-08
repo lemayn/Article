@@ -6,6 +6,7 @@ import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,11 +48,13 @@ public class ArticleFragment extends Fragment implements View.OnClickListener, I
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle
+            savedInstanceState) {
         View view = inflater.inflate(R.layout.activity_article, container, false);
         initView(view);
         //get cookie sid
         cookie = (String) SPUtil.get(Constant.Share_prf.COOKIE, "");
+        Log.e("Retrofit", cookie);
         sid = (String) SPUtil.get(Constant.Share_prf.SID, "");
         initDate();
         initEvent();
@@ -95,7 +98,7 @@ public class ArticleFragment extends Fragment implements View.OnClickListener, I
             public void onScrollStateChanged(AbsListView view, int scrollState) {
                 if (scrollState == SCROLL_STATE_IDLE && isBottom) {
                     if (page < totalpager) {
-                        page ++;
+                        page++;
                         loadMore();
                     }
                 }
@@ -115,16 +118,16 @@ public class ArticleFragment extends Fragment implements View.OnClickListener, I
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                artPresenter.getuserArtList(cookie,sid,page);
+                artPresenter.getuserArtList(cookie, sid, page);
                 ll_footer_contain.setVisibility(View.GONE);
             }
-        },2000);
+        }, 2000);
     }
 
     private void initDate() {
         artPresenter = new ArtPresenterImp(this);
         adapter = new ArtListAdapter(getContext());
-
+        Log.e("Retrofit  initDate", cookie);
         artPresenter.getuserArtList(cookie, sid, page);
         lv_article.setAdapter(adapter);
     }
@@ -178,7 +181,7 @@ public class ArticleFragment extends Fragment implements View.OnClickListener, I
 
     @Override
     public void showError() {
-//        Toast.makeText(getContext(),"服务器繁忙，刷新一下试试吧",Toast.LENGTH_SHORT).show();
+        //        Toast.makeText(getContext(),"服务器繁忙，刷新一下试试吧",Toast.LENGTH_SHORT).show();
     }
 
     @Override

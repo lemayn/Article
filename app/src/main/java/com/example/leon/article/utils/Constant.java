@@ -97,6 +97,11 @@ public class Constant {
          * 用户信息
          */
         public static final String USER_DATA = "user_data";
+
+        /**
+         * 上次使用app的时间
+         */
+        public static final String LAST_USING_TIME = "last_using_time";
     }
 
     public static class Intent_Extra {

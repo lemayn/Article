@@ -22,7 +22,7 @@ import rx.schedulers.Schedulers;
  * Created by Hu on 2017/5/30.
  */
 
-public class BankPresenterImp extends BasepresenterImp implements IBankPresenter{
+public class BankPresenterImp extends BasepresenterImp implements IBankPresenter {
     private Context context;
     private IBankSettingActivity bankSettingActivity;
     private IAddCardActivity addCardActivity;
@@ -40,7 +40,7 @@ public class BankPresenterImp extends BasepresenterImp implements IBankPresenter
     public void getBankConfig(String cookie, String sid) {
         Subscription subscribe = ApiManager.getInstance().getBankApiService()
                 .getBanklist(cookie, sid)
-                .lift(new BaseValueValidOperator<BankConfigBean>())
+                .lift(new BaseValueValidOperator<BankConfigBean>("getBanklist  " + cookie))
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -67,10 +67,11 @@ public class BankPresenterImp extends BasepresenterImp implements IBankPresenter
     }
 
     @Override
-    public void bindBankCard(String cookie, String bid, String card, String sid, String account_name, String address,String password) {
+    public void bindBankCard(String cookie, String bid, String card, String sid, String account_name, String address,
+                             String password) {
         Subscription subscribe = ApiManager.getInstance().getBankApiService()
-                .bindBankCard(cookie, bid, card, sid, account_name, address,password)
-                .lift(new BaseValueValidOperator<BindBankBean>())
+                .bindBankCard(cookie, bid, card, sid, account_name, address, password)
+                .lift(new BaseValueValidOperator<BindBankBean>("bindBankCard  " + cookie))
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -82,13 +83,13 @@ public class BankPresenterImp extends BasepresenterImp implements IBankPresenter
 
                     @Override
                     public void onError(Throwable e) {
-                        Toast.makeText(context,e.getMessage(),Toast.LENGTH_LONG).show();
+                        Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
                     }
 
                     @Override
                     public void onNext(BindBankBean bindBankBean) {
                         if (bindBankBean.getMsg() != null) {
-                            Toast.makeText(context,bindBankBean.getMsg(),Toast.LENGTH_LONG).show();
+                            Toast.makeText(context, bindBankBean.getMsg(), Toast.LENGTH_LONG).show();
                             addCardActivity.showResult();
                         }
                     }
@@ -101,7 +102,7 @@ public class BankPresenterImp extends BasepresenterImp implements IBankPresenter
     public void getUserBankInfo(String cookie, String sid) {
         Subscription subscribe = ApiManager.getInstance().getBankApiService()
                 .getUserCardInfo(cookie, sid)
-                .lift(new BaseValueValidOperator<UserBankBean>())
+                .lift(new BaseValueValidOperator<UserBankBean>("getUserCardInfo  " + cookie))
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

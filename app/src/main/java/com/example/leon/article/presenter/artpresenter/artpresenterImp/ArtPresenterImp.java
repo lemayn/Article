@@ -24,7 +24,7 @@ import rx.schedulers.Schedulers;
  * Created by Administrator on 2017/5/22.
  */
 
-public class ArtPresenterImp extends BasepresenterImp implements IArtPresenter{
+public class ArtPresenterImp extends BasepresenterImp implements IArtPresenter {
 
     private Context context;
     private IArticleFragment articleFragment;
@@ -35,7 +35,7 @@ public class ArtPresenterImp extends BasepresenterImp implements IArtPresenter{
         this.articleFragment = articleFragment;
     }
 
-    public ArtPresenterImp(Context context,IEditorActivity editorActivity) {
+    public ArtPresenterImp(Context context, IEditorActivity editorActivity) {
         this.context = context;
         this.editorActivity = editorActivity;
     }
@@ -45,11 +45,11 @@ public class ArtPresenterImp extends BasepresenterImp implements IArtPresenter{
     }
 
     @Override
-    public void getuserArtList(String cookie,String sid,int page) {
+    public void getuserArtList(String cookie, String sid, int page) {
         articleFragment.showProgress();
         Subscription subscribe = ApiManager.getInstance().getArtApiService()
-                .getArtList(cookie,sid,page)
-                .lift(new BaseValueValidOperator<ArtListBean>())
+                .getArtList(cookie, sid, page)
+                .lift(new BaseValueValidOperator<ArtListBean>("getArtList  " + cookie))
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -72,14 +72,14 @@ public class ArtPresenterImp extends BasepresenterImp implements IArtPresenter{
                         articleFragment.getTotalPager(artListBean.getData().getTotalpage());
                     }
                 });
-            addSubscription(subscribe);
+        addSubscription(subscribe);
     }
 
     @Override
-    public void getArtDetail(String cookie,String aid,String sid) {
+    public void getArtDetail(String cookie, String aid, String sid) {
         Subscription subscribe = ApiManager.getInstance().getArtApiService()
                 .getArtInfo(cookie, aid, sid)
-                .lift(new BaseValueValidOperator<ArtInfoBean>())
+                .lift(new BaseValueValidOperator<ArtInfoBean>("getArtInfo  " + cookie))
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -103,11 +103,11 @@ public class ArtPresenterImp extends BasepresenterImp implements IArtPresenter{
     }
 
     @Override
-    public void uploadUserArt(String cookie, String title, String content,String sid,String imgBase64) {
+    public void uploadUserArt(String cookie, String title, String content, String sid, String imgBase64) {
         editorActivity.showProgress();
         Subscription subscribe = ApiManager.getInstance().getArtApiService()
-                .uploadArt(cookie, title, content,sid,imgBase64)
-                .lift(new BaseValueValidOperator<UpLoadArtBean>())
+                .uploadArt(cookie, title, content, sid, imgBase64)
+                .lift(new BaseValueValidOperator<UpLoadArtBean>("uploadArt  " + cookie))
                 .subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -120,9 +120,9 @@ public class ArtPresenterImp extends BasepresenterImp implements IArtPresenter{
                     @Override
                     public void onError(Throwable e) {
                         editorActivity.hideProgress();
-                        Log.i("HT", "onError: "+e.getMessage());
-//                        editorActivity.showError();
-                        Toast.makeText(context,e.getMessage(),Toast.LENGTH_SHORT).show();
+                        Log.i("HT", "onError: " + e.getMessage());
+                        //                        editorActivity.showError();
+                        Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
@@ -137,10 +137,10 @@ public class ArtPresenterImp extends BasepresenterImp implements IArtPresenter{
                                     editorActivity.showFailure();
                                 }
                             }
-                        },2000);
+                        }, 2000);
                     }
                 });
-            addSubscription(subscribe);
+        addSubscription(subscribe);
     }
 
 }

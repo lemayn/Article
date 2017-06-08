@@ -51,6 +51,29 @@ public class ArticleApiBean extends ApiBean {
         private String weixin;
         private String email;
 
+        private String use_money;
+        private String get_money;
+
+        @Bindable
+        public String getUse_money() {
+            return use_money;
+        }
+
+        public void setUse_money(String use_money) {
+            this.use_money = use_money;
+            notifyPropertyChanged(BR.use_money);
+        }
+
+        @Bindable
+        public String getGet_money() {
+            return get_money;
+        }
+
+        public void setGet_money(String get_money) {
+            this.get_money = get_money;
+            notifyPropertyChanged(BR.get_money);
+        }
+
         public String getAid() {
             return aid;
         }

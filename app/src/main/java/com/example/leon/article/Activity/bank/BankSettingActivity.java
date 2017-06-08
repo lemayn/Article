@@ -64,7 +64,7 @@ public class BankSettingActivity extends ToolBarBaseActivity<ActivityBankSetting
         bt_addCard = getViewById(R.id.bt_addCard);
         rv_list = getViewById(R.id.rv_bank_list);
         rv_list.setLayoutManager(new LinearLayoutManager(this));
-        rv_list.addItemDecoration(new DividerItemDecoration(this,DividerItemDecoration.HORIZONTAL));
+        rv_list.addItemDecoration(new DividerItemDecoration(this,DividerItemDecoration.VERTICAL));
         adapter = new BankSettingAdapter(this);
         rv_list.setAdapter(adapter);
     }

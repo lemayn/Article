@@ -1,6 +1,5 @@
 package com.example.leon.article;
 
-import android.os.Build;
 import android.support.test.runner.AndroidJUnit4;
 
 import com.example.leon.article.api.ApiFactory;
@@ -95,9 +94,7 @@ public class ExampleInstrumentedTest {
 
     @Test
     public void osConfig() {
-        String brand = Build.BRAND;
-        String model = Build.MODEL;
-        System.out.println(brand + " ----- " + model);
+
     }
 
 }

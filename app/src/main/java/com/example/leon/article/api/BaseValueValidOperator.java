@@ -21,6 +21,14 @@ import rx.Subscriber;
  */
 public class BaseValueValidOperator<T extends ApiBean>
         implements Observable.Operator<T, T> {
+    private String api;
+
+    public BaseValueValidOperator() {
+    }
+
+    public BaseValueValidOperator(String api) {
+        this.api = api;
+    }
 
     @Override
     public Subscriber<? super T> call(final Subscriber<? super T> subscriber) {
@@ -41,7 +49,6 @@ public class BaseValueValidOperator<T extends ApiBean>
 
             @Override
             public void onNext(T data) {
-                Log.e("Retrofit_", "data: " + data);
                 if (!subscriber.isUnsubscribed()) {
                     if (data == null) {
                         subscriber.onError(new Exception("网络异常"));
@@ -52,6 +59,7 @@ public class BaseValueValidOperator<T extends ApiBean>
                         return;
                     }
                     if ("2".equals(data.getCode())) {
+                        Log.e("Retrofit_", "data: " + data + "\n api:" + api);
                         onConnectionConflict();
                         return;
                     }

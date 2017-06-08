@@ -179,7 +179,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:text="@string/balance_total"
-                                    android:textSize="@dimen/x15"/>
+                                    android:textSize="@dimen/x13"/>
 
                                 <TextView
                                     android:layout_width="match_parent"
@@ -221,12 +221,12 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="@string/avail_balance"
-                                    android:textSize="@dimen/x15"/>
+                                    android:textSize="@dimen/x13"/>
 
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="@{apibean.data.mmoney}"
+                                    android:text="@{apibean.data.use_money}"
                                     android:textColor="@color/toolbar_back"
                                     android:textSize="@dimen/x15"/>
 
@@ -263,12 +263,12 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="@string/commission_balance"
-                                    android:textSize="@dimen/x15"/>
+                                    android:textSize="@dimen/x13"/>
 
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="@{apibean.data.mmoney}"
+                                    android:text="@{apibean.data.get_money}"
                                     android:textColor="@color/toolbar_back"
                                     android:textSize="@dimen/x15"/>
 
@@ -289,6 +289,17 @@
                     android:id="@+id/rv_vip_center"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"/>
+
+                <Button
+                    android:id="@+id/btn_logout"
+                    android:textColor="@color/white"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/x5"
+                    android:layout_marginBottom="@dimen/x10"
+                    android:layout_marginTop="@dimen/x10"
+                    android:background="@drawable/shape_modify_confirm_bg"
+                    android:text="@string/logout"/>
 
             </LinearLayout>
 

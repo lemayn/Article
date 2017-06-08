@@ -27,6 +27,29 @@
             android:orientation="vertical">
 
             <android.support.design.widget.TextInputLayout
+                android:id="@+id/textinput_layout0"
+                android:layout_width="match_parent"
+                android:layout_height="46dp"
+                android:paddingLeft="10dp"
+                >
+
+                <EditText
+                    android:id="@+id/edit_nickname"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:background="@null"
+                    android:hint="@string/user_account"
+                    android:inputType="textWebEmailAddress"
+                    app:data="@{userdata.data.mname}"/>
+            </android.support.design.widget.TextInputLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.2dp"
+                android:background="#ababab"/>
+
+            <android.support.design.widget.TextInputLayout
                 android:id="@+id/textinput_layout1"
                 android:layout_width="match_parent"
                 android:layout_height="46dp"
@@ -39,7 +62,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:background="@null"
-                    android:hint="@string/user_account"
+                    android:hint="@string/user_nickname"
                     android:inputType="textWebEmailAddress"
                     app:data="@{userdata.data.nickname}"/>
             </android.support.design.widget.TextInputLayout>
@@ -61,9 +84,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@null"
-                    app:data="@{userdata.data.mtell}"
                     android:hint="@string/contact_number"
-                    android:inputType="phone"/>
+                    android:inputType="phone"
+                    app:data="@{userdata.data.mtell}"/>
             </android.support.design.widget.TextInputLayout>
 
 
@@ -84,9 +107,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@null"
-                    app:data="@{userdata.data.mqq}"
                     android:hint="@string/user_qq"
-                    android:inputType="textWebEmailAddress"/>
+                    android:inputType="textWebEmailAddress"
+                    app:data="@{userdata.data.mqq}"/>
             </android.support.design.widget.TextInputLayout>
 
             <View
@@ -106,9 +129,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@null"
-                    app:data="@{userdata.data.weixin}"
                     android:hint="@string/user_weixin"
-                    android:inputType="textWebEmailAddress"/>
+                    android:inputType="textWebEmailAddress"
+                    app:data="@{userdata.data.weixin}"/>
             </android.support.design.widget.TextInputLayout>
 
             <View
@@ -128,9 +151,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@null"
-                    app:data="@{userdata.data.email}"
                     android:hint="@string/secure_mailbox"
-                    android:inputType="textWebEmailAddress"/>
+                    android:inputType="textWebEmailAddress"
+                    app:data="@{userdata.data.email}"/>
             </android.support.design.widget.TextInputLayout>
 
             <View

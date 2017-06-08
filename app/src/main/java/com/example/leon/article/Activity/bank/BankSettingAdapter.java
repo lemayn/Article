@@ -69,7 +69,7 @@ public class BankSettingAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             StringBuilder sb = new StringBuilder();
             for (int i = 0; i < bankCard.length(); i++) {
                 char c = bankCard.charAt(i);
-                if (i <= bankCard.length() - 7) {
+                if (i <= bankCard.length() - 5) {
                     if (String.valueOf(c) .equals("\t")){
                         sb.append("\t");
                     }else{

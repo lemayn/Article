@@ -4,6 +4,7 @@ import android.databinding.BindingAdapter;
 import android.text.TextUtils;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.leon.article.R;
@@ -33,5 +34,26 @@ public class DataBindingUtil {
             et.setText(data);
             et.setKeyListener(null);
         }
+    }
+
+    @BindingAdapter("bankcard")
+    public static void setBankCard(TextView editText, String card) {
+        if(TextUtils.isEmpty(card)) {
+            return;
+        }
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < card.length(); i++) {
+            char c = card.charAt(i);
+            if (i <= card.length() - 5) {
+                if (String.valueOf(c).equals("\t")) {
+                    sb.append("\t");
+                } else {
+                    sb.append("*");
+                }
+            } else {
+                sb.append(c);
+            }
+        }
+        editText.setText(sb.toString());
     }
 }

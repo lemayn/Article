@@ -19,6 +19,8 @@ import com.example.leon.article.fragment.ArticleFragment;
 import com.example.leon.article.fragment.HomeFragment;
 import com.example.leon.article.fragment.MoreFragment;
 import com.example.leon.article.fragment.VipFragment;
+import com.example.leon.article.utils.Constant;
+import com.example.leon.article.utils.SPUtil;
 import com.example.leon.article.widget.BottomNavigationViewHelper;
 
 import java.util.ArrayList;
@@ -35,8 +37,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-//        hideHeaderInfo();
-//        hideHeaderMoneyInfo();
+        Long lastUsingTime = (Long) SPUtil.get(Constant.Share_prf.LAST_USING_TIME, 0L);
+        long currentTimeMillis = System.currentTimeMillis();
+        if (lastUsingTime != 0 && currentTimeMillis - lastUsingTime > 24 * 60 * 60 * 1000) {
+            SPUtil.clear();
+        }
+        //记录上次使用时间
+        SPUtil.put(Constant.Share_prf.LAST_USING_TIME, currentTimeMillis);
 
         initView();
         ifShowArticle();
@@ -48,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
             }
+
             @Override
             public void onPageSelected(int position) {
                 switch (position) {
@@ -65,6 +73,7 @@ public class MainActivity extends AppCompatActivity {
                         break;
                 }
             }
+
             @Override
             public void onPageScrollStateChanged(int state) {
             }
@@ -78,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
         if (position == 0) {
             navigationview.setSelectedItemId(R.id.menu_home);
         }
-        if (position == 1){
+        if (position == 1) {
             navigationview.setSelectedItemId(R.id.menu_article);
         }
     }
@@ -112,7 +121,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        viewpager.setOffscreenPageLimit(4);
+        viewpager.setOffscreenPageLimit(1);
         navigationview.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -150,11 +159,16 @@ public class MainActivity extends AppCompatActivity {
         navigationview.setSelectedItemId(R.id.menu_article);
     }
 
+    public void gotoHomePage() {
+        viewpager.setCurrentItem(0);
+        navigationview.setSelectedItemId(R.id.menu_home);
+    }
+
     private long exitTime = 0;
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN){
+        if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN) {
             if (System.currentTimeMillis() - exitTime > 2000) {
                 Toast.makeText(getApplicationContext(), "再按一次退出程序", Toast.LENGTH_SHORT).show();
                 exitTime = System.currentTimeMillis();
@@ -167,4 +181,10 @@ public class MainActivity extends AppCompatActivity {
         return super.onKeyDown(keyCode, event);
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        //记录上次使用时间
+        SPUtil.put(Constant.Share_prf.LAST_USING_TIME, System.currentTimeMillis());
+    }
 }

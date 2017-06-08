@@ -2,8 +2,8 @@
     <string name="app_name">微创秀文</string>
     <string name="vip_info">会员资料</string>
     <string name="publish_article">发表文章</string>
-    <string name="avail_balance">可用余额</string>
-    <string name="commission_balance">佣金金额</string>
+    <string name="avail_balance">可提现余额</string>
+    <string name="commission_balance">已提现余额</string>
     <string name="balance_total">总余额</string>
     <string name="required">*</string>
     <string name="basic_info">基本资料</string>
@@ -34,6 +34,7 @@
     <string name="register_userqq">请正确输入QQ号码，提款将核实</string>
 
     <string name="user_account">我的账号</string>
+    <string name="user_nickname">我的昵称</string>
     <string name="contact_number">联系电话</string>
     <string name="user_qq">我的QQ</string>
     <string name="user_weixin">我的微信</string>
@@ -75,7 +76,7 @@
         &#160;&#160;这款APP与传统的校园报相比有什么样的优势呢？\n
         &#160;&#160;1、审核速度快，效率高；\n
         &#160;&#160;2、没有文体类型的限制；\n
-        &#160;&#160;3、每发表并且顺利通过审核的，都可以获得奖励。奖励的金额在2-50元不等。\n
+        &#160;&#160;3、每发表并且顺利通过审核的，都可以获得奖励。奖励的金额在1-50元不等。\n
         &#160;&#160;4、如用游戏类为题材，奖会有意想不到的收获哦。\n
         &#160;&#160;当然这款APP也有一点小要求，不过对你们来说肯定是可以做到的啦：\n
         &#160;&#160;1、文章必须是原创作品，一旦发现作品抄袭将不予发表。\n
@@ -102,5 +103,7 @@
     <string name="back_submit">确认提交</string>
     <string name="back_login">返回登录</string>
     <string name="title">标题</string>
+    <string name="logout">退出登录</string>
+    <string name="app_intro">软件说明</string>
 
 </resources>
