@@ -2,8 +2,8 @@
     <string name="app_name">微创秀文</string>
     <string name="vip_info">会员资料</string>
     <string name="publish_article">发表文章</string>
-    <string name="avail_balance">可提现余额</string>
-    <string name="commission_balance">已提现余额</string>
+    <string name="avail_balance">可提余额</string>
+    <string name="commission_balance">已提余额</string>
     <string name="balance_total">总余额</string>
     <string name="required">*</string>
     <string name="basic_info">基本资料</string>
@@ -105,5 +105,6 @@
     <string name="title">标题</string>
     <string name="logout">退出登录</string>
     <string name="app_intro">软件说明</string>
+    <string name="tell_test">验证手机</string>
 
 </resources>

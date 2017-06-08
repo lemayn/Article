@@ -1,8 +1,11 @@
 package com.example.leon.article.Activity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.leon.article.R;
@@ -67,6 +70,80 @@ public class BasicinformationActivity extends ToolBarBaseActivity<ActivityBasici
                 }
             }
         });
+
+        binding.btnTellTest.setOnClickListener(new PerfectClickListener() {
+            @Override
+            protected void onNoDoubleClick(View v) {
+                requestVerifyFromServer();
+            }
+        });
+    }
+
+    private void requestVerifyFromServer() {
+        HashMap<String, String> hashMap = new HashMap<>();
+        hashMap.put("cookie", (String) SPUtil.get(Constant.Share_prf.COOKIE, ""));
+        hashMap.put("sid", (String) SPUtil.get(Constant.Share_prf.SID, ""));
+        ApiFactory.getApi().article(Constant.Api.TELL_TEST, hashMap)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<ArticleApiBean>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Toast.makeText(BasicinformationActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onNext(ArticleApiBean apiBean) {
+                        final EditText editText = new EditText(BasicinformationActivity.this);
+                        new AlertDialog.Builder(BasicinformationActivity.this)
+                                .setTitle("验证")
+                                .setMessage("请输入收到的验证码")
+                                .setView(editText)
+                                .setNegativeButton("确定", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        verifyTell(editText.getText().toString().trim());
+                                    }
+                                })
+                                .setPositiveButton("取消", null)
+                                .setCancelable(false)
+                                .show();
+                    }
+                });
+
+    }
+
+    private void verifyTell(String verify) {
+        HashMap<String, String> hashMap = new HashMap<>();
+        hashMap.put("cookie", (String) SPUtil.get(Constant.Share_prf.COOKIE, ""));
+        hashMap.put("sid", (String) SPUtil.get(Constant.Share_prf.SID, ""));
+        hashMap.put("verify", verify);
+        ApiFactory.getApi().article(Constant.Api.TELL_RES, hashMap)
+                .lift(new BaseValueValidOperator<ArticleApiBean>())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<ArticleApiBean>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Toast.makeText(BasicinformationActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onNext(ArticleApiBean apiBean) {
+                        binding.btnTellTest.setVisibility(View.GONE);
+                        Toast.makeText(BasicinformationActivity.this, "验证成功", Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
 
     private void editUserData() {

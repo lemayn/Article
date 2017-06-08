@@ -179,7 +179,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:text="@string/balance_total"
-                                    android:textSize="@dimen/x13"/>
+                                    android:textSize="@dimen/x14"/>
 
                                 <TextView
                                     android:layout_width="match_parent"
@@ -221,7 +221,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="@string/avail_balance"
-                                    android:textSize="@dimen/x13"/>
+                                    android:textSize="@dimen/x14"/>
 
                                 <TextView
                                     android:layout_width="wrap_content"
@@ -263,7 +263,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="@string/commission_balance"
-                                    android:textSize="@dimen/x13"/>
+                                    android:textSize="@dimen/x14"/>
 
                                 <TextView
                                     android:layout_width="wrap_content"

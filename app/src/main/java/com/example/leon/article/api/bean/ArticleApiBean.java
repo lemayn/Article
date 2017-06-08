@@ -55,6 +55,28 @@ public class ArticleApiBean extends ApiBean {
         private String get_money;
 
         private String explain;
+        /**
+         * 是否已验证手机
+         */
+        private String tell_test;
+
+        private String verify;
+
+        public String getVerify() {
+            return verify;
+        }
+
+        public void setVerify(String verify) {
+            this.verify = verify;
+        }
+
+        public String getTell_test() {
+            return tell_test;
+        }
+
+        public void setTell_test(String tell_test) {
+            this.tell_test = tell_test;
+        }
 
         public String getExplain() {
             return explain;

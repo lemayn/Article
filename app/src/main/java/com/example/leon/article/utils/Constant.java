@@ -74,9 +74,15 @@ public class Constant {
          */
         public static final String AD = "Ad";
         /**
-         * 说明介绍接口
+         * 手机验证接口
          */
-        public static final String EXPLAIN = "Explain";
+        public static final String TELL_TEST = "TellTest";
+
+
+        /**
+         * 验证结果接口
+         */
+        public static final String TELL_RES = "TellRes";
 
     }
 

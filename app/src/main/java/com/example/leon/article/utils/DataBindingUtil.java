@@ -2,6 +2,7 @@ package com.example.leon.article.utils;
 
 import android.databinding.BindingAdapter;
 import android.text.TextUtils;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -17,6 +18,18 @@ public class DataBindingUtil {
     public static void setImageSrc(ImageView imageView, int res) {
         if (res != 0) {
             imageView.setImageResource(res);
+        }
+    }
+
+    @BindingAdapter("android:visibility")
+    public static void visibility(View view, String res) {
+        if (TextUtils.isEmpty(res)) {
+            return;
+        }
+        if ("1".equals(res)) {
+            view.setVisibility(View.GONE);
+        } else if ("2".equals(res)) {
+            view.setVisibility(View.VISIBLE);
         }
     }
 
@@ -38,7 +51,7 @@ public class DataBindingUtil {
 
     @BindingAdapter("bankcard")
     public static void setBankCard(TextView editText, String card) {
-        if(TextUtils.isEmpty(card)) {
+        if (TextUtils.isEmpty(card)) {
             return;
         }
         StringBuilder sb = new StringBuilder();

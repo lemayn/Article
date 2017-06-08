@@ -14,7 +14,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.leon.article.Activity.BasicinformationActivity;
-import com.example.leon.article.Activity.MainActivity;
+import com.example.leon.article.Activity.LoginActivity;
 import com.example.leon.article.Activity.ModifyPasswordActivity;
 import com.example.leon.article.Activity.ModifyWithoutPasswordActivity;
 import com.example.leon.article.Activity.WithdrawDepositActivity;
@@ -145,7 +145,7 @@ public class VipFragment extends Fragment {
             @Override
             protected void onNoDoubleClick(View v) {
                 SPUtil.clear();
-                ((MainActivity) getActivity()).gotoHomePage();
+                startActivity(new Intent(getActivity(), LoginActivity.class));
             }
         });
     }
