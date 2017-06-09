@@ -35,9 +35,13 @@ public class DataBindingUtil {
 
     @BindingAdapter("image")
     public static void imageLoader(ImageView imageView, String imageUrls) {
+        if (TextUtils.isEmpty(imageUrls)) {
+            return;
+        }
         Glide.with(imageView.getContext()).load(BASE_IMAGE_URL + imageUrls)
                 .crossFade()
-                .placeholder(R.drawable.timg).error(R.drawable.timg)
+                //                .placeholder(R.drawable.timg)  不添加占位图，CircleImageView有问题，添加后第一次加载只显示占位图
+                .error(R.drawable.timg)
                 .into(imageView);
     }
 
