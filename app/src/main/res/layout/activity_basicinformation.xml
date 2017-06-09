@@ -36,12 +36,12 @@
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
-                <TextView
+                <com.example.leon.article.widget.AlignTextView
                     android:layout_width="@dimen/x64"
                     android:layout_height="match_parent"
                     android:layout_marginRight="@dimen/x10"
                     android:gravity="center"
-                    android:text="@string/user_account"
+                    app:text="@string/user_account"
                     android:textSize="@dimen/x14"/>
 
                 <EditText
@@ -66,12 +66,12 @@
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
-                <TextView
+                <com.example.leon.article.widget.AlignTextView
                     android:layout_width="@dimen/x64"
                     android:layout_height="match_parent"
                     android:layout_marginRight="@dimen/x10"
                     android:gravity="center"
-                    android:text="@string/user_nickname"
+                    app:text="@string/user_nickname"
                     android:textSize="@dimen/x14"/>
 
                 <EditText
@@ -96,12 +96,12 @@
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
-                <TextView
+                <com.example.leon.article.widget.AlignTextView
                     android:layout_width="@dimen/x64"
                     android:layout_height="match_parent"
                     android:layout_marginRight="@dimen/x10"
                     android:gravity="center"
-                    android:text="@string/contact_number"
+                    app:text="@string/contact_number"
                     android:textSize="@dimen/x14"/>
 
                 <RelativeLayout
@@ -146,13 +146,13 @@
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
-                <TextView
+                <com.example.leon.article.widget.AlignTextView
                     android:layout_width="@dimen/x64"
                     android:layout_height="match_parent"
                     android:layout_marginRight="@dimen/x10"
                     android:gravity="center"
-                    android:text="@string/user_qq"
-                    android:textSize="@dimen/x14"/>
+                    android:textSize="@dimen/x14"
+                    app:text="@string/user_qq"/>
 
                 <EditText
                     android:id="@+id/edit_qq"
@@ -176,12 +176,12 @@
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
-                <TextView
+                <com.example.leon.article.widget.AlignTextView
                     android:layout_width="@dimen/x64"
                     android:layout_height="match_parent"
                     android:layout_marginRight="@dimen/x10"
                     android:gravity="center"
-                    android:text="@string/user_weixin"
+                    app:text="@string/user_weixin"
                     android:textSize="@dimen/x14"/>
 
                 <EditText
@@ -206,12 +206,12 @@
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
-                <TextView
+                <com.example.leon.article.widget.AlignTextView
                     android:layout_width="@dimen/x64"
                     android:layout_height="match_parent"
                     android:layout_marginRight="@dimen/x10"
                     android:gravity="center"
-                    android:text="@string/secure_mailbox"
+                    app:text="@string/secure_mailbox"
                     android:textSize="@dimen/x14"/>
 
                 <EditText

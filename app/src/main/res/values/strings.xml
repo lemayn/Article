@@ -33,12 +33,12 @@
     <string name="register_userphone">请正确输入手机号码，提款将核实</string>
     <string name="register_userqq">请正确输入QQ号码，提款将核实</string>
 
-    <string name="user_account">&#160;我的账号</string>
-    <string name="user_nickname">&#160;我的昵称</string>
-    <string name="contact_number">&#160;联系电话</string>
-    <string name="user_qq">&#160;我的QQ</string>
-    <string name="user_weixin">&#160;我的微信</string>
-    <string name="secure_mailbox">&#160;安全邮箱</string>
+    <string name="user_account">我的账号</string>
+    <string name="user_nickname">我的昵称</string>
+    <string name="contact_number">联系电话</string>
+    <string name="user_qq">我的QQ</string>
+    <string name="user_weixin">我的微信</string>
+    <string name="secure_mailbox">安全邮箱</string>
     <string name="myarticle">我的文章</string>
     <string name="cue_words">请输入您的银行卡号</string>
     <string name="nav_ui">首页</string>

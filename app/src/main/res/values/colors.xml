@@ -17,4 +17,5 @@
     <color name="center_divider">#DCDCDC</color>
     <color name="white">#FFFFFF</color>
     <color name="commtent_reply_bg">#e7e5e0</color>
+    <color name="custom_text_color">#737373</color>
 </resources>

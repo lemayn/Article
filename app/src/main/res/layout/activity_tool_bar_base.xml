@@ -117,11 +117,11 @@
                         <de.hdodenhof.circleimageview.CircleImageView
                             android:id="@+id/iv_user_avatar"
                             android:layout_width="@dimen/x50"
-                            android:layout_height="@dimen/x50"
                             android:src="@drawable/timg"
+                            android:layout_height="@dimen/x50"
                             android:layout_gravity="center_vertical"
-                            android:layout_marginLeft="@dimen/x15"
-                            android:layout_marginRight="@dimen/x15"
+                            android:layout_marginLeft="@dimen/x7"
+                            android:layout_marginRight="@dimen/x12"
                             android:paddingRight="@dimen/x1"
                             app:image="@{apibean.data.mimg}"/>
 
