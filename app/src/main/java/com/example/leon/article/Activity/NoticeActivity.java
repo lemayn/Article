@@ -2,9 +2,13 @@ package com.example.leon.article.Activity;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.leon.article.Http.Api;
@@ -30,35 +34,52 @@ import okhttp3.Request;
  * Created by leonseven on 2017/5/27.
  */
 
-public class NoticeActivity extends ToolBarBaseActivity<ActivityNoticeBinding> {
+public class NoticeActivity extends Activity {
 
     NoticeBean bean = new NoticeBean();
     List<NoticeBean.DataBean> beanlsit = new ArrayList<NoticeBean.DataBean>();
+    List<NoticeBean.DataBean> beanlsit2 = new ArrayList<NoticeBean.DataBean>();
     private NoticeAdapter adapter;
 
+    private RecyclerView recyclerView;
+    private TextView tool_title;
+    private ImageView tool_back;
+
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notice);
 
         initview();
     }
 
-    private void initview() {
-        setTitle(getString(R.string.system_notice));
-        setNavigationView();
-        hideHeaderInfo();
 
-        binding.recyclerviewNotice.setLayoutManager(new LinearLayoutManager(binding.recyclerviewNotice.getContext(), LinearLayoutManager.VERTICAL, false));
+    private void initview() {
+//        setTitle(getString(R.string.system_notice));
+
+        recyclerView = (RecyclerView) findViewById(R.id.recyclerview_notice);
+        recyclerView.setLayoutManager(new LinearLayoutManager(recyclerView.getContext(), LinearLayoutManager.VERTICAL, false));
+
+        tool_title = (TextView) findViewById(R.id.tv_toolbar_title);
+        tool_back = (ImageView) findViewById(R.id.iv_toolbar_back);tool_back.setVisibility(View.VISIBLE);
+        tool_title.setText(R.string.system_notice);
+        tool_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
 
         loadData();
     }
 
     private void setAdapter() {
-        binding.recyclerviewNotice.setAdapter(adapter = new NoticeAdapter(beanlsit, this));
+        recyclerView.setAdapter(adapter = new NoticeAdapter(beanlsit, this));
     }
 
     private void loadData() {
+
         final Gson gson = new Gson();
         FormBody formBody = new FormBody.Builder()
                 .build();
