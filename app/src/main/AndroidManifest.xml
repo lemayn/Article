@@ -61,7 +61,7 @@
 
         <activity android:name=".Activity.ForgetPwdActivity"/>
         <activity android:name=".Activity.bank.BankSettingActivity"/>
-        <activity android:name=".Activity.bank.AddCardActivity"/>
+        <activity android:name=".Activity.bank.AddCardActivity" android:windowSoftInputMode="stateHidden|adjustResize"/>
         <activity android:name=".Activity.MoreInfoActivity"/>
     </application>
 

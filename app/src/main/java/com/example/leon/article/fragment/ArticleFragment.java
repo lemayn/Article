@@ -44,7 +44,8 @@ public class ArticleFragment extends Fragment implements View.OnClickListener, I
     private boolean isBottom = false;
     private LinearLayout ll_footer_contain;
     private View headerView;
-
+    private String type;
+    private int artStatus;
 
     @Nullable
     @Override
@@ -162,12 +163,15 @@ public class ArticleFragment extends Fragment implements View.OnClickListener, I
         spinner.setItems("全部", "已发表", "未通过", "审核中");
         spinner.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener<String>() {
             @Override public void onItemSelected(MaterialSpinner view, int position, long id, String item) {
+                type = item;
                 switch (position) {
                     case 0://点击了全部
+                        artStatus = -1;
                         adapter.clearDate();
                         artPresenter.getuserArtList(cookie,sid,1);
                         break;
                     case 1://点击了已发表
+                        artStatus = 1;
                         adapter.clearDate();
                         artPresenter.getUserArtTypeList(cookie,sid,1,1);
                         if (adapter.getCount() >= 20) {
@@ -175,6 +179,7 @@ public class ArticleFragment extends Fragment implements View.OnClickListener, I
                         }
                         break;
                     case 2://点击了未通过
+                        artStatus = 2;
                         adapter.clearDate();
                         artPresenter.getUserArtTypeList(cookie,sid,1,2);
                         if (adapter.getCount() >= 20) {
@@ -182,6 +187,7 @@ public class ArticleFragment extends Fragment implements View.OnClickListener, I
                         }
                         break;
                     case 3://点击了审核中
+                        artStatus = 0;
                         adapter.clearDate();
                         artPresenter.getUserArtTypeList(cookie,sid,1,0);
                         if (adapter.getCount() >= 20) {
@@ -229,6 +235,9 @@ public class ArticleFragment extends Fragment implements View.OnClickListener, I
             adapter.addItems(date);
         }else{
             artPresenter.getuserArtList(cookie,sid,1);
+            if (type != null) {
+                Toast.makeText(getContext(),"您还没有"+type+"的文章",Toast.LENGTH_SHORT).show();
+            }
         }
     }
 

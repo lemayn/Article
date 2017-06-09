@@ -279,12 +279,12 @@
         <EditText
             android:id="@+id/et_title"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="35dp"
             android:layout_marginLeft="6dp"
             android:background="@drawable/edit_editor_bg"
             android:hint="@string/editor_title"
             android:maxLength="20"
-            android:padding="5dp" />
+            android:paddingLeft="5dp" />
     </LinearLayout>
 
     <LinearLayout
@@ -292,23 +292,34 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="4dp"
         android:background="@color/colorWhite"
-        android:gravity="start"
+        android:gravity="start|center_vertical"
         android:orientation="horizontal">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="文章类型："
+            android:text="类型"
+            android:textSize="18sp"
             android:gravity="center_vertical"
             android:textColor="@color/colorBlack"/>
 
-            <com.jaredrummler.materialspinner.MaterialSpinner
-                android:id="@+id/spinner_editor"
-                android:layout_width="100dp"
-                android:layout_height="45dp" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="7dp"
+                android:layout_marginBottom="7dp"
+                android:layout_marginLeft="8dp"
+                android:padding="2dp"
+                android:gravity="center_horizontal"
+                android:background="@drawable/edit_editor_bg">
+                <com.jaredrummler.materialspinner.MaterialSpinner
+                    android:id="@+id/spinner_editor"
+                    android:layout_width="84dp"
+                    android:layout_height="38dp"
+                    />
+            </LinearLayout>
 
     </LinearLayout>
-
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -394,12 +405,12 @@
     <ImageView
         android:id="@+id/iv_editor_insert"
         android:layout_width="200dp"
-        android:layout_height="200dp"
+        android:layout_height="190dp"
         android:layout_gravity="center"
         android:layout_margin="10dp"
-        android:adjustViewBounds="true"
-        android:padding="10dp"
         android:scaleType="centerCrop"
-        android:visibility="gone" />
+        android:adjustViewBounds="true"
+        android:visibility="visible"
+        android:src="@drawable/rec_bg"/>
 
 </LinearLayout>

@@ -100,8 +100,8 @@ public class EditorActivity extends AppCompatActivity implements IEditorActivity
                     ImageCompress imageCompress = new ImageCompress();
                     ImageCompress.CompressOptions options = new ImageCompress.CompressOptions();
                     options.uri = Uri.fromFile(new File(imgpath));
-                    options.maxHeight = 960;
-                    options.maxWidth = 540;
+                    options.maxHeight = 800;
+                    options.maxWidth = 480;
                     insertBitmap = imageCompress.compressFromUri(EditorActivity.this, options);
                     /*//设置图片缩放比例
                     ImageResizeUtil.resizeImage(insertBitmap,500,500);*/
@@ -212,6 +212,7 @@ public class EditorActivity extends AppCompatActivity implements IEditorActivity
                         ImageCompress imageCompress = new ImageCompress();
                         ImageCompress.CompressOptions options = new ImageCompress.CompressOptions();
                         options.uri = Uri.fromFile(new File(imgpath));
+
                         options.maxHeight = 960;
                         options.maxWidth = 540;
                         insertBitmap = imageCompress.compressFromUri(EditorActivity.this, options);
@@ -234,11 +235,7 @@ public class EditorActivity extends AppCompatActivity implements IEditorActivity
         iv_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (TextUtils.isEmpty(mEditor.getText().toString())){
-                    finish();
-                }else{
-                    showifSaveDialog();
-                }
+                onBackPressed();
             }
         });
 

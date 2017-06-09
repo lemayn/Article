@@ -111,5 +111,6 @@
     <string name="basic_info_attention">基本资料设置后无法修改，请务必真实填写，\n谨慎提交.</string>
 
     <string name="back_pwd">可通过手机验证码找回密码</string>
+    <string name="basic_info_bank_attention">银行资料设置后无法修改，请务必真实填写，\n谨慎提交.</string>
 
 </resources>

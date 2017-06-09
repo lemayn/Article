@@ -12,6 +12,8 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -44,6 +46,9 @@ public class AddCardActivity extends ToolBarBaseActivity<ActivityAddCardBinding>
     private String cookie;
     private ListViewDialogAdapter dialogAdapter;
     private int bid;
+    private ImageView iv_chooseBank;
+    private LinearLayout ll_chooseBank;
+    private ImageView iv_chooseBank2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,12 +70,16 @@ public class AddCardActivity extends ToolBarBaseActivity<ActivityAddCardBinding>
 
     private void initEvent() {
         loadUserData();
-        tv_choose_bank.setOnClickListener(this);
         bt_addConfirm.setOnClickListener(this);
+        ll_chooseBank.setOnClickListener(this);
     }
 
     private void initView() {
         setTitle(getString(R.string.add_bankcard));
+        setNavigationView();
+        ll_chooseBank = (LinearLayout) findViewById(R.id.ll_chooseBank);
+        iv_chooseBank = (ImageView) findViewById(R.id.iv_chooseBank);
+        iv_chooseBank2 = (ImageView) findViewById(R.id.iv_chooseBank02);
         et_cardNum = (EditTextWithClear) findViewById(R.id.et_card_numb);
         et_userbankName = (EditText) findViewById(R.id.et_userbankName);
         et_userAdress = (EditText) findViewById(R.id.et_userAdress);
@@ -172,8 +181,11 @@ public class AddCardActivity extends ToolBarBaseActivity<ActivityAddCardBinding>
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.tv_choose_bank:
+            case R.id.ll_chooseBank:
                 //显示列表dialog?
+                /*iv_chooseBank.setVisibility(View.GONE);
+                iv_chooseBank2.setVisibility(View.VISIBLE);*/
+                iv_chooseBank.setImageResource(R.mipmap.bank_set02);
                 showListDialog();
                 break;
             case R.id.bt_addConfirm:
@@ -225,6 +237,7 @@ public class AddCardActivity extends ToolBarBaseActivity<ActivityAddCardBinding>
                         bid = which + 1;
                         tv_choose_bank.setTextColor(Color.BLACK);
                         tv_choose_bank.setText(bankList.get(which).getBank());
+                        iv_chooseBank.setImageResource(R.mipmap.bank_set01);
                     }
                 })
                 .create().show();
