@@ -96,6 +96,12 @@ public class WithdrawDepositActivity extends ToolBarBaseActivity<ActivityWithdra
                         showProgressDialog();
                     }
                 })
+                .doAfterTerminate(new Action0() {
+                    @Override
+                    public void call() {
+                        dismissProgressDialog();
+                    }
+                })
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<BankApiBean>() {
                     @Override
@@ -105,12 +111,10 @@ public class WithdrawDepositActivity extends ToolBarBaseActivity<ActivityWithdra
 
                     @Override
                     public void onError(Throwable e) {
-                        dismissProgressDialog();
                     }
 
                     @Override
                     public void onNext(BankApiBean bankApiBean) {
-                        dismissProgressDialog();
                         if (bankApiBean != null && "1".equals(bankApiBean.getCode())) {
                             mBankApiBean = bankApiBean;
                             hasData = mBankApiBean.getData() != null && mBankApiBean.getData().size() > 0;

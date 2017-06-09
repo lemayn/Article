@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.os.SystemClock;
 import android.support.annotation.LayoutRes;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -109,38 +110,44 @@ public class ToolBarBaseActivity<T extends ViewDataBinding> extends AppCompatAct
     }
 
     protected void loadUserData() {
-        HashMap<String, String> hashMap = new HashMap<>();
-        hashMap.put("cookie", (String) SPUtil.get(Constant.Share_prf.COOKIE, ""));
-        hashMap.put("sid", (String) SPUtil.get(Constant.Share_prf.SID, ""));
-        ApiFactory.getApi().article(Constant.Api.USER_DATA, hashMap)
-                .lift(new BaseValueValidOperator<ArticleApiBean>())
-                .doOnSubscribe(new Action0() {
-                    @Override
-                    public void call() {
-                        Log.e("Retrofit_", "BASE: USER_DATA");
-                        SystemClock.sleep(500);
-                        Log.e("Retrofit_", "BASE: USER_DATA   500");
-                    }
-                })
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<ArticleApiBean>() {
-                    @Override
-                    public void onCompleted() {
+        String userData = (String) SPUtil.get(Constant.Share_prf.USER_DATA, "");
+        if (!TextUtils.isEmpty(userData)) {
+            ArticleApiBean articleApiBean = GsonUtil.GsonToBean(userData, ArticleApiBean.class);
+            baseBinding.setApibean(articleApiBean);
+        } else {
+            HashMap<String, String> hashMap = new HashMap<>();
+            hashMap.put("cookie", (String) SPUtil.get(Constant.Share_prf.COOKIE, ""));
+            hashMap.put("sid", (String) SPUtil.get(Constant.Share_prf.SID, ""));
+            ApiFactory.getApi().article(Constant.Api.USER_DATA, hashMap)
+                    .lift(new BaseValueValidOperator<ArticleApiBean>())
+                    .doOnSubscribe(new Action0() {
+                        @Override
+                        public void call() {
+                            Log.e("Retrofit_", "BASE: USER_DATA");
+                            SystemClock.sleep(500);
+                            Log.e("Retrofit_", "BASE: USER_DATA   500");
+                        }
+                    })
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(new Subscriber<ArticleApiBean>() {
+                        @Override
+                        public void onCompleted() {
 
-                    }
+                        }
 
-                    @Override
-                    public void onError(Throwable e) {
-                        Toast.makeText(ToolBarBaseActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
+                        @Override
+                        public void onError(Throwable e) {
+                            Toast.makeText(ToolBarBaseActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
 
-                    @Override
-                    public void onNext(ArticleApiBean apiBean) {
-                        baseBinding.setApibean(apiBean);
-                        SPUtil.put(Constant.Share_prf.USER_DATA, GsonUtil.GsonString(apiBean));
-                    }
-                });
+                        @Override
+                        public void onNext(ArticleApiBean apiBean) {
+                            baseBinding.setApibean(apiBean);
+                            SPUtil.put(Constant.Share_prf.USER_DATA, GsonUtil.GsonString(apiBean));
+                        }
+                    });
+        }
     }
 
     protected void gotoArticle() {

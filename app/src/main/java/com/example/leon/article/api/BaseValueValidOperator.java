@@ -80,7 +80,7 @@ public class BaseValueValidOperator<T extends ApiBean>
         new Handler(Looper.getMainLooper()).post(new Runnable() {
             @Override
             public void run() {
-                DialogHelper.showDialog(topActivity, null, "您的账号已在其他终端登录,请重新登录",
+                DialogHelper.showDialog(topActivity, null, "请重新登录",
                         new DialogHelper.OnClickYesListener() {
                             @Override
                             public void onClickYes(DialogInterface dialog, int which) {
