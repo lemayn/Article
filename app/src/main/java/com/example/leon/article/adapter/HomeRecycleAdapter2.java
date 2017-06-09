@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.leon.article.Activity.NoticeActivity;
 import com.example.leon.article.Activity.art.ArtConstant;
 import com.example.leon.article.Activity.art.ArtDetailActivity;
@@ -178,6 +179,7 @@ public class HomeRecycleAdapter2 extends RecyclerView.Adapter<RecyclerView.ViewH
             holder.text_date.setText(reBeanlist.get(position - 2).getAaddtime());
             Glide.with(context)
                     .load(headurl + reBeanlist.get(position - 2).getAimg())
+                    .diskCacheStrategy(DiskCacheStrategy.SOURCE)
                     .centerCrop()
                     .into(holder.img);
 
@@ -325,6 +327,7 @@ public class HomeRecycleAdapter2 extends RecyclerView.Adapter<RecyclerView.ViewH
 
             Glide.with(context)
                     .load(headurl+list.get(position).getImg())
+                    .diskCacheStrategy(DiskCacheStrategy.SOURCE)
                     .fitCenter()
                     .into(view);
 //            view.setImageResource(list[position]);

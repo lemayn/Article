@@ -15,8 +15,8 @@
 
         <ImageView
             android:id="@+id/iv_toolbar_back"
-            android:layout_width="@dimen/x30"
-            android:layout_height="@dimen/x30"
+            android:layout_width="@dimen/x22"
+            android:layout_height="@dimen/x22"
             android:scaleType="centerInside"
             android:src="@drawable/icon_back"
             android:visibility="gone"/>
