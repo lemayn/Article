@@ -75,6 +75,7 @@
                     android:textSize="@dimen/x14"/>
 
                 <EditText
+                    android:hint="请输入昵称"
                     android:id="@+id/edit_useraccount"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -185,6 +186,7 @@
                     android:textSize="@dimen/x14"/>
 
                 <EditText
+                    android:hint="请输入微信"
                     android:id="@+id/edit_weixin"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -215,6 +217,7 @@
                     android:textSize="@dimen/x14"/>
 
                 <EditText
+                    android:hint="请输入邮箱"
                     android:id="@+id/edit_email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

@@ -156,11 +156,11 @@ public class BasicinformationActivity extends ToolBarBaseActivity<ActivityBasici
             return;
         }
         if (TextUtils.isEmpty(weiXin)) {
-            binding.editWeixin.setError("昵称不能为空");
+            binding.editWeixin.setError("微信不能为空");
             return;
         }
         if (TextUtils.isEmpty(email)) {
-            binding.editEmail.setError("昵称不能为空");
+            binding.editEmail.setError("邮箱不能为空");
             return;
         }
 
