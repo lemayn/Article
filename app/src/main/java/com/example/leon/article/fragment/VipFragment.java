@@ -93,6 +93,7 @@ public class VipFragment extends Fragment {
                 DividerItemDecoration.VERTICAL));
         vipCenterAdapter = new VIPCenterAdapter(data);
         binding.rvVipCenter.setAdapter(vipCenterAdapter);
+        binding.rvVipCenter.setFocusable(false);
     }
 
     public void initView() {
