@@ -118,6 +118,7 @@
                             android:id="@+id/iv_user_avatar"
                             android:layout_width="@dimen/x50"
                             android:layout_height="@dimen/x50"
+                            android:src="@drawable/timg"
                             android:layout_gravity="center_vertical"
                             android:layout_marginLeft="@dimen/x15"
                             android:layout_marginRight="@dimen/x15"

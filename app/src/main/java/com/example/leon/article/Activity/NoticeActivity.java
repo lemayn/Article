@@ -15,11 +15,7 @@ import com.example.leon.article.Http.Api;
 import com.example.leon.article.Http.XHttpUtils;
 import com.example.leon.article.R;
 import com.example.leon.article.adapter.NoticeAdapter;
-import com.example.leon.article.base.ToolBarBaseActivity;
 import com.example.leon.article.bean.NoticeBean;
-import com.example.leon.article.databinding.ActivityNoticeBinding;
-import com.example.leon.article.utils.Constant;
-import com.example.leon.article.utils.SPUtil;
 import com.google.gson.Gson;
 
 import java.io.IOException;
