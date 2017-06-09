@@ -165,7 +165,9 @@ public class ArtPresenterImp extends BasepresenterImp implements IArtPresenter{
 
                     @Override
                     public void onNext(ArtListBean artListBean) {
+                        int artStatustoTalpage = artListBean.getData().getTotalpage();
                         articleFragment.setArtDate(artListBean.getData().getArticle());
+                        articleFragment.getArtStatusTotal(artStatustoTalpage);
                     }
                 });
         addSubscription(subscribe);

@@ -230,7 +230,6 @@ public class AddCardActivity extends ToolBarBaseActivity<ActivityAddCardBinding>
     private void showListDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(getString(R.string.please_choose_yourbank))
-                .setIcon(R.mipmap.chosebankicon)
                 .setAdapter(dialogAdapter, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {

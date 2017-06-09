@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -70,6 +71,7 @@ public class EditorActivity extends AppCompatActivity implements IEditorActivity
     private List<UploadClassifyBean.DataBean> classifys= new ArrayList<>();
     private MaterialSpinner spinner;
     private int selectPosition = 1;
+    private boolean isDelet = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -207,15 +209,20 @@ public class EditorActivity extends AppCompatActivity implements IEditorActivity
                     bytesFromBitmap = getBytesFromBitmap(insertBitmap);
                 }
                 else{
-                    if (!TextUtils.isEmpty(imgpath)) {
+                    /*if (!TextUtils.isEmpty(imgpath)) {
                         //压缩图片
                         ImageCompress imageCompress = new ImageCompress();
                         ImageCompress.CompressOptions options = new ImageCompress.CompressOptions();
                         options.uri = Uri.fromFile(new File(imgpath));
-
                         options.maxHeight = 960;
                         options.maxWidth = 540;
                         insertBitmap = imageCompress.compressFromUri(EditorActivity.this, options);
+                        bytesFromBitmap = getBytesFromBitmap(insertBitmap);
+                    }*/
+                    if (isDelet) {
+                        insertBitmap = null;
+                    }else{
+                        insertBitmap = BitmapFactory.decodeResource(getResources(),R.drawable.rec_bg);
                         bytesFromBitmap = getBytesFromBitmap(insertBitmap);
                     }
                 }
@@ -271,6 +278,7 @@ public class EditorActivity extends AppCompatActivity implements IEditorActivity
                             iv_insert.setVisibility(View.GONE);
                             imgpath = "";
                             insertBitmap = null;
+                            isDelet = true;
                         }
                     }
                 })

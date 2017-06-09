@@ -37,6 +37,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/colorWhite"
             android:gravity="center_vertical"
             android:orientation="horizontal"
             android:padding="5dp">
@@ -80,6 +81,51 @@
 
         </LinearLayout>
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/colorGrey" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@color/colorWhite"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/upload_content"
+                android:textSize="13sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <View
+                    android:layout_width="10dp"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/divider_vertical" />
+
+                <com.jaredrummler.materialspinner.MaterialSpinner
+                    android:id="@+id/spinner"
+                    android:layout_width="102dp"
+                    android:layout_height="match_parent" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/colorGrey" />
+
         <android.support.v4.widget.SwipeRefreshLayout
             android:id="@+id/swipeRefresh_acticle"
             android:layout_width="match_parent"
@@ -90,13 +136,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:divider="@drawable/divider"
-                android:dividerHeight="1px"/>
+                android:dividerHeight="1px" />
 
         </android.support.v4.widget.SwipeRefreshLayout>
 
     </LinearLayout>
 
-    <LinearLayout
+    <!--<LinearLayout
         android:id="@+id/lv_article_empty"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -117,7 +163,7 @@
             android:textSize="16sp"
             android:layout_margin="5dp"/>
 
-    </LinearLayout>
+    </LinearLayout>-->
 
     <!--<ProgressBar
         android:id="@+id/article_progressBar"
