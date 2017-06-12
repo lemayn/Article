@@ -66,8 +66,8 @@ public class HomePresenter extends BasePresenter<IHomePre> {
 
     }
 
-    public void RecommendArticle() {
-
+    public void RecommendArticle(int page) {
+        String Spage = String.valueOf(page);
         FormBody formBody = new FormBody.Builder()
                 .add("page", "1")
                 .build();
@@ -92,14 +92,14 @@ public class HomePresenter extends BasePresenter<IHomePre> {
                             Toast.makeText(context, bean.getMsg(), Toast.LENGTH_SHORT).show();
                         }
                         else if(bean.getCode().equals("1")){
-                            iView.showRecommendList(bean.getData().getTuijian());
+                            iView.showRecommendList(bean.getData().getTuijian(), bean.getData().getTotalpage());
                         }
                     }
                 });
     }
 
-    public void excellentArticle() {
-
+    public void excellentArticle(int page) {
+        String Spage = String.valueOf(page);
         FormBody formBody = new FormBody.Builder()
                 .add("page", "1")
                 .build();
@@ -125,7 +125,7 @@ public class HomePresenter extends BasePresenter<IHomePre> {
                             Toast.makeText(context, bean.getMsg(), Toast.LENGTH_SHORT).show();
                         }
                         else if(bean.getCode().equals("1")) {
-                            iView.showGoodList(bean.getData().getGood());
+                            iView.showGoodList(bean.getData().getGood(), bean.getData().getTotalpage());
                         }
 
                     }

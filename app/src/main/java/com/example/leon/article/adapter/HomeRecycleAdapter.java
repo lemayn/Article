@@ -214,9 +214,13 @@ public class HomeRecycleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
         if (reBeanlist.size()>0) {
 
-            if ((position - 2) == 0){
+            if (position == 2){
                 holder.text_contect.setTextColor(context.getResources().getColor(R.color.colorRed));
                 holder.text_date.setTextColor(context.getResources().getColor(R.color.colorRed));
+            }
+            else {
+                holder.text_contect.setTextColor(context.getResources().getColor(R.color.textcolorbalck));
+                holder.text_date.setTextColor(context.getResources().getColor(R.color.textcolorbalck));
             }
 
             holder.text_contect.setText(reBeanlist.get(position - 2).getAtitle());

@@ -14,8 +14,8 @@ import java.util.List;
 public interface IHomePre extends IBaseView {
 
     void showAdvList(List<AdvBean.DataBean> List);
-    void showRecommendList(List<RecomArtBean.DataBean.TuijianBean> List);
-    void showGoodList(List<ExcellentBean.DataBean.GoodBean> List);
+    void showRecommendList(List<RecomArtBean.DataBean.TuijianBean> List, int page);
+    void showGoodList(List<ExcellentBean.DataBean.GoodBean> List, int page);
     void showNoticeList(List<NoticeBean.DataBean> List);
 
 }
