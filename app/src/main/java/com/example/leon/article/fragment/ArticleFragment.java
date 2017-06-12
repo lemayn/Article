@@ -6,7 +6,6 @@ import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -102,7 +101,6 @@ public class ArticleFragment extends Fragment implements View.OnClickListener, I
                     if (page < totalpager) {
                         page ++;
                         loadMore();
-                        Log.i("HT", "onScrollStateChanged: "+page);
                     }
                     //判断文章分类是否需要加载更多
                     if (statusPage < artStatusTotalpager){//超过一页需要加载更多
@@ -171,9 +169,9 @@ public class ArticleFragment extends Fragment implements View.OnClickListener, I
                 artType = item;
                 switch (position) {
                     case 0://点击了全部
-                        artStatus = -1;
                         adapter.clearDate();
-                        artPresenter.getuserArtList(cookie,sid,1);
+                        page = 1;
+                        artPresenter.getuserArtList(cookie,sid,page);
                         break;
                     case 1://点击了已发表
                         artStatus = 1;
@@ -246,7 +244,6 @@ public class ArticleFragment extends Fragment implements View.OnClickListener, I
     @Override
     public void getArtStatusTotal(int statusTotalpager) {
         this.artStatusTotalpager = statusTotalpager;
-        Log.i("HT", "各个状态栏的getArtStatusTotal: "+statusTotalpager);
     }
 
     @Override
