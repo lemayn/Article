@@ -9,6 +9,8 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.leon.article.R;
+import com.example.leon.article.api.bean.StatementBean;
+import com.example.leon.article.widget.AlignTextView;
 
 public class DataBindingUtil {
 
@@ -72,5 +74,48 @@ public class DataBindingUtil {
             }
         }
         editText.setText(sb.toString());
+    }
+
+    @BindingAdapter("statement_type")
+    public static void setStatementType(TextView textView, int type) {
+        if (type == 0) {
+            textView.setText("提现");
+        } else if (type == 1) {
+            textView.setText("佣金");
+        }
+    }
+
+    @BindingAdapter("statement_handle")
+    public static void setStatementHandle(AlignTextView textView, String handle) {
+        if (TextUtils.isEmpty(handle)) {
+            return;
+        }
+        StringBuffer handleState = new StringBuffer();
+        int color = 0;
+        if ("0".equals(handle)) {
+            handleState.append(CommonUtils.getString(R.string.statement_pending));
+            color = CommonUtils.getColor(R.color.statement_handle_pending);
+        } else if ("1".equals(handle)) {
+            handleState.append(CommonUtils.getString(R.string.statement_success));
+            color = CommonUtils.getColor(R.color.statement_handle_success);
+        } else if ("2".equals(handle)) {
+            handleState.append(CommonUtils.getString(R.string.statement_fail));
+            color = CommonUtils.getColor(R.color.statement_handle_fail);
+        }
+        textView.setAlingTextColor(color);
+        textView.setAlingText(handleState.toString());
+    }
+
+    @BindingAdapter("statement_money")
+    public static void setStatementMoney(TextView textView, StatementBean.DataBean.MoneyConfig config) {
+        if (config == null) {
+            return;
+        }
+        StringBuffer money = new StringBuffer();
+        if (config.getType() == 0) {
+            textView.setText(money.append("-").append(config.getMoney()).toString());
+        } else if (config.getType() == 1) {
+            textView.setText(money.append("+").append(config.getMoney()).toString());
+        }
     }
 }

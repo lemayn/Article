@@ -4,6 +4,6 @@
 
     <solid android:color="@color/toolbar_back"/>
 
-    <corners android:radius="@dimen/x6"/>
+    <corners android:radius="@dimen/x4"/>
 
 </shape>

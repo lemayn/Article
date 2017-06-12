@@ -2,6 +2,7 @@ package com.example.leon.article.api;
 
 import com.example.leon.article.api.bean.ArticleApiBean;
 import com.example.leon.article.api.bean.BankApiBean;
+import com.example.leon.article.api.bean.StatementBean;
 
 import java.util.HashMap;
 
@@ -16,11 +17,16 @@ public interface ArticleService {
     @FormUrlEncoded
     @POST("api/")
     Observable<ArticleApiBean> article(@Query("Action") String type,
-                                       @FieldMap HashMap<String,String> options);
+                                       @FieldMap HashMap<String, String> options);
 
     @FormUrlEncoded
     @POST("api/")
     Observable<BankApiBean> bank(@Query("Action") String type,
-                                 @FieldMap HashMap<String,String> options);
+                                 @FieldMap HashMap<String, String> options);
+
+    @FormUrlEncoded
+    @POST("api/")
+    Observable<StatementBean> statement(@Query("Action") String type,
+                                        @FieldMap HashMap<String, String> options);
 
 }

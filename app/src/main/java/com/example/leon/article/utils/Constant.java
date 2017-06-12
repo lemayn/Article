@@ -84,6 +84,11 @@ public class Constant {
          */
         public static final String TELL_RES = "TellRes";
 
+        /**
+         * 我的账单接口
+         */
+        public static final String MONEY_CONFIG = "MoneyConfig";
+
     }
 
     public static class Share_prf {

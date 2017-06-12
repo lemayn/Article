@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.example.leon.article.Activity.AccountStatementActivity;
 import com.example.leon.article.Activity.BasicinformationActivity;
 import com.example.leon.article.Activity.LoginActivity;
 import com.example.leon.article.Activity.ModifyPasswordActivity;
@@ -75,17 +76,19 @@ public class VipFragment extends Fragment {
 
     private void initEvent() {
         ArrayList<ItemBean> data = new ArrayList<>();
-        data.add(new ItemBean(R.drawable.basic_info, CommonUtils.getString(R.string.basic_info),
+        data.add(new ItemBean(R.drawable.jibenziliao, CommonUtils.getString(R.string.basic_info),
                 BasicinformationActivity.class));
-        data.add(new ItemBean(R.drawable.banks_setting, CommonUtils.getString(R.string.banks_setting),
+        data.add(new ItemBean(R.drawable.yinhangshezhi, CommonUtils.getString(R.string.banks_setting),
                 BankSettingActivity.class));
-        data.add(new ItemBean(R.drawable.banks_setting, CommonUtils.getString(R.string.withdraw_deposit),
+        data.add(new ItemBean(R.drawable.woyaotixian, CommonUtils.getString(R.string.withdraw_deposit),
                 WithdrawDepositActivity.class));
-        data.add(new ItemBean(R.drawable.articles_list, CommonUtils.getString(R.string.articles_list),
+        data.add(new ItemBean(R.drawable.wodezhangdan, getString(R.string.account_statement),
+                AccountStatementActivity.class));
+        data.add(new ItemBean(R.drawable.wenzhangliebiao, CommonUtils.getString(R.string.articles_list),
                 WithdrawDepositActivity.class));
-        data.add(new ItemBean(R.drawable.password_modify, CommonUtils.getString(R.string.password_modify),
+        data.add(new ItemBean(R.drawable.xiugaimima, CommonUtils.getString(R.string.password_modify),
                 ModifyPasswordActivity.class));
-        data.add(new ItemBean(R.drawable.password_modify, CommonUtils.getString(R.string.withdraw_password_modify),
+        data.add(new ItemBean(R.drawable.tixianxiugaimima, CommonUtils.getString(R.string.withdraw_password_modify),
                 ModifyWithoutPasswordActivity.class));
         binding.rvVipCenter.setLayoutManager(new LinearLayoutManager(getActivity(),
                 LinearLayoutManager.VERTICAL, false));
@@ -94,6 +97,7 @@ public class VipFragment extends Fragment {
         vipCenterAdapter = new VIPCenterAdapter(data);
         binding.rvVipCenter.setAdapter(vipCenterAdapter);
         binding.rvVipCenter.setFocusable(false);
+        binding.rvVipCenter.setNestedScrollingEnabled(false);
     }
 
     public void initView() {

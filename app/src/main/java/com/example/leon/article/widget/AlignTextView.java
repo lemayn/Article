@@ -30,17 +30,25 @@ public class AlignTextView extends AppCompatTextView {
      */
     private String suffixStr;
 
+    /**
+     * 文字颜色
+     */
+    private int color;
+
     public AlignTextView(Context context) {
         this(context, null);
+        color = CommonUtils.getColor(R.color.custom_text_color);
     }
 
     public AlignTextView(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
+        color = CommonUtils.getColor(R.color.custom_text_color);
     }
 
     public AlignTextView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         this.context = context;
+        color = CommonUtils.getColor(R.color.custom_text_color);
 
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.AlignTextView);
         text = typedArray.getString(R.styleable.AlignTextView_text);
@@ -53,7 +61,7 @@ public class AlignTextView extends AppCompatTextView {
         Paint paint = new Paint();
         paint.setAntiAlias(true);
         paint.setTextSize(getTextSize());
-        paint.setColor(CommonUtils.getColor(R.color.custom_text_color));
+        paint.setColor(color);
 
         Rect targetRect = new Rect(0, 0, getWidth(), getHeight());
 
@@ -119,6 +127,11 @@ public class AlignTextView extends AppCompatTextView {
 
     public void setAlingText(String text) {
         this.text = text;
+        invalidate();
+    }
+
+    public void setAlingTextColor(int color) {
+        this.color = color;
         invalidate();
     }
 

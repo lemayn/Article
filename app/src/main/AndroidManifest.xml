@@ -63,6 +63,7 @@
         <activity android:name=".Activity.bank.BankSettingActivity"/>
         <activity android:name=".Activity.bank.AddCardActivity" android:windowSoftInputMode="stateHidden|adjustResize"/>
         <activity android:name=".Activity.MoreInfoActivity"/>
+        <activity android:name=".Activity.AccountStatementActivity"/>
     </application>
 
 </manifest>
