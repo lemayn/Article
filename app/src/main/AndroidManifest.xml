@@ -60,6 +60,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".Activity.GuideActivity"></activity>
+        <activity android:name=".Activity.AccountStatementActivity"/>
     </application>
 
 </manifest>
