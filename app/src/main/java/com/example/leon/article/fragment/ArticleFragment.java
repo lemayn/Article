@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -47,6 +48,7 @@ public class ArticleFragment extends Fragment implements View.OnClickListener, I
     private String artType;
     private int artStatus;
     private Handler handler = new Handler();
+    private ImageView iv_creatArt;
 
     @Nullable
     @Override
@@ -72,6 +74,7 @@ public class ArticleFragment extends Fragment implements View.OnClickListener, I
 
     private void initEvent() {
         tv_createArt.setOnClickListener(this);
+        iv_creatArt.setOnClickListener(this);
         refreshActicle.setProgressBackgroundColorSchemeResource(android.R.color.white);
         refreshActicle.setColorSchemeResources(R.color.colorAccent, R.color.colorPrimary, R.color.colorPrimaryDark);
         refreshActicle.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -132,27 +135,7 @@ public class ArticleFragment extends Fragment implements View.OnClickListener, I
 
     private void loadMore() {
         ll_footer_contain.setVisibility(View.VISIBLE);
-        Log.i("HT", "loadMore: "+totalpager);
-        /*new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                if (type == 0){
-                    artPresenter.getUserArtTypeList(cookie,sid,page,type);
-                    ll_footer_contain.setVisibility(View.GONE);
-                }
-                if (type == 1){
-                    artPresenter.getUserArtTypeList(cookie,sid,page,type);
-                    ll_footer_contain.setVisibility(View.GONE);
-                }
-                if (type == 2) {
-                    artPresenter.getUserArtTypeList(cookie,sid,page,type);
-                    ll_footer_contain.setVisibility(View.GONE);
-                } if (type == 6){
-                    artPresenter.getuserArtList(cookie,sid,page);
-                    ll_footer_contain.setVisibility(View.GONE);
-                }
-            }
-        },2000);*/
+
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -177,6 +160,7 @@ public class ArticleFragment extends Fragment implements View.OnClickListener, I
         lv_article = (ListView) view.findViewById(R.id.lv_article);
         lv_article.addFooterView(footerView);
         tv_createArt = (TextView) view.findViewById(R.id.tv_createArt);
+        iv_creatArt = (ImageView) view.findViewById(R.id.icon_creat_article);
     }
 
     private void initSpinner(View view) {
@@ -216,6 +200,7 @@ public class ArticleFragment extends Fragment implements View.OnClickListener, I
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.tv_createArt:
+            case R.id.icon_creat_article:
                 goEditorActivity();
                 break;
         }

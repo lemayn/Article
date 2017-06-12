@@ -77,9 +77,10 @@ public class EditorActivity extends AppCompatActivity implements IEditorActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_editor);
-        initView();
         //获取用户输入，cookie，sid
-        GetDate();
+        cookie = (String) SPUtil.get(Constant.Share_prf.COOKIE,"");
+        sid = (String) SPUtil.get(Constant.Share_prf.SID,"");
+        initView();
 
         initPic();
     }
@@ -109,14 +110,11 @@ public class EditorActivity extends AppCompatActivity implements IEditorActivity
                     ImageResizeUtil.resizeImage(insertBitmap,500,500);*/
                 }
             }
-        },false);//图像裁剪功能 false不开启，true开启
+        },true);//图像裁剪功能 false不开启，true开启
     }
-
 
     private void GetDate() {
         artPresenter = new ArtPresenterImp(this,this);
-        cookie = (String) SPUtil.get(Constant.Share_prf.COOKIE,"");
-        sid = (String) SPUtil.get(Constant.Share_prf.SID,"");
         //获取上传类型
         artPresenter.getUploadClassify(cookie,sid);
         mEditor.addTextChangedListener(new TextWatcher() {
@@ -158,6 +156,7 @@ public class EditorActivity extends AppCompatActivity implements IEditorActivity
         //上传状态选择器
         spinner = (MaterialSpinner) findViewById(R.id.spinner_editor);
         initEditor();
+        GetDate();
         initEvent();
     }
 

@@ -18,9 +18,9 @@
         <ImageView
             android:id="@+id/iv_editor_back"
             android:layout_width="wrap_content"
-            android:layout_height="26dp"
+            android:layout_height="25dp"
             android:layout_centerVertical="true"
-            android:layout_margin="5dp"
+            android:layout_margin="6dp"
             android:src="@drawable/back" />
 
         <TextView
@@ -404,7 +404,7 @@
     <ImageView
         android:id="@+id/iv_editor_insert"
         android:layout_width="200dp"
-        android:layout_height="190dp"
+        android:layout_height="160dp"
         android:layout_gravity="center"
         android:layout_margin="10dp"
         android:scaleType="centerCrop"

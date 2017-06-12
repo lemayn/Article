@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest package="com.example.leon.article"
-          xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.leon.article">
 
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
         android:name=".app"
@@ -16,54 +16,50 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".Activity.LoginActivity"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden"
-            >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+            android:windowSoftInputMode="adjustUnspecified|stateHidden">
 
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
         </activity>
-        <activity android:name=".Activity.art.ArtDetailActivity"/>
+        <activity android:name=".Activity.art.ArtDetailActivity" />
         <activity
             android:name=".Activity.art.EditorActivity"
-            android:windowSoftInputMode="adjustPan"/>
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".Activity.art.MySqlActivity"
-            android:launchMode="singleTask"/>
-        <activity android:name=".Activity.VIPCenterActivity"/>
-        <activity android:name=".Activity.RegisterActivity"/>
+            android:launchMode="singleTask" />
+        <activity android:name=".Activity.VIPCenterActivity" />
+        <activity android:name=".Activity.RegisterActivity" />
         <activity
             android:name=".Activity.MainActivity"
-            android:launchMode="singleTask"/>
-
+            android:launchMode="singleTask" />
         <activity
             android:name=".Activity.BasicinformationActivity"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden"/>
-
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
         <activity
             android:name=".Activity.ModifyPasswordActivity"
-            android:windowSoftInputMode="stateHidden">
-        </activity>
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".Activity.ModifyWithoutPasswordActivity"
-            android:windowSoftInputMode="stateHidden">
-        </activity>
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".Activity.WithdrawDepositActivity"
-            android:windowSoftInputMode="stateHidden">
-        </activity>
-
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".Activity.NoticeActivity"
-            android:windowSoftInputMode="stateHidden">
-        </activity>
+            android:windowSoftInputMode="stateHidden" />
+        <activity android:name=".Activity.ForgetPwdActivity" />
+        <activity android:name=".Activity.bank.BankSettingActivity" />
+        <activity
+            android:name=".Activity.bank.AddCardActivity"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+        <activity android:name=".Activity.MoreInfoActivity" />
+        <activity android:name=".Activity.SplashActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-        <activity android:name=".Activity.ForgetPwdActivity"/>
-        <activity android:name=".Activity.bank.BankSettingActivity"/>
-        <activity android:name=".Activity.bank.AddCardActivity" android:windowSoftInputMode="stateHidden|adjustResize"/>
-        <activity android:name=".Activity.MoreInfoActivity"/>
-        <activity android:name=".Activity.AccountStatementActivity"/>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".Activity.GuideActivity"></activity>
     </application>
 
 </manifest>
