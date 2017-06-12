@@ -39,10 +39,10 @@ public class HomeRecycleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
     String headurl = Constant.Api.BASE_URL;
 
-    private Context context;
+    private static Context context;
 
     List<AdvBean.DataBean> DatabeanList;
-    List<RecomArtBean.DataBean.TuijianBean> reBeanlist;
+    static List<RecomArtBean.DataBean.TuijianBean> reBeanlist;
     List<ExcellentBean.DataBean.GoodBean> Goodlist;
     List<NoticeBean.DataBean> noticeBean;
 
@@ -50,6 +50,7 @@ public class HomeRecycleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     public static final int TYPE_HEAD1 = 0xff01;
     public static final int TYPE_HEAD2 = 0xff02;
     public static final int TYPE_TYPE3_FRAGMENT = 0xff03;
+
 
     public HomeRecycleAdapter(List<AdvBean.DataBean> list, List<RecomArtBean.DataBean.TuijianBean> reBeanlist,
                               List<NoticeBean.DataBean> noticeBean
@@ -107,40 +108,6 @@ public class HomeRecycleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         }
     }
 
-//    @Override
-//    public void onAttachedToRecyclerView(RecyclerView recyclerView) {
-//        RecyclerView.LayoutManager layoutManager = recyclerView.getLayoutManager();
-//        if (layoutManager instanceof GridLayoutManager) {
-//
-//            final GridLayoutManager gridLayoutManager = ((GridLayoutManager) layoutManager);
-//            gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
-//
-//                /**
-//                 * SpanSizeLookup
-//                 * 这个类是一个抽象类，而且仅有一个抽象方法getSpanSize，
-//                 * 这个方法的返回值决定了我们每个position上的item占据的单元格个数，
-//                 * 而我们这段代码综合上面为GridLayoutManager设置的每行的个数来解释的话，
-//                 * GridLayoutManager设置的  spanCount(列数) 比上  getSpanSize返回的值(每个item所占的单元格数)
-//                 */
-//                @Override
-//                public int getSpanSize(int position) {
-//                    int type = getItemViewType(position);
-//                    switch (type) {
-//                        case TYPE_HEAD1:
-//                            return gridLayoutManager.getSpanCount();
-//                        case TYPE_HEAD2:
-//                            return gridLayoutManager.getSpanCount();
-//                        case TYPE_TYPE3_FRAGMENT:
-//                            return gridLayoutManager.getSpanCount();
-//                        default:
-//                            return gridLayoutManager.getSpanCount();
-//                    }
-//
-//                }
-//            });
-//        }
-//    }
-
 
     /**
      * bind HEAD1 轮播图
@@ -162,12 +129,11 @@ public class HomeRecycleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     private void bindTypeHead2(final HolderTypeHead2 holder, final int position){
 
         String text = "";
-
         for (int i = 0; i<noticeBean.size(); i++){
-            text = noticeBean.get(i).getNtitle();
-            text = text + text;
+            String a = "";
+            a = noticeBean.get(i).getNtitle();
+            text = "   " + text +  "   " + a + "    ";
         }
-//        Log.i("MyTest", "text"+text);
 
        if (noticeBean.size()>0){
            holder.text_notice.setText(text);
@@ -225,11 +191,6 @@ public class HomeRecycleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
             holder.text_contect.setText(reBeanlist.get(position - 2).getAtitle());
             holder.text_date.setText(reBeanlist.get(position - 2).getAaddtime());
-            Glide.with(context)
-                    .load(headurl + reBeanlist.get(position - 2).getAimg())
-                    .diskCacheStrategy(DiskCacheStrategy.SOURCE)
-                    .centerCrop()
-                    .into(holder.img);
 
             if (reBeanlist.get(position - 2).getAimg()==null||reBeanlist.get(position - 2).getAimg().equals("")){
                 Glide.with(context)
@@ -237,22 +198,16 @@ public class HomeRecycleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                         .centerCrop()
                         .into(holder.img);
             }
-
-            //文章详情
-            holder.lin1.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    String aid = reBeanlist.get(position - 2).getAid();
-                    Log.i("MyTest1", "aid + "+aid);
-                    Intent intent = new Intent(context, ArtDetailActivity.class);
-                    intent.putExtra(ArtConstant.DETAIL_AID, aid);
-                    context.startActivity(intent);
-                }
-            });
+            else {
+                Glide.with(context)
+                        .load(headurl + reBeanlist.get(position - 2).getAimg())
+                        .diskCacheStrategy(DiskCacheStrategy.SOURCE)
+                        .centerCrop()
+                        .into(holder.img);
+            }
         }
 
     }
-
 
 
     /**
@@ -330,7 +285,23 @@ public class HomeRecycleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             text_date2 = (TextView) itemView.findViewById(R.id.text_date2);
             img2 = (ImageView) itemView.findViewById(R.id.img2);
             lin2 = (LinearLayout) itemView.findViewById(R.id.lin2);
+
+            initListener(itemView);
         }
+
+        private void initListener(View itemView) {
+            lin1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+//                    Log.i("MyTest", "poistion"+getAdapterPosition());
+                    String aid = reBeanlist.get(getAdapterPosition() - 2).getAid();
+                    Intent intent = new Intent(context, ArtDetailActivity.class);
+                    intent.putExtra(ArtConstant.DETAIL_AID, aid);
+                    context.startActivity(intent);
+                }
+            });
+        }
+
     }
 
     public void addNotItems(List<NoticeBean.DataBean> List){

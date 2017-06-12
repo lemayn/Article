@@ -91,7 +91,6 @@ public class HomeFragment extends Fragment implements IHomePre {
 
         homePresenter = new HomePresenter(getContext(), this);
         ClearData();
-
         init();
         return view;
     }
@@ -143,10 +142,6 @@ public class HomeFragment extends Fragment implements IHomePre {
                     // 判断是否滚动到底部，并且不在加载状态
                     if (lastVisibleItem == (totalItemCount - 1) && !isLoadMore) {
 //                        layout_more.setVisibility(View.VISIBLE);
-//                        if (page == 1){
-//                            Log.i("MyTest", "停止加载");
-//                            return;
-//                        }
                         swipeRefreshLayout.setRefreshing(true);
                         Toast.makeText(getActivity(), "加载中...", Toast.LENGTH_SHORT).show();
                         mHandler.postDelayed(new Runnable() {
@@ -261,6 +256,7 @@ public class HomeFragment extends Fragment implements IHomePre {
     public void showNoticeList(List<NoticeBean.DataBean> List) {
         adapter.addNotItems(List);
     }
+
 
     @Override
     public void onResume() {

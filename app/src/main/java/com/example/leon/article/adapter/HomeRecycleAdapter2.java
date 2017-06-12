@@ -38,11 +38,11 @@ public class HomeRecycleAdapter2 extends RecyclerView.Adapter<RecyclerView.ViewH
 
     String headurl = Constant.Api.BASE_URL;
 
-    private Context context;
+    private static Context context;
 
     List<AdvBean.DataBean> DatabeanList;
 //    List<RecomArtBean.DataBean.TuijianBean> reBeanlist;
-    List<ExcellentBean.DataBean.GoodBean> reBeanlist;
+    static List<ExcellentBean.DataBean.GoodBean> reBeanlist;
     List<NoticeBean.DataBean> noticeBean;
 
     //type
@@ -121,12 +121,11 @@ public class HomeRecycleAdapter2 extends RecyclerView.Adapter<RecyclerView.ViewH
     private void bindTypeHead2(final HolderTypeHead2 holder, final int position){
 
         String text = "";
-
         for (int i = 0; i<noticeBean.size(); i++){
-            text = noticeBean.get(i).getNtitle();
-            text = text + text;
+            String a = "";
+            a = noticeBean.get(i).getNtitle();
+            text = "   " + text +  "   " + a + "    ";
         }
-//        Log.i("MyTest", "text"+text);
 
        if (noticeBean.size()>0){
            holder.text_notice.setText(text);
@@ -181,11 +180,6 @@ public class HomeRecycleAdapter2 extends RecyclerView.Adapter<RecyclerView.ViewH
 
             holder.text_contect.setText(reBeanlist.get(position - 2).getAtitle());
             holder.text_date.setText(reBeanlist.get(position - 2).getAaddtime());
-            Glide.with(context)
-                    .load(headurl + reBeanlist.get(position - 2).getAimg())
-                    .diskCacheStrategy(DiskCacheStrategy.SOURCE)
-                    .centerCrop()
-                    .into(holder.img);
 
             if (reBeanlist.get(position - 2).getAimg()==null||reBeanlist.get(position - 2).getAimg().equals("")){
                 Glide.with(context)
@@ -193,18 +187,14 @@ public class HomeRecycleAdapter2 extends RecyclerView.Adapter<RecyclerView.ViewH
                         .centerCrop()
                         .into(holder.img);
             }
+            else {
+                Glide.with(context)
+                        .load(headurl + reBeanlist.get(position - 2).getAimg())
+                        .diskCacheStrategy(DiskCacheStrategy.SOURCE)
+                        .centerCrop()
+                        .into(holder.img);
+            }
 
-            //文章详情
-            holder.lin1.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    String aid = reBeanlist.get(position - 2).getAid();
-                    Log.i("MyTest2", "aid + "+aid);
-                    Intent intent = new Intent(context, ArtDetailActivity.class);
-                    intent.putExtra(ArtConstant.DETAIL_AID, aid);
-                    context.startActivity(intent);
-                }
-            });
         }
 
     }
@@ -283,7 +273,23 @@ public class HomeRecycleAdapter2 extends RecyclerView.Adapter<RecyclerView.ViewH
             text_date2 = (TextView) itemView.findViewById(R.id.text_date2);
             img2 = (ImageView) itemView.findViewById(R.id.img2);
             lin2 = (LinearLayout) itemView.findViewById(R.id.lin2);
+
+            initListener(itemView);
         }
+
+        private void initListener(View itemView) {
+            lin1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+//                    Log.i("MyTest", "poistion"+getAdapterPosition());
+                    String aid = reBeanlist.get(getAdapterPosition() - 2).getAid();
+                    Intent intent = new Intent(context, ArtDetailActivity.class);
+                    intent.putExtra(ArtConstant.DETAIL_AID, aid);
+                    context.startActivity(intent);
+                }
+            });
+        }
+
     }
 
     public void addNotItems(List<NoticeBean.DataBean> List){
