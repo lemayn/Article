@@ -163,17 +163,17 @@ public class ArticleFragment extends Fragment implements View.OnClickListener, I
 
     private void initSpinner(View view) {
         MaterialSpinner spinner = (MaterialSpinner) view.findViewById(R.id.spinner);
-        spinner.setItems("全部", "已发表", "未通过", "审核中");
+        spinner.setItems("已发表", "已通过", "未通过", "审核中");
         spinner.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener<String>() {
             @Override public void onItemSelected(MaterialSpinner view, int position, long id, String item) {
                 artType = item;
                 switch (position) {
-                    case 0://点击了全部
+                    case 0://点击了全部（已发表）
                         adapter.clearDate();
                         page = 1;
                         artPresenter.getuserArtList(cookie,sid,page);
                         break;
-                    case 1://点击了已发表
+                    case 1://点击了已发表（已通过）
                         artStatus = 1;
                         adapter.clearDate();
                         artPresenter.getUserArtTypeList(cookie,sid,1,1);
