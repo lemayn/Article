@@ -20,18 +20,20 @@
 
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_margin="@dimen/x5"
             android:background="@drawable/shape_modify_confirm_bg"
             android:ems="1"
             android:gravity="center"
             android:text="账单"
+            android:lineSpacingExtra="@dimen/x5"
             android:textColor="@color/white"
             android:textSize="@dimen/x16"/>
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:orientation="vertical">
 
             <RelativeLayout
