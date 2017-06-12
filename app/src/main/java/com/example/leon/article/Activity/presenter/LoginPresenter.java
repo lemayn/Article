@@ -46,7 +46,7 @@ public class LoginPresenter extends BasePresenter<ILoginPre> {
 
                     @Override
                     public void onSuccess(Request request, String result) {
-                        Log.i("MyTest", "AdvData请求成功01" + result.toString());
+//                        Log.i("MyTest", "AdvData请求成功01" + result.toString());
 
                         AdvBean bean = new AdvBean();
                         bean = gson.fromJson(result, AdvBean.class);
@@ -89,7 +89,7 @@ public class LoginPresenter extends BasePresenter<ILoginPre> {
 
                     @Override
                     public void onSuccess(Request request, String result) {
-                        Log.i("MyTest", "backpwd suc" + result.toString());
+//                        Log.i("MyTest", "backpwd suc" + result.toString());
                         ArticleApiBean bean = gson.fromJson(result, ArticleApiBean.class);
                         if (bean.getCode().equals("0")){
                             Toast.makeText(context, bean.getMsg(), Toast.LENGTH_SHORT).show();
