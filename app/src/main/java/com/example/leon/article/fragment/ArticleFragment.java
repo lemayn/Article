@@ -133,7 +133,6 @@ public class ArticleFragment extends Fragment implements View.OnClickListener, I
 
     private void loadMore() {
         ll_footer_contain.setVisibility(View.VISIBLE);
-
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -167,10 +166,10 @@ public class ArticleFragment extends Fragment implements View.OnClickListener, I
         spinner.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener<String>() {
             @Override public void onItemSelected(MaterialSpinner view, int position, long id, String item) {
                 artType = item;
+                page = 1;
                 switch (position) {
                     case 0://点击了全部（已发表）
                         adapter.clearDate();
-                        page = 1;
                         artPresenter.getuserArtList(cookie,sid,page);
                         break;
                     case 1://点击了已发表（已通过）
@@ -186,8 +185,7 @@ public class ArticleFragment extends Fragment implements View.OnClickListener, I
                     case 3://点击了审核中
                         artStatus = 0;
                         adapter.clearDate();
-                        artPresenter.getUserArtTypeList(cookie,sid,1,0);
-
+                        artPresenter.getUserArtTypeList(cookie,sid,page,0);
                         break;
                 }
             }

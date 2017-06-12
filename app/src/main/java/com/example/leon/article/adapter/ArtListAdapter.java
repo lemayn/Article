@@ -67,7 +67,7 @@ public class ArtListAdapter extends BaseAdapter {
         IssueItemHolder holder = getHolder(convertView);
         String review = items.get(position).getReview();
         switch (review) {
-            case "0"://未审核 red
+            case "0"://审核中 red
                 holder.tv_issue_status.setTextColor(Color.RED);
                 holder.tv_issue_status.setText(context.getString(R.string.in_review));
                 break;
