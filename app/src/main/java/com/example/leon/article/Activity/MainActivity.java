@@ -114,6 +114,8 @@ public class MainActivity extends AppCompatActivity {
             // set your width here
             layoutParams.width = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
                     CommonUtils.getDimens(R.dimen.x11), displayMetrics);
+            iconView.setPadding(iconView.getLeft(), iconView.getTop() - CommonUtils.getDimension(R.dimen.x2),
+                    iconView.getRight(), CommonUtils.getDimension(R.dimen.x2));
             iconView.setLayoutParams(layoutParams);
         }
 
