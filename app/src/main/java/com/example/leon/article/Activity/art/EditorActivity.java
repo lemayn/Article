@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -220,10 +219,11 @@ public class EditorActivity extends AppCompatActivity implements IEditorActivity
                     }*/
                     if (isDelet) {
                         insertBitmap = null;
-                    }else{
+                    }
+                    /*else{//不上传默认图片
                         insertBitmap = BitmapFactory.decodeResource(getResources(),R.drawable.rec_bg);
                         bytesFromBitmap = getBytesFromBitmap(insertBitmap);
-                    }
+                    }*/
                 }
                 artPresenter.uploadUserArt(cookie,title,mEditorDate,sid,bytesFromBitmap,String.valueOf(selectPosition));
             }
