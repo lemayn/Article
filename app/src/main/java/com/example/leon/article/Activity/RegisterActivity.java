@@ -51,6 +51,7 @@ public class RegisterActivity extends ToolBarBaseActivity<ActivityRegisterBindin
 
         presenter = new LoginPresenter(RegisterActivity.this, this);
 
+        setHideToolBarView();
         hideHeaderInfo();
         hideHeaderMoneyInfo();
         setNavigationView();

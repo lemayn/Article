@@ -71,6 +71,11 @@ public class ToolBarBaseActivity<T extends ViewDataBinding> extends AppCompatAct
         getSupportActionBar().setDisplayShowTitleEnabled(false);
     }
 
+    //隐藏toolbar
+    public void setHideToolBarView() {
+        baseBinding.toolbar.setVisibility(View.GONE);
+    }
+
     public void setTitle(CharSequence title) {
         baseBinding.tvToolbarTitle.setText(title);
     }

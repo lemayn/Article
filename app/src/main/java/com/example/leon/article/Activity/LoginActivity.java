@@ -61,6 +61,7 @@ public class LoginActivity extends ToolBarBaseActivity<ActivityLoginBinding> imp
         presenter = new LoginPresenter(LoginActivity.this, this);
         hideHeaderInfo();
         hideHeaderMoneyInfo();
+        setHideToolBarView();
         init();
 
         boolean isLogin = !TextUtils.isEmpty((String) SPUtil.get(Constant.Share_prf.COOKIE, "")) ||
