@@ -56,7 +56,10 @@ public class NoticeAdapter extends RecyclerView.Adapter<NoticeAdapter.ViewHolder
     @Override
     public void onBindViewHolder(NoticeAdapter.ViewHolder holder, int position) {
         if (beanlsit.size()>0){
-            holder.notice_title.setText(beanlsit.get(position).getNtitle());
+
+            String a = beanlsit.get(position).getNtitle();
+
+            holder.notice_title.setText(beanlsit.get(position).getNtitle()+a);
             holder.notice_date.setText(beanlsit.get(position).getNaddtime());
             String contect = beanlsit.get(position).getNcontent();
             RichText.fromHtml(contect)

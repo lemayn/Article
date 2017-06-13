@@ -39,8 +39,7 @@
                 android:text="公告通知"
                 android:textSize="14sp"
                 android:layout_alignParentLeft="true"
-                android:singleLine="true"
-                android:maxLines="1"
+                android:maxLines="2"
                 android:textColor="@color/toolbar_back"
                 android:drawablePadding="10dp"
                 android:drawableLeft="@drawable/laban"/>
