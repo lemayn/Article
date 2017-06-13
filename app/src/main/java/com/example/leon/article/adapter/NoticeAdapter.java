@@ -2,6 +2,7 @@ package com.example.leon.article.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 
 import com.example.leon.article.R;
 import com.example.leon.article.bean.NoticeBean;
+import com.example.leon.article.utils.DelHtmlTag;
 import com.zzhoujay.richtext.RichText;
 
 import java.util.List;
@@ -59,14 +61,16 @@ public class NoticeAdapter extends RecyclerView.Adapter<NoticeAdapter.ViewHolder
 
             holder.notice_title.setText(beanlsit.get(position).getNtitle());
             holder.notice_date.setText(beanlsit.get(position).getNaddtime());
-            String contect = beanlsit.get(position).getNcontent();
-            RichText.fromHtml(contect)
-                    .into(holder.notice_contect);
+            String contect = DelHtmlTag.delHTMLTag(beanlsit.get(position).getNcontent());
+
+            contect=contect.replace("&nbsp;"," ");
+            holder.notice_contect.setText(contect);
 
             if (position==0){
                 holder.line.setVisibility(View.GONE);
             }
         }
+        else {}
     }
 
     @Override
