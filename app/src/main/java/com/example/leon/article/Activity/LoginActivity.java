@@ -229,7 +229,7 @@ public class LoginActivity extends ToolBarBaseActivity<ActivityLoginBinding> imp
 
             Glide.with(LoginActivity.this)
                     .load(headurl + list.get(position).getImg())
-                    .fitCenter()
+                    .centerCrop()
                     .into(view);
             //            view.setImageResource(list[position]);
             view.setScaleType(ImageView.ScaleType.CENTER_CROP);

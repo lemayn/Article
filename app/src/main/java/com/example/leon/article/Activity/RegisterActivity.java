@@ -185,7 +185,7 @@ public class RegisterActivity extends ToolBarBaseActivity<ActivityRegisterBindin
 
             Glide.with(RegisterActivity.this)
                     .load(headurl + list.get(position).getImg())
-                    .fitCenter()
+                    .centerCrop()
                     .into(view);
             //            view.setImageResource(list[position]);
             view.setScaleType(ImageView.ScaleType.CENTER_CROP);

@@ -12,7 +12,7 @@
     <com.jude.rollviewpager.RollPagerView
         android:id="@+id/rollpagerview_register"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="180dp"
         app:rollviewpager_play_delay="3000"
         app:rollviewpager_hint_paddingBottom="8dp"/>
 
