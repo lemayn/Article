@@ -43,7 +43,7 @@
 
         <TextView
             android:id="@+id/tv_issue_status"
-            android:layout_width="102dp"
+            android:layout_width="103dp"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
             android:text="审核中"

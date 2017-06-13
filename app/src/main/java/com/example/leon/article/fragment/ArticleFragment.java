@@ -47,6 +47,7 @@ public class ArticleFragment extends Fragment implements View.OnClickListener, I
     private Handler handler = new Handler();
     private ImageView iv_creatArt;
     private boolean ifClick = false;
+    private boolean isClickSpinner = false;
     private int statusIndex;
 
     public static String getCookie(){
@@ -196,6 +197,7 @@ public class ArticleFragment extends Fragment implements View.OnClickListener, I
                 artType = item;
                 page = 1;
                 statusPage = 1;
+                isClickSpinner = true;
                 switch (position) {
                     case 0://点击了全部（已发表）
                         ifClick = false;
@@ -262,8 +264,9 @@ public class ArticleFragment extends Fragment implements View.OnClickListener, I
         if (date != null) {
             adapter.addItems(date);
         } else {
-            if (artType != null) {
+            if (artType != null && isClickSpinner) {
                 Toast.makeText(getContext(), "您还没有" + artType + "的文章", Toast.LENGTH_SHORT).show();
+                isClickSpinner = false;
             }
         }
     }

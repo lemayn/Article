@@ -12,8 +12,6 @@ import com.example.leon.article.api.bean.ArtListBean;
 import com.example.leon.article.api.bean.UpLoadArtBean;
 import com.example.leon.article.api.bean.UploadClassifyBean;
 import com.example.leon.article.presenter.artpresenter.IArtPresenter;
-import com.example.leon.article.utils.Constant;
-import com.example.leon.article.utils.SPUtil;
 import com.example.leon.article.view.IArtDetailActivity;
 import com.example.leon.article.view.IArticleFragment;
 import com.example.leon.article.view.IEditorActivity;
@@ -49,8 +47,8 @@ public class ArtPresenterImp extends BasepresenterImp implements IArtPresenter{
 
     @Override
     public void getuserArtList(String cookie,String sid,int page) {
-        cookie = (String) SPUtil.get(Constant.Share_prf.COOKIE, "");
-        sid = (String) SPUtil.get(Constant.Share_prf.SID, "");
+       /* cookie = (String) SPUtil.get(Constant.Share_prf.COOKIE, "");
+        sid = (String) SPUtil.get(Constant.Share_prf.SID, "");*/
         articleFragment.showProgress();
         Subscription subscribe = ApiManager.getInstance().getArtApiService()
                 .getArtList(cookie,sid,page)
