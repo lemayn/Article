@@ -174,10 +174,8 @@ public class HomeFragment extends Fragment implements IHomePre {
 
     public void setLoadMore(boolean complete) {
         if (complete) {
-//            layout_more.setVisibility(View.GONE);
             loadMore(page);
         } else {
-//            layout_more.setVisibility(View.GONE);
             Toast.makeText(getActivity(), "没有更多数据了!", Toast.LENGTH_SHORT).show();
         }
         isLoadMore = false;
@@ -230,31 +228,44 @@ public class HomeFragment extends Fragment implements IHomePre {
     @Override
     public void showAdvList(List<AdvBean.DataBean> List) {
 //        DatabeanList.addAll(List);
-        adapter.addAdvItems(List);
+        if (List != null&&List.size()>0) {
+            adapter.addAdvItems(List);
+        }else {
+        }
     }
 
 
     @Override
     public void showRecommendList(List<RecomArtBean.DataBean.TuijianBean> List, int page) {
         totalpager = page;
-//        Log.i("MyTest", "rebeanlistsize "+List.size() + " page "+page);
-        reBeanlist.addAll(List);
-//        SetAda();
-        recyclerView.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
+        if (List != null&&List.size()>0) {
+            reBeanlist.addAll(List);
+            recyclerView.setAdapter(adapter);
+            adapter.notifyDataSetChanged();
+        }else {
+            return;
+        }
 //        adapter.addArtItems(List);
     }
 
     @Override
     public void showGoodList(List<ExcellentBean.DataBean.GoodBean> List, int page) {
         totalpager = page;
-        goodBean.addAll(List);
-        adapter.notifyDataSetChanged();
+        if (List != null&&List.size()>0) {
+            goodBean.addAll(List);
+            adapter.notifyDataSetChanged();
+        }else {
+            return;
+        }
+
     }
 
     @Override
     public void showNoticeList(List<NoticeBean.DataBean> List) {
-        adapter.addNotItems(List);
+        if (List != null&&List.size()>0) {
+            adapter.addNotItems(List);
+        }else {
+        }
     }
 
 

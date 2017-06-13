@@ -165,8 +165,15 @@ public class HomeRecycleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                 intent.setAction("article2");
                 context.sendBroadcast(intent);
 
-                HolderTypeArticle3.lin1.setVisibility(View.GONE);
-                HolderTypeArticle3.lin2.setVisibility(View.VISIBLE);
+                if ( HolderTypeArticle3.lin1!=null){
+                    HolderTypeArticle3.lin1.setVisibility(View.GONE);
+                    HolderTypeArticle3.lin2.setVisibility(View.VISIBLE);
+                }
+                else{
+                    Log.i("MyTest", "adapter null");
+                }
+
+
             }
         });
     }
@@ -206,6 +213,7 @@ public class HomeRecycleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                         .into(holder.img);
             }
         }
+        else {}
 
     }
 
@@ -346,6 +354,7 @@ public class HomeRecycleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
             final int picNo = position + 1;
             ImageView view = new ImageView(container.getContext());
+
 
             Glide.with(context)
                     .load(headurl+list.get(position).getImg())

@@ -149,8 +149,14 @@ public class HomeRecycleAdapter2 extends RecyclerView.Adapter<RecyclerView.ViewH
                 intent.setAction("article1");
                 context.sendBroadcast(intent);
 
-                HolderTypeArticle3.lin1.setVisibility(View.VISIBLE);
-                HolderTypeArticle3.lin2.setVisibility(View.GONE);
+                if (HolderTypeArticle3.lin2!=null){
+                    HolderTypeArticle3.lin1.setVisibility(View.VISIBLE);
+                    HolderTypeArticle3.lin2.setVisibility(View.GONE);
+                }
+                else{
+                    Log.i("MyTest", "adapter null");
+                }
+
             }
         });
 
@@ -196,6 +202,7 @@ public class HomeRecycleAdapter2 extends RecyclerView.Adapter<RecyclerView.ViewH
             }
 
         }
+        else {}
 
     }
 

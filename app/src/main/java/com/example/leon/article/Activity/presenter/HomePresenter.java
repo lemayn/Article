@@ -80,7 +80,7 @@ public class HomePresenter extends BasePresenter<IHomePre> {
 
                     @Override
                     public void onSuccess(Request request, String result) {
-//                        Log.i("MyTest", "RecommendArticle请求成功01" + result.toString());
+                        Log.i("MyTest", "RecommendArticle请求成功01" + result.toString());
 
                         RecomArtBean bean = new RecomArtBean();
                         bean = gson.fromJson(result, RecomArtBean.class);
@@ -112,7 +112,7 @@ public class HomePresenter extends BasePresenter<IHomePre> {
 
                     @Override
                     public void onSuccess(Request request, String result) {
-//                        Log.i("MyTest", "excellentArticle请求成功01" + result.toString());
+                        Log.i("MyTest", "excellentArticle请求成功01" + result.toString());
 
 //                        RecomArtBean bean1 = new RecomArtBean();
                         ExcellentBean bean = new ExcellentBean();
