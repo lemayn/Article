@@ -110,10 +110,10 @@ public class MainActivity extends AppCompatActivity {
             final DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
             // set your height here
             layoutParams.height = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
-                    CommonUtils.dip2px(this,32), displayMetrics);
+                    CommonUtils.dip2px(this,13), displayMetrics);
             // set your width here
             layoutParams.width = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
-                    CommonUtils.dip2px(this,32), displayMetrics);
+                    CommonUtils.dip2px(this,13), displayMetrics);
             iconView.setLayoutParams(layoutParams);
         }
 
