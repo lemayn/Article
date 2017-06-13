@@ -189,6 +189,7 @@ public class AddCardActivity extends ToolBarBaseActivity<ActivityAddCardBinding>
                 showListDialog();
                 break;
             case R.id.bt_addConfirm:
+                String chooseBankString = getResources().getString(R.string.please_choose_yourbank);
                 String accountName = et_userbankName.getText().toString().trim();
                 String address = et_userAdress.getText().toString();
                 //提现密码
@@ -198,7 +199,11 @@ public class AddCardActivity extends ToolBarBaseActivity<ActivityAddCardBinding>
                 String cardNumWithClear = et_cardNum.getText().toString().trim();
                 String cardNumb = cardNumWithClear.replace(" ", "");
                 String nameOfBank = BankUtils.getNameOfBank(cardNumb);
-                if (!TextUtils.isEmpty(cardNumb) && !TextUtils.isEmpty(withdrawPwd) && !TextUtils.isEmpty(accountName) && !TextUtils.isEmpty(address)) {
+                if (et_cardNum.getText().length() < 23) {
+                    et_cardNum.setError("请填写正确的银行卡号");
+                }
+                if (!TextUtils.isEmpty(cardNumb) && !TextUtils.isEmpty(withdrawPwd) && !TextUtils.isEmpty(accountName)
+                        && !TextUtils.isEmpty(address) && et_cardNum.getText().length() >= 23 && !tv_choose_bank.getText().equals(chooseBankString)) {
                     checkBank(nameOfBank,cardNumWithClear,accountName,address,withdrawPwd);
                 }else{
                     Toast.makeText(this,getString(R.string.please_fill_in),Toast.LENGTH_LONG).show();
@@ -209,21 +214,32 @@ public class AddCardActivity extends ToolBarBaseActivity<ActivityAddCardBinding>
 
     private void checkBank(String nameOfBank, final String cardNumWithClear, final String accountName, final String address,final String withdrawPwd) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle(getString(R.string.confirm_your_bans))
-                .setMessage(nameOfBank)
-                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        presenterImp.bindBankCard(cookie,String.valueOf(bid),cardNumWithClear,sid,accountName,address,withdrawPwd);
-                    }
-                })
-                .setNegativeButton("取消", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
+        if (TextUtils.equals(nameOfBank,"无法识别银行卡所属银行")){
+            builder.setTitle(getString(R.string.confirm_your_bans))
+                    .setMessage("无法识别您的银行卡，请重新设置")
+                    .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                        }
+                    })
+                    .create().show();
+        }else {
+            builder.setTitle(getString(R.string.confirm_your_bans))
+                    .setMessage(nameOfBank)
+                    .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            presenterImp.bindBankCard(cookie, String.valueOf(bid), cardNumWithClear, sid, accountName, address, withdrawPwd);
+                        }
+                    })
+                    .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
 
-                    }
-                })
-                .create().show();
+                        }
+                    })
+                    .create().show();
+        }
     }
 
 

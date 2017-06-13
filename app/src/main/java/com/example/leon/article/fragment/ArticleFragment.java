@@ -40,8 +40,6 @@ public class ArticleFragment extends Fragment implements View.OnClickListener, I
     private int totalpager; //总页数
     private int artStatusTotalpager;//各个状态栏的总页数
     private int statusPage = 1; //当前状态栏的页数(默认为1)
-    private String cookie;
-    private String sid;
     private boolean isBottom = false;
     private LinearLayout ll_footer_contain;
     private String artType;
@@ -51,13 +49,18 @@ public class ArticleFragment extends Fragment implements View.OnClickListener, I
     private boolean ifClick = false;
     private int statusIndex;
 
+    public static String getCookie(){
+        return (String) SPUtil.get(Constant.Share_prf.COOKIE, "");
+    }
+
+    public static String getSid(){
+        return (String) SPUtil.get(Constant.Share_prf.SID, "");
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.activity_article, container, false);
-        //get cookie sid
-        cookie = (String) SPUtil.get(Constant.Share_prf.COOKIE, "");
-        sid = (String) SPUtil.get(Constant.Share_prf.SID, "");
         initView(view);
         initDate();
         initEvent();
@@ -89,19 +92,19 @@ public class ArticleFragment extends Fragment implements View.OnClickListener, I
                         switch (statusIndex) {
                             case 0: //刷新已发表文章
                                 ifClick = false;
-                                artPresenter.getuserArtList(cookie, sid, 1);
+                                artPresenter.getuserArtList(getCookie(), getSid(), 1);
                                 break;
                             case 1: //刷新已通过文章
                                 ifClick = true;
-                                artPresenter.getUserArtTypeList(cookie, sid, 1, 1);
+                                artPresenter.getUserArtTypeList(getCookie(), getSid(), 1, 1);
                                 break;
                             case 2: //刷新未通过文章
                                 ifClick = true;
-                                artPresenter.getUserArtTypeList(cookie, sid, 1, 2);
+                                artPresenter.getUserArtTypeList(getCookie(), getSid(), 1, 2);
                                 break;
                             case 3: //刷新审核中文章
                                 ifClick = true;
-                                artPresenter.getUserArtTypeList(cookie, sid, 1, 0);
+                                artPresenter.getUserArtTypeList(getCookie(), getSid(), 1, 0);
                                 break;
                         }
 //                        artPresenter.getuserArtList(cookie, sid, 1);
@@ -148,7 +151,7 @@ public class ArticleFragment extends Fragment implements View.OnClickListener, I
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                artPresenter.getUserArtTypeList(cookie, sid, statusPage, artStatus);
+                artPresenter.getUserArtTypeList(getCookie(), getSid(), statusPage, artStatus);
                 ll_footer_contain.setVisibility(View.GONE);
             }
         }, 1700);
@@ -159,7 +162,7 @@ public class ArticleFragment extends Fragment implements View.OnClickListener, I
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                artPresenter.getuserArtList(cookie, sid, page);
+                artPresenter.getuserArtList(getCookie(), getSid(), page);
                 ll_footer_contain.setVisibility(View.GONE);
             }
         }, 1700);
@@ -168,7 +171,7 @@ public class ArticleFragment extends Fragment implements View.OnClickListener, I
     private void initDate() {
         artPresenter = new ArtPresenterImp(this);
         adapter = new ArtListAdapter(getContext());
-        artPresenter.getuserArtList(cookie, sid, page);
+        artPresenter.getuserArtList(getCookie(), getSid(), page);
         lv_article.setAdapter(adapter);
     }
 
@@ -198,25 +201,25 @@ public class ArticleFragment extends Fragment implements View.OnClickListener, I
                         ifClick = false;
                         artStatus = 3;
                         adapter.clearDate();
-                        artPresenter.getuserArtList(cookie, sid, page);
+                        artPresenter.getuserArtList(getCookie(), getSid(), page);
                         break;
                     case 1://点击了已发表（已通过）
                         ifClick = true;
                         artStatus = 1;
                         adapter.clearDate();
-                        artPresenter.getUserArtTypeList(cookie, sid, 1, 1);
+                        artPresenter.getUserArtTypeList(getCookie(), getSid(), 1, 1);
                         break;
                     case 2://点击了未通过
                         ifClick = true;
                         artStatus = 2;
                         adapter.clearDate();
-                        artPresenter.getUserArtTypeList(cookie, sid, 1, 2);
+                        artPresenter.getUserArtTypeList(getCookie(), getSid(), 1, 2);
                         break;
                     case 3://点击了审核中
                         ifClick = true;
                         artStatus = 0;
                         adapter.clearDate();
-                        artPresenter.getUserArtTypeList(cookie, sid, page, 0);
+                        artPresenter.getUserArtTypeList(getCookie(), getSid(), page, 0);
                         break;
                 }
             }

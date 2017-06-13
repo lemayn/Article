@@ -108,6 +108,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:background="@null"
+                android:textSize="17sp"
                 android:hint=" 请输入户主姓名"
                 android:paddingLeft="10dp" />
 
@@ -148,7 +149,8 @@
                 android:hint=" 请输入银行卡号"
                 android:inputType="number"
                 android:maxLength="23"
-                android:paddingLeft="10dp" />
+                android:paddingLeft="10dp"
+                android:textSize="17sp" />
 
         </LinearLayout>
         <View
@@ -183,6 +185,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:background="@null"
+                android:textSize="17sp"
                 android:hint=" 请输入开户所在地"
                 android:paddingLeft="10dp" />
 
@@ -222,6 +225,7 @@
                 android:layout_height="40dp"
                 android:background="@null"
                 android:hint="请输入提现密码(默认为登录密码)"
+                android:textSize="17sp"
                 android:inputType="textPassword"
                 android:paddingLeft="4dp" />
 
