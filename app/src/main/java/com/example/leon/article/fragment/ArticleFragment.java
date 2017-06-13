@@ -30,7 +30,7 @@ import java.util.List;
 
 public class ArticleFragment extends Fragment implements View.OnClickListener, IArticleFragment {
 
-//    private TextView tv_myArt;
+    //    private TextView tv_myArt;
     private TextView tv_createArt;
     private ListView lv_article;
     private ArtListAdapter adapter;
@@ -48,6 +48,8 @@ public class ArticleFragment extends Fragment implements View.OnClickListener, I
     private int artStatus;
     private Handler handler = new Handler();
     private ImageView iv_creatArt;
+    private boolean ifClick = false;
+    private int statusIndex;
 
     @Nullable
     @Override
@@ -84,13 +86,32 @@ public class ArticleFragment extends Fragment implements View.OnClickListener, I
                     @Override
                     public void run() {
                         adapter.clearDate();
-                        artPresenter.getuserArtList(cookie, sid, 1);
+                        switch (statusIndex) {
+                            case 0: //刷新已发表文章
+                                ifClick = false;
+                                artPresenter.getuserArtList(cookie, sid, 1);
+                                break;
+                            case 1: //刷新已通过文章
+                                ifClick = true;
+                                artPresenter.getUserArtTypeList(cookie, sid, 1, 1);
+                                break;
+                            case 2: //刷新未通过文章
+                                ifClick = true;
+                                artPresenter.getUserArtTypeList(cookie, sid, 1, 2);
+                                break;
+                            case 3: //刷新审核中文章
+                                ifClick = true;
+                                artPresenter.getUserArtTypeList(cookie, sid, 1, 0);
+                                break;
+                        }
+//                        artPresenter.getuserArtList(cookie, sid, 1);
                         lv_article.setAdapter(adapter);
                         refreshActicle.setRefreshing(false);
                         Toast.makeText(getContext(), "刷新成功", Toast.LENGTH_SHORT).show();
                     }
                 }, 1500);
                 page = 1;
+                statusPage = 1;
             }
         });
 
@@ -98,14 +119,16 @@ public class ArticleFragment extends Fragment implements View.OnClickListener, I
             @Override
             public void onScrollStateChanged(AbsListView view, int scrollState) {
                 if (scrollState == SCROLL_STATE_IDLE && isBottom) {
-                    if (page < totalpager) {
-                        page ++;
-                        loadMore();
-                    }
-                    //判断文章分类是否需要加载更多
-                    if (statusPage < artStatusTotalpager){//超过一页需要加载更多
-                        statusPage++;
-                        loadMoreStatus(artStatus);
+                    if (ifClick) {//判断文章分类是否需要加载更多
+                        if (statusPage < artStatusTotalpager) {//超过一页需要加载更多
+                            statusPage++;
+                            loadMoreStatus(artStatus);
+                        }
+                    } else {
+                        if (page < totalpager) {
+                            page++;
+                            loadMore();
+                        }
                     }
                 }
             }
@@ -125,10 +148,10 @@ public class ArticleFragment extends Fragment implements View.OnClickListener, I
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                artPresenter.getUserArtTypeList(cookie,sid,statusPage,artStatus);
+                artPresenter.getUserArtTypeList(cookie, sid, statusPage, artStatus);
                 ll_footer_contain.setVisibility(View.GONE);
             }
-        },1700);
+        }, 1700);
     }
 
     private void loadMore() {
@@ -136,10 +159,10 @@ public class ArticleFragment extends Fragment implements View.OnClickListener, I
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                artPresenter.getuserArtList(cookie,sid,page);
+                artPresenter.getuserArtList(cookie, sid, page);
                 ll_footer_contain.setVisibility(View.GONE);
             }
-        },1700);
+        }, 1700);
     }
 
     private void initDate() {
@@ -164,28 +187,36 @@ public class ArticleFragment extends Fragment implements View.OnClickListener, I
         MaterialSpinner spinner = (MaterialSpinner) view.findViewById(R.id.spinner);
         spinner.setItems("已发表", "已通过", "未通过", "审核中");
         spinner.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener<String>() {
-            @Override public void onItemSelected(MaterialSpinner view, int position, long id, String item) {
+            @Override
+            public void onItemSelected(MaterialSpinner view, int position, long id, String item) {
+                statusIndex = position;
                 artType = item;
                 page = 1;
+                statusPage = 1;
                 switch (position) {
                     case 0://点击了全部（已发表）
+                        ifClick = false;
+                        artStatus = 3;
                         adapter.clearDate();
-                        artPresenter.getuserArtList(cookie,sid,page);
+                        artPresenter.getuserArtList(cookie, sid, page);
                         break;
                     case 1://点击了已发表（已通过）
+                        ifClick = true;
                         artStatus = 1;
                         adapter.clearDate();
-                        artPresenter.getUserArtTypeList(cookie,sid,1,1);
+                        artPresenter.getUserArtTypeList(cookie, sid, 1, 1);
                         break;
                     case 2://点击了未通过
+                        ifClick = true;
                         artStatus = 2;
                         adapter.clearDate();
-                        artPresenter.getUserArtTypeList(cookie,sid,1,2);
+                        artPresenter.getUserArtTypeList(cookie, sid, 1, 2);
                         break;
                     case 3://点击了审核中
+                        ifClick = true;
                         artStatus = 0;
                         adapter.clearDate();
-                        artPresenter.getUserArtTypeList(cookie,sid,page,0);
+                        artPresenter.getUserArtTypeList(cookie, sid, page, 0);
                         break;
                 }
             }
@@ -227,9 +258,9 @@ public class ArticleFragment extends Fragment implements View.OnClickListener, I
     public void setArtDate(List<ArtListBean.DataBean.ArticleBean> date) {
         if (date != null) {
             adapter.addItems(date);
-        }else{
+        } else {
             if (artType != null) {
-                Toast.makeText(getContext(),"您还没有"+artType+"的文章",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "您还没有" + artType + "的文章", Toast.LENGTH_SHORT).show();
             }
         }
     }
