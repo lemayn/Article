@@ -2,15 +2,19 @@ package com.example.leon.article.Activity;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.internal.BottomNavigationMenuView;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.DisplayMetrics;
+import android.util.TypedValue;
 import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.leon.article.Activity.art.ArtConstant;
@@ -19,6 +23,7 @@ import com.example.leon.article.fragment.ArticleFragment;
 import com.example.leon.article.fragment.HomeFragment;
 import com.example.leon.article.fragment.MoreFragment;
 import com.example.leon.article.fragment.VipFragment;
+import com.example.leon.article.utils.CommonUtils;
 import com.example.leon.article.utils.Constant;
 import com.example.leon.article.utils.SPUtil;
 import com.example.leon.article.widget.BottomNavigationViewHelper;
@@ -98,6 +103,20 @@ public class MainActivity extends AppCompatActivity {
         initfragments();
         viewpager = (ViewPager) findViewById(R.id.viewpager);
         navigationview = (BottomNavigationView) findViewById(R.id.navigationview);
+        BottomNavigationMenuView menuView = (BottomNavigationMenuView) navigationview.getChildAt(0);
+        for (int i = 0; i < menuView.getChildCount(); i++) {
+            final View iconView = menuView.getChildAt(i).findViewById(android.support.design.R.id.icon);
+            final ViewGroup.LayoutParams layoutParams = iconView.getLayoutParams();
+            final DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
+            // set your height here
+            layoutParams.height = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
+                    CommonUtils.dip2px(this,32), displayMetrics);
+            // set your width here
+            layoutParams.width = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
+                    CommonUtils.dip2px(this,32), displayMetrics);
+            iconView.setLayoutParams(layoutParams);
+        }
+
         BottomNavigationViewHelper.disableShiftMode(navigationview);
 
         mAdapter = new FragmentPagerAdapter(getSupportFragmentManager()) {
