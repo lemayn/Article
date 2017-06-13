@@ -150,6 +150,9 @@ public class AccountStatementActivity extends AppCompatActivity {
                         if (binding.statementSwipe.isRefreshing()) {
                             binding.statementSwipe.setRefreshing(false);
                         }
+                        if(statementBean.getData().getMoneyConfig() == null) {
+                            return;
+                        }
                         totalPage = statementBean.getData().getTotalpage();
                         currentPage = statementBean.getData().getPage();
                         statementAdapter.addStatement(statementBean.getData().getMoneyConfig(), isClear);
