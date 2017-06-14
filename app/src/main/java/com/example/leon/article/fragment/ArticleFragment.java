@@ -108,7 +108,6 @@ public class ArticleFragment extends Fragment implements View.OnClickListener, I
                                 artPresenter.getUserArtTypeList(getCookie(), getSid(), 1, 0);
                                 break;
                         }
-//                        artPresenter.getuserArtList(cookie, sid, 1);
                         lv_article.setAdapter(adapter);
                         refreshActicle.setRefreshing(false);
                         Toast.makeText(getContext(), "刷新成功", Toast.LENGTH_SHORT).show();
