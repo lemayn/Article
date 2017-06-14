@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.example.leon.article.Activity.CustomerServiceActivity;
 import com.example.leon.article.Activity.MoreInfoActivity;
 import com.example.leon.article.Activity.NoticeActivity;
 import com.example.leon.article.R;
@@ -44,6 +45,12 @@ public class MoreFragment extends Fragment implements View.OnClickListener {
         intro_icon.setVisibility(View.GONE);
         rl_intro.setOnClickListener(this);
 
+        RelativeLayout rl_service = (RelativeLayout) view.findViewById(R.id.rl_service);
+        TextView service_title = (TextView) rl_service.findViewById(R.id.tv_title);
+        ImageView service_icon = (ImageView) rl_service.findViewById(R.id.iv_icon);
+        service_title.setText(R.string.customer_service);
+        service_icon.setVisibility(View.GONE);
+        rl_service.setOnClickListener(this);
 
         return view;
     }
@@ -56,6 +63,9 @@ public class MoreFragment extends Fragment implements View.OnClickListener {
                 break;
             case R.id.rl_intro:
                 startActivity(new Intent(getActivity(), MoreInfoActivity.class));
+                break;
+            case R.id.rl_service:
+                startActivity(new Intent(getActivity(), CustomerServiceActivity.class));
                 break;
         }
     }

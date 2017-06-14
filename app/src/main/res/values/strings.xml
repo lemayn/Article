@@ -22,7 +22,7 @@
     <string name="attention">注意事项：</string>
     <string name="modify_pwd_attentions">1.请注意，如果重新设置密码后，请一定牢记新的密码，并建议您定期
         更新密码保证安全性 \n2.登录密码如不修改，请勿填写。\n3.如忘记密码，请联系客服为您重置密码。\n4
-        .如果操作过程中遇到问题，请于客服联系。</string>
+        .如果操作过程中遇到问题，请与客服联系。</string>
 
     <string name="register">注册</string>
     <string name="login">登录</string>
@@ -57,31 +57,17 @@
     <string name="newslist">新闻列表</string>
     <string name="send">发送</string>
     <string name="editorContent">正文</string>
-    <string name="withdraw_amount">请输入提现金额(单笔金额100元起)</string>
+    <string name="withdraw_amount">请输入提现金额(单笔金额50元起)</string>
     <string name="withdraw_pwd">请输入提现密码(默认是登录密码)</string>
-    <string name="withdraw_deposit_attentions">1.每个账号每天有3次取款，单笔不少于100元，提现账号不正确的情况
+    <string name="withdraw_deposit_attentions">1.每个账号每天有3次取款，单笔不少于50元，提现账号不正确的情况
         请及时联系我们的客服，提现密码默认是账号登录密码。\n2.提现时间:24小时，3-10分钟内到账，忙时不超过30分钟，
-        若超过时间，请及时练习客服。\n3.偶尔提款高峰期会出现短时间的延时，但平台保证资金会一一到达客户银行账户。</string>
+        若超过时间，请及时联系客服。\n3.偶尔提款高峰期会出现短时间的延时，但平台保证资金会一一到达客户银行账户。</string>
     <string name="matters_needing_attention">注意事项:</string>
     <string name="matters_needing_attention1">1.一个游戏账户最多绑定两张银行卡</string>
     <string name="matters_needing_attention2">2.银行卡信息完成后，已绑定的银行卡信息不能进行修改和删除</string>
     <string name="matters_needing_attention3">3.所绑定的银行卡必须在使用中</string>
     <string name="confirm_withdraw">确认提现</string>
     <string name="loading">请稍候</string>
-
-    <string name="more_info_content">&#160;&#160;学生时代的单纯与美好往往是我们之后生活中所向往的。
-        可能现在置身其中的你并没有发现什么，可当你毕业多年以后，提到你是会莫名感慨的……想要记录生活的你，
-        不妨来试试用文笔记录下你最美的青春年华。这里有着才华横溢的“作家”，也有感悟生活中酸甜苦辣的“哲学家”，
-        还有着积极向上态度的“文艺青年”，等你来加入。\n
-        &#160;&#160;这款APP与传统的校园报相比有什么样的优势呢？\n
-        &#160;&#160;1、审核速度快，效率高；\n
-        &#160;&#160;2、没有文体类型的限制；\n
-        &#160;&#160;3、每发表并且顺利通过审核的，都可以获得奖励。奖励的金额在1-50元不等。\n
-        &#160;&#160;4、如用游戏类为题材，奖会有意想不到的收获哦。\n
-        &#160;&#160;当然这款APP也有一点小要求，不过对你们来说肯定是可以做到的啦：\n
-        &#160;&#160;1、文章必须是原创作品，一旦发现作品抄袭将不予发表。\n
-        &#160;&#160;2、发表的文章字数在200字以上。\n
-        &#160;&#160;3、发表的文章内容是积极向上的。</string>
 
     <string name="in_review">审核中</string>
     <string name="notpass">未通过</string>
@@ -105,10 +91,12 @@
     <string name="back_login">返回登录</string>
     <string name="title">标题</string>
     <string name="logout">退出登录</string>
-    <string name="app_intro">软件说明</string>
+    <string name="app_intro">关于我们</string>
     <string name="tell_test">验证手机</string>
+    <string name="customer_service">在线客服</string>
     <string name="id">ID：</string>
-    <string name="basic_info_attention">基本资料设置后无法修改，请务必真实填写，\n谨慎提交.</string>
+    <string name="basic_info_attention">1.基本资料设置后无法修改，请务必真实填写，\n谨慎提交.</string>
+    <string name="basic_info_attention2">2.如果操作过程中遇到问题，请与在线客服联系</string>
 
     <string name="back_pwd">可通过手机验证码找回密码</string>
     <string name="basic_info_bank_attention">银行资料设置后无法修改，请务必真实填写，\n谨慎提交.</string>

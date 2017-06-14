@@ -41,8 +41,8 @@
                     android:layout_height="match_parent"
                     android:layout_marginRight="@dimen/x10"
                     android:gravity="center"
-                    app:text="@string/user_account"
-                    android:textSize="@dimen/x14"/>
+                    android:textSize="@dimen/x14"
+                    app:text="@string/user_account"/>
 
                 <EditText
                     android:id="@+id/edit_nickname"
@@ -71,16 +71,16 @@
                     android:layout_height="match_parent"
                     android:layout_marginRight="@dimen/x10"
                     android:gravity="center"
-                    app:text="@string/user_nickname"
-                    android:textSize="@dimen/x14"/>
+                    android:textSize="@dimen/x14"
+                    app:text="@string/user_nickname"/>
 
                 <EditText
-                    android:hint="请输入昵称"
                     android:id="@+id/edit_useraccount"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:background="@null"
+                    android:hint="请输入昵称"
                     app:data="@{userdata.data.nickname}"/>
 
             </LinearLayout>
@@ -102,8 +102,8 @@
                     android:layout_height="match_parent"
                     android:layout_marginRight="@dimen/x10"
                     android:gravity="center"
-                    app:text="@string/contact_number"
-                    android:textSize="@dimen/x14"/>
+                    android:textSize="@dimen/x14"
+                    app:text="@string/contact_number"/>
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -182,15 +182,15 @@
                     android:layout_height="match_parent"
                     android:layout_marginRight="@dimen/x10"
                     android:gravity="center"
-                    app:text="@string/user_weixin"
-                    android:textSize="@dimen/x14"/>
+                    android:textSize="@dimen/x14"
+                    app:text="@string/user_weixin"/>
 
                 <EditText
-                    android:hint="请输入微信"
                     android:id="@+id/edit_weixin"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@null"
+                    android:hint="请输入微信"
                     app:data="@{userdata.data.weixin}"/>
 
 
@@ -213,15 +213,15 @@
                     android:layout_height="match_parent"
                     android:layout_marginRight="@dimen/x10"
                     android:gravity="center"
-                    app:text="@string/secure_mailbox"
-                    android:textSize="@dimen/x14"/>
+                    android:textSize="@dimen/x14"
+                    app:text="@string/secure_mailbox"/>
 
                 <EditText
-                    android:hint="请输入邮箱"
                     android:id="@+id/edit_email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@null"
+                    android:hint="请输入邮箱"
                     android:inputType="textWebEmailAddress"
                     app:data="@{userdata.data.email}"/>
 
@@ -258,12 +258,23 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="50dp"
             android:layout_marginLeft="10dp"
+            android:textColor="#737373"
             android:layout_marginRight="10dp"
             android:lineSpacingExtra="@dimen/x3"
             android:text="@string/basic_info_attention"
             android:textSize="@dimen/x13"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="50dp"
+            android:textColor="@android:color/white"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:lineSpacingExtra="@dimen/x3"
+            android:textSize="@dimen/x13"
+            app:servicetext="@{@string/basic_info_attention2}"/>
 
     </LinearLayout>
 

@@ -1,16 +1,27 @@
 package com.example.leon.article.utils;
 
+import android.content.Context;
+import android.content.Intent;
 import android.databinding.BindingAdapter;
+import android.graphics.Color;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.TextPaint;
 import android.text.TextUtils;
+import android.text.method.LinkMovementMethod;
+import android.text.style.ClickableSpan;
+import android.text.style.ForegroundColorSpan;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.example.leon.article.Activity.CustomerServiceActivity;
 import com.example.leon.article.R;
 import com.example.leon.article.api.bean.StatementBean;
 import com.example.leon.article.widget.AlignTextView;
+import com.example.leon.article.widget.RadiusBackgroundSpan;
 
 public class DataBindingUtil {
 
@@ -116,6 +127,48 @@ public class DataBindingUtil {
             textView.setText(money.append("-").append(config.getMoney()).toString());
         } else if (config.getType() == 1) {
             textView.setText(money.append("+").append(config.getMoney()).toString());
+        }
+    }
+
+    @BindingAdapter("servicetext")
+    public static void servicetext(TextView textView, String content) {
+        SpannableString spannableString = new SpannableString(content);
+        ForegroundColorSpan colorSpan = new ForegroundColorSpan(Color.parseColor("#737373"));
+        spannableString.setSpan(colorSpan, 0, spannableString.length() - 6,
+                Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
+        ForegroundColorSpan colorSpan1 = new ForegroundColorSpan(Color.parseColor("#737373"));
+        spannableString.setSpan(colorSpan1, spannableString.length() - 2, spannableString.length(),
+                Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
+        RadiusBackgroundSpan radiusBackgroundSpan = new RadiusBackgroundSpan(Color.parseColor("#E11B03"),
+                CommonUtils.getDimension(R.dimen.x9));
+        spannableString.setSpan(radiusBackgroundSpan, spannableString.length() - 6, spannableString.length() - 2,
+                Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
+        MyClickableSpan clickableSpan = new MyClickableSpan(textView.getContext());
+        spannableString.setSpan(clickableSpan, spannableString.length() - 6, spannableString.length() - 2,
+                Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
+        textView.setMovementMethod(LinkMovementMethod.getInstance());
+        textView.setText(spannableString);
+    }
+
+    /***************************************************************/
+
+    static class MyClickableSpan extends ClickableSpan {
+
+        private Context context;
+
+        public MyClickableSpan(Context context) {
+            this.context = context;
+        }
+
+        @Override
+        public void updateDrawState(TextPaint ds) {
+            ds.setUnderlineText(false);
+        }
+
+        @Override
+        public void onClick(View widget) {
+            Intent intent1 = new Intent(context, CustomerServiceActivity.class);
+            context.startActivity(intent1);
         }
     }
 }

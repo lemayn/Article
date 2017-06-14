@@ -124,5 +124,20 @@ public class Constant {
          * 是否强制登录
          */
         public static final String IS_CONSTRAINT_LOIN = "is_constraint_loin";
+
+        /**
+         * 跳转标识
+         */
+        public static final String MORE_INFO_TYPE = "more_info_type";
+
+        /**
+         * 关于我们
+         */
+        public static final int INTRO = 0;
+
+        /**
+         * 在线客服
+         */
+        public static final int SERVICE = 1;
     }
 }
