@@ -139,8 +139,8 @@ public class WithdrawDepositActivity extends ToolBarBaseActivity<ActivityWithdra
             Toast.makeText(WithdrawDepositActivity.this, "请输入提现密码", Toast.LENGTH_SHORT).show();
             return;
         }
-        if (Integer.parseInt(money) < 100) {
-            Toast.makeText(WithdrawDepositActivity.this, "最小提现金额为100", Toast.LENGTH_SHORT).show();
+        if (Integer.parseInt(money) < 50) {
+            Toast.makeText(WithdrawDepositActivity.this, "最小提现金额为50", Toast.LENGTH_SHORT).show();
             return;
         }
         if (hasData) {
