@@ -8,6 +8,7 @@ import java.util.HashMap;
 
 import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
 import rx.Observable;
@@ -28,5 +29,8 @@ public interface ArticleService {
     @POST("api/")
     Observable<StatementBean> statement(@Query("Action") String type,
                                         @FieldMap HashMap<String, String> options);
+
+    @GET("api/")
+    Observable<ArticleApiBean> weixin(@Query("Action") String type);
 
 }

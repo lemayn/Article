@@ -89,6 +89,11 @@ public class Constant {
          */
         public static final String MONEY_CONFIG = "MoneyConfig";
 
+        /**
+         * 在线客服接口
+         */
+        public static final String KEFU = "Kefu";
+
     }
 
     public static class Share_prf {

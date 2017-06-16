@@ -12,23 +12,28 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.GlideDrawableImageViewTarget;
-import com.bumptech.glide.signature.StringSignature;
 import com.example.leon.article.R;
+import com.example.leon.article.api.ApiFactory;
+import com.example.leon.article.api.BaseValueValidOperator;
+import com.example.leon.article.api.bean.ArticleApiBean;
 import com.example.leon.article.base.ToolBarBaseActivity;
 import com.example.leon.article.databinding.ActivityCustomerServiceBinding;
+import com.example.leon.article.utils.Constant;
 import com.example.leon.article.utils.DownLoadImageService;
 import com.example.leon.article.utils.ImageDownLoadCallBack;
 
 import kr.co.namee.permissiongen.PermissionFail;
 import kr.co.namee.permissiongen.PermissionGen;
 import kr.co.namee.permissiongen.PermissionSuccess;
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 public class CustomerServiceActivity extends ToolBarBaseActivity<ActivityCustomerServiceBinding> {
-    private static final String URL = "http://118.89.233.35:8989/upload/kefu/kefu.png";
+    private String URL;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,13 +45,37 @@ public class CustomerServiceActivity extends ToolBarBaseActivity<ActivityCustome
 
         setTitle(R.string.customer_service);
 
-        loadExplain();
+        getKeFu();
     }
 
-    private void loadExplain() {
+    private void getKeFu() {
+        ApiFactory.getApi().weixin(Constant.Api.KEFU)
+                .lift(new BaseValueValidOperator<ArticleApiBean>())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<ArticleApiBean>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Toast.makeText(CustomerServiceActivity.this, "获取公众号失败", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onNext(ArticleApiBean apiBean) {
+                        loadExplain(apiBean.getData().getWeixin(), apiBean.getData().getImg());
+                    }
+                });
+    }
+
+    private void loadExplain(String weixin, String url) {
+        URL = Constant.Api.BASE_URL + url;
+        binding.weixin.append(weixin);
         Glide.with(this).load(URL)
-                .signature(new StringSignature(String.valueOf(System.currentTimeMillis())))
-                .diskCacheStrategy(DiskCacheStrategy.SOURCE).centerCrop()
+                .centerCrop()
                 .into(new GlideDrawableImageViewTarget(binding.image) {
                     @Override
                     public void onResourceReady(GlideDrawable drawable, GlideAnimation anim) {
