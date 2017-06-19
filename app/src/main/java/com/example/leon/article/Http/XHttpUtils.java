@@ -68,7 +68,7 @@ public class XHttpUtils {
         public void onResponse(Call call, Response response) throws IOException {
 
             final String json = response.body().string();
-            if (httpCallBack != null) {
+            if (httpCallBack != null && response.isSuccessful()) {
                 handler.post(new Runnable() {
                     @Override
                     public void run() {
