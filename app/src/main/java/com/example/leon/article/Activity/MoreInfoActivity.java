@@ -5,6 +5,7 @@ import android.os.Bundle;
 import com.example.leon.article.R;
 import com.example.leon.article.base.ToolBarBaseActivity;
 import com.example.leon.article.databinding.ActivityMoreInfoBinding;
+import com.example.leon.article.utils.Constant;
 
 
 public class MoreInfoActivity extends ToolBarBaseActivity<ActivityMoreInfoBinding> {
@@ -23,6 +24,6 @@ public class MoreInfoActivity extends ToolBarBaseActivity<ActivityMoreInfoBindin
     }
 
     private void loadExplain() {
-        binding.webView.loadUrl("http://118.89.233.35:8989/api/about.php");
+        binding.webView.loadUrl(Constant.Api.ABOOUT_IUS);
     }
 }

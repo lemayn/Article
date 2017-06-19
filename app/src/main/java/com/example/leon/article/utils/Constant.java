@@ -6,7 +6,8 @@ public class Constant {
         /**
          * url
          */
-        public static final String BASE_URL = "http://118.89.233.35:8989/";
+        //        public static final String BASE_URL = "http://118.89.233.35:8989/"; 测试服务器
+        public static final String BASE_URL = "http://121.127.226.160/";//正式服务器
 
         /**
          * 接口验证
@@ -93,6 +94,8 @@ public class Constant {
          * 在线客服接口
          */
         public static final String KEFU = "Kefu";
+
+        public static final String ABOOUT_IUS = BASE_URL + "api/about.php";
 
     }
 

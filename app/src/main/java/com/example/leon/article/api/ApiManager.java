@@ -71,7 +71,8 @@ public class ApiManager {
             synchronized (artMonitor) {
                 if (artApi == null) {
                     artApi = new Retrofit.Builder()
-                            .baseUrl("http://118.89.233.35:8989/api/")
+//                            .baseUrl("http://118.89.233.35:8989/api/")
+                            .baseUrl("http://121.127.226.160/api/")
                             .addConverterFactory(GsonConverterFactory.create())
                             .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                             .client(client)
@@ -88,7 +89,8 @@ public class ApiManager {
             synchronized (artMonitor) {
                 if (bankApi == null) {
                     bankApi = new Retrofit.Builder()
-                            .baseUrl("http://118.89.233.35:8989/api/")
+//                            .baseUrl("http://118.89.233.35:8989/api/")
+                            .baseUrl("http://121.127.226.160/api/")
                             .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                             .addConverterFactory(GsonConverterFactory.create())
                             .client(client)

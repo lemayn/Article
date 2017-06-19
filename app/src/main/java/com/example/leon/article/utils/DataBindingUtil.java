@@ -25,7 +25,8 @@ import com.example.leon.article.widget.RadiusBackgroundSpan;
 
 public class DataBindingUtil {
 
-    private static final String BASE_IMAGE_URL = "http://118.89.233.35:8989";
+//    private static final String BASE_IMAGE_URL = "http://118.89.233.35:8989";
+    private static final String BASE_IMAGE_URL = "http://121.127.226.160";
 
     @BindingAdapter("android:src")
     public static void setImageSrc(ImageView imageView, int res) {

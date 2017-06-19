@@ -6,7 +6,8 @@ package com.example.leon.article.Http;
 
 public class Api {
 
-    public static String baseurl = "http://118.89.233.35:8989/api/?Key=55a50c1a06f9c1032014112cbd68f34b&Action=";
+//    public static String baseurl = "http://118.89.233.35:8989/api/?Key=55a50c1a06f9c1032014112cbd68f34b&Action=";
+    public static String baseurl = "http://121.127.226.160/api/?Key=55a50c1a06f9c1032014112cbd68f34b&Action=";
 
     public static String Login = "Login";
 
