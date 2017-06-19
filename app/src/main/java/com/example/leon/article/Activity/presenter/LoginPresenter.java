@@ -49,17 +49,21 @@ public class LoginPresenter extends BasePresenter<ILoginPre> {
 //                        Log.i("MyTest", "AdvData请求成功01" + result.toString());
 
                         AdvBean bean = new AdvBean();
-                        bean = gson.fromJson(result, AdvBean.class);
+                        if(result != null){
+                            bean = gson.fromJson(result, AdvBean.class);
 
-                        if (bean.getCode().equals("0")){
-                            Toast.makeText(context, bean.getMsg(), Toast.LENGTH_SHORT).show();
+                            if (bean.getCode().equals("0")){
+                                Toast.makeText(context, bean.getMsg(), Toast.LENGTH_SHORT).show();
+                            }
+                            else if(bean.getCode().equals("2")){
+                                Toast.makeText(context, bean.getMsg(), Toast.LENGTH_SHORT).show();
+                            }
+                            else if(bean.getCode().equals("1")) {
+                                iView.showAdvList(bean.getData());
+                            }
                         }
-                        else if(bean.getCode().equals("2")){
-                            Toast.makeText(context, bean.getMsg(), Toast.LENGTH_SHORT).show();
-                        }
-                        else if(bean.getCode().equals("1")) {
-                            iView.showAdvList(bean.getData());
-                        }
+                        else { Log.i("MyTest", "AdvData请求成功01 null");}
+
                     }
                 });
 

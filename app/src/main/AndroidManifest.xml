@@ -6,6 +6,8 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
         android:name=".app"
@@ -14,6 +16,18 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
+        <!--<provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="com.example.leon.article.fileProvider"
+            android:grantUriPermissions="true"
+            android:exported="false">
+            &lt;!&ndash;元数据&ndash;&gt;
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>-->
+
         <activity
             android:name=".Activity.LoginActivity"
             android:windowSoftInputMode="adjustUnspecified|stateHidden">

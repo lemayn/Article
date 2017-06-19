@@ -79,7 +79,7 @@ public class RegisterActivity extends ToolBarBaseActivity<ActivityRegisterBindin
 
     private void register() {
 
-        String account = binding.edittextName.getText().toString().trim();
+        final String account = binding.edittextName.getText().toString().trim();
         String pwd = binding.edittextPwd.getText().toString().trim();
         String pwd2 = binding.edittextPwd2.getText().toString().trim();
         String phone = binding.edittextPhone.getText().toString().trim();
@@ -143,7 +143,9 @@ public class RegisterActivity extends ToolBarBaseActivity<ActivityRegisterBindin
                         }
                         else if(bean.getCode().equals("1")) {
                             Toast.makeText(RegisterActivity.this, bean.getMsg(), Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
+                            Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                            intent.putExtra("account", account);
+                            startActivity(intent);
                         }
 
                     }

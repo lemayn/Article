@@ -3,6 +3,7 @@ package com.example.leon.article.adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -348,7 +349,7 @@ public class HomeRecycleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         }
 
         @Override
-        public View getView(ViewGroup container, int position) {
+        public View getView(ViewGroup container, final int position) {
 
             final int picNo = position + 1;
             ImageView view = new ImageView(container.getContext());
@@ -368,7 +369,15 @@ public class HomeRecycleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                 @Override
                 public void onClick(View v)
                 {
-//                    Toast.makeText(context, "点击了第" + picNo + "张图片", Toast.LENGTH_SHORT).show();
+                    String address = list.get(position).getUrl();
+                    if (address == null||address.equals("")){
+                        return;
+                    }
+                    else {
+                        Uri uri = Uri.parse("https://"+address);
+                        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                        context.startActivity(intent);
+                    }
                 }
 
             });

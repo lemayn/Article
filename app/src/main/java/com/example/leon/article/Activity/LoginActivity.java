@@ -2,6 +2,7 @@ package com.example.leon.article.Activity;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
@@ -50,11 +51,14 @@ public class LoginActivity extends ToolBarBaseActivity<ActivityLoginBinding> imp
     List<AdvBean.DataBean> advlist = new ArrayList<AdvBean.DataBean>();
 
     ForgetPwdDialog dialog;
+    String account = "";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        account = getIntent().getStringExtra("account");
 
         is_constraint_loin = getIntent().getBooleanExtra(Constant.Intent_Extra.IS_CONSTRAINT_LOIN, false);
 
@@ -85,6 +89,7 @@ public class LoginActivity extends ToolBarBaseActivity<ActivityLoginBinding> imp
         binding.btnLogin.setOnClickListener(this);
         binding.btnRegister.setOnClickListener(this);
         binding.tvForgetpwd.setOnClickListener(this);
+        binding.edittextPhone.setText(account);
     }
 
 
@@ -222,7 +227,7 @@ public class LoginActivity extends ToolBarBaseActivity<ActivityLoginBinding> imp
         }
 
         @Override
-        public View getView(ViewGroup container, int position) {
+        public View getView(ViewGroup container, final int position) {
 
             final int picNo = position + 1;
             ImageView view = new ImageView(container.getContext());
@@ -239,8 +244,7 @@ public class LoginActivity extends ToolBarBaseActivity<ActivityLoginBinding> imp
             view.setOnClickListener(new View.OnClickListener()      // 点击事件
             {
                 @Override
-                public void onClick(View v) {
-                }
+                public void onClick(View v) {}
 
             });
 
