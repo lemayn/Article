@@ -165,13 +165,12 @@ public class HomeRecycleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                 context.sendBroadcast(intent);
 
                 if ( HolderTypeArticle3.lin1!=null){
-                    HolderTypeArticle3.lin1.setVisibility(View.GONE);
                     HolderTypeArticle3.lin2.setVisibility(View.VISIBLE);
+                    HolderTypeArticle3.lin1.setVisibility(View.GONE);
                 }
                 else{
                     Log.i("MyTest", "adapter null");
                 }
-
 
             }
         });
