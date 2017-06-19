@@ -79,13 +79,15 @@ public class ArtDetailActivity extends ToolBarBaseActivity<ActivityArtDetailBind
         String artImg = (String) bean.getData().getAimg();
         String addtime = bean.getData().getAaddtime();
         if (!TextUtils.isEmpty(artImg)) {
-            iv_detail.setVisibility(View.VISIBLE);
             Glide.with(this)
                     .load(imgUrl+artImg)
                     .centerCrop()
                     .transform(new CornersTransform(ArtDetailActivity.this))
                     .crossFade()
                     .into(iv_detail);
+            iv_detail.setVisibility(View.VISIBLE);
+        }else{
+            iv_detail.setVisibility(View.VISIBLE);
         }
         tv_title.setText(atitle);
         tv_time.setText("更新时间："+addtime);

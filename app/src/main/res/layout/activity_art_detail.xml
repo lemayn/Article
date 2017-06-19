@@ -37,6 +37,7 @@
             android:layout_marginRight="10dp"
             android:layout_height="180dp"
             android:scaleType="centerCrop"
+            android:src="@mipmap/art_default"
             android:visibility="gone"/>
 
         <TextView
