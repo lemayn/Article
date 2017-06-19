@@ -71,6 +71,8 @@ public class EditorActivity extends AppCompatActivity implements IEditorActivity
     private MaterialSpinner spinner;
     private int selectPosition = 1;
     private boolean isDelet = false;
+    //存放Classify的集合
+    private List<String> items = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -160,7 +162,6 @@ public class EditorActivity extends AppCompatActivity implements IEditorActivity
     }
 
     private void initSpinner() {
-        List<String> items = new ArrayList<>();
         for (UploadClassifyBean.DataBean classify : classifys) {
             items.add(classify.getClass_name());
         }
@@ -470,7 +471,7 @@ public class EditorActivity extends AppCompatActivity implements IEditorActivity
         //设置对话框显示小图标
         builder.setIcon(android.R.drawable.ic_dialog_alert)
                 .setTitle("申请权限")
-                .setMessage("在设置-应用-RichText-权限 中开启相机、存储权限，才能正常使用拍照或图片选择功能")
+                .setMessage("在设置-应用-微创秀文-权限 中开启相机、存储权限，才能正常使用拍照或图片选择功能")
                 //添加确定按钮点击事件
                 .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                     @Override

@@ -27,8 +27,7 @@ public class ArtDetailActivity extends ToolBarBaseActivity<ActivityArtDetailBind
     private TextView tv_title;
     private ArtPresenterImp artPresenter;
     private TextView tv_content;
-    private String imgUrl = "http://121.127.226.160";
-//    private String imgUrl = "http://118.89.233.35:8989";
+    private String imgUrl = ArtConstant.BASE_IMGURL;
     private ImageView iv_detail;
     private TextView tv_time;
 

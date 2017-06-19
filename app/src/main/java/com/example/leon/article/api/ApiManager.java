@@ -1,5 +1,6 @@
 package com.example.leon.article.api;
 
+import com.example.leon.article.Activity.art.ArtConstant;
 import com.example.leon.article.app;
 import com.example.leon.article.utils.NetWorkUtil;
 
@@ -71,8 +72,7 @@ public class ApiManager {
             synchronized (artMonitor) {
                 if (artApi == null) {
                     artApi = new Retrofit.Builder()
-//                            .baseUrl("http://118.89.233.35:8989/api/")
-                            .baseUrl("http://121.127.226.160/api/")
+                            .baseUrl(ArtConstant.BASE_URL)
                             .addConverterFactory(GsonConverterFactory.create())
                             .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                             .client(client)
@@ -89,8 +89,7 @@ public class ApiManager {
             synchronized (artMonitor) {
                 if (bankApi == null) {
                     bankApi = new Retrofit.Builder()
-//                            .baseUrl("http://118.89.233.35:8989/api/")
-                            .baseUrl("http://121.127.226.160/api/")
+                            .baseUrl(ArtConstant.BASE_URL)
                             .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                             .addConverterFactory(GsonConverterFactory.create())
                             .client(client)
