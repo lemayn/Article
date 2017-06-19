@@ -258,10 +258,10 @@ public class EditorActivity extends AppCompatActivity implements IEditorActivity
         findViewById(R.id.bt_editor_newslist).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (mEditor != null) {
-                    showifSaveDialog();
-                }else{
+                if (TextUtils.isEmpty(mEditor.getText().toString().trim()) && TextUtils.isEmpty(artTitle.getText().toString())) {
                     startActivity(new Intent(EditorActivity.this, MainActivity.class));
+                }else{
+                    showifSaveDialog();
                 }
             }
         });

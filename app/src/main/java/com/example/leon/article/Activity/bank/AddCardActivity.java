@@ -48,7 +48,6 @@ public class AddCardActivity extends ToolBarBaseActivity<ActivityAddCardBinding>
     private int bid;
     private ImageView iv_chooseBank;
     private LinearLayout ll_chooseBank;
-    private ImageView iv_chooseBank2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,7 +78,6 @@ public class AddCardActivity extends ToolBarBaseActivity<ActivityAddCardBinding>
         setNavigationView();
         ll_chooseBank = (LinearLayout) findViewById(R.id.ll_chooseBank);
         iv_chooseBank = (ImageView) findViewById(R.id.iv_chooseBank);
-        iv_chooseBank2 = (ImageView) findViewById(R.id.iv_chooseBank02);
         et_cardNum = (EditTextWithClear) findViewById(R.id.et_card_numb);
         et_userbankName = (EditText) findViewById(R.id.et_userbankName);
         et_userAdress = (EditText) findViewById(R.id.et_userAdress);
