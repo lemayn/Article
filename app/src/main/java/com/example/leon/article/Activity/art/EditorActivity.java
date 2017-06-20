@@ -92,20 +92,20 @@ public class EditorActivity extends AppCompatActivity implements IEditorActivity
             public void onFinish(File outputFile, Uri outputUri) {
                 if (outputUri != null) {
                     imgpath = outputFile.getAbsolutePath();
-                    iv_insert.setVisibility(View.VISIBLE);
                     Glide.with(EditorActivity.this)
                             .load(outputUri)
                             .centerCrop()
                             .transform(new CornersTransform(EditorActivity.this))
                             .crossFade()
                             .into(iv_insert);
+                    iv_insert.setVisibility(View.VISIBLE);
 
                     //压缩图片
                     ImageCompress imageCompress = new ImageCompress();
                     ImageCompress.CompressOptions options = new ImageCompress.CompressOptions();
                     options.uri = Uri.fromFile(new File(imgpath));
                     options.maxHeight = 800;
-                    options.maxWidth = 480;
+                    options.maxWidth = 400;
                     insertBitmap = imageCompress.compressFromUri(EditorActivity.this, options);
                     /*//设置图片缩放比例
                     ImageResizeUtil.resizeImage(insertBitmap,500,500);*/

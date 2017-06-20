@@ -202,11 +202,11 @@ public class PhotoSelectUtils {
                 case PhotoSelectUtils.REQ_SELECT_PHOTO://图库
                     if (data != null) {
                         Uri sourceUri = data.getData();
-                        String[] proj = {MediaStore.Images.Media.DATA};
+                        /*String[] proj = {MediaStore.Images.Media.DATA};
                         Cursor cursor = mActivity.managedQuery(sourceUri, proj, null, null, null);
                         int columnIndex = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
                         cursor.moveToFirst();
-                        String imgPath = cursor.getString(columnIndex);
+                        String imgPath = cursor.getString(columnIndex);*/
 
                         //通过ImagePathUtils获取图片路径(小米4能通过这种方式获取，上面的方法获取地址失败)
                         String path = ImagePathUtils.getImageAbsolutePath(mActivity, sourceUri);

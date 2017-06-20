@@ -410,7 +410,6 @@
         android:layout_marginBottom="15dp"
         android:scaleType="centerCrop"
         android:adjustViewBounds="true"
-        android:visibility="gone"
-        android:src="@drawable/rec_bg"/>
+        android:visibility="gone" />
 
 </LinearLayout>
