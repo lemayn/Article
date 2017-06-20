@@ -130,6 +130,7 @@ public class DownLoadService extends Service {
             //添加这一句表示对目标应用临时授权该Uri所代表的文件
             intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
             intent.setDataAndType(apkUri, "application/vnd.android.package-archive");
+            mContext.startActivity(intent);
         } else {
             Uri uri = Uri.fromFile(file);
             Intent install = new Intent(Intent.ACTION_VIEW);
