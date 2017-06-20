@@ -33,4 +33,6 @@ public interface ArticleService {
     @GET("api/")
     Observable<ArticleApiBean> weixin(@Query("Action") String type);
 
+    @GET("api/")
+    Observable<ArticleApiBean> upgrade(@Query("Action") String type);
 }

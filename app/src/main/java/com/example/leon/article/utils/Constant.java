@@ -95,7 +95,15 @@ public class Constant {
          */
         public static final String KEFU = "Kefu";
 
+        /**
+         * 软件说明接口
+         */
         public static final String ABOOUT_IUS = BASE_URL + "api/about.php";
+
+        /**
+         * 软件更新
+         */
+        public static final String UPGRADE = "Upgrade";
 
     }
 
@@ -147,5 +155,9 @@ public class Constant {
          * 在线客服
          */
         public static final int SERVICE = 1;
+        /**
+         * apk更新链接
+         */
+        public static final String VERSION_URL = "version_url";
     }
 }

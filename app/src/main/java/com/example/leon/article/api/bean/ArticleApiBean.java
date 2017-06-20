@@ -64,6 +64,34 @@ public class ArticleApiBean extends ApiBean {
 
         private String img;
 
+        private String version_code;
+        private String version_explain;
+        private String version_url;
+
+        public String getVersion_code() {
+            return version_code;
+        }
+
+        public void setVersion_code(String version_code) {
+            this.version_code = version_code;
+        }
+
+        public String getVersion_explain() {
+            return version_explain;
+        }
+
+        public void setVersion_explain(String version_explain) {
+            this.version_explain = version_explain;
+        }
+
+        public String getVersion_url() {
+            return version_url;
+        }
+
+        public void setVersion_url(String version_url) {
+            this.version_url = version_url;
+        }
+
         public String getImg() {
             return img;
         }

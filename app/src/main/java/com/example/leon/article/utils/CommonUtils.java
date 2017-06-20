@@ -1,6 +1,8 @@
 package com.example.leon.article.utils;
 
 import android.content.Context;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
@@ -165,5 +167,24 @@ public class CommonUtils {
             return 0;
         }
         return list.size();
+    }
+
+    /*
+    * 获取应用版本
+    */
+    public static int getVersionCode(Context context) {
+
+        int versionCode = 0;
+        try {
+            //获取包管理者
+            PackageManager pm = context.getPackageManager();
+            //获取packageInfo
+            PackageInfo info = pm.getPackageInfo(context.getPackageName(), 0);
+            //获取versionCode
+            versionCode = info.versionCode;
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+        return versionCode;
     }
 }
