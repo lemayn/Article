@@ -142,7 +142,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        viewpager.setOffscreenPageLimit(1);
+        viewpager.setOffscreenPageLimit(3);
         navigationview.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
