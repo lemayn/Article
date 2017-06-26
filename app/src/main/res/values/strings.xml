@@ -105,5 +105,6 @@
     <string name="statement_success">成功</string>
     <string name="statement_fail">失败</string>
     <string name="account_statement">我的账单</string>
+    <string name="video_list">视频列表</string>
 
 </resources>
