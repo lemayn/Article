@@ -14,6 +14,7 @@ import android.text.style.ForegroundColorSpan;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -128,6 +129,19 @@ public class DataBindingUtil {
             textView.setText(money.append("-").append(config.getMoney()).toString());
         } else if (config.getType() == 1) {
             textView.setText(money.append("+").append(config.getMoney()).toString());
+        }
+    }
+
+    @BindingAdapter("state")
+    public static void setState(RelativeLayout rl, int state) {
+        if (rl == null) {
+            return;
+        }
+        if (rl.getChildAt(0) instanceof ImageView) {
+            rl.getChildAt(0).setSelected(rl.getId() == state);
+        }
+        if (rl.getChildAt(1) instanceof TextView) {
+            ((TextView) rl.getChildAt(1)).setTextColor(CommonUtils.getColor(R.color.colorBlack));
         }
     }
 

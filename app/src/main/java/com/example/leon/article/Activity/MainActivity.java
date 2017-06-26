@@ -5,21 +5,16 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.design.internal.BottomNavigationMenuView;
-import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.util.DisplayMetrics;
-import android.util.TypedValue;
 import android.view.KeyEvent;
-import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.leon.article.Activity.art.ArtConstant;
@@ -27,6 +22,7 @@ import com.example.leon.article.R;
 import com.example.leon.article.api.ApiFactory;
 import com.example.leon.article.api.BaseValueValidOperator;
 import com.example.leon.article.api.bean.ArticleApiBean;
+import com.example.leon.article.databinding.ActivityMainBinding;
 import com.example.leon.article.fragment.ArticleFragment;
 import com.example.leon.article.fragment.HomeFragment;
 import com.example.leon.article.fragment.MoreFragment;
@@ -35,7 +31,6 @@ import com.example.leon.article.upgrade.DownLoadService;
 import com.example.leon.article.utils.CommonUtils;
 import com.example.leon.article.utils.Constant;
 import com.example.leon.article.utils.SPUtil;
-import com.example.leon.article.widget.BottomNavigationViewHelper;
 
 import java.util.ArrayList;
 
@@ -46,18 +41,18 @@ import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private FragmentPagerAdapter mAdapter;
     private ArrayList<Fragment> mFragments = new ArrayList<>();
     private ViewPager viewpager;
-    private BottomNavigationView navigationview;
     private String version_url;
+    private ActivityMainBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
 
         Long lastUsingTime = (Long) SPUtil.get(Constant.Share_prf.LAST_USING_TIME, 0L);
         long currentTimeMillis = System.currentTimeMillis();
@@ -74,6 +69,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initEvent() {
+        binding.home.setOnClickListener(this);
+        binding.article.setOnClickListener(this);
+        binding.vip.setOnClickListener(this);
+        binding.more.setOnClickListener(this);
+        binding.setState(R.id.home);
+
         viewpager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -83,16 +84,16 @@ public class MainActivity extends AppCompatActivity {
             public void onPageSelected(int position) {
                 switch (position) {
                     case 0:
-                        navigationview.setSelectedItemId(R.id.menu_home);
+                        binding.setState(R.id.home);
                         break;
                     case 1:
-                        navigationview.setSelectedItemId(R.id.menu_article);
+                        binding.setState(R.id.article);
                         break;
                     case 2:
-                        navigationview.setSelectedItemId(R.id.menu_vip);
+                        binding.setState(R.id.vip);
                         break;
                     case 3:
-                        navigationview.setSelectedItemId(R.id.menu_more);
+                        binding.setState(R.id.more);
                         break;
                 }
             }
@@ -108,36 +109,17 @@ public class MainActivity extends AppCompatActivity {
         int position = getIntent().getIntExtra(ArtConstant.SHOW_ARTICLEFRAGMENT, 0);
         viewpager.setCurrentItem(position);
         if (position == 0) {
-            navigationview.setSelectedItemId(R.id.menu_home);
+            binding.setState(R.id.home);
         }
         if (position == 1) {
-            navigationview.setSelectedItemId(R.id.menu_article);
+            binding.setState(R.id.article);
         }
     }
 
 
     private void initView() {
-
         initfragments();
         viewpager = (ViewPager) findViewById(R.id.viewpager);
-        navigationview = (BottomNavigationView) findViewById(R.id.navigationview);
-        BottomNavigationMenuView menuView = (BottomNavigationMenuView) navigationview.getChildAt(0);
-        for (int i = 0; i < menuView.getChildCount(); i++) {
-            final View iconView = menuView.getChildAt(i).findViewById(android.support.design.R.id.icon);
-            final ViewGroup.LayoutParams layoutParams = iconView.getLayoutParams();
-            final DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
-            // set your height here
-            layoutParams.height = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
-                    CommonUtils.getDimens(R.dimen.x11), displayMetrics);
-            // set your width here
-            layoutParams.width = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
-                    CommonUtils.getDimens(R.dimen.x11), displayMetrics);
-            iconView.setPadding(iconView.getLeft(), iconView.getTop() - CommonUtils.getDimension(R.dimen.x2),
-                    iconView.getRight(), CommonUtils.getDimension(R.dimen.x2));
-            iconView.setLayoutParams(layoutParams);
-        }
-
-        BottomNavigationViewHelper.disableShiftMode(navigationview);
 
         mAdapter = new FragmentPagerAdapter(getSupportFragmentManager()) {
             @Override
@@ -161,27 +143,6 @@ public class MainActivity extends AppCompatActivity {
         });
 
         viewpager.setOffscreenPageLimit(3);
-        navigationview.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.menu_home:
-                        viewpager.setCurrentItem(0);
-                        break;
-                    case R.id.menu_article:
-                        viewpager.setCurrentItem(1);
-                        break;
-                    case R.id.menu_vip:
-                        viewpager.setCurrentItem(2);
-                        break;
-                    case R.id.menu_more:
-                        viewpager.setCurrentItem(3);
-                        break;
-                }
-                return true;
-            }
-        });
-
     }
 
     private void initfragments() {
@@ -195,12 +156,12 @@ public class MainActivity extends AppCompatActivity {
 
     public void gotoArticle() {
         viewpager.setCurrentItem(1);
-        navigationview.setSelectedItemId(R.id.menu_article);
+        binding.setState(R.id.article);
     }
 
     public void gotoHomePage() {
         viewpager.setCurrentItem(0);
-        navigationview.setSelectedItemId(R.id.menu_home);
+        binding.setState(R.id.home);
     }
 
     private long exitTime = 0;
@@ -305,5 +266,24 @@ public class MainActivity extends AppCompatActivity {
     @PermissionFail(requestCode = 654321)
     private void showTip() {
         Toast.makeText(MainActivity.this, "未获取权限，升级失败", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onClick(View v) {
+        binding.setState(v.getId());
+        switch (v.getId()) {
+            case R.id.home:
+                viewpager.setCurrentItem(0, false);
+                break;
+            case R.id.article:
+                viewpager.setCurrentItem(1, false);
+                break;
+            case R.id.vip:
+                viewpager.setCurrentItem(2, false);
+                break;
+            case R.id.more:
+                viewpager.setCurrentItem(3, false);
+                break;
+        }
     }
 }

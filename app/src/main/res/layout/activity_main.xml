@@ -1,35 +1,144 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/activity_main"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    >
+<layout>
 
-    <android.support.v4.view.ViewPager
-        android:id="@+id/viewpager"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@+id/view"
-        />
+    <data>
 
-    <View
-        android:id="@+id/view"
-        android:layout_width="match_parent"
-        android:layout_height="3dp"
-        android:background="#f0eff4"
-        android:layout_above="@+id/navigationview"/>
+        <variable
+            name="state"
+            type="Integer"/>
 
-    <android.support.design.widget.BottomNavigationView
-        android:id="@+id/navigationview"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:background="@color/white"
-        app:itemTextColor="@color/colorBlack"
-        app:menu="@menu/bottom"
-        />
+    </data>
+
+    <RelativeLayout android:id="@+id/activity_main"
+                    xmlns:android="http://schemas.android.com/apk/res/android"
+                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                    xmlns:tools="http://schemas.android.com/tools"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+        >
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/viewpager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/view"
+            />
+
+        <View
+            android:id="@+id/view"
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:layout_above="@+id/navigationview"
+            android:background="#f0eff4"/>
 
 
-</RelativeLayout>
+        <LinearLayout
+            android:id="@+id/navigationview"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x60"
+            android:layout_alignParentBottom="true"
+            android:orientation="horizontal">
+
+            <RelativeLayout
+                android:id="@+id/home"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                app:state="@{state}">
+
+                <ImageView
+                    android:id="@+id/iv_home"
+                    style="@style/Bottom_bar_icon"
+                    android:layout_width="@dimen/x26"
+                    android:layout_height="@dimen/x26"
+                    android:src="@drawable/selector_home"/>
+
+                <TextView
+                    android:id="@+id/tv_home"
+                    style="@style/Bottom_bar_text"
+                    android:layout_below="@+id/iv_home"
+                    android:layout_marginTop="@dimen/x2"
+                    android:text="首页"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/article"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                app:state="@{state}">
+
+                <ImageView
+                    android:id="@+id/iv_article"
+                    style="@style/Bottom_bar_icon"
+                    android:layout_width="@dimen/x26"
+                    android:layout_height="@dimen/x26"
+                    android:src="@drawable/selector_article"/>
+
+                <TextView
+                    android:id="@+id/tv_article"
+                    style="@style/Bottom_bar_text"
+                    android:layout_below="@+id/iv_article"
+                    android:layout_marginTop="@dimen/x2"
+                    android:text="文章上传"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/vip"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                app:state="@{state}">
+
+                <ImageView
+                    android:id="@+id/iv_vip"
+                    style="@style/Bottom_bar_icon"
+                    android:layout_width="@dimen/x26"
+                    android:layout_height="@dimen/x26"
+                    android:src="@drawable/selector_vip"/>
+
+                <TextView
+                    android:id="@+id/tv_vip"
+                    style="@style/Bottom_bar_text"
+                    android:layout_below="@+id/iv_vip"
+                    android:layout_marginTop="@dimen/x2"
+                    android:text="会员中心"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/more"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                app:state="@{state}">
+
+                <ImageView
+                    android:id="@+id/iv_more"
+                    style="@style/Bottom_bar_icon"
+                    android:layout_width="@dimen/x26"
+                    android:layout_height="@dimen/x26"
+                    android:src="@drawable/selector_more"/>
+
+                <TextView
+                    android:id="@+id/tv_more"
+                    style="@style/Bottom_bar_text"
+                    android:layout_below="@+id/iv_more"
+                    android:layout_marginTop="@dimen/x2"
+                    android:text="更多"
+                    />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+</layout>

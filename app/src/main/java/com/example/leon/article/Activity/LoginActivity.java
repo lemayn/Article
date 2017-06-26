@@ -2,7 +2,6 @@ package com.example.leon.article.Activity;
 
 import android.content.Intent;
 import android.graphics.Color;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
@@ -187,6 +186,8 @@ public class LoginActivity extends ToolBarBaseActivity<ActivityLoginBinding> imp
                         SPUtil.put(Constant.Share_prf.SID, apiBean.getData().getSid());
                         SPUtil.put(Constant.Share_prf.NAME, apiBean.getData().getMname());
                         SPUtil.put(Constant.Share_prf.PWD, pwd);
+                        //记录上次使用时间
+                        SPUtil.put(Constant.Share_prf.LAST_USING_TIME, System.currentTimeMillis());
                         if (!is_constraint_loin) {
                             startActivity(new Intent(LoginActivity.this, MainActivity.class));
                         }
