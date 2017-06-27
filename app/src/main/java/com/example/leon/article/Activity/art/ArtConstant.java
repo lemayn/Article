@@ -29,4 +29,7 @@ public class ArtConstant {
     public static final String BASE_URL = "http://121.127.226.160/api/";
 
     public static final String BASE_IMGURL = "http://121.127.226.160";
+
+    public static final String AddVideo = "?Key=55a50c1a06f9c1032014112cbd68f34b&Action=AddVideo";
+
 }

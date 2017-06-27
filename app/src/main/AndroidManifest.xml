@@ -17,7 +17,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <!--<provider
+        <!--
+        <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="com.example.leon.article.fileProvider"
             android:grantUriPermissions="true"
@@ -26,13 +27,12 @@
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
-        </provider>-->
+        </provider>
+        -->
 
         <activity
             android:name=".Activity.LoginActivity"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden">
-
-        </activity>
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"></activity>
         <activity android:name=".Activity.art.ArtDetailActivity" />
         <activity
             android:name=".Activity.art.EditorActivity"
@@ -73,21 +73,25 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activity.GuideActivity"></activity>
-        <activity android:name=".Activity.AccountStatementActivity"/>
-        <activity android:name=".Activity.CustomerServiceActivity"/>
-        <service android:name=".upgrade.DownLoadService"/>
+        <activity android:name=".Activity.GuideActivity" />
+        <activity android:name=".Activity.AccountStatementActivity" />
+        <activity android:name=".Activity.CustomerServiceActivity" />
+
+        <service android:name=".upgrade.DownLoadService" />
 
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="com.dasheng.article.fileProvider"
-            android:grantUriPermissions="true"
-            android:exported="false">
-            <!--元数据-->
+            android:exported="false"
+            android:grantUriPermissions="true">
+
+            <!-- 元数据 -->
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
         </provider>
+
+        <activity android:name=".Activity.video.UpVideoActivity"></activity>
     </application>
 
 </manifest>

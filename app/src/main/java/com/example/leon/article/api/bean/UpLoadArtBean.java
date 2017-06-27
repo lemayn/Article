@@ -37,4 +37,11 @@ public class UpLoadArtBean extends ApiBean{
     public void setData(Object data) {
         this.data = data;
     }
+
+    @Override
+    public String toString() {
+        return "UpLoadArtBean{" +
+                "data=" + data +
+                '}';
+    }
 }

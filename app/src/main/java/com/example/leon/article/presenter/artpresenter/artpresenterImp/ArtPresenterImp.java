@@ -14,6 +14,7 @@ import com.example.leon.article.api.bean.UploadClassifyBean;
 import com.example.leon.article.presenter.artpresenter.IArtPresenter;
 import com.example.leon.article.view.IArtDetailActivity;
 import com.example.leon.article.view.IArticleFragment;
+import com.example.leon.article.view.IArticleListFragment;
 import com.example.leon.article.view.IEditorActivity;
 
 import rx.Observer;
@@ -28,11 +29,17 @@ import rx.schedulers.Schedulers;
 public class ArtPresenterImp extends BasepresenterImp implements IArtPresenter{
 
     private Context context;
-    private IArticleFragment articleFragment;
+    private IArticleListFragment articleFragment;
     private IEditorActivity editorActivity;
     private IArtDetailActivity detailActivity;
+    private IArticleFragment mArticleFragment;
 
-    public ArtPresenterImp(IArticleFragment articleFragment) {
+
+    public ArtPresenterImp(IArticleFragment mArticleFragment) {
+        this.mArticleFragment = mArticleFragment;
+    }
+
+    public ArtPresenterImp(IArticleListFragment articleFragment) {
         this.articleFragment = articleFragment;
     }
 

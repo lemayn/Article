@@ -5,9 +5,16 @@ import com.example.leon.article.api.bean.ArtListBean;
 import com.example.leon.article.api.bean.UpLoadArtBean;
 import com.example.leon.article.api.bean.UploadClassifyBean;
 
+import java.util.Map;
+
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.Part;
+import retrofit2.http.PartMap;
 import rx.Observable;
 
 /**
@@ -73,4 +80,13 @@ public interface ArtApi {
                                         @Field("sid")String sid,
                                         @Field("img") String imgBase64,
                                         @Field("class_id")String class_id);
+
+    /**
+     * 上传用户视频
+     */
+    @Multipart
+    @POST("?Key=55a50c1a06f9c1032014112cbd68f34b&Action=AddVideo")
+    Observable<UpLoadArtBean> uploadVideo(@PartMap Map<String, RequestBody> params,
+                                          @Part MultipartBody.Part file);
+
 }
