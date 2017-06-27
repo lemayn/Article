@@ -50,9 +50,13 @@ public class VIPCenterAdapter extends BaseRecyclerViewAdapter<ItemBean> implemen
             binding.rlItem.setOnClickListener(new PerfectClickListener() {
                 @Override
                 protected void onNoDoubleClick(View v) {
-                    if (position == 4) {
+                    if (position == 4 || position == 5) {
                         MainActivity mainActivity = (MainActivity) app.getInstance().getCurrentActivity();
-                        mainActivity.gotoArticle();
+                        if (position == 4) {
+                            mainActivity.gotoArticle();
+                        } else {
+                            mainActivity.gotoArticle();
+                        }
                         return;
                     }
                     Intent intent = new Intent(app.getInstance(), itemBean.getClazz());

@@ -73,6 +73,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         binding.article.setOnClickListener(this);
         binding.vip.setOnClickListener(this);
         binding.more.setOnClickListener(this);
+        binding.fabu.setOnClickListener(this);
         binding.setState(R.id.home);
 
         viewpager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -90,9 +91,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         binding.setState(R.id.article);
                         break;
                     case 2:
-                        binding.setState(R.id.vip);
+                        binding.setState(R.id.fabu);
                         break;
                     case 3:
+                        binding.setState(R.id.vip);
+                        break;
+                    case 4:
                         binding.setState(R.id.more);
                         break;
                 }
@@ -149,6 +153,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         mFragments.add(new HomeFragment());
         mFragments.add(new ArticleFragment());
+        mFragments.add(new ArticleFragment());
         mFragments.add(new VipFragment());
         mFragments.add(new MoreFragment());
 
@@ -157,6 +162,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void gotoArticle() {
         viewpager.setCurrentItem(1);
         binding.setState(R.id.article);
+    }
+
+    public void gotoFabu() {
+        viewpager.setCurrentItem(2);
+        binding.setState(R.id.fabu);
     }
 
     public void gotoHomePage() {
@@ -278,11 +288,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.article:
                 viewpager.setCurrentItem(1, false);
                 break;
-            case R.id.vip:
+            case R.id.fabu:
                 viewpager.setCurrentItem(2, false);
                 break;
-            case R.id.more:
+            case R.id.vip:
                 viewpager.setCurrentItem(3, false);
+                break;
+            case R.id.more:
+                viewpager.setCurrentItem(4, false);
                 break;
         }
     }

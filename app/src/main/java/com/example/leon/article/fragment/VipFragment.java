@@ -86,6 +86,8 @@ public class VipFragment extends Fragment {
                 AccountStatementActivity.class));
         data.add(new ItemBean(R.drawable.wenzhangliebiao, CommonUtils.getString(R.string.articles_list),
                 WithdrawDepositActivity.class));
+        data.add(new ItemBean(R.drawable.wenzhangliebiao, CommonUtils.getString(R.string.video_list),
+                WithdrawDepositActivity.class));
         data.add(new ItemBean(R.drawable.xiugaimima, CommonUtils.getString(R.string.password_modify),
                 ModifyPasswordActivity.class));
         data.add(new ItemBean(R.drawable.tixianxiugaimima, CommonUtils.getString(R.string.withdraw_password_modify),
