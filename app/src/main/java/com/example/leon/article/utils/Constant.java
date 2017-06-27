@@ -91,6 +91,11 @@ public class Constant {
         public static final String MONEY_CONFIG = "MoneyConfig";
 
         /**
+         * 我的账单接口
+         */
+        public static final String V2_MONEY_CONFIG = "V2_MoneyConfig";
+
+        /**
          * 在线客服接口
          */
         public static final String KEFU = "Kefu";

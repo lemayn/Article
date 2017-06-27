@@ -126,7 +126,7 @@ public class AccountStatementActivity extends AppCompatActivity {
         hashMap.put("cookie", (String) SPUtil.get(Constant.Share_prf.COOKIE, ""));
         hashMap.put("sid", (String) SPUtil.get(Constant.Share_prf.SID, ""));
         hashMap.put("page", String.valueOf(page));
-        ApiFactory.getApi().statement(Constant.Api.MONEY_CONFIG, hashMap)
+        ApiFactory.getApi().statement(Constant.Api.V2_MONEY_CONFIG, hashMap)
                 .lift(new BaseValueValidOperator<StatementBean>())
                 .compose(this.<StatementBean>rxSchedulerHelper())
                 .subscribe(new Subscriber<StatementBean>() {
