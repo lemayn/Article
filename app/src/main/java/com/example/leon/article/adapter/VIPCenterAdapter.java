@@ -53,9 +53,9 @@ public class VIPCenterAdapter extends BaseRecyclerViewAdapter<ItemBean> implemen
                     if (position == 4 || position == 5) {
                         MainActivity mainActivity = (MainActivity) app.getInstance().getCurrentActivity();
                         if (position == 4) {
-                            mainActivity.gotoArticle();
+                            mainActivity.gotoArticle(4);
                         } else {
-                            mainActivity.gotoArticle();
+                            mainActivity.gotoArticle(5);
                         }
                         return;
                     }

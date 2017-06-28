@@ -50,6 +50,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private ViewPager viewpager;
     private String version_url;
     private ActivityMainBinding binding;
+    private ArticleFragment articleFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -113,7 +114,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     //发表文章后跳转到当前页面
     private void ifShowArticle() {
         int position = getIntent().getIntExtra(ArtConstant.SHOW_ARTICLEFRAGMENT, 0);
-        Log.i("HT", "ifShowArticle: "+position);
+        Log.i("HT", "ifShowArticle: " + position);
         viewpager.setCurrentItem(position);
         if (position == 0) {
             binding.setState(R.id.home);
@@ -153,18 +154,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void initfragments() {
-
+        articleFragment = new ArticleFragment();
         mFragments.add(new HomeFragment());
-        mFragments.add(new ArticleFragment());
+        mFragments.add(articleFragment);
         mFragments.add(new PublishFragment());
         mFragments.add(new VipFragment());
         mFragments.add(new MoreFragment());
 
     }
 
-    public void gotoArticle() {
+    public void gotoArticle(int index) {
         viewpager.setCurrentItem(1);
         binding.setState(R.id.article);
+        if (index == 4) {
+            articleFragment.switchTag(0);
+            articleFragment.switchFragment(0);
+        } else if (index == 5) {
+            articleFragment.switchTag(1);
+            articleFragment.switchFragment(1);
+        }
     }
 
     public void gotoFabu() {

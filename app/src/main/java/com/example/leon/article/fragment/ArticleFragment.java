@@ -82,7 +82,7 @@ public class ArticleFragment extends Fragment implements View.OnClickListener{
         currentIndex=newIndex;
     }
 
-    private void switchFragment(int targetTabIndex) {
+    public void switchFragment(int targetTabIndex) {
         FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
         Fragment currentFragment = fragments.get(currentTabIndex);
         Fragment targetFragment = fragments.get(targetTabIndex);
