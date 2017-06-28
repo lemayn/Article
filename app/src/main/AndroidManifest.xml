@@ -32,7 +32,7 @@
 
         <activity
             android:name=".Activity.LoginActivity"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden"></activity>
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
         <activity android:name=".Activity.art.ArtDetailActivity" />
         <activity
             android:name=".Activity.art.EditorActivity"
@@ -91,7 +91,8 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
-        <activity android:name=".Activity.video.UpVideoActivity"></activity>
+        <activity android:name=".Activity.video.UpVideoActivity" />
+        <activity android:name=".Activity.video.VideoDetailActivity"></activity>
     </application>
 
 </manifest>

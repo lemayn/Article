@@ -10,4 +10,5 @@ public interface IUpVideoActivity extends IBaseActivity{
 
     void setClassfiy(UploadClassifyBean classifyBean);
 
+
 }

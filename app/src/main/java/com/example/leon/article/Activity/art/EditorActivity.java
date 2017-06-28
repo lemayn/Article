@@ -179,7 +179,6 @@ public class EditorActivity extends AppCompatActivity implements IEditorActivity
         mEditor = (EditText) findViewById(R.id.et_eritor);
         mEditor.setText("\t\t");
         mEditor.setSelection(mEditor.getText().length());
-
     }
 
     private void initEvent() {

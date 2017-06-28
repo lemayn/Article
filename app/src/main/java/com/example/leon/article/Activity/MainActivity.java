@@ -12,6 +12,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
@@ -26,6 +27,7 @@ import com.example.leon.article.databinding.ActivityMainBinding;
 import com.example.leon.article.fragment.ArticleFragment;
 import com.example.leon.article.fragment.HomeFragment;
 import com.example.leon.article.fragment.MoreFragment;
+import com.example.leon.article.fragment.PublishFragment;
 import com.example.leon.article.fragment.VipFragment;
 import com.example.leon.article.upgrade.DownLoadService;
 import com.example.leon.article.utils.CommonUtils;
@@ -111,6 +113,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     //发表文章后跳转到当前页面
     private void ifShowArticle() {
         int position = getIntent().getIntExtra(ArtConstant.SHOW_ARTICLEFRAGMENT, 0);
+        Log.i("HT", "ifShowArticle: "+position);
         viewpager.setCurrentItem(position);
         if (position == 0) {
             binding.setState(R.id.home);
@@ -153,7 +156,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         mFragments.add(new HomeFragment());
         mFragments.add(new ArticleFragment());
-        mFragments.add(new ArticleFragment());
+        mFragments.add(new PublishFragment());
         mFragments.add(new VipFragment());
         mFragments.add(new MoreFragment());
 

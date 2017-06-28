@@ -2,6 +2,7 @@ package com.example.leon.article.Activity.video;
 
 import android.Manifest;
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.media.MediaPlayer;
@@ -9,6 +10,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Base64;
@@ -22,15 +24,18 @@ import android.widget.ImageView;
 import android.widget.MediaController;
 import android.widget.Toast;
 
+import com.example.leon.article.Activity.MainActivity;
+import com.example.leon.article.Activity.art.ArtConstant;
 import com.example.leon.article.R;
 import com.example.leon.article.api.ApiManager;
 import com.example.leon.article.api.bean.UpLoadArtBean;
 import com.example.leon.article.api.bean.UploadClassifyBean;
+import com.example.leon.article.presenter.videopresenter.videopresenterImp.VideoPresenterImp;
 import com.example.leon.article.utils.Constant;
 import com.example.leon.article.utils.CreateBitmap;
 import com.example.leon.article.utils.SPUtil;
 import com.example.leon.article.utils.UriAllUriUtils;
-import com.example.leon.article.view.IEditorActivity;
+import com.example.leon.article.view.IUpVideoActivity;
 import com.example.leon.article.widget.FllScreenVideoView;
 import com.example.leon.article.widget.SelectVideoPopupWindow;
 import com.jaredrummler.materialspinner.MaterialSpinner;
@@ -52,7 +57,7 @@ import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
-public class UpVideoActivity extends AppCompatActivity implements View.OnClickListener, SelectVideoPopupWindow.OnSelectedListener,IEditorActivity {
+public class UpVideoActivity extends AppCompatActivity implements View.OnClickListener, SelectVideoPopupWindow.OnSelectedListener,IUpVideoActivity {
 
     private static final int VIDEO_KU = 12345;
     private EditText et_title;
@@ -67,6 +72,10 @@ public class UpVideoActivity extends AppCompatActivity implements View.OnClickLi
     private int selectPosition = 1;
     private String path = "";
     private AVLoadingIndicatorView avi_upload;
+    private VideoPresenterImp videoPresenterImp;
+    private ImageView iv_cover,iv_back;
+    private String bytesFromBitmap;
+    private EditText et_videoContent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,7 +87,9 @@ public class UpVideoActivity extends AppCompatActivity implements View.OnClickLi
     }
 
     private void GetData() {
-//        videoPresenterImp.getClassify(getCookie(),getSid());
+        //初始化presenter
+        videoPresenterImp = new VideoPresenterImp(this);
+        videoPresenterImp.getClassify(getCookie(),getSid());
     }
 
     private void initSpinner() {
@@ -86,7 +97,6 @@ public class UpVideoActivity extends AppCompatActivity implements View.OnClickLi
             items.add(classify.getClass_name());
         }
         mSpinner.setItems(items);
-        mSpinner.setItems(classifys);
         mSpinner.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener() {
             @Override
             public void onItemSelected(MaterialSpinner view, int position, long id, Object item) {
@@ -97,8 +107,11 @@ public class UpVideoActivity extends AppCompatActivity implements View.OnClickLi
 
     private void initView() {
         mSpinner = (MaterialSpinner) findViewById(R.id.spinner_videoList);
+        iv_cover = (ImageView) findViewById(R.id.iv_cover_upVideo);
         avi_upload = (AVLoadingIndicatorView) findViewById(R.id.avi_upvideo);
         et_title = (EditText) findViewById(R.id.et_video);
+        et_videoContent = (EditText) findViewById(R.id.et_videoContent);
+        iv_back = (ImageView) findViewById(R.id.iv_upload_back);
         iv_play = (ImageView) findViewById(R.id.iv_start);
         fl_myVideo = (FrameLayout) findViewById(R.id.fl_myVideo);
         bt_addvideo = (Button) findViewById(R.id.bt_upvideo_addvideo);
@@ -112,7 +125,9 @@ public class UpVideoActivity extends AppCompatActivity implements View.OnClickLi
         mediaController.setVisibility(View.INVISIBLE);
         mVideoView.setMediaController(mediaController);
         mVideoView.requestFocus();
-        //初始化presenter
+        //设置正文空格
+        et_videoContent.setText("\t\t");
+        et_videoContent.setSelection(et_videoContent.getText().length());
     }
 
     private void initEvent() {
@@ -120,6 +135,7 @@ public class UpVideoActivity extends AppCompatActivity implements View.OnClickLi
         bt_videolist.setOnClickListener(this);
         bt_upload.setOnClickListener(this);
         iv_play.setOnClickListener(this);//点击开始播放
+        iv_back.setOnClickListener(this);
         //设置点击空白处消失popwindow
         selectVideoPopupWindow.setTouchInterceptor(new View.OnTouchListener() {
             @Override
@@ -136,8 +152,9 @@ public class UpVideoActivity extends AppCompatActivity implements View.OnClickLi
             @Override
             public void onCompletion(MediaPlayer mp) {
                 // TODO Auto-generated method stub
-                Toast.makeText(getApplicationContext(), "视频播放结束", Toast.LENGTH_LONG).show();
+//                Toast.makeText(getApplicationContext(), "视频播放结束", Toast.LENGTH_LONG).show();
                 iv_play.setVisibility(View.VISIBLE);
+//                iv_cover.setVisibility(View.VISIBLE);
             }
         });
     }
@@ -149,7 +166,7 @@ public class UpVideoActivity extends AppCompatActivity implements View.OnClickLi
                 selectVideoPopupWindow.showPopupWindow(UpVideoActivity.this);
                 break;
             case R.id.bt_upvideo_videolist://视频列表
-
+                GoVideoListFragment();
                 break;
             case R.id.bt_upvideo_upload://上传视频
                 avi_upload.setVisibility(View.VISIBLE);
@@ -158,18 +175,62 @@ public class UpVideoActivity extends AppCompatActivity implements View.OnClickLi
                 break;
             case R.id.iv_start:   //播放视频
                 mVideoView.start();
+                iv_cover.setVisibility(View.INVISIBLE);//隐藏第一帧图
                 iv_play.setVisibility(View.GONE);
+                break;
+            case R.id.iv_upload_back:     //点击返回
+                finish();
                 break;
         }
     }
 
+    private void GoVideoListFragment() {
+        int myVideoVisibility = fl_myVideo.getVisibility();
+        if (!TextUtils.isEmpty(et_title.getText().toString().trim()) && myVideoVisibility == View.VISIBLE) {
+            showifsaveDialog();
+        } else {
+            GoVideoFragment();
+        }
+    }
+
+    private void GoVideoFragment() {
+        Intent intent = new Intent(UpVideoActivity.this, MainActivity.class);
+        intent.putExtra(ArtConstant.SHOW_ARTICLEFRAGMENT,1);
+        startActivity(intent);
+        finish();
+    }
+
+    private void showifsaveDialog() {
+            final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle("您还没有上传哦，确定退出吗？")
+                    .setMessage("退出后数据将不会保存")
+                    .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            //do nothing or what you want
+                        }
+                    })
+                    .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            finish();
+                        }
+                    })
+                    .create()
+                    .show();
+    }
+
     private void uploaduserVideo(String path) {
+        mVideoView.pause();
         //获取视频第一帧图片
         Bitmap bitmap = CreateBitmap.getLocalVideoThumbnail(path);
-        String bytesFromBitmap = getBytesFromBitmap(bitmap);
+        if (bitmap != null) {
+            bytesFromBitmap = getBytesFromBitmap(bitmap);
+        }
         //获取Title
         String title = et_title.getText().toString();
-        if (!TextUtils.isEmpty(title)) {
+        String content = et_videoContent.getText().toString().trim();
+        if (!TextUtils.isEmpty(title) && bitmap!=null && !TextUtils.isEmpty(content)) {
             RequestBody requestFile =
                     RequestBody.create(MediaType.parse("multipart/form-data"), new File(path));
             // MultipartBody.Part  和后端约定好Key，这里的partName是用image
@@ -179,7 +240,7 @@ public class UpVideoActivity extends AppCompatActivity implements View.OnClickLi
             RequestBody body2 = RequestBody.create(MediaType.parse("multipart/form-data"),getCookie());
             RequestBody body3 = RequestBody.create(MediaType.parse("multipart/form-data"),title);
             RequestBody body4 = RequestBody.create(MediaType.parse("multipart/form-data"),String.valueOf(selectPosition));
-            RequestBody body5 = RequestBody.create(MediaType.parse("multipart/form-data"),"哈哈哈");
+            RequestBody body5 = RequestBody.create(MediaType.parse("multipart/form-data"),content);
             RequestBody body6 = RequestBody.create(MediaType.parse("multipart/form-data"),bytesFromBitmap);
             Map<String,RequestBody> map = new HashMap<>();
             map.put("sid",body1);
@@ -210,13 +271,20 @@ public class UpVideoActivity extends AppCompatActivity implements View.OnClickLi
                             avi_upload.hide();
                             if (upLoadArtBean.getCode().equals("1")) {
                                 Toast.makeText(UpVideoActivity.this,"上传成功",Toast.LENGTH_SHORT).show();
+                                GoVideoFragment();
                             }else{
                                 Toast.makeText(UpVideoActivity.this,"上传失败",Toast.LENGTH_SHORT).show();
                             }
                         }
                     });
         }else{
-            et_title.setError("您还没有添加标题");
+            if (path != null && fl_myVideo.getVisibility() == View.VISIBLE) {
+                Toast.makeText(UpVideoActivity.this,"别忘了给视频加上标题与内容哦~",Toast.LENGTH_SHORT).show();
+                avi_upload.hide();
+            }else{
+                Toast.makeText(UpVideoActivity.this,"别忘了添加您的视频哦~",Toast.LENGTH_SHORT).show();
+                avi_upload.hide();
+            }
         }
     }
 
@@ -271,7 +339,7 @@ public class UpVideoActivity extends AppCompatActivity implements View.OnClickLi
         intent.addCategory("android.intent.category.DEFAULT");
 
         // 保存录像到指定的路径
-        File file = new File(Environment.getExternalStorageDirectory().getPath()+"/fl1234.mp4");
+        File file = new File(Environment.getExternalStorageDirectory().getPath()+"/video.mp4");
         Uri uri = Uri.fromFile(file);
         intent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
         startActivityForResult(intent, 0);
@@ -287,12 +355,12 @@ public class UpVideoActivity extends AppCompatActivity implements View.OnClickLi
                     uri = data.getData();
                     path = UriAllUriUtils.getPath(this, uri);
                     if (uri != null) {
+                        Bitmap bitmap = CreateBitmap.getLocalVideoThumbnail(path);
+                        iv_cover.setImageBitmap(bitmap);
                         fl_myVideo.setVisibility(View.VISIBLE);
                     }else{
                         fl_myVideo.setVisibility(View.INVISIBLE);
                     }
-                    Log.i("FiDo", "onActivityResult: path--->"+ path);
-                    Log.i("FiDo", "onActivityResult: uri--->"+uri);
                     mVideoView.setVideoURI(uri);
                 }
                 break;
@@ -342,6 +410,7 @@ public class UpVideoActivity extends AppCompatActivity implements View.OnClickLi
 
     @Override
     public void showProgress() {
+
     }
 
     @Override
@@ -355,18 +424,19 @@ public class UpVideoActivity extends AppCompatActivity implements View.OnClickLi
     }
 
     @Override
-    public void showSuccess() {
-
-    }
-
-    @Override
-    public void showFailure() {
-
-    }
-
-    @Override
-    public void setUploadClassfiy(UploadClassifyBean classifyBean) {
-        classifys.addAll(classifyBean.getData());
+    public void setClassfiy(UploadClassifyBean classifyBean) {
+        if (classifyBean != null) {
+            classifys.addAll(classifyBean.getData());
+        }
         initSpinner();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        videoPresenterImp.unsubcrible();
+        if (mVideoView != null) {
+            mVideoView = null;
+        }
     }
 }

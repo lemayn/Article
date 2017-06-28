@@ -12,7 +12,6 @@ import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.leon.article.Activity.art.EditorActivity;
@@ -34,7 +33,6 @@ import java.util.List;
 public class ArticleListFragment extends Fragment implements View.OnClickListener, IArticleListFragment {
 
     //    private TextView tv_myArt;
-    private TextView tv_createArt;
     private ListView lv_article;
     private ArtListAdapter adapter;
     private ArtPresenterImp artPresenter;

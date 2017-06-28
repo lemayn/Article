@@ -4,6 +4,8 @@ import com.example.leon.article.api.bean.ArtInfoBean;
 import com.example.leon.article.api.bean.ArtListBean;
 import com.example.leon.article.api.bean.UpLoadArtBean;
 import com.example.leon.article.api.bean.UploadClassifyBean;
+import com.example.leon.article.api.bean.VideoInfoBean;
+import com.example.leon.article.api.bean.VideoListBean;
 
 import java.util.Map;
 
@@ -88,5 +90,37 @@ public interface ArtApi {
     @POST("?Key=55a50c1a06f9c1032014112cbd68f34b&Action=AddVideo")
     Observable<UpLoadArtBean> uploadVideo(@PartMap Map<String, RequestBody> params,
                                           @Part MultipartBody.Part file);
+
+    /**
+     * 获取用户全部视频列表
+     * @param cookie
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("?Key=55a50c1a06f9c1032014112cbd68f34b&Action=Video")
+    Observable<VideoListBean> getVideoList(@Field("cookie") String cookie, @Field("sid") String sid
+            , @Field("page")int page);
+
+    /**
+     * 获取视频列表详情
+     * @param cookie
+     * @param id
+     * @return
+     */
+    @FormUrlEncoded
+    @POST("?Key=55a50c1a06f9c1032014112cbd68f34b&Action=VideoInfo")
+    Observable<VideoInfoBean> getVideoDetailInfo(@Field("cookie") String cookie, @Field("id") String id,
+                                                 @Field("sid") String sid);
+
+
+    /**
+     * 获取用户发表视频列表分类
+     */
+    @FormUrlEncoded
+    @POST("?Key=55a50c1a06f9c1032014112cbd68f34b&Action=Video")
+    Observable<VideoListBean> getUserVideoTypeList(@Field("cookie") String cookie,
+                                               @Field("sid") String sid,
+                                               @Field("page")int page,
+                                               @Field("type") int type);
 
 }

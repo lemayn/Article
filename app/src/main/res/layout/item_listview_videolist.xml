@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:id="@+id/ll_adapter_videolist"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:background="@color/colorWhite">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_videolist_content"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="能够在每一天的生活里缓慢而坚定的改变人、影响人的，就是习惯！据我多年的观察，但凡优秀的大学生，他们各有其闪光点，但他们有一个共同点——那就是都拥有以下五个良好的习惯。" />
+
+            <TextView
+                android:id="@+id/tv_videolist_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2017-5-16" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="10dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/divider_vertical" />
+
+        <TextView
+            android:id="@+id/tv_videolist_status"
+            android:layout_width="103dp"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="审核中"
+            android:textSize="15sp" />
+
+    </LinearLayout>
+
+</LinearLayout>
