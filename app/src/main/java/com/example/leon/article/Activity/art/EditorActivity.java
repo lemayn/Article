@@ -258,7 +258,7 @@ public class EditorActivity extends AppCompatActivity implements IEditorActivity
             @Override
             public void onClick(View v) {
                 if (TextUtils.isEmpty(mEditor.getText().toString().trim()) && TextUtils.isEmpty(artTitle.getText().toString())) {
-                    startActivity(new Intent(EditorActivity.this, MainActivity.class));
+                    goArticleFragment();
                 }else{
                     showifSaveDialog();
                 }
@@ -360,6 +360,7 @@ public class EditorActivity extends AppCompatActivity implements IEditorActivity
 
     private void goArticleFragment() {
         Intent intent = new Intent(EditorActivity.this, MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         intent.putExtra(ArtConstant.SHOW_ARTICLEFRAGMENT,1);
         startActivity(intent);
         finish();

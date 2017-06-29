@@ -114,7 +114,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     //发表文章后跳转到当前页面
     private void ifShowArticle() {
         int position = getIntent().getIntExtra(ArtConstant.SHOW_ARTICLEFRAGMENT, 0);
-        Log.i("HT", "ifShowArticle: " + position);
         viewpager.setCurrentItem(position);
         if (position == 0) {
             binding.setState(R.id.home);

@@ -44,7 +44,7 @@
         <activity android:name=".Activity.RegisterActivity" />
         <activity
             android:name=".Activity.MainActivity"
-            android:launchMode="singleTask" />
+             />
         <activity
             android:name=".Activity.BasicinformationActivity"
             android:windowSoftInputMode="adjustUnspecified|stateHidden" />
@@ -92,7 +92,6 @@
         </provider>
 
         <activity android:name=".Activity.video.UpVideoActivity" />
-        <activity android:name=".Activity.video.VideoDetailActivity"></activity>
     </application>
 
 </manifest>

@@ -10,39 +10,56 @@
         <TextView
             android:id="@+id/tv_art_detail_title"
             android:layout_width="match_parent"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:padding="6dp"
-            android:textSize="20sp"
-            android:textStyle="bold" />
+            android:textSize="19sp"
+            android:textStyle="bold"
+            android:maxLines="2"
+            android:ellipsize="end"
+            android:textColor="@color/colorBlack" />
 
         <TextView
             android:id="@+id/tv_art_detail_time"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_horizontal" />
+            android:gravity="center_horizontal"
+            android:textColor="@color/colorBlack"/>
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_margin="10dp"
+            android:layout_height="0.8dp"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="10dp"
             android:background="@color/colorGrey"/>
 
         <ImageView
             android:layout_gravity="center"
             android:id="@+id/iv_art_detail"
             android:layout_width="match_parent"
-            android:layout_marginTop="5dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:layout_height="180dp"
+            android:layout_height="165dp"
             android:scaleType="centerCrop"
             android:src="@mipmap/art_default"
             android:visibility="gone"/>
 
         <TextView
             android:id="@+id/tv_art_detail_content"
-            android:layout_margin="8dp"
+            android:padding="2dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="7dp"
+            android:layout_marginBottom="8dp"
+            android:textSize="16sp"
+            android:lineSpacingMultiplier="1.2"
+            android:lineSpacingExtra="@dimen/x10"
+            android:textColor="@color/colorBlack"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 

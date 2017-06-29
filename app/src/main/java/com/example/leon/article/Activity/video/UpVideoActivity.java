@@ -195,6 +195,7 @@ public class UpVideoActivity extends AppCompatActivity implements View.OnClickLi
 
     private void GoVideoFragment() {
         Intent intent = new Intent(UpVideoActivity.this, MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         intent.putExtra(ArtConstant.SHOW_ARTICLEFRAGMENT,1);
         startActivity(intent);
         finish();
@@ -233,7 +234,7 @@ public class UpVideoActivity extends AppCompatActivity implements View.OnClickLi
         if (!TextUtils.isEmpty(title) && bitmap!=null && !TextUtils.isEmpty(content)) {
             RequestBody requestFile =
                     RequestBody.create(MediaType.parse("multipart/form-data"), new File(path));
-            // MultipartBody.Part  和后端约定好Key，这里的partName是用image
+            // MultipartBody.Part  和后端约定好Key，这里的partName是用video
             MultipartBody.Part body = MultipartBody.Part.createFormData("video", new File(path).getName(), requestFile);
             // 执行请求
             RequestBody body1 = RequestBody.create(MediaType.parse("multipart/form-data"),getSid());
@@ -263,7 +264,7 @@ public class UpVideoActivity extends AppCompatActivity implements View.OnClickLi
                         @Override
                         public void onError(Throwable e) {
                             avi_upload.setVisibility(View.GONE);
-                            Log.i("FiDo", "onNext: onError"+e.getMessage());
+                            Toast.makeText(UpVideoActivity.this,getString(R.string.retry_letter),Toast.LENGTH_SHORT).show();
                         }
 
                         @Override

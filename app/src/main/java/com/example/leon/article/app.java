@@ -103,7 +103,6 @@ public class app extends Application {
         }
     }
 
-
     /**
      * 通过隐式意图调用系统安装程序安装APK
      */
