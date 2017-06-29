@@ -32,7 +32,6 @@ import java.util.List;
 
 public class ArticleListFragment extends Fragment implements View.OnClickListener, IArticleListFragment {
 
-    //    private TextView tv_myArt;
     private ListView lv_article;
     private ArtListAdapter adapter;
     private ArtPresenterImp artPresenter;

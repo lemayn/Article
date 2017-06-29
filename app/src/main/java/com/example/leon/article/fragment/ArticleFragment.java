@@ -47,6 +47,7 @@ public class ArticleFragment extends Fragment implements View.OnClickListener{
         tvList.add(tv_videoList);
         switchTag(0);
         //初始化presenter
+
     }
 
     private void initfragment() {

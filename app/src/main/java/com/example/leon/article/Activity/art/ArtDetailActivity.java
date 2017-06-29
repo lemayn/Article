@@ -92,7 +92,9 @@ public class ArtDetailActivity extends ToolBarBaseActivity<ActivityArtDetailBind
         tv_title.setText(atitle);
         tv_time.setText("更新时间："+addtime);
         editorDate = bean.getData().getAcontent();
-        RichText.fromHtml(editorDate)
-                .into(tv_content);
+        /*RichText.fromHtml(editorDate)
+                .into(tv_content);*/
+        String replace = editorDate.replace("<br/>", "\n" + "\t\t\t\t");
+        tv_content.setText("\t\t\t\t" + replace);
     }
 }

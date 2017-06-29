@@ -177,7 +177,7 @@ public class EditorActivity extends AppCompatActivity implements IEditorActivity
     private void initEditor() {
         artTitle = (EditText) findViewById(R.id.et_title);
         mEditor = (EditText) findViewById(R.id.et_eritor);
-        mEditor.setText("\t\t");
+        mEditor.setText("\t\t\t\t");
         mEditor.setSelection(mEditor.getText().length());
     }
 

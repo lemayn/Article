@@ -258,13 +258,14 @@ public class UpVideoActivity extends AppCompatActivity implements View.OnClickLi
                     .subscribe(new Observer<UpLoadArtBean>() {
                         @Override
                         public void onCompleted() {
-                            avi_upload.setVisibility(View.GONE);
+                            avi_upload.hide();
                         }
 
                         @Override
                         public void onError(Throwable e) {
-                            avi_upload.setVisibility(View.GONE);
+                            avi_upload.hide();
                             Toast.makeText(UpVideoActivity.this,getString(R.string.retry_letter),Toast.LENGTH_SHORT).show();
+                            Log.i("FiDo", "uploaduserVideo---->onError: "+e.getMessage());
                         }
 
                         @Override
