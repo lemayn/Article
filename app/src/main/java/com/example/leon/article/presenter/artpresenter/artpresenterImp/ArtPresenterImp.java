@@ -123,7 +123,6 @@ public class ArtPresenterImp extends BasepresenterImp implements IArtPresenter{
                     @Override
                     public void onError(Throwable e) {
                         editorActivity.hideProgress();
-                        Log.i("HT", "onError: "+e.getMessage());
 //                        editorActivity.showError();
                         Toast.makeText(context,e.getMessage(),Toast.LENGTH_SHORT).show();
                     }

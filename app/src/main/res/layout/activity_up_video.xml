@@ -211,7 +211,7 @@
 
     </FrameLayout>
 
-    <com.wang.avi.AVLoadingIndicatorView
+    <!--<com.wang.avi.AVLoadingIndicatorView
         android:id="@+id/avi_upvideo"
         style="@style/AVLoadingIndicatorView"
         android:layout_width="wrap_content"
@@ -219,6 +219,6 @@
         android:layout_centerInParent="true"
         android:visibility="gone"
         app:indicatorColor="@color/colorAccent"
-        app:indicatorName="BallClipRotatePulseIndicator" />
+        app:indicatorName="BallClipRotatePulseIndicator" />-->
 
 </RelativeLayout>
