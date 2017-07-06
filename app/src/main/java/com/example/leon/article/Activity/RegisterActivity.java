@@ -76,20 +76,19 @@ public class RegisterActivity extends ToolBarBaseActivity<ActivityRegisterBindin
     }
 
 
-
     private void register() {
 
         final String account = binding.edittextName.getText().toString().trim();
         String pwd = binding.edittextPwd.getText().toString().trim();
         String pwd2 = binding.edittextPwd2.getText().toString().trim();
         String phone = binding.edittextPhone.getText().toString().trim();
-        String qq =  binding.edittextQq.getText().toString().trim();
+        String qq = binding.edittextQq.getText().toString().trim();
 
-        if (account == null || account.equals("")){
+        if (account == null || account.equals("")) {
             binding.edittextName.setError("账号不能为空");
             return;
         }
-        if (account.length() < 6 || account.length() > 10){
+        if (account.length() < 6 || account.length() > 10 || !Validator.isUserName(account)) {
             binding.edittextName.setError("账号不正确");
             return;
         }
@@ -97,19 +96,19 @@ public class RegisterActivity extends ToolBarBaseActivity<ActivityRegisterBindin
             binding.edittextPwd2.setError("请输入正确的6~16位密码");
             return;
         }
-        if (pwd2 == null || pwd2.equals("")){
+        if (pwd2 == null || pwd2.equals("")) {
             binding.edittextPwd2.setError("重复密码不能为空");
             return;
         }
-        if (!pwd.equals(pwd2)){
+        if (!pwd.equals(pwd2)) {
             binding.edittextPwd2.setError("两次密码不一致");
             return;
         }
-        if (!Validator.isMobile(phone)){
+        if (!Validator.isMobile(phone)) {
             binding.edittextPhone.setError("请输入正确的手机号");
             return;
         }
-        if (qq == null || qq.equals("")){
+        if (qq == null || qq.equals("")) {
             binding.edittextQq.setError("QQ账号不能为空");
             return;
         }
@@ -131,17 +130,15 @@ public class RegisterActivity extends ToolBarBaseActivity<ActivityRegisterBindin
                     @Override
                     public void onSuccess(Request request, String result) {
                         Gson gson = new Gson();
-//                        Log.i("MyTest", "bean 请求成功01" + result.toString());
+                        //                        Log.i("MyTest", "bean 请求成功01" + result.toString());
                         ArticleApiBean bean = new ArticleApiBean();
                         bean = gson.fromJson(result, ArticleApiBean.class);
 
-                        if (bean.getCode().equals("0")){
+                        if (bean.getCode().equals("0")) {
                             Toast.makeText(RegisterActivity.this, bean.getMsg(), Toast.LENGTH_SHORT).show();
-                        }
-                        else if(bean.getCode().equals("2")){
+                        } else if (bean.getCode().equals("2")) {
                             Toast.makeText(RegisterActivity.this, bean.getMsg(), Toast.LENGTH_SHORT).show();
-                        }
-                        else if(bean.getCode().equals("1")) {
+                        } else if (bean.getCode().equals("1")) {
                             Toast.makeText(RegisterActivity.this, bean.getMsg(), Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
                             intent.putExtra("account", account);
@@ -167,6 +164,7 @@ public class RegisterActivity extends ToolBarBaseActivity<ActivityRegisterBindin
         binding.rollpagerviewRegister.setAdapter(new TestLoopAdapter(binding.rollpagerviewRegister, advlist)); //设置适配器
         binding.rollpagerviewRegister.setHintView(new ColorPointHintView(this, Color.WHITE, Color.GRAY));// 设置圆点指示器颜色
     }
+
     /**
      * 轮播图adapter
      */

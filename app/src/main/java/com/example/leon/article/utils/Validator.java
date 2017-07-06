@@ -6,7 +6,7 @@ public class Validator {
     /**
      * 正则表达式:验证用户名(不包含中文和特殊字符)如果用户名使用手机号码或邮箱 则结合手机号验证和邮箱验证
      */
-    public static final String REGEX_USERNAME = "^[a-zA-Z]\\w{5,17}$";
+    public static final String REGEX_USERNAME = "^[a-zA-Z]\\w{5,9}$";
 
     /**
      * 正则表达式:验证密码(不包含特殊字符)
