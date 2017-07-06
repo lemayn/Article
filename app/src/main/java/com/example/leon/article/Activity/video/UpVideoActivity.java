@@ -42,6 +42,7 @@ import com.example.leon.article.api.bean.UploadClassifyBean;
 import com.example.leon.article.presenter.videopresenter.videopresenterImp.VideoPresenterImp;
 import com.example.leon.article.utils.Constant;
 import com.example.leon.article.utils.CreateBitmap;
+import com.example.leon.article.utils.ImageCompress;
 import com.example.leon.article.utils.SPUtil;
 import com.example.leon.article.utils.UriAllUriUtils;
 import com.example.leon.article.view.IUpVideoActivity;
@@ -66,6 +67,8 @@ import okhttp3.RequestBody;
 import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
+
+import static android.R.attr.bitmap;
 
 public class UpVideoActivity extends AppCompatActivity implements View.OnClickListener, SelectVideoPopupWindow.OnSelectedListener, IUpVideoActivity {
 
@@ -110,6 +113,7 @@ public class UpVideoActivity extends AppCompatActivity implements View.OnClickLi
 
     private ProgressDialog mProgressDialog;
     private File mFile;
+    private Bitmap firstBitmap;
 
 
     @Override
@@ -308,14 +312,22 @@ public class UpVideoActivity extends AppCompatActivity implements View.OnClickLi
         mVideoView.pause();
         spinnerDialog.show();
         //获取视频第一帧图片
-        Bitmap bitmap = CreateBitmap.getLocalVideoThumbnail(path);
-        if (bitmap != null) {
-            bytesFromBitmap = getBytesFromBitmap(bitmap);
+        firstBitmap = CreateBitmap.getLocalVideoThumbnail(path);
+        //压缩图片
+        ImageCompress imageCompress = new ImageCompress();
+        ImageCompress.CompressOptions options = new ImageCompress.CompressOptions();
+        options.uri = Uri.fromFile(new File(path));
+        options.maxHeight = 480;
+        options.maxWidth = 320;
+        firstBitmap = imageCompress.compressFromUri(UpVideoActivity.this, options);
+
+        if (firstBitmap != null) {
+            bytesFromBitmap = getBytesFromBitmap(firstBitmap);
         }
         //获取Title
         String title = et_title.getText().toString();
         String content = et_videoContent.getText().toString().trim();
-        if (!TextUtils.isEmpty(title) && bitmap != null && !TextUtils.isEmpty(content)) {
+        if (!TextUtils.isEmpty(title) && firstBitmap != null && !TextUtils.isEmpty(content)) {
             RequestBody requestFile =
 //                    RequestBody.create(MediaType.parse("multipart/form-data"), new File(path));
             RequestBody.create(MediaType.parse("multipart/form-data"), mFile);
@@ -515,7 +527,7 @@ public class UpVideoActivity extends AppCompatActivity implements View.OnClickLi
 
     public String getBytesFromBitmap(Bitmap bitmap) {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG, 70, baos);
+        bitmap.compress(Bitmap.CompressFormat.PNG, 60, baos);
         byte[] bytes = baos.toByteArray();
         String imgString = new String(Base64.encodeToString(bytes, Base64.DEFAULT));
         return imgString;

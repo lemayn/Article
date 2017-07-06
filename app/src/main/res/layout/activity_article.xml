@@ -26,18 +26,7 @@
                 android:textColor="#ffffff"
                 android:textSize="@dimen/x18" />
 
-            <!--<com.jaredrummler.materialspinner.MaterialSpinner
-                android:id="@+id/spinner_classify"
-                android:layout_width="103dp"
-                android:layout_height="match_parent"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentBottom="true"
-                app:ms_text_color="@color/colorBlack" />-->
 
-            <!-- <View
-                 android:layout_width="0dp"
-                 android:layout_height="0dp"
-                 android:layout_weight="1" />-->
 
         </RelativeLayout>
 

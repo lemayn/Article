@@ -30,6 +30,11 @@ android {
         enabled true
     }
 
+    lintOptions{
+        checkReleaseBuilds false
+        abortOnError false
+    }
+
     sourceSets.main {
         assets.srcDirs = ['assets']
         jniLibs.srcDirs = ['libs']//指定jniLibs文件夹路径

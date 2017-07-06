@@ -194,7 +194,7 @@ public class EditorActivity extends AppCompatActivity implements IEditorActivity
             }
         });
 
-        //点击发布后,做提交处理
+        //点击上传后,做提交处理
         findViewById(R.id.bt_editor_send).setOnClickListener(new View.OnClickListener() {
             private String bytesFromBitmap;
             @Override
@@ -207,16 +207,8 @@ public class EditorActivity extends AppCompatActivity implements IEditorActivity
                     bytesFromBitmap = getBytesFromBitmap(insertBitmap);
                 }
                 else{
-                    /*if (!TextUtils.isEmpty(imgpath)) {
-                        //压缩图片
-                        ImageCompress imageCompress = new ImageCompress();
-                        ImageCompress.CompressOptions options = new ImageCompress.CompressOptions();
-                        options.uri = Uri.fromFile(new File(imgpath));
-                        options.maxHeight = 960;
-                        options.maxWidth = 540;
-                        insertBitmap = imageCompress.compressFromUri(EditorActivity.this, options);
-                        bytesFromBitmap = getBytesFromBitmap(insertBitmap);
-                    }*/
+
+
                     if (isDelet) {
                         insertBitmap = null;
                     }
