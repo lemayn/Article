@@ -512,7 +512,11 @@ public class UpVideoActivity extends AppCompatActivity implements View.OnClickLi
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        finish();
+        if (TextUtils.isEmpty(et_title.getText().toString().trim()) && TextUtils.isEmpty(et_videoContent.getText().toString())) {//如果输入的内容为空
+            super.onBackPressed();
+        } else {//用户输入的内容不为空
+            showifsaveDialog();
+        }
     }
 
     public String getBytesFromBitmap(Bitmap bitmap) {
