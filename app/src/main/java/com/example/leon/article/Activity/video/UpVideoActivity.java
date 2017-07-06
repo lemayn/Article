@@ -3,15 +3,15 @@ package com.example.leon.article.Activity.video;
 import android.Manifest;
 import android.app.Activity;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.media.MediaMetadataRetriever;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
 import android.os.Handler;
-import android.provider.MediaStore;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
@@ -19,6 +19,7 @@ import android.util.Base64;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
@@ -28,6 +29,12 @@ import android.widget.Toast;
 
 import com.example.leon.article.Activity.MainActivity;
 import com.example.leon.article.Activity.art.ArtConstant;
+import com.example.leon.article.Activity.video.permission.PermissionsActivity;
+import com.example.leon.article.Activity.video.permission.PermissionsChecker;
+import com.example.leon.article.Activity.video.videocompress.CompressListener;
+import com.example.leon.article.Activity.video.videocompress.Compressor;
+import com.example.leon.article.Activity.video.videocompress.InitListener;
+import com.example.leon.article.Activity.video.videorecord.CameraActivity;
 import com.example.leon.article.R;
 import com.example.leon.article.api.ApiManager;
 import com.example.leon.article.api.bean.UpLoadArtBean;
@@ -60,12 +67,12 @@ import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
-public class UpVideoActivity extends AppCompatActivity implements View.OnClickListener, SelectVideoPopupWindow.OnSelectedListener,IUpVideoActivity {
+public class UpVideoActivity extends AppCompatActivity implements View.OnClickListener, SelectVideoPopupWindow.OnSelectedListener, IUpVideoActivity {
 
     private static final int VIDEO_KU = 12345;
     private EditText et_title;
     private MaterialSpinner mSpinner;
-    private Button bt_addvideo,bt_videolist,bt_upload;
+    private Button bt_addvideo, bt_videolist, bt_upload;
     private SelectVideoPopupWindow selectVideoPopupWindow;
     private FllScreenVideoView mVideoView;
     private ImageView iv_play;
@@ -73,13 +80,36 @@ public class UpVideoActivity extends AppCompatActivity implements View.OnClickLi
     private ArrayList<UploadClassifyBean.DataBean> classifys = new ArrayList<>();
     private List<String> items = new ArrayList<>();
     private int selectPosition = 1;
-    private String path = "";
-//    private AVLoadingIndicatorView avi_upload;
+    //    private AVLoadingIndicatorView avi_upload;
     private VideoPresenterImp videoPresenterImp;
-    private ImageView iv_cover,iv_back;
+    private ImageView iv_cover, iv_back;
     private String bytesFromBitmap;
     private EditText et_videoContent;
     private Dialog spinnerDialog;
+    /*录制视频参数*/
+    private String currentInputVideoPath = "";
+    private String currentOutputVideoPath = "/mnt/sdcard/videokit/out.mp4";
+    private String cmd = "-y -i " + currentInputVideoPath + " -strict -2 -vcodec libx264 -preset ultrafast " +
+            "-crf 24 -acodec aac -ar 44100 -ac 2 -b:a 96k -s 640x480 -aspect 16:9 " + currentOutputVideoPath;
+
+    private Double videoLength = 0.00;//视频时长 s
+    private Compressor mCompressor;
+    private static final int REQUEST_CODE_FOR_PERMISSIONS = 0;//
+    private static final int REQUEST_CODE_FOR_RECORD_VIDEO = 1;//录制视频请求码
+    public static final int RESULT_CODE_FOR_RECORD_VIDEO_SUCCEED = 2;//视频录制成功
+    public static final int RESULT_CODE_FOR_RECORD_VIDEO_FAILED = 3;//视频录制出错
+    public static final int RESULT_CODE_FOR_RECORD_VIDEO_CANCEL = 4;//取消录制
+    public static final String INTENT_EXTRA_VIDEO_PATH = "intent_extra_video_path";//录制的视频路径
+
+    //相机权限,录制音频权限,读写sd卡的权限,都为必须,缺一不可
+    private static final String[] PERMISSIONS = new String[]{
+            Manifest.permission.CAMERA,
+            Manifest.permission.RECORD_AUDIO,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+            Manifest.permission.READ_EXTERNAL_STORAGE};
+
+    private ProgressDialog mProgressDialog;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,7 +123,7 @@ public class UpVideoActivity extends AppCompatActivity implements View.OnClickLi
     private void GetData() {
         //初始化presenter
         videoPresenterImp = new VideoPresenterImp(this);
-        videoPresenterImp.getClassify(getCookie(),getSid());
+        videoPresenterImp.getClassify(getCookie(), getSid());
     }
 
     private void initSpinner() {
@@ -133,6 +163,24 @@ public class UpVideoActivity extends AppCompatActivity implements View.OnClickLi
         //设置正文空格
         et_videoContent.setText("\t\t");
         et_videoContent.setSelection(et_videoContent.getText().length());
+
+        //初始化权限
+        PermissionsChecker mChecker = new PermissionsChecker(getApplicationContext());
+        if (mChecker.lacksPermissions(PERMISSIONS)) {
+            PermissionsActivity.startActivityForResult(this, REQUEST_CODE_FOR_PERMISSIONS, PERMISSIONS);
+        }
+        mCompressor = new Compressor(this);
+        mCompressor.loadBinary(new InitListener() {
+            @Override
+            public void onLoadSuccess() {
+                Log.v("FiDo", "load library succeed");
+            }
+
+            @Override
+            public void onLoadFail(String reason) {
+                Log.i("FiDo", "load library fail:" + reason);
+            }
+        });
     }
 
     private void initEvent() {
@@ -174,10 +222,7 @@ public class UpVideoActivity extends AppCompatActivity implements View.OnClickLi
                 GoVideoListFragment();
                 break;
             case R.id.bt_upvideo_upload://上传视频
-                /*avi_upload.setVisibility(View.VISIBLE);
-                avi_upload.show();*/
-                spinnerDialog.show();
-                uploaduserVideo(path);
+                uploaduserVideo(currentOutputVideoPath);
                 break;
             case R.id.iv_start:   //播放视频
                 mVideoView.start();
@@ -188,6 +233,39 @@ public class UpVideoActivity extends AppCompatActivity implements View.OnClickLi
                 finish();
                 break;
         }
+    }
+
+    private void execCommand(String cmd) {
+        File mFile = new File(currentOutputVideoPath);
+        if (mFile.exists()) {
+            mFile.delete();
+        }
+        mCompressor.execCommand(cmd, new CompressListener() {
+            @Override
+            public void onExecSuccess(String message) {
+                Log.i("FiDo", "onExecSuccess " + message);
+                hidenProgress();
+                Toast.makeText(UpVideoActivity.this,"视频已准备完成，请大胆上传。",Toast.LENGTH_SHORT).show();
+                //录制成功显示图片和地址
+                Bitmap bitmap = CreateBitmap.getLocalVideoThumbnail(currentInputVideoPath);
+                iv_cover.setImageBitmap(bitmap);
+                fl_myVideo.setVisibility(View.VISIBLE);
+                mVideoView.setVideoPath(currentInputVideoPath);
+            }
+
+            @Override
+            public void onExecFail(String reason) {
+                Log.i("FiDo", "onExecFail " + reason);
+                fl_myVideo.setVisibility(View.INVISIBLE);
+                hidenProgress();
+            }
+
+            @Override
+            public void onExecProgress(String message) {
+                Log.i("FiDo", "onExecProgress " + message);
+                showProgress("", "视频准备中...", -1);
+            }
+        });
     }
 
     private void GoVideoListFragment() {
@@ -202,33 +280,34 @@ public class UpVideoActivity extends AppCompatActivity implements View.OnClickLi
     private void GoVideoFragment() {
         Intent intent = new Intent(UpVideoActivity.this, MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        intent.putExtra(ArtConstant.SHOW_ARTICLEFRAGMENT,1);
+        intent.putExtra(ArtConstant.SHOW_ARTICLEFRAGMENT, 1);
         startActivity(intent);
         finish();
     }
 
     private void showifsaveDialog() {
-            final AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setTitle("您还没有上传哦，确定退出吗？")
-                    .setMessage("退出后数据将不会保存")
-                    .setNegativeButton("取消", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            //do nothing or what you want
-                        }
-                    })
-                    .setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            finish();
-                        }
-                    })
-                    .create()
-                    .show();
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("您还没有上传哦，确定退出吗？")
+                .setMessage("退出后数据将不会保存")
+                .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        //do nothing or what you want
+                    }
+                })
+                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        finish();
+                    }
+                })
+                .create()
+                .show();
     }
 
     private void uploaduserVideo(String path) {
         mVideoView.pause();
+        spinnerDialog.show();
         //获取视频第一帧图片
         Bitmap bitmap = CreateBitmap.getLocalVideoThumbnail(path);
         if (bitmap != null) {
@@ -237,68 +316,65 @@ public class UpVideoActivity extends AppCompatActivity implements View.OnClickLi
         //获取Title
         String title = et_title.getText().toString();
         String content = et_videoContent.getText().toString().trim();
-        if (!TextUtils.isEmpty(title) && bitmap!=null && !TextUtils.isEmpty(content)) {
+        if (!TextUtils.isEmpty(title) && bitmap != null && !TextUtils.isEmpty(content)) {
             RequestBody requestFile =
                     RequestBody.create(MediaType.parse("multipart/form-data"), new File(path));
             // MultipartBody.Part  和后端约定好Key，这里的partName是用video
             MultipartBody.Part body = MultipartBody.Part.createFormData("video", new File(path).getName(), requestFile);
             // 执行请求
-            RequestBody body1 = RequestBody.create(MediaType.parse("multipart/form-data"),getSid());
-            RequestBody body2 = RequestBody.create(MediaType.parse("multipart/form-data"),getCookie());
-            RequestBody body3 = RequestBody.create(MediaType.parse("multipart/form-data"),title);
-            RequestBody body4 = RequestBody.create(MediaType.parse("multipart/form-data"),String.valueOf(selectPosition));
-            RequestBody body5 = RequestBody.create(MediaType.parse("multipart/form-data"),content);
-            RequestBody body6 = RequestBody.create(MediaType.parse("multipart/form-data"),bytesFromBitmap);
-            Map<String,RequestBody> map = new HashMap<>();
-            map.put("sid",body1);
-            map.put("cookie",body2);
-            map.put("title",body3);
-            map.put("class_id",body4);
-            map.put("content",body5);
-            map.put("img",body6);
+            RequestBody body1 = RequestBody.create(MediaType.parse("multipart/form-data"), getSid());
+            RequestBody body2 = RequestBody.create(MediaType.parse("multipart/form-data"), getCookie());
+            RequestBody body3 = RequestBody.create(MediaType.parse("multipart/form-data"), title);
+            RequestBody body4 = RequestBody.create(MediaType.parse("multipart/form-data"), String.valueOf(selectPosition));
+            RequestBody body5 = RequestBody.create(MediaType.parse("multipart/form-data"), content);
+            RequestBody body6 = RequestBody.create(MediaType.parse("multipart/form-data"), bytesFromBitmap);
+            Map<String, RequestBody> map = new HashMap<>();
+            map.put("sid", body1);
+            map.put("cookie", body2);
+            map.put("title", body3);
+            map.put("class_id", body4);
+            map.put("content", body5);
+            map.put("img", body6);
             ApiManager.getInstance().getArtApiService()
-                    .uploadVideo(map,body)
+                    .uploadVideo(map, body)
                     .subscribeOn(Schedulers.io())
                     .unsubscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(new Observer<UpLoadArtBean>() {
                         @Override
                         public void onCompleted() {
-//                            avi_upload.hide();
                             spinnerDialog.dismiss();
                         }
 
                         @Override
                         public void onError(Throwable e) {
-//                            avi_upload.hide();
                             spinnerDialog.dismiss();
-                            Toast.makeText(UpVideoActivity.this,e.getMessage(),Toast.LENGTH_SHORT).show();
+                            Toast.makeText(UpVideoActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                         }
 
                         @Override
                         public void onNext(final UpLoadArtBean upLoadArtBean) {
-//                            avi_upload.hide();
                             new Handler().postDelayed(new Runnable() {
                                 @Override
                                 public void run() {
                                     spinnerDialog.dismiss();
                                     if (upLoadArtBean.getCode().equals("1")) {
-                                        Toast.makeText(UpVideoActivity.this,"上传成功",Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(UpVideoActivity.this, "上传成功", Toast.LENGTH_SHORT).show();
                                         GoVideoFragment();
-                                    }else{
-                                        Toast.makeText(UpVideoActivity.this,"上传失败",Toast.LENGTH_SHORT).show();
+                                    } else {
+                                        Toast.makeText(UpVideoActivity.this, "上传失败", Toast.LENGTH_SHORT).show();
                                     }
                                 }
-                            },1000);
+                            }, 1600);
                         }
                     });
-        }else{
+        } else {
             if (path != null && fl_myVideo.getVisibility() == View.VISIBLE) {
-                Toast.makeText(UpVideoActivity.this,"别忘了给视频加上标题与内容哦~",Toast.LENGTH_SHORT).show();
+                Toast.makeText(UpVideoActivity.this, "别忘了给视频加上标题与内容哦~", Toast.LENGTH_SHORT).show();
 //                avi_upload.hide();
                 spinnerDialog.dismiss();
-            }else{
-                Toast.makeText(UpVideoActivity.this,"别忘了添加您的视频哦~",Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(UpVideoActivity.this, "别忘了添加您的视频哦~", Toast.LENGTH_SHORT).show();
 //                avi_upload.hide();
                 spinnerDialog.dismiss();
             }
@@ -326,20 +402,22 @@ public class UpVideoActivity extends AppCompatActivity implements View.OnClickLi
     }
 
     private void selectorFromGallery() {
-        PermissionGen.needPermission(this,VIDEO_KU,new String[]{Manifest.permission.READ_EXTERNAL_STORAGE});
+        PermissionGen.needPermission(this, VIDEO_KU, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE});
     }
 
     private void recording() {
-        PermissionGen.with(this)
+       /* PermissionGen.with(this)
                 .addRequestCode(0)
                 .permissions(Manifest.permission.READ_EXTERNAL_STORAGE,
                         Manifest.permission.WRITE_EXTERNAL_STORAGE,
                         Manifest.permission.CAMERA)
-                .request();
+                .request();*/
+        //录制
+        CameraActivity.startActivityForResult(this, REQUEST_CODE_FOR_RECORD_VIDEO);
     }
 
     @PermissionSuccess(requestCode = VIDEO_KU)
-    private void selectFromGallery(){
+    private void selectFromGallery() {
         // TODO 启动相册
         Intent intent = new Intent();
         intent.setType("video/*");
@@ -348,7 +426,7 @@ public class UpVideoActivity extends AppCompatActivity implements View.OnClickLi
         startActivityForResult(intent, VIDEO_KU);
     }
 
-    @PermissionSuccess(requestCode = 0)
+   /* @PermissionSuccess(requestCode = 0)
     private void recordVideo(){
         // 激活系统的照相机进行录像
         Intent intent = new Intent();
@@ -360,56 +438,74 @@ public class UpVideoActivity extends AppCompatActivity implements View.OnClickLi
         Uri uri = Uri.fromFile(file);
         intent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
         startActivityForResult(intent, 0);
-    }
+    }*/
 
     @PermissionFail(requestCode = VIDEO_KU)
-    private void showTip1(){
+    private void showTip1() {
         showRequestDialog();
     }
 
-    @PermissionFail(requestCode = 0)
+   /* @PermissionFail(requestCode = 0)
     private void showTip2(){
         showRequestDialog();
-    }
+    }*/
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         Uri uri = null;
-        switch (requestCode) {
-            case 0:
-                if (resultCode == Activity.RESULT_OK){
-                    uri = data.getData();
-                    path = UriAllUriUtils.getPath(this, uri);
-                    if (uri != null) {
-                        Bitmap bitmap = CreateBitmap.getLocalVideoThumbnail(path);
-                        iv_cover.setImageBitmap(bitmap);
-                        fl_myVideo.setVisibility(View.VISIBLE);
-                    }else{
-                        fl_myVideo.setVisibility(View.INVISIBLE);
-                    }
-                    mVideoView.setVideoURI(uri);
-                }
-                break;
-            case VIDEO_KU:
-                if (resultCode == Activity.RESULT_OK) {
+        if (requestCode == REQUEST_CODE_FOR_PERMISSIONS) {
+            //权限申请
+            if (PermissionsActivity.PERMISSIONS_DENIED == resultCode) {
+                //权限未被授予，退出应用
+                finish();
+            } else if (PermissionsActivity.PERMISSIONS_GRANTED == resultCode) {
+                //权限被授予
+                //do nothing
+            }
+        } else if (requestCode == REQUEST_CODE_FOR_RECORD_VIDEO) {
+            //录制视频
+            if (resultCode == RESULT_CODE_FOR_RECORD_VIDEO_SUCCEED) {
+                //录制成功
+                String videoPath = data.getStringExtra(INTENT_EXTRA_VIDEO_PATH);
+                if (!TextUtils.isEmpty(videoPath)) {
+                    currentInputVideoPath = videoPath;
+                    MediaMetadataRetriever retr = new MediaMetadataRetriever();
+                    retr.setDataSource(currentInputVideoPath);
+                    String time = retr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION);//获取视频时长
+                    execCommand("-y -i " + currentInputVideoPath + " -strict -2 -vcodec libx264 -preset ultrafast " +
+                            "-crf 24 -acodec aac -ar 44100 -ac 2 -b:a 96k -s 640x480 -aspect 16:9 " + currentOutputVideoPath);
+                    //7680
                     try {
-                        uri = data.getData();
-                        if (uri != null) {
-                            fl_myVideo.setVisibility(View.VISIBLE);
-                        } else {
-                            fl_myVideo.setVisibility(View.INVISIBLE);
-                        }
-                        path = UriAllUriUtils.getPath(this, uri);
-                        Log.i("FiDo", "onActivityResult: Gallerypath" + path);
-                        mVideoView.setVideoURI(uri);
-                    }catch (Exception e) {
-                        String  a=e+"";
-                    } catch (OutOfMemoryError e) {
-                        String  a=e+"";
+                        videoLength = Double.parseDouble(time) / 1000.00;
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        videoLength = 0.00;
                     }
+                    Log.v("FiDo", "videoLength = " + videoLength + "s");
+
                 }
-                break;
+            } else if (resultCode == RESULT_CODE_FOR_RECORD_VIDEO_FAILED) {
+                //录制失败
+                currentInputVideoPath = "";
+                fl_myVideo.setVisibility(View.INVISIBLE);
+            }
+        } else if (requestCode == VIDEO_KU) {
+            if (resultCode == Activity.RESULT_OK) {
+                try {
+                    uri = data.getData();
+                    currentInputVideoPath = UriAllUriUtils.getPath(this, uri);
+                    if (uri != null) {
+                        execCommand("-y -i " + currentInputVideoPath + " -strict -2 -vcodec libx264 -preset ultrafast " +
+                                "-crf 24 -acodec aac -ar 44100 -ac 2 -b:a 96k -s 640x480 -aspect 16:9 " + currentOutputVideoPath);
+                        Log.i("FiDo", "onActivityResult: Gallerypath" + currentInputVideoPath);
+                    }
+                } catch (Exception e) {
+                    String a = e + "";
+                } catch (OutOfMemoryError e) {
+                    String a = e + "";
+                }
+            }
         }
     }
 
@@ -419,19 +515,19 @@ public class UpVideoActivity extends AppCompatActivity implements View.OnClickLi
         finish();
     }
 
-    public String getBytesFromBitmap(Bitmap bitmap){
+    public String getBytesFromBitmap(Bitmap bitmap) {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG,70,baos);
+        bitmap.compress(Bitmap.CompressFormat.PNG, 70, baos);
         byte[] bytes = baos.toByteArray();
         String imgString = new String(Base64.encodeToString(bytes, Base64.DEFAULT));
         return imgString;
     }
 
-    public static String getCookie(){
+    public static String getCookie() {
         return (String) SPUtil.get(Constant.Share_prf.COOKIE, "");
     }
 
-    public static String getSid(){
+    public static String getSid() {
         return (String) SPUtil.get(Constant.Share_prf.SID, "");
     }
 
@@ -495,5 +591,31 @@ public class UpVideoActivity extends AppCompatActivity implements View.OnClickLi
                 .create()
                 .show();
     }
+
+    private void showProgress(String title, String message, int theme) {
+        if (mProgressDialog == null) {
+            if (theme > 0)
+                mProgressDialog = new ProgressDialog(this, theme);
+            else
+                mProgressDialog = new ProgressDialog(this);
+            mProgressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+            mProgressDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            mProgressDialog.setCanceledOnTouchOutside(false);// 不能取消
+            mProgressDialog.setCancelable(false);
+            mProgressDialog.setIndeterminate(true);// 设置进度条是否不明确
+        }
+
+        if (!TextUtils.isEmpty(title))
+            mProgressDialog.setTitle(title);
+        mProgressDialog.setMessage(message);
+        mProgressDialog.show();
+    }
+
+    private void hidenProgress() {
+        if (mProgressDialog != null) {
+            mProgressDialog.dismiss();
+        }
+    }
+
 
 }

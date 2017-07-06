@@ -32,6 +32,7 @@ public class app extends Application {
       /*  Toast.makeText(this, "install 0", Toast.LENGTH_SHORT).show();
         install(this);
         Toast.makeText(this, "install 3", Toast.LENGTH_SHORT).show();*/
+
         mInstance = this;
 
         setupDataBase();
@@ -42,6 +43,7 @@ public class app extends Application {
     public static app getInstance() {
         return mInstance;
     }
+
 
     private void setupDataBase() {
         DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(this, "art-db");

@@ -1,13 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest package="com.example.leon.article"
-          xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.leon.article">
 
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <!--视频录制权限-->
+    <uses-permission android:name="android.permission.WRITE_INTERNAL_STORAGE"/>
+    <uses-permission-sdk-23 android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission-sdk-23 android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
+    <uses-permission-sdk-23 android:name="android.permission.RECORD_AUDIO"/>
     <uses-permission android:name="android.permission.CAMERA"/>
-    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission-sdk-23 android:name="android.permission.CAMERA"/>
+
 
     <application
         android:name=".app"
@@ -32,56 +41,56 @@
 
         <activity
             android:name=".Activity.LoginActivity"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden"/>
-        <activity android:name=".Activity.art.ArtDetailActivity"/>
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+        <activity android:name=".Activity.art.ArtDetailActivity" />
         <activity
             android:name=".Activity.art.EditorActivity"
-            android:windowSoftInputMode="adjustPan"/>
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".Activity.art.MySqlActivity"
-            android:launchMode="singleTask"/>
-        <activity android:name=".Activity.VIPCenterActivity"/>
-        <activity android:name=".Activity.RegisterActivity"/>
+            android:launchMode="singleTask" />
+        <activity android:name=".Activity.VIPCenterActivity" />
+        <activity android:name=".Activity.RegisterActivity" />
         <activity
             android:name=".Activity.MainActivity"
-            />
+             />
         <activity
             android:name=".Activity.BasicinformationActivity"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden"/>
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
         <activity
             android:name=".Activity.ModifyPasswordActivity"
-            android:windowSoftInputMode="stateHidden"/>
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".Activity.ModifyWithoutPasswordActivity"
-            android:windowSoftInputMode="stateHidden"/>
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".Activity.WithdrawDepositActivity"
-            android:windowSoftInputMode="stateHidden"/>
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".Activity.NoticeActivity"
-            android:windowSoftInputMode="stateHidden"/>
-        <activity android:name=".Activity.ForgetPwdActivity"/>
-        <activity android:name=".Activity.bank.BankSettingActivity"/>
+            android:windowSoftInputMode="stateHidden" />
+        <activity android:name=".Activity.ForgetPwdActivity" />
+        <activity android:name=".Activity.bank.BankSettingActivity" />
         <activity
             android:name=".Activity.bank.AddCardActivity"
-            android:windowSoftInputMode="stateHidden|adjustResize"/>
-        <activity android:name=".Activity.MoreInfoActivity"/>
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+        <activity android:name=".Activity.MoreInfoActivity" />
         <activity android:name=".Activity.SplashActivity">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity android:name=".Activity.GuideActivity"/>
         <activity android:name=".Activity.AccountStatementActivity"/>
         <activity android:name=".Activity.CustomerServiceActivity"/>
-        <activity
+        <!--<activity
             android:name=".Activity.JieCaoPlayerActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"/>-->
 
-        <service android:name=".upgrade.DownLoadService"/>
+        <service android:name=".upgrade.DownLoadService" />
 
         <provider
             android:name="android.support.v4.content.FileProvider"
@@ -92,10 +101,15 @@
             <!-- 元数据 -->
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/file_paths"/>
+                android:resource="@xml/file_paths" />
         </provider>
 
-        <activity android:name=".Activity.video.UpVideoActivity"/>
+        <activity android:name=".Activity.video.UpVideoActivity" />
+
+        <activity android:name=".Activity.video.UpUserVideoActivity"/>
+
+        <activity android:name=".Activity.video.permission.PermissionsActivity"/>
+        <activity android:name=".Activity.video.videorecord.CameraActivity"/>
     </application>
 
 </manifest>

@@ -29,6 +29,13 @@ android {
     dataBinding {
         enabled true
     }
+
+    sourceSets.main {
+        assets.srcDirs = ['assets']
+        jniLibs.srcDirs = ['libs']//指定jniLibs文件夹路径
+        jni.srcDirs = []//不编译jni
+    }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -99,4 +106,5 @@ dependencies {
     testCompile 'junit:junit:4.12'
     //节操播放器
     compile 'fm.jiecao:jiecaovideoplayer:5.5.4'
+    compile project(':FFmpegAndroid')
 }

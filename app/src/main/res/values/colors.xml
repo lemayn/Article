@@ -21,4 +21,6 @@
     <color name="statement_handle_pending">#30CA9E</color>
     <color name="statement_handle_success">#FB0303</color>
     <color name="statement_handle_fail">#A3A3A5</color>
+
+    <color name="list_qualities_bg">#88FFFFFF</color>
 </resources>
