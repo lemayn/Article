@@ -159,7 +159,6 @@ public class UpUserVideoActivity extends AppCompatActivity {
         }
     }
 
-
     private void showProgress(String title, String message, int theme) {
         if (mProgressDialog == null) {
             if (theme > 0)

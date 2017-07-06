@@ -47,8 +47,6 @@ public class ArtPresenterImp extends BasepresenterImp implements IArtPresenter{
 
     @Override
     public void getuserArtList(String cookie,String sid,int page) {
-       /* cookie = (String) SPUtil.get(Constant.Share_prf.COOKIE, "");
-        sid = (String) SPUtil.get(Constant.Share_prf.SID, "");*/
         articleFragment.showProgress();
         Subscription subscribe = ApiManager.getInstance().getArtApiService()
                 .getArtList(cookie,sid,page)

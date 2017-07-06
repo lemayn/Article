@@ -1,7 +1,5 @@
 package com.example.leon.article.presenter.videopresenter.videopresenterImp;
 
-import android.util.Log;
-
 import com.example.leon.article.api.ApiManager;
 import com.example.leon.article.api.BaseValueValidOperator;
 import com.example.leon.article.api.bean.UploadClassifyBean;
@@ -78,7 +76,6 @@ public class VideoPresenterImp extends BasepresenterImp implements IVideoPresent
                     public void onError(Throwable e) {
                         iVideoListFragment.hideProgress();
                         iVideoListFragment.showError();
-                        Log.i("HT", "onError: getuserVideoList--->"+e.getMessage());
                     }
 
                     @Override
@@ -134,7 +131,7 @@ public class VideoPresenterImp extends BasepresenterImp implements IVideoPresent
 
                     @Override
                     public void onError(Throwable e) {
-                        Log.i("HT", "onError: getUserVideoTypeList---->"+e.getMessage());
+
                     }
 
                     @Override

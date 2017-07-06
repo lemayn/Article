@@ -5,7 +5,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Looper;
-import android.util.Log;
 
 import com.example.leon.article.Activity.LoginActivity;
 import com.example.leon.article.api.bean.ApiBean;
@@ -59,7 +58,6 @@ public class BaseValueValidOperator<T extends ApiBean>
                         return;
                     }
                     if ("2".equals(data.getCode())) {
-                        Log.e("Retrofit_", "data: " + data + "\n api:" + api);
                         onConnectionConflict();
                         return;
                     }
