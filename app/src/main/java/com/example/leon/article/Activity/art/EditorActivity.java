@@ -392,7 +392,7 @@ public class EditorActivity extends AppCompatActivity implements IEditorActivity
 
     public String getBytesFromBitmap(Bitmap bitmap){
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG,80,baos);
+        bitmap.compress(Bitmap.CompressFormat.PNG,65,baos);
         byte[] bytes = baos.toByteArray();
         String imgString = new String(Base64.encodeToString(bytes,Base64.DEFAULT));
         return imgString;

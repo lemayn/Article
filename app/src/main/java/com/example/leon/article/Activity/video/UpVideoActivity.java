@@ -310,13 +310,6 @@ public class UpVideoActivity extends AppCompatActivity implements View.OnClickLi
         spinnerDialog.show();
         //获取视频第一帧图片
         firstBitmap = CreateBitmap.getLocalVideoThumbnail(path);
-        //压缩图片
-        /*ImageCompress imageCompress = new ImageCompress();
-        ImageCompress.CompressOptions options = new ImageCompress.CompressOptions();
-        options.uri = Uri.fromFile(new File(path));
-        options.maxHeight = 480;
-        options.maxWidth = 320;
-        firstBitmap = imageCompress.compressFromUri(UpVideoActivity.this, options);*/
 
         if (firstBitmap != null) {
             bytesFromBitmap = getBytesFromBitmap(firstBitmap);
