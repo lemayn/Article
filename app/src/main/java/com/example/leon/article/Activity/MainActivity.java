@@ -12,7 +12,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
@@ -66,9 +65,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         SPUtil.put(Constant.Share_prf.LAST_USING_TIME, currentTimeMillis);
 
         initView();
-        ifShowArticle();
         initEvent();
         isUpgrade();
+        ifShowArticle();
     }
 
     private void initEvent() {
@@ -209,6 +208,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void isUpgrade() {
+        int position = getIntent().getIntExtra(ArtConstant.SHOW_ARTICLEFRAGMENT, -1);
+        if (position != -1) {
+            return;
+        }
         ApiFactory.getApi().upgrade(Constant.Api.UPGRADE)
                 .lift(new BaseValueValidOperator<ArticleApiBean>())
                 .subscribeOn(Schedulers.io())

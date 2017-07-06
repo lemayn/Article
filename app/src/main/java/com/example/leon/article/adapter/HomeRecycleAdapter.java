@@ -15,7 +15,9 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.example.leon.article.Activity.JieCaoPlayerActivity;
 import com.example.leon.article.Activity.NoticeActivity;
+import com.example.leon.article.Activity.art.ArtConstant;
 import com.example.leon.article.R;
 import com.example.leon.article.bean.AdvBean;
 import com.example.leon.article.bean.ExcellentBean;
@@ -300,9 +302,10 @@ public class HomeRecycleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                 public void onClick(View v) {
                     //                    Log.i("MyTest", "poistion"+getAdapterPosition());
                     RecomArtBean.DataBean.TuijianBean aid = reBeanlist.get(getAdapterPosition() - 2);
-//                    Intent intent = new Intent(context, JieCaoPlayerActivity.class);
-//                    intent.putExtra(ArtConstant.DETAIL_AID, aid);
-//                    context.startActivity(intent);
+                    Intent intent = new Intent(context, JieCaoPlayerActivity.class);
+                    intent.putExtra(ArtConstant.DETAIL_AID, aid.getId());
+                    intent.putExtra(ArtConstant.DETAIL_TITLE, aid.getTitle());
+                    context.startActivity(intent);
                 }
             });
         }

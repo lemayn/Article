@@ -1,5 +1,4 @@
 <resources>
-    <string name="app_name">VideoRecordAndCompressor</string>
 
     <!-- 权限申请-->
     <string name="tips_permission_request_title">权限申请</string>

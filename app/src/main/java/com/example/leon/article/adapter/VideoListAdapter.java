@@ -10,8 +10,8 @@ import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.leon.article.Activity.JieCaoPlayerActivity;
 import com.example.leon.article.Activity.art.ArtConstant;
-import com.example.leon.article.Activity.art.ArtDetailActivity;
 import com.example.leon.article.R;
 import com.example.leon.article.api.bean.VideoListBean;
 
@@ -33,12 +33,12 @@ public class VideoListAdapter extends BaseAdapter {
         this.layoutInflater = LayoutInflater.from(context);
     }
 
-    public void addItems(List<VideoListBean.DataBean.VideoBean> bean){
+    public void addItems(List<VideoListBean.DataBean.VideoBean> bean) {
         items.addAll(bean);
         notifyDataSetChanged();
     }
 
-    public void clearDate(){
+    public void clearDate() {
         items.clear();
         notifyDataSetChanged();
     }
@@ -93,8 +93,9 @@ public class VideoListAdapter extends BaseAdapter {
 
     private void goArtDetailActivity(int position) {
         if (items.get(position).getId() != null) {
-            Intent intent = new Intent(context, ArtDetailActivity.class);
-            intent.putExtra(ArtConstant.DETAIL_AID,items.get(position).getId());
+            Intent intent = new Intent(context, JieCaoPlayerActivity.class);
+            intent.putExtra(ArtConstant.DETAIL_AID, items.get(position).getId());
+            intent.putExtra(ArtConstant.DETAIL_TITLE, items.get(position).getTitle());
             context.startActivity(intent);
         }
     }
