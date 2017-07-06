@@ -110,6 +110,7 @@ public class UpVideoActivity extends AppCompatActivity implements View.OnClickLi
             Manifest.permission.READ_EXTERNAL_STORAGE};
 
     private ProgressDialog mProgressDialog;
+    private File mFile;
 
 
     @Override
@@ -237,7 +238,7 @@ public class UpVideoActivity extends AppCompatActivity implements View.OnClickLi
     }
 
     private void execCommand(String cmd) {
-        File mFile = new File(currentOutputVideoPath);
+        mFile = new File(currentOutputVideoPath);
         if (mFile.exists()) {
             mFile.delete();
         }
@@ -321,9 +322,11 @@ public class UpVideoActivity extends AppCompatActivity implements View.OnClickLi
         String content = et_videoContent.getText().toString().trim();
         if (!TextUtils.isEmpty(title) && bitmap != null && !TextUtils.isEmpty(content)) {
             RequestBody requestFile =
-                    RequestBody.create(MediaType.parse("multipart/form-data"), new File(path));
+//                    RequestBody.create(MediaType.parse("multipart/form-data"), new File(path));
+            RequestBody.create(MediaType.parse("multipart/form-data"), mFile);
             // MultipartBody.Part  和后端约定好Key，这里的partName是用video
-            MultipartBody.Part body = MultipartBody.Part.createFormData("video", new File(path).getName(), requestFile);
+//            MultipartBody.Part body = MultipartBody.Part.createFormData("video", new File(path).getName(), requestFile);
+            MultipartBody.Part body = MultipartBody.Part.createFormData("video", mFile.getName(), requestFile);
             // 执行请求
             RequestBody body1 = RequestBody.create(MediaType.parse("multipart/form-data"), getSid());
             RequestBody body2 = RequestBody.create(MediaType.parse("multipart/form-data"), getCookie());
