@@ -60,7 +60,7 @@ public class BaseValueValidOperator<T extends ApiBean>
                     }
                     if ("2".equals(data.getCode())) {
                         Log.e("Retrofit_", "data: " + data + "\n api:" + api);
-//                        onConnectionConflict();
+                        onConnectionConflict();
                         return;
                     }
                     subscriber.onError(new Exception(data.getMsg()));
