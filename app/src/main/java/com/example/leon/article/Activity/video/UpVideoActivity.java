@@ -42,6 +42,7 @@ import com.example.leon.article.api.bean.UploadClassifyBean;
 import com.example.leon.article.presenter.videopresenter.videopresenterImp.VideoPresenterImp;
 import com.example.leon.article.utils.Constant;
 import com.example.leon.article.utils.CreateBitmap;
+import com.example.leon.article.utils.FileSizeUtil;
 import com.example.leon.article.utils.SPUtil;
 import com.example.leon.article.utils.UriAllUriUtils;
 import com.example.leon.article.view.IUpVideoActivity;
@@ -306,6 +307,8 @@ public class UpVideoActivity extends AppCompatActivity implements View.OnClickLi
     }
 
     private void uploaduserVideo(String path) {
+        Log.i("FiDo", "uploaduserVideo: currentOutputVideoPath--->"+path);
+        Log.i("FiDo", "上传的文件大小为----->: "+FileSizeUtil.getFileOrFilesSize(path,FileSizeUtil.SIZETYPE_KB));
         mVideoView.pause();
         spinnerDialog.show();
         //获取视频第一帧图片
@@ -483,7 +486,8 @@ public class UpVideoActivity extends AppCompatActivity implements View.OnClickLi
                         videoLength = 0.00;
                     }
                     Log.v("FiDo", "videoLength = " + videoLength + "s");
-
+                    Log.i("FiDo", "压缩前文件大小为："+ FileSizeUtil.getFileOrFilesSize(currentInputVideoPath,FileSizeUtil.SIZETYPE_KB));
+                    Log.i("FiDo", "压缩后文件大小为："+ FileSizeUtil.getFileOrFilesSize(currentOutputVideoPath,FileSizeUtil.SIZETYPE_KB));
                 }
             } else if (resultCode == RESULT_CODE_FOR_RECORD_VIDEO_FAILED) {
                 //录制失败
@@ -499,6 +503,8 @@ public class UpVideoActivity extends AppCompatActivity implements View.OnClickLi
                         execCommand("-y -i " + currentInputVideoPath + " -strict -2 -vcodec libx264 -preset ultrafast " +
                                 "-crf 24 -acodec aac -ar 44100 -ac 2 -b:a 96k -s 640x480 -aspect 16:9 " + currentOutputVideoPath);
                         Log.i("FiDo", "onActivityResult: Gallerypath" + currentInputVideoPath);
+                        Log.i("FiDo", "压缩前文件大小为："+ FileSizeUtil.getFileOrFilesSize(currentInputVideoPath,FileSizeUtil.SIZETYPE_KB));
+                        Log.i("FiDo", "压缩后文件大小为："+ FileSizeUtil.getFileOrFilesSize(currentOutputVideoPath,FileSizeUtil.SIZETYPE_KB));
                     }
                 } catch (Exception e) {
                     String a = e + "";
