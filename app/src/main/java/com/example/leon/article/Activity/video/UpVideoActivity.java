@@ -42,7 +42,6 @@ import com.example.leon.article.api.bean.UploadClassifyBean;
 import com.example.leon.article.presenter.videopresenter.videopresenterImp.VideoPresenterImp;
 import com.example.leon.article.utils.Constant;
 import com.example.leon.article.utils.CreateBitmap;
-import com.example.leon.article.utils.ImageCompress;
 import com.example.leon.article.utils.SPUtil;
 import com.example.leon.article.utils.UriAllUriUtils;
 import com.example.leon.article.view.IUpVideoActivity;
@@ -67,8 +66,6 @@ import okhttp3.RequestBody;
 import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
-
-import static android.R.attr.bitmap;
 
 public class UpVideoActivity extends AppCompatActivity implements View.OnClickListener, SelectVideoPopupWindow.OnSelectedListener, IUpVideoActivity {
 
@@ -314,12 +311,12 @@ public class UpVideoActivity extends AppCompatActivity implements View.OnClickLi
         //获取视频第一帧图片
         firstBitmap = CreateBitmap.getLocalVideoThumbnail(path);
         //压缩图片
-        ImageCompress imageCompress = new ImageCompress();
+        /*ImageCompress imageCompress = new ImageCompress();
         ImageCompress.CompressOptions options = new ImageCompress.CompressOptions();
         options.uri = Uri.fromFile(new File(path));
         options.maxHeight = 480;
         options.maxWidth = 320;
-        firstBitmap = imageCompress.compressFromUri(UpVideoActivity.this, options);
+        firstBitmap = imageCompress.compressFromUri(UpVideoActivity.this, options);*/
 
         if (firstBitmap != null) {
             bytesFromBitmap = getBytesFromBitmap(firstBitmap);
@@ -487,7 +484,7 @@ public class UpVideoActivity extends AppCompatActivity implements View.OnClickLi
                     retr.setDataSource(currentInputVideoPath);
                     String time = retr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION);//获取视频时长
                     execCommand("-y -i " + currentInputVideoPath + " -strict -2 -vcodec libx264 -preset ultrafast " +
-                            "-crf 24 -acodec aac -ar 44100 -ac 2 -b:a 96k -s 640x480 -aspect 16:9 " + currentOutputVideoPath);
+                            "-crf 24 -acodec aac -ar 44100 -ac 2 -b:a 96k -s 480x640 -aspect 16:9 " + currentOutputVideoPath);
                     //7680
                     try {
                         videoLength = Double.parseDouble(time) / 1000.00;
@@ -508,7 +505,7 @@ public class UpVideoActivity extends AppCompatActivity implements View.OnClickLi
                     currentInputVideoPath = UriAllUriUtils.getPath(this, uri);
                     if (uri != null) {
                         execCommand("-y -i " + currentInputVideoPath + " -strict -2 -vcodec libx264 -preset ultrafast " +
-                                "-crf 24 -acodec aac -ar 44100 -ac 2 -b:a 96k -s 640x480 -aspect 16:9 " + currentOutputVideoPath);
+                                "-crf 24 -acodec aac -ar 44100 -ac 2 -b:a 96k -s 480x640 -aspect 16:9 " + currentOutputVideoPath);
                     }
                 } catch (Exception e) {
                     String a = e + "";
@@ -527,7 +524,7 @@ public class UpVideoActivity extends AppCompatActivity implements View.OnClickLi
 
     public String getBytesFromBitmap(Bitmap bitmap) {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG, 60, baos);
+        bitmap.compress(Bitmap.CompressFormat.PNG, 50, baos);
         byte[] bytes = baos.toByteArray();
         String imgString = new String(Base64.encodeToString(bytes, Base64.DEFAULT));
         return imgString;
