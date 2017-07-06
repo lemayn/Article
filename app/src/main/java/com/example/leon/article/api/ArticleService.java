@@ -3,6 +3,7 @@ package com.example.leon.article.api;
 import com.example.leon.article.api.bean.ArticleApiBean;
 import com.example.leon.article.api.bean.BankApiBean;
 import com.example.leon.article.api.bean.StatementBean;
+import com.example.leon.article.api.bean.VideoInfoBean;
 
 import java.util.HashMap;
 
@@ -35,4 +36,9 @@ public interface ArticleService {
 
     @GET("api/")
     Observable<ArticleApiBean> upgrade(@Query("Action") String type);
+
+    @FormUrlEncoded
+    @POST("api/")
+    Observable<VideoInfoBean> video(@Query("Action") String type,
+                                    @FieldMap HashMap<String, String> options);
 }

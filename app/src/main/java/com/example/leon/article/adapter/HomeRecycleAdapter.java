@@ -15,9 +15,9 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.example.leon.article.Activity.JieCaoPlayerActivity;
 import com.example.leon.article.Activity.NoticeActivity;
 import com.example.leon.article.Activity.art.ArtConstant;
-import com.example.leon.article.Activity.art.ArtDetailActivity;
 import com.example.leon.article.R;
 import com.example.leon.article.bean.AdvBean;
 import com.example.leon.article.bean.ExcellentBean;
@@ -54,7 +54,7 @@ public class HomeRecycleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
     public HomeRecycleAdapter(List<AdvBean.DataBean> list, List<RecomArtBean.DataBean.TuijianBean> reBeanlist,
                               List<NoticeBean.DataBean> noticeBean
-                              , Context context) {
+            , Context context) {
         this.DatabeanList = list;
         this.reBeanlist = reBeanlist;
         this.noticeBean = noticeBean;
@@ -63,16 +63,19 @@ public class HomeRecycleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        switch (viewType){
+        switch (viewType) {
 
             case TYPE_HEAD1:
-                return new HolderTypeHead1(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_homefragment_head1, parent, false));
+                return new HolderTypeHead1(LayoutInflater.from(parent.getContext()).inflate(R.layout
+                        .item_homefragment_head1, parent, false));
             case TYPE_HEAD2:
-                return new HolderTypeHead2(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_homefragment_head2, parent, false));
+                return new HolderTypeHead2(LayoutInflater.from(parent.getContext()).inflate(R.layout
+                        .item_homefragment_head2, parent, false));
             case TYPE_TYPE3_FRAGMENT:
-                return new HolderTypeArticle3(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_article_recyclerview, parent, false));
+                return new HolderTypeArticle3(LayoutInflater.from(parent.getContext()).inflate(R.layout
+                        .item_article_recyclerview, parent, false));
             default:
-                Log.d("error","viewholder is null");
+                Log.d("error", "viewholder is null");
                 return null;
         }
     }
@@ -80,30 +83,28 @@ public class HomeRecycleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
 
-        if (holder instanceof HolderTypeHead1){
+        if (holder instanceof HolderTypeHead1) {
             bindTypeHead1((HolderTypeHead1) holder, position);
-        }
-        else if (holder instanceof HolderTypeHead2){
+        } else if (holder instanceof HolderTypeHead2) {
             bindTypeHead2((HolderTypeHead2) holder, position);
-        }
-        else if (holder instanceof HolderTypeArticle3){
+        } else if (holder instanceof HolderTypeArticle3) {
             bindTypeArticle3((HolderTypeArticle3) holder, position);
         }
     }
 
     @Override
     public int getItemCount() {
-            return reBeanlist.size()+2;
+        return reBeanlist.size() + 2;
     }
 
 
     @Override
     public int getItemViewType(int position) {
-        if (position == 0){
+        if (position == 0) {
             return TYPE_HEAD1;
-        }else if (position == 1){
+        } else if (position == 1) {
             return TYPE_HEAD2;
-        }else {
+        } else {
             return TYPE_TYPE3_FRAGMENT;
         }
     }
@@ -112,7 +113,7 @@ public class HomeRecycleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     /**
      * bind HEAD1 轮播图
      */
-    private void bindTypeHead1(HolderTypeHead1 holder, int position){
+    private void bindTypeHead1(HolderTypeHead1 holder, int position) {
 
         holder.rollpagerview.setAnimationDurtion(500);    //设置切换时间
         holder.rollpagerview.setAdapter(new TestLoopAdapter(holder.rollpagerview, DatabeanList)); //设置适配器
@@ -123,28 +124,29 @@ public class HomeRecycleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
     /**
      * band  系统消息
+     *
      * @param holder
      * @param position
      */
-    private void bindTypeHead2(final HolderTypeHead2 holder, final int position){
+    private void bindTypeHead2(final HolderTypeHead2 holder, final int position) {
 
         String text = "";
-        for (int i = 0; i<noticeBean.size(); i++){
+        for (int i = 0; i < noticeBean.size(); i++) {
             String a = "";
             a = noticeBean.get(i).getNtitle();
-            text = "   " + text +  "   " + a + "    ";
+            text = "   " + text + "   " + a + "    ";
         }
 
-       if (noticeBean.size()>0){
-           holder.text_notice.setText(text);
-       }
-       else {}
+        if (noticeBean.size() > 0) {
+            holder.text_notice.setText(text);
+        } else {
+        }
 
         //Intent 消息Activity
         holder.lin_notice.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               context.startActivity(new Intent(context, NoticeActivity.class));
+                context.startActivity(new Intent(context, NoticeActivity.class));
             }
         });
 
@@ -165,11 +167,10 @@ public class HomeRecycleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                 intent.setAction("article2");
                 context.sendBroadcast(intent);
 
-                if ( HolderTypeArticle3.lin1!=null){
+                if (HolderTypeArticle3.lin1 != null) {
                     HolderTypeArticle3.lin2.setVisibility(View.VISIBLE);
                     HolderTypeArticle3.lin1.setVisibility(View.GONE);
-                }
-                else{
+                } else {
                     Log.i("MyTest", "adapter null");
                 }
 
@@ -178,41 +179,40 @@ public class HomeRecycleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     }
 
     /**
-     *  文章
+     * 文章
+     *
      * @param holder
      * @param position
      */
-    private void bindTypeArticle3(final HolderTypeArticle3 holder, final int position){
+    private void bindTypeArticle3(final HolderTypeArticle3 holder, final int position) {
 
-        if (reBeanlist.size()>0) {
+        if (reBeanlist.size() > 0) {
 
-            if (position == 2){
+            if (position == 2) {
                 holder.text_contect.setTextColor(context.getResources().getColor(R.color.colorRed));
                 holder.text_date.setTextColor(context.getResources().getColor(R.color.colorRed));
-            }
-            else {
+            } else {
                 holder.text_contect.setTextColor(context.getResources().getColor(R.color.textcolorbalck));
                 holder.text_date.setTextColor(context.getResources().getColor(R.color.textcolorbalck));
             }
 
-            holder.text_contect.setText(reBeanlist.get(position - 2).getAtitle());
-            holder.text_date.setText(reBeanlist.get(position - 2).getAaddtime());
+            holder.text_contect.setText(reBeanlist.get(position - 2).getTitle());
+            holder.text_date.setText(reBeanlist.get(position - 2).getAddtime());
 
-            if (reBeanlist.get(position - 2).getAimg()==null||reBeanlist.get(position - 2).getAimg().equals("")){
+            if (reBeanlist.get(position - 2).getImg() == null || reBeanlist.get(position - 2).getImg().equals("")) {
                 Glide.with(context)
                         .load(R.drawable.adv2)
                         .centerCrop()
                         .into(holder.img);
-            }
-            else {
+            } else {
                 Glide.with(context)
-                        .load(headurl + reBeanlist.get(position - 2).getAimg())
+                        .load(headurl + reBeanlist.get(position - 2).getImg())
                         .diskCacheStrategy(DiskCacheStrategy.SOURCE)
                         .centerCrop()
                         .into(holder.img);
             }
+        } else {
         }
-        else {}
 
     }
 
@@ -300,9 +300,9 @@ public class HomeRecycleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             lin1.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-//                    Log.i("MyTest", "poistion"+getAdapterPosition());
-                    String aid = reBeanlist.get(getAdapterPosition() - 2).getAid();
-                    Intent intent = new Intent(context, ArtDetailActivity.class);
+                    //                    Log.i("MyTest", "poistion"+getAdapterPosition());
+                    RecomArtBean.DataBean.TuijianBean aid = reBeanlist.get(getAdapterPosition() - 2);
+                    Intent intent = new Intent(context, JieCaoPlayerActivity.class);
                     intent.putExtra(ArtConstant.DETAIL_AID, aid);
                     context.startActivity(intent);
                 }
@@ -311,23 +311,24 @@ public class HomeRecycleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
     }
 
-    public void addNotItems(List<NoticeBean.DataBean> List){
+    public void addNotItems(List<NoticeBean.DataBean> List) {
         noticeBean.addAll(List);
         notifyDataSetChanged();
     }
-    public void addArtItems(List<RecomArtBean.DataBean.TuijianBean> List){
+
+    public void addArtItems(List<RecomArtBean.DataBean.TuijianBean> List) {
         reBeanlist.addAll(List);
         notifyDataSetChanged();
     }
 
-    public void addGoodItems(List<RecomArtBean.DataBean.TuijianBean> List){
-        if (List.size()>0){
+    public void addGoodItems(List<RecomArtBean.DataBean.TuijianBean> List) {
+        if (List.size() > 0) {
             reBeanlist.addAll(List);
         }
         notifyDataSetChanged();
     }
 
-    public void addAdvItems(List<AdvBean.DataBean> List){
+    public void addAdvItems(List<AdvBean.DataBean> List) {
         DatabeanList.addAll(List);
         notifyDataSetChanged();
     }
@@ -340,8 +341,9 @@ public class HomeRecycleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
         List<AdvBean.DataBean> list;
 
-//        private int[] imgs = {R.drawable.adv, R.drawable.goto_article, R.drawable.adv, R.drawable.available_balance,};  // 本地图片
-//        private int count = imgs.length;  // banner上图片的数量
+        //        private int[] imgs = {R.drawable.adv, R.drawable.goto_article, R.drawable.adv, R.drawable
+        // .available_balance,};  // 本地图片
+        //        private int count = imgs.length;  // banner上图片的数量
 
         public TestLoopAdapter(RollPagerView viewPager, List<AdvBean.DataBean> list) {
             super(viewPager);
@@ -356,25 +358,24 @@ public class HomeRecycleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
 
             Glide.with(context)
-                    .load(headurl+list.get(position).getImg())
+                    .load(headurl + list.get(position).getImg())
                     .diskCacheStrategy(DiskCacheStrategy.SOURCE)
                     .centerCrop()
                     .into(view);
-//            view.setImageResource(list[position]);
+            //            view.setImageResource(list[position]);
             view.setScaleType(ImageView.ScaleType.CENTER_CROP);
-            view.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+            view.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup
+                    .LayoutParams.MATCH_PARENT));
 
             view.setOnClickListener(new View.OnClickListener()      // 点击事件
             {
                 @Override
-                public void onClick(View v)
-                {
+                public void onClick(View v) {
                     String address = list.get(position).getUrl();
-                    if (address == null||address.equals("")){
+                    if (address == null || address.equals("")) {
                         return;
-                    }
-                    else {
-                        Uri uri = Uri.parse("https://"+address);
+                    } else {
+                        Uri uri = Uri.parse("https://" + address);
                         Intent intent = new Intent(Intent.ACTION_VIEW, uri);
                         context.startActivity(intent);
                     }

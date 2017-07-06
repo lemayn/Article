@@ -26,7 +26,8 @@ public class ArtConstant {
     public static final String SHOW_ARTICLEFRAGMENT = "SHOW_ARTICLE";
 
     //BaseURL
-    public static final String BASE_URL = "http://121.127.226.160/api/";
+//    public static final String BASE_URL = "http://121.127.226.160/api/";
+    public static final String BASE_URL = "http://118.89.233.35:8989/"; //测试
 
     public static final String BASE_IMGURL = "http://121.127.226.160";
 

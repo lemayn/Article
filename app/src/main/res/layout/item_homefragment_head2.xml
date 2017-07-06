@@ -55,39 +55,6 @@
         android:background="@color/white">
 
         <LinearLayout
-            android:id="@+id/lin_recommend"
-            android:layout_width="0dp"
-            android:layout_height="?attr/actionBarSize"
-            android:layout_weight="1"
-            android:gravity="center">
-
-            <ImageView
-                android:id="@+id/imagview_recommend"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/tab_head2_select"
-                android:layout_marginRight="5dp"/>
-
-            <TextView
-                android:id="@+id/textveiw_recommend"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:drawablePadding="5dp"
-                android:text="@string/recommend_article"
-                android:textSize="16sp"
-                android:textColor="@color/colorRed"/>
-
-        </LinearLayout>
-
-
-        <View
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="0.005"
-            android:background="@color/colorGrey"/>
-
-
-        <LinearLayout
             android:id="@+id/lin_excellent"
             android:layout_width="0dp"
             android:layout_height="?attr/actionBarSize"
@@ -107,10 +74,44 @@
                 android:layout_height="wrap_content"
                 android:drawablePadding="5dp"
                 android:textSize="16sp"
-                android:text="@string/excellent_article"
-                android:textColor="@color/colorGrey" />
+                android:text="@string/recommend_article"
+                android:textColor="@color/colorRed" />
 
         </LinearLayout>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.005"
+            android:background="@color/colorGrey"/>
+
+        <LinearLayout
+            android:id="@+id/lin_recommend"
+            android:layout_width="0dp"
+            android:layout_height="?attr/actionBarSize"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/imagview_recommend"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/tab_head2_select"
+                android:layout_marginRight="5dp"/>
+
+            <TextView
+                android:id="@+id/textveiw_recommend"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawablePadding="5dp"
+                android:text="@string/recommend_video"
+                android:textSize="16sp"
+                android:textColor="@color/colorGrey"/>
+
+        </LinearLayout>
+
+
+
 
     </LinearLayout>
 

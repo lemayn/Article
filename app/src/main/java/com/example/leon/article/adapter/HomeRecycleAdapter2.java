@@ -12,7 +12,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -198,12 +197,12 @@ public class HomeRecycleAdapter2 extends RecyclerView.Adapter<RecyclerView.ViewH
                 Glide.with(context)
                         .load(headurl + reBeanlist.get(position - 2).getAimg())
                         .diskCacheStrategy(DiskCacheStrategy.SOURCE)
+                        .error(R.drawable.adv2)
                         .centerCrop()
                         .into(holder.img);
             }
 
         }
-        else {}
 
     }
 

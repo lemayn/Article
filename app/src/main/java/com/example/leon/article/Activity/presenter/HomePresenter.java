@@ -10,8 +10,6 @@ import com.example.leon.article.bean.AdvBean;
 import com.example.leon.article.bean.ExcellentBean;
 import com.example.leon.article.bean.NoticeBean;
 import com.example.leon.article.bean.RecomArtBean;
-import com.example.leon.article.utils.Constant;
-import com.example.leon.article.utils.SPUtil;
 import com.google.gson.Gson;
 
 import java.io.IOException;
@@ -69,7 +67,7 @@ public class HomePresenter extends BasePresenter<IHomePre> {
     public void RecommendArticle(int page) {
         String Spage = String.valueOf(page);
         FormBody formBody = new FormBody.Builder()
-                .add("page", "1")
+                .add("page", Spage)
                 .build();
         XHttpUtils.getInstance().asyncPost(Api.baseurl+Api.Index,
                 formBody, new XHttpUtils.HttpCallBack() {
@@ -101,7 +99,7 @@ public class HomePresenter extends BasePresenter<IHomePre> {
     public void excellentArticle(int page) {
         String Spage = String.valueOf(page);
         FormBody formBody = new FormBody.Builder()
-                .add("page", "1")
+                .add("page", Spage)
                 .build();
         XHttpUtils.getInstance().asyncPost(Api.baseurl+Api.Good,
                 formBody, new XHttpUtils.HttpCallBack() {

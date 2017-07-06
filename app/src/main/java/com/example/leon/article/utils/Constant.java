@@ -6,8 +6,8 @@ public class Constant {
         /**
          * url
          */
-        //        public static final String BASE_URL = "http://118.89.233.35:8989/"; 测试服务器
-        public static final String BASE_URL = "http://121.127.226.160/";//正式服务器
+        public static final String BASE_URL = "http://118.89.233.35:8989/"; //测试服务器
+        //        public static final String BASE_URL = "http://121.127.226.160/";//正式服务器
 
         /**
          * 接口验证
@@ -109,6 +109,8 @@ public class Constant {
          * 软件更新
          */
         public static final String UPGRADE = "Upgrade";
+
+        public static final String VIDEO_INFO = "VideoInfo";
 
     }
 

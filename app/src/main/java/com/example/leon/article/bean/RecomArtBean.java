@@ -1,5 +1,6 @@
 package com.example.leon.article.bean;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -88,7 +89,7 @@ public class RecomArtBean {
             this.tuijian = tuijian;
         }
 
-        public static class TuijianBean {
+        public static class TuijianBean implements Serializable{
             /**
              * aid : 21
              * atitle : 福利福利
@@ -100,6 +101,18 @@ public class RecomArtBean {
             private String atitle;
             private String aaddtime;
             private String aimg;
+            /**
+             * id : 2
+             * title : first
+             * addtime : 2017-06-29 10:46
+             * img : /upload/vimg/9e7b04852c8affa57674d8a69613dd20.jpg
+             */
+
+            private String id;
+            private String title;
+            private String addtime;
+            private String img;
+
 
             public String getAid() {
                 return aid;
@@ -141,6 +154,38 @@ public class RecomArtBean {
                         ", aaddtime='" + aaddtime + '\'' +
                         ", aimg='" + aimg + '\'' +
                         '}';
+            }
+
+            public String getId() {
+                return id;
+            }
+
+            public void setId(String id) {
+                this.id = id;
+            }
+
+            public String getTitle() {
+                return title;
+            }
+
+            public void setTitle(String title) {
+                this.title = title;
+            }
+
+            public String getAddtime() {
+                return addtime;
+            }
+
+            public void setAddtime(String addtime) {
+                this.addtime = addtime;
+            }
+
+            public String getImg() {
+                return img;
+            }
+
+            public void setImg(String img) {
+                this.img = img;
             }
         }
 
