@@ -26,6 +26,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.MediaController;
 import android.widget.Toast;
+import android.widget.VideoView;
 
 import com.example.leon.article.Activity.MainActivity;
 import com.example.leon.article.Activity.art.ArtConstant;
@@ -45,7 +46,6 @@ import com.example.leon.article.utils.CreateBitmap;
 import com.example.leon.article.utils.SPUtil;
 import com.example.leon.article.utils.UriAllUriUtils;
 import com.example.leon.article.view.IUpVideoActivity;
-import com.example.leon.article.widget.FllScreenVideoView;
 import com.example.leon.article.widget.SelectVideoPopupWindow;
 import com.example.leon.article.widget.SpinnerDialog;
 import com.jaredrummler.materialspinner.MaterialSpinner;
@@ -74,7 +74,7 @@ public class UpVideoActivity extends AppCompatActivity implements View.OnClickLi
     private MaterialSpinner mSpinner;
     private Button bt_addvideo, bt_videolist, bt_upload;
     private SelectVideoPopupWindow selectVideoPopupWindow;
-    private FllScreenVideoView mVideoView;
+    private VideoView mVideoView;
     private ImageView iv_play;
     private FrameLayout fl_myVideo;
     private ArrayList<UploadClassifyBean.DataBean> classifys = new ArrayList<>();
@@ -156,7 +156,7 @@ public class UpVideoActivity extends AppCompatActivity implements View.OnClickLi
         bt_upload = (Button) findViewById(R.id.bt_upvideo_upload);
         selectVideoPopupWindow = new SelectVideoPopupWindow(this);
         selectVideoPopupWindow.setOnSelectedListener(this);
-        mVideoView = (FllScreenVideoView) findViewById(R.id.videoView);
+        mVideoView = (VideoView) findViewById(R.id.videoView);
         MediaController mediaController = new MediaController(this);
         mediaController.setAnchorView(mVideoView);
         mediaController.setVisibility(View.INVISIBLE);
@@ -246,7 +246,7 @@ public class UpVideoActivity extends AppCompatActivity implements View.OnClickLi
             @Override
             public void onExecSuccess(String message) {
                 hidenProgress();
-                Toast.makeText(UpVideoActivity.this,"视频已准备完成，请大胆上传。",Toast.LENGTH_SHORT).show();
+                Toast.makeText(UpVideoActivity.this, "视频已准备完成，请大胆上传。", Toast.LENGTH_SHORT).show();
                 //压缩成功显示图片和地址
                 Bitmap bitmap = CreateBitmap.getLocalVideoThumbnail(currentOutputVideoPath);
                 iv_cover.setImageBitmap(bitmap);
@@ -320,7 +320,7 @@ public class UpVideoActivity extends AppCompatActivity implements View.OnClickLi
         if (!TextUtils.isEmpty(title) && firstBitmap != null && !TextUtils.isEmpty(content)) {
             RequestBody requestFile =
 //                    RequestBody.create(MediaType.parse("multipart/form-data"), new File(path));
-            RequestBody.create(MediaType.parse("multipart/form-data"), mFile);
+                    RequestBody.create(MediaType.parse("multipart/form-data"), mFile);
             // MultipartBody.Part  和后端约定好Key，这里的partName是用video
 //            MultipartBody.Part body = MultipartBody.Part.createFormData("video", new File(path).getName(), requestFile);
             MultipartBody.Part body = MultipartBody.Part.createFormData("video", mFile.getName(), requestFile);
@@ -368,7 +368,7 @@ public class UpVideoActivity extends AppCompatActivity implements View.OnClickLi
                                         Toast.makeText(UpVideoActivity.this, "上传失败", Toast.LENGTH_SHORT).show();
                                     }
                                 }
-                            }, 1600);
+                            }, 800);
                         }
                     });
         } else {
@@ -476,8 +476,12 @@ public class UpVideoActivity extends AppCompatActivity implements View.OnClickLi
                     MediaMetadataRetriever retr = new MediaMetadataRetriever();
                     retr.setDataSource(currentInputVideoPath);
                     String time = retr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION);//获取视频时长
+                    String mHeight = retr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_VIDEO_WIDTH);//宽
+                    String mWidth = retr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_VIDEO_HEIGHT);//高
+                    Log.i("FiDo", "上传前文件宽为: "+mWidth + " 高为："+mHeight);
+                    double scale = Double.parseDouble(mWidth) / Double.parseDouble(mHeight);
                     execCommand("-y -i " + currentInputVideoPath + " -strict -2 -vcodec libx264 -preset ultrafast " +
-                            "-crf 24 -acodec aac -ar 44100 -ac 2 -b:a 96k -s 480x640 -aspect 16:9 " + currentOutputVideoPath);
+                            "-crf 19 -acodec aac -ar 44100 -ac 2 -b:a 96k -s "+getUploadScale(Double.parseDouble(mWidth),Double.parseDouble(mHeight),scale)+" -aspect 16:9 " + currentOutputVideoPath);
                     //7680
                     try {
                         videoLength = Double.parseDouble(time) / 1000.00;
@@ -496,15 +500,45 @@ public class UpVideoActivity extends AppCompatActivity implements View.OnClickLi
                 try {
                     uri = data.getData();
                     currentInputVideoPath = UriAllUriUtils.getPath(this, uri);
+                    MediaMetadataRetriever retr = new MediaMetadataRetriever();
+                    retr.setDataSource(currentInputVideoPath);
+                    String time = retr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION);//获取视频时长
+                    String mWidth = retr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_VIDEO_WIDTH);//宽
+                    String mHeight = retr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_VIDEO_HEIGHT);//高
+                    Log.i("FiDo", "上传前文件宽为: "+mWidth + " 高为："+mHeight);
+                    double scale = Double.parseDouble(mWidth) / Double.parseDouble(mHeight);
                     if (uri != null) {
                         execCommand("-y -i " + currentInputVideoPath + " -strict -2 -vcodec libx264 -preset ultrafast " +
-                                "-crf 24 -acodec aac -ar 44100 -ac 2 -b:a 96k -s 480x640 -aspect 16:9 " + currentOutputVideoPath);
+                                "-crf 19 -acodec aac -ar 44100 -ac 2 -b:a 96k -s "+getUploadScale(Double.parseDouble(mWidth),Double.parseDouble(mHeight),scale)+" -aspect 16:9 " + currentOutputVideoPath);
                     }
                 } catch (Exception e) {
                     String a = e + "";
                 } catch (OutOfMemoryError e) {
                     String a = e + "";
                 }
+            }
+        }
+    }
+
+    private String getUploadScale(double mWidth, double mHeight, double scale) {
+        if (scale > 1) {//宽屏
+            if (mWidth <= 480) {
+                Log.i("FiDo", "宽频<= 480: "+mWidth + "x" + mHeight);
+                return (int)mWidth + "x" + (int)mHeight;
+            } else {
+                mHeight = 480 / scale;
+                Log.i("FiDo", "宽屏>480: "+480 + "x" + mHeight);
+                return 480 + "x" + (int)mHeight;
+            }
+
+        } else {    //竖屏
+            if (mHeight <= 640) {
+                Log.i("FiDo", "竖屏<=640: "+mWidth + "x"+ mHeight);
+                return (int)mWidth + "x"+ (int)mHeight;
+            }else{
+                mWidth = 640 * scale;
+                Log.i("FiDo", "竖屏>640: "+mWidth + "x" + 640);
+                return (int)mWidth + "x" + 640;
             }
         }
     }
