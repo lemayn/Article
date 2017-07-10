@@ -9,7 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.example.leon.article.Activity.art.EditorActivity;
+import com.example.leon.article.Activity.art.ArtEditorActivity;
 import com.example.leon.article.Activity.video.UpVideoActivity;
 import com.example.leon.article.R;
 import com.jaredrummler.materialspinner.MaterialSpinner;
@@ -73,7 +73,8 @@ public class PublishFragment extends Fragment implements View.OnClickListener {
     }
 
     private void GoEditorActivity() {
-        Intent intent = new Intent(getContext(), EditorActivity.class);
+//        Intent intent = new Intent(getContext(), EditorActivity.class);
+        Intent intent = new Intent(getContext(), ArtEditorActivity.class);
         startActivity(intent);
     }
 

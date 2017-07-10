@@ -123,4 +123,12 @@ public interface ArtApi {
                                                @Field("page")int page,
                                                @Field("type") int type);
 
+    /**
+     * 测试多图片上传
+     */
+    @Multipart
+    @POST("?Key=55a50c1a06f9c1032014112cbd68f34b&Action=AddImg")
+    Observable<String> upLoadMuiltImgs(@PartMap Map<String , RequestBody> params);
+
+
 }

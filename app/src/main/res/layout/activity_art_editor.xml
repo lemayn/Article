@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/ll_rootview"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Activity.art.EditorActivity">
+    tools:context="com.example.leon.article.Activity.art.ArtEditorActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -16,7 +13,7 @@
         android:gravity="center_vertical">
 
         <ImageView
-            android:id="@+id/iv_editor_back"
+            android:id="@+id/iv_artEditor_back"
             android:layout_width="wrap_content"
             android:layout_height="25dp"
             android:layout_centerVertical="true"
@@ -33,7 +30,19 @@
             android:textSize="20sp" />
 
         <TextView
-            android:id="@+id/tv_clear"
+            android:id="@+id/tv_artEditor_insertImg"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="插入图片"
+            android:background="@color/toolbar_back"
+            android:textColor="@color/colorWhite"
+            android:layout_marginRight="5dp"
+            android:layout_alignParentRight="true"
+            android:layout_toLeftOf="@+id/tv_clear"/>
+
+        <TextView
+            android:id="@+id/tv_artEditor_clear"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
@@ -277,7 +286,7 @@
             android:textSize="18sp" />
 
         <EditText
-            android:id="@+id/et_title"
+            android:id="@+id/et_artEditor_title"
             android:layout_width="match_parent"
             android:layout_height="35dp"
             android:layout_marginLeft="6dp"
@@ -301,20 +310,20 @@
             android:gravity="center_vertical"
             android:textColor="@color/colorBlack"/>
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="9dp"
-                android:layout_marginBottom="8dp"
-                android:layout_marginLeft="8dp"
-                android:padding="2dp"
-                android:gravity="center_horizontal"
-                android:background="@drawable/edit_editor_bg">
-                <com.jaredrummler.materialspinner.MaterialSpinner
-                    android:id="@+id/spinner_editor"
-                    android:layout_width="90dp"
-                    android:layout_height="40dp" />
-            </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="9dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="8dp"
+            android:padding="2dp"
+            android:gravity="center_horizontal"
+            android:background="@drawable/edit_editor_bg">
+            <com.jaredrummler.materialspinner.MaterialSpinner
+                android:id="@+id/spinner_artEditor_"
+                android:layout_width="90dp"
+                android:layout_height="40dp" />
+        </LinearLayout>
 
     </LinearLayout>
 
@@ -340,8 +349,8 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <EditText
-                android:id="@+id/et_eritor"
+            <com.sendtion.xrichtext.RichTextEditor
+                android:id="@+id/et_artEditor_content"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_margin="3dp"
@@ -349,7 +358,9 @@
                 android:background="@drawable/edit_editor_bg"
                 android:gravity="start"
                 android:padding="3dp"
-                android:scrollbars="vertical" />
+                android:scrollbars="vertical"
+                android:textSize="16sp"
+                android:textColor="@color/colorGrey"/>
 
         </LinearLayout>
 
@@ -368,7 +379,7 @@
             android:layout_weight="1" />
 
         <Button
-            android:id="@+id/bt_editor_addImg"
+            android:id="@+id/bt_artEditor_addImg"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginRight="10dp"
@@ -378,7 +389,7 @@
             android:textColor="@color/white" />
 
         <Button
-            android:id="@+id/bt_editor_newslist"
+            android:id="@+id/bt_artEditor_newslist"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginRight="10dp"
@@ -388,7 +399,7 @@
             android:textColor="@color/white" />
 
         <Button
-            android:id="@+id/bt_editor_send"
+            android:id="@+id/bt_artEditor_send"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginRight="3dp"
@@ -400,7 +411,7 @@
     </LinearLayout>
 
     <ImageView
-        android:id="@+id/iv_editor_insert"
+        android:id="@+id/iv_artEditor_insert"
         android:layout_width="200dp"
         android:layout_height="160dp"
         android:layout_gravity="center"
