@@ -2,11 +2,13 @@ package com.example.leon.article.api;
 
 import com.example.leon.article.api.bean.ArtInfoBean;
 import com.example.leon.article.api.bean.ArtListBean;
+import com.example.leon.article.api.bean.ImgTagBean;
 import com.example.leon.article.api.bean.UpLoadArtBean;
 import com.example.leon.article.api.bean.UploadClassifyBean;
 import com.example.leon.article.api.bean.VideoInfoBean;
 import com.example.leon.article.api.bean.VideoListBean;
 
+import java.util.List;
 import java.util.Map;
 
 import okhttp3.MultipartBody;
@@ -128,7 +130,7 @@ public interface ArtApi {
      */
     @Multipart
     @POST("?Key=55a50c1a06f9c1032014112cbd68f34b&Action=AddImg")
-    Observable<String> upLoadMuiltImgs(@PartMap Map<String , RequestBody> params);
-
-
+//    Observable<ResponseBody> upLoadMuiltImgs(@PartMap Map<String , RequestBody> params);
+//    Observable<ResponseBody> upLoadMuiltImgs(@PartMap MultipartBody.Part file);
+    Observable<ImgTagBean> upLoadMuiltImgs(@PartMap Map<String, RequestBody> params, @Part List<MultipartBody.Part> files);
 }

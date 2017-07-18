@@ -1,1 +1,1 @@
-include ':app', ':FFmpegAndroid', ':xrichtext'
+include ':app', ':FFmpegAndroid', ':xrichtext', ':matisse'

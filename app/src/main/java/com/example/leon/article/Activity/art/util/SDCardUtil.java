@@ -34,7 +34,7 @@ public class SDCardUtil {
 	 * @return
 	 */
 	public static String getPictureDir(){
-		String imageCacheUrl = SDCardRoot + "XRichText" + File.separator;
+		String imageCacheUrl = SDCardRoot + "WCXW" + File.separator;
 		File file = new File(imageCacheUrl);
 		if(!file.exists())
 			file.mkdir();  //如果不存在则创建
@@ -47,11 +47,11 @@ public class SDCardUtil {
 	 * @return
 	 */
 	public static String saveToSdCard(Bitmap bitmap) {
-		String imageUrl = getPictureDir() + System.currentTimeMillis() + "-";
+		String imageUrl = getPictureDir() + System.currentTimeMillis() + ".jpg";
 		File file = new File(imageUrl);
 		try {
 			FileOutputStream out = new FileOutputStream(file);
-			if (bitmap.compress(Bitmap.CompressFormat.JPEG, 90, out)) {
+			if (bitmap.compress(Bitmap.CompressFormat.JPEG, 70, out)) {
 				out.flush();
 				out.close();
 			}

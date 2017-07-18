@@ -51,7 +51,7 @@
             android:src="@mipmap/art_default"
             android:visibility="gone"/>
 
-        <TextView
+        <com.sendtion.xrichtext.RichTextView
             android:id="@+id/tv_art_detail_content"
             android:padding="2dp"
             android:layout_marginLeft="15dp"

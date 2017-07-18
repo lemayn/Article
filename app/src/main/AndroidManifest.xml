@@ -92,12 +92,23 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
-        <activity android:name=".Activity.video.UpVideoActivity" />
+        <activity android:name=".Activity.video.UpVideoActivity"
+            android:windowSoftInputMode="adjustPan">
+        </activity>
         <activity android:name=".Activity.video.UpUserVideoActivity" />
         <activity android:name=".Activity.video.permission.PermissionsActivity" />
         <activity android:name=".Activity.video.videorecord.CameraActivity" />
-        <activity android:name=".Activity.art.ArtEditorActivity"></activity>
+        <activity android:name=".Activity.art.ArtEditorActivity"
+            android:windowSoftInputMode="adjustPan">
+        </activity>
+        <activity android:name=".Activity.art.ArtEditorActivity02"
+            android:windowSoftInputMode="adjustPan">
+        </activity>
+        <activity android:name=".Activity.art.ArtEditorActivity03"
+            android:windowSoftInputMode="adjustPan">
+        </activity>
 
+        <!--ArtEditorActivity imagePicker-->
         <activity
             android:name="me.iwf.photopicker.PhotoPickerActivity"
             android:screenOrientation="portrait" />
@@ -105,6 +116,21 @@
             android:name="me.iwf.photopicker.PhotoPagerActivity"
             android:screenOrientation="portrait" />
 
+        <!--ArtEditorActivity02  ImgPicker-->
+        <activity android:name="com.zzti.fengyongge.imagepicker.PhotoSelectorActivity"></activity><!--选择图片-->
+        <activity android:name="com.zzti.fengyongge.imagepicker.PhotoPreviewActivity"></activity><!--//预览图片-->
+
+        <!--ArtEditorActivity03  知乎FileProvider-->
+        <provider
+            android:name=".Activity.art.MyFileProvider"
+            android:authorities="com.zhihu.matisse.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths_public">
+            </meta-data>
+        </provider>
     </application>
 
 </manifest>

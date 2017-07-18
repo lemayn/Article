@@ -52,7 +52,7 @@ public class ArtPresenterImp extends BasepresenterImp implements IArtPresenter{
                 .getArtList(cookie,sid,page)
                 .lift(new BaseValueValidOperator<ArtListBean>())
                 .subscribeOn(Schedulers.io())
-//                .unsubscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<ArtListBean>() {
                     @Override
@@ -82,7 +82,7 @@ public class ArtPresenterImp extends BasepresenterImp implements IArtPresenter{
                 .getArtInfo(cookie, aid, sid)
                 .lift(new BaseValueValidOperator<ArtInfoBean>())
                 .subscribeOn(Schedulers.io())
-//                .unsubscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<ArtInfoBean>() {
                     @Override
@@ -149,7 +149,7 @@ public class ArtPresenterImp extends BasepresenterImp implements IArtPresenter{
                 .getUserArtTypeList(cookie, sid, page, type)
                 .lift(new BaseValueValidOperator<ArtListBean>())
                 .subscribeOn(Schedulers.io())
-//                .unsubscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<ArtListBean>() {
                     @Override
@@ -177,7 +177,7 @@ public class ArtPresenterImp extends BasepresenterImp implements IArtPresenter{
         Subscription subscribe = ApiManager.getInstance().getArtApiService()
                 .getClassify(cookie, sid)
                 .subscribeOn(Schedulers.io())
-//                .unsubscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<UploadClassifyBean>() {
                     @Override
@@ -187,7 +187,6 @@ public class ArtPresenterImp extends BasepresenterImp implements IArtPresenter{
 
                     @Override
                     public void onError(Throwable e) {
-
                     }
 
                     @Override

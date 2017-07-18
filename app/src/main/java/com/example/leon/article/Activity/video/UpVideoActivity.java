@@ -89,8 +89,6 @@ public class UpVideoActivity extends AppCompatActivity implements View.OnClickLi
     /*录制视频参数*/
     private String currentInputVideoPath = "";
     private String currentOutputVideoPath = "/mnt/sdcard/videokit/out.mp4";
-    private String cmd = "-y -i " + currentInputVideoPath + " -strict -2 -vcodec libx264 -preset ultrafast " +
-            "-crf 24 -acodec aac -ar 44100 -ac 2 -b:a 96k -s 640x480 -aspect 16:9 " + currentOutputVideoPath;
 
     private Double videoLength = 0.00;//视频时长 s
     private Compressor mCompressor;
@@ -204,7 +202,6 @@ public class UpVideoActivity extends AppCompatActivity implements View.OnClickLi
             @Override
             public void onCompletion(MediaPlayer mp) {
                 // TODO Auto-generated method stub
-//                Toast.makeText(getApplicationContext(), "视频播放结束", Toast.LENGTH_LONG).show();
                 iv_play.setVisibility(View.VISIBLE);
 //                iv_cover.setVisibility(View.VISIBLE);
             }
@@ -275,9 +272,10 @@ public class UpVideoActivity extends AppCompatActivity implements View.OnClickLi
     }
 
     private void GoVideoFragment() {
-        Intent intent = new Intent(UpVideoActivity.this, MainActivity.class);
+        Intent intent = new Intent(this, MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         intent.putExtra(ArtConstant.SHOW_ARTICLEFRAGMENT, 1);
+        intent.putExtra(ArtConstant.SHOW_ARTICLE_VIDEOFRAGMENT, 2017);
         startActivity(intent);
         finish();
     }
@@ -316,10 +314,7 @@ public class UpVideoActivity extends AppCompatActivity implements View.OnClickLi
         String content = et_videoContent.getText().toString().trim();
         if (!TextUtils.isEmpty(title) && firstBitmap != null && !TextUtils.isEmpty(content)) {
             RequestBody requestFile =
-//                    RequestBody.create(MediaType.parse("multipart/form-data"), new File(path));
                     RequestBody.create(MediaType.parse("multipart/form-data"), mFile);
-            // MultipartBody.Part  和后端约定好Key，这里的partName是用video
-//            MultipartBody.Part body = MultipartBody.Part.createFormData("video", new File(path).getName(), requestFile);
             MultipartBody.Part body = MultipartBody.Part.createFormData("video", mFile.getName(), requestFile);
             // 执行请求
             RequestBody body1 = RequestBody.create(MediaType.parse("multipart/form-data"), getSid());
@@ -547,7 +542,7 @@ public class UpVideoActivity extends AppCompatActivity implements View.OnClickLi
     public void onBackPressed() {
         super.onBackPressed();
         if (TextUtils.isEmpty(et_title.getText().toString().trim()) && TextUtils.isEmpty(et_videoContent.getText().toString())) {//如果输入的内容为空
-            super.onBackPressed();
+            finish();
         } else {//用户输入的内容不为空
             showifsaveDialog();
         }
@@ -645,8 +640,8 @@ public class UpVideoActivity extends AppCompatActivity implements View.OnClickLi
 
         if (!TextUtils.isEmpty(title))
             mProgressDialog.setTitle(title);
-        mProgressDialog.setMessage(message);
-        mProgressDialog.show();
+            mProgressDialog.setMessage(message);
+            mProgressDialog.show();
     }
 
     private void hidenProgress() {

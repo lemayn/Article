@@ -190,7 +190,7 @@
        android:layout_centerHorizontal="true"
         android:layout_marginBottom="10dp"
         android:layout_marginTop="5dp"
-        android:visibility="visible"
+        android:visibility="gone"
         android:background="@color/colorBlack">
 
         <com.example.leon.article.widget.FllScreenVideoView

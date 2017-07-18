@@ -129,7 +129,6 @@ public class PhotoSelectUtils {
             imgUri = mActivity.getApplication().getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, contentValues);
         }
 
-
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         intent.putExtra(MediaStore.EXTRA_OUTPUT, imgUri);
         mActivity.startActivityForResult(intent, REQ_TAKE_PHOTO);

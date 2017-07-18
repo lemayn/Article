@@ -4,7 +4,7 @@
     android:layout_height="wrap_content">
 
     <LinearLayout
-        android:id="@+id/ll_adapter_videolist"
+
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:orientation="horizontal"
@@ -12,6 +12,7 @@
         android:background="@color/colorWhite">
 
         <LinearLayout
+            android:id="@+id/ll_adapter_videolist"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -44,8 +45,8 @@
         <TextView
             android:id="@+id/tv_videolist_status"
             android:layout_width="103dp"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
+            android:layout_height="match_parent"
+            android:gravity="center"
             android:text="审核中"
             android:textSize="15sp" />
 

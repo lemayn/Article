@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -113,12 +114,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     //发表文章后跳转到当前页面
     private void ifShowArticle() {
         int position = getIntent().getIntExtra(ArtConstant.SHOW_ARTICLEFRAGMENT, 0);
+        final int index = getIntent().getIntExtra(ArtConstant.SHOW_ARTICLE_VIDEOFRAGMENT, -1);
         viewpager.setCurrentItem(position);
         if (position == 0) {
             binding.setState(R.id.home);
         }
         if (position == 1) {
             binding.setState(R.id.article);
+            if (index == 2017) {
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (articleFragment.isAdded()) {
+                            articleFragment.switchTag(1);
+                            articleFragment.switchFragment(1);
+                        }
+                    }
+                }, 90);
+            }
         }
     }
 
@@ -311,5 +324,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 viewpager.setCurrentItem(4, false);
                 break;
         }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
     }
 }

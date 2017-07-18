@@ -26,17 +26,18 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:text="发表文章"
-            android:textColor="#ffffff"
+            android:textColor="@color/colorWhite"
             android:textSize="20sp" />
 
         <TextView
             android:id="@+id/tv_artEditor_insertImg"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="40dp"
             android:gravity="center"
+            android:layout_centerInParent="true"
             android:text="插入图片"
-            android:background="@color/toolbar_back"
-            android:textColor="@color/colorWhite"
+            android:textSize="17sp"
+            android:textColor="@drawable/selector_insertimage_textcolor_bg"
             android:layout_marginRight="5dp"
             android:layout_alignParentRight="true"
             android:layout_toLeftOf="@+id/tv_clear"/>
@@ -53,221 +54,6 @@
             android:textSize="20sp"
             android:visibility="gone" />
     </RelativeLayout>
-
-    <!--<HorizontalScrollView
-        android:layout_width="match_parent"
-        android:layout_height="38dp"
-        android:layout_gravity="center_vertical"
-        android:background="@android:color/black">
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <ImageButton
-                android:id="@+id/action_undo"
-                android:layout_width="48dp"
-                android:layout_height="40dp"
-                android:background="@null"
-                android:contentDescription="@null"
-                android:src="@drawable/undo" />
-
-            <ImageButton
-                android:id="@+id/action_redo"
-                android:layout_width="48dp"
-                android:layout_height="40dp"
-                android:background="@null"
-                android:contentDescription="@null"
-                android:src="@drawable/redo" />
-
-            <ImageButton
-                android:id="@+id/action_bold"
-                android:layout_width="48dp"
-                android:layout_height="40dp"
-                android:background="@null"
-                android:contentDescription="@null"
-                android:src="@drawable/bold" />
-
-            <ImageButton
-                android:id="@+id/action_italic"
-                android:layout_width="48dp"
-                android:layout_height="40dp"
-                android:background="@null"
-                android:contentDescription="@null"
-                android:src="@drawable/italic" />
-
-            <ImageButton
-                android:id="@+id/action_subscript"
-                android:layout_width="48dp"
-                android:layout_height="40dp"
-                android:background="@null"
-                android:contentDescription="@null"
-                android:src="@drawable/subscript" />
-
-            <ImageButton
-                android:id="@+id/action_superscript"
-                android:layout_width="48dp"
-                android:layout_height="40dp"
-                android:background="@null"
-                android:contentDescription="@null"
-                android:src="@drawable/superscript" />
-
-            <ImageButton
-                android:id="@+id/action_strikethrough"
-                android:layout_width="48dp"
-                android:layout_height="40dp"
-                android:background="@null"
-                android:contentDescription="@null"
-                android:src="@drawable/strikethrough" />
-
-            <ImageButton
-                android:id="@+id/action_underline"
-                android:layout_width="48dp"
-                android:layout_height="40dp"
-                android:background="@null"
-                android:contentDescription="@null"
-                android:src="@drawable/underline" />
-
-            <ImageButton
-                android:id="@+id/action_heading1"
-                android:layout_width="48dp"
-                android:layout_height="40dp"
-                android:background="@null"
-                android:contentDescription="@null"
-                android:src="@drawable/h1" />
-
-            <ImageButton
-                android:id="@+id/action_heading2"
-                android:layout_width="48dp"
-                android:layout_height="40dp"
-                android:background="@null"
-                android:contentDescription="@null"
-                android:src="@drawable/h2" />
-
-            <ImageButton
-                android:id="@+id/action_heading3"
-                android:layout_width="48dp"
-                android:layout_height="40dp"
-                android:background="@null"
-                android:contentDescription="@null"
-                android:src="@drawable/h3" />
-
-            <ImageButton
-                android:id="@+id/action_heading4"
-                android:layout_width="48dp"
-                android:layout_height="40dp"
-                android:background="@null"
-                android:contentDescription="@null"
-                android:src="@drawable/h4" />
-
-            <ImageButton
-                android:id="@+id/action_heading5"
-                android:layout_width="48dp"
-                android:layout_height="40dp"
-                android:background="@null"
-                android:contentDescription="@null"
-                android:src="@drawable/h5" />
-
-            <ImageButton
-                android:id="@+id/action_heading6"
-                android:layout_width="48dp"
-                android:layout_height="40dp"
-                android:background="@null"
-                android:contentDescription="@null"
-                android:src="@drawable/h6" />
-
-            &lt;!&ndash;<ImageButton
-                android:id="@+id/action_txt_color"
-                android:layout_width="48dp"
-                android:layout_height="40dp"
-                android:background="@null"
-                android:contentDescription="@null"
-                android:src="@drawable/txt_color"
-                />
-
-            <ImageButton
-                android:id="@+id/action_bg_color"
-                android:layout_width="48dp"
-                android:layout_height="40dp"
-                android:background="@null"
-                android:contentDescription="@null"
-                android:src="@drawable/bg_color"
-                />&ndash;&gt;
-
-            <ImageButton
-                android:id="@+id/action_indent"
-                android:layout_width="48dp"
-                android:layout_height="40dp"
-                android:background="@null"
-                android:contentDescription="@null"
-                android:src="@drawable/indent" />
-
-            <ImageButton
-                android:id="@+id/action_outdent"
-                android:layout_width="48dp"
-                android:layout_height="40dp"
-                android:background="@null"
-                android:contentDescription="@null"
-                android:src="@drawable/outdent" />
-
-            <ImageButton
-                android:id="@+id/action_align_left"
-                android:layout_width="48dp"
-                android:layout_height="40dp"
-                android:background="@null"
-                android:contentDescription="@null"
-                android:src="@drawable/justify_left" />
-
-            <ImageButton
-                android:id="@+id/action_align_center"
-                android:layout_width="48dp"
-                android:layout_height="40dp"
-                android:background="@null"
-                android:contentDescription="@null"
-                android:src="@drawable/justify_center" />
-
-            <ImageButton
-                android:id="@+id/action_align_right"
-                android:layout_width="48dp"
-                android:layout_height="40dp"
-                android:background="@null"
-                android:contentDescription="@null"
-                android:src="@drawable/justify_right" />
-
-            <ImageButton
-                android:id="@+id/action_insert_bullets"
-                android:layout_width="48dp"
-                android:layout_height="40dp"
-                android:background="@null"
-                android:contentDescription="@null"
-                android:src="@drawable/bullets" />
-
-            <ImageButton
-                android:id="@+id/action_insert_numbers"
-                android:layout_width="48dp"
-                android:layout_height="40dp"
-                android:background="@null"
-                android:contentDescription="@null"
-                android:src="@drawable/numbers" />
-
-            <ImageButton
-                android:id="@+id/action_insert_image"
-                android:layout_width="48dp"
-                android:layout_height="40dp"
-                android:background="@null"
-                android:contentDescription="@null"
-                android:src="@drawable/insert_image" />
-
-            <ImageButton
-                android:id="@+id/action_insert_checkbox"
-                android:layout_width="48dp"
-                android:layout_height="40dp"
-                android:background="@null"
-                android:contentDescription="@null"
-                android:src="@android:drawable/checkbox_on_background" />
-        </LinearLayout>
-    </HorizontalScrollView>-->
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -320,7 +106,7 @@
             android:gravity="center_horizontal"
             android:background="@drawable/edit_editor_bg">
             <com.jaredrummler.materialspinner.MaterialSpinner
-                android:id="@+id/spinner_artEditor_"
+                android:id="@+id/spinner_artEditor"
                 android:layout_width="90dp"
                 android:layout_height="40dp" />
         </LinearLayout>
@@ -369,9 +155,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="35dp"
+        android:layout_margin="11dp"
         android:orientation="horizontal"
-        android:padding="2dp"
-        android:layout_margin="11dp">
+        android:padding="2dp">
 
         <View
             android:layout_width="0dp"

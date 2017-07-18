@@ -3,6 +3,7 @@ package com.example.leon.article.adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -77,6 +78,12 @@ public class VideoListAdapter extends BaseAdapter {
             case "2"://审核未通过 gray
                 holder.tv_issue_status.setTextColor(Color.GRAY);
                 holder.tv_issue_status.setText(context.getString(R.string.notpass));
+                holder.tv_issue_status.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        showReason(position);
+                    }
+                });
                 break;
         }
 
@@ -89,6 +96,13 @@ public class VideoListAdapter extends BaseAdapter {
             }
         });
         return convertView;
+    }
+
+    private void showReason(int position) {
+        new AlertDialog.Builder(context).setTitle("未通过原因：")
+                .setMessage((CharSequence) items.get(position).getReason())
+                .create()
+                .show();
     }
 
     private void goArtDetailActivity(int position) {
