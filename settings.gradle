@@ -1,1 +1,2 @@
-include ':app', ':FFmpegAndroid', ':xrichtext', ':matisse'
+include ':app', ':FFmpegAndroid', ':xrichtext', ':matisse', ':AndroidVideoCacheLibrary'
+

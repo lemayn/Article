@@ -12,6 +12,7 @@ import android.os.Environment;
 import android.support.v4.content.FileProvider;
 import android.widget.Toast;
 
+import com.danikula.videocache.HttpProxyCacheServer;
 import com.example.leon.article.sql.bean.DaoMaster;
 import com.example.leon.article.sql.bean.DaoSession;
 
@@ -25,19 +26,33 @@ public class app extends Application {
     private static DaoSession daoSession;
     private Activity top_activity;
     private List<Activity> activityList = new ArrayList<>();
+    private HttpProxyCacheServer proxy;
 
     @Override
     public void onCreate() {
         super.onCreate();
-      /*  Toast.makeText(this, "install 0", Toast.LENGTH_SHORT).show();
-        install(this);
-        Toast.makeText(this, "install 3", Toast.LENGTH_SHORT).show();*/
 
         mInstance = this;
 
         setupDataBase();
 
         initGlobeActivity();
+
+
+    }
+
+    public static HttpProxyCacheServer getProxy() {
+        return mInstance.proxy == null ? (mInstance.proxy = mInstance.newProxy()) : mInstance.proxy;
+    }
+
+    /**
+     * @return 设置最大缓存200M，最大缓存文件20个
+     */
+    private HttpProxyCacheServer newProxy() {
+        return new HttpProxyCacheServer.Builder(this)
+                .maxCacheSize(200 * 1024 * 1024)
+                .maxCacheFilesCount(20)
+                .build();
     }
 
     public static app getInstance() {

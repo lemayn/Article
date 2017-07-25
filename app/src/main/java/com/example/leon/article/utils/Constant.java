@@ -10,6 +10,11 @@ public class Constant {
         //        public static final String BASE_URL = "http://121.127.226.160/";//正式服务器
 
         /**
+         * 更新apk url
+         */
+        public static final String DOWNLOAD_URL = BASE_URL + "download/";
+
+        /**
          * 接口验证
          */
         public static final String URL_KEY = "55a50c1a06f9c1032014112cbd68f34b";

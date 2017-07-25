@@ -80,7 +80,7 @@ public class DownLoadService extends Service {
         if (retrofit == null) {
             retrofit = new Retrofit.Builder();
         }
-        retrofit.baseUrl("http://121.127.226.160/download/")
+        retrofit.baseUrl(Constant.Api.DOWNLOAD_URL)
                 .client(initOkHttpClient())
                 .build()
                 .create(IFileLoad.class)
