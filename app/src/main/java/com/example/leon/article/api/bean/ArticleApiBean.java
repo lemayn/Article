@@ -68,6 +68,16 @@ public class ArticleApiBean extends ApiBean {
         private String version_explain;
         private String version_url;
 
+        private String alipay;
+
+        public String getAlipay() {
+            return alipay;
+        }
+
+        public void setAlipay(String alipay) {
+            this.alipay = alipay;
+        }
+
         public String getVersion_code() {
             return version_code;
         }

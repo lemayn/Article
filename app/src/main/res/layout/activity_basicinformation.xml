@@ -232,6 +232,36 @@
                 android:layout_height="0.2dp"
                 android:background="#ababab"/>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/x37"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <com.example.leon.article.widget.AlignTextView
+                    android:layout_width="@dimen/x64"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="@dimen/x10"
+                    android:gravity="center"
+                    android:textSize="@dimen/x14"
+                    app:text="@string/user_alipay"/>
+
+                <EditText
+                    android:id="@+id/edit_alipay"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:hint="请输入支付宝"
+                    android:inputType="textWebEmailAddress"
+                    app:data="@{userdata.data.alipay}"/>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.2dp"
+                android:background="#ababab"/>
+
             <Button
                 android:id="@+id/btn_register"
                 android:layout_width="match_parent"

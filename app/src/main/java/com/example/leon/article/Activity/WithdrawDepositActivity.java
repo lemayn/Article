@@ -11,15 +11,18 @@ import android.widget.Toast;
 import com.example.leon.article.R;
 import com.example.leon.article.api.ApiFactory;
 import com.example.leon.article.api.BaseValueValidOperator;
+import com.example.leon.article.api.bean.ArticleApiBean;
 import com.example.leon.article.api.bean.BankApiBean;
 import com.example.leon.article.base.ToolBarBaseActivity;
 import com.example.leon.article.databinding.ActivityWithdrawDepositBinding;
 import com.example.leon.article.utils.CommonUtils;
 import com.example.leon.article.utils.Constant;
+import com.example.leon.article.utils.GsonUtil;
 import com.example.leon.article.utils.PerfectClickListener;
 import com.example.leon.article.utils.SPUtil;
 
 import java.util.HashMap;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
@@ -32,6 +35,22 @@ public class WithdrawDepositActivity extends ToolBarBaseActivity<ActivityWithdra
     private BankApiBean mBankApiBean;
     private int mDefaultChoice;
     private boolean hasData;
+    /**
+     * 提现方式
+     */
+    private static final int TYPE_BANK = 0;
+    private static final int TYPE_ALIBABA = 1;
+    private static final int TYPE_TENCENT = 2;
+    /**
+     * 默认提现方式
+     */
+    private int mDefaultType = 0;
+    private String[] types;
+
+    /**
+     * 线程安全的自增，2个接口请求完成隐藏progress
+     */
+    private AtomicInteger mProgressCount = new AtomicInteger(0);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +68,27 @@ public class WithdrawDepositActivity extends ToolBarBaseActivity<ActivityWithdra
     }
 
     private void initEvent() {
+        types = new String[]{"银行卡", "支付宝", "微信"};
+        binding.tvType.setText(types[mDefaultType]);
+        showAndHideByType();
+        binding.tvType.setOnClickListener(new PerfectClickListener() {
+            @Override
+            protected void onNoDoubleClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(WithdrawDepositActivity.this);
+                builder.setIcon(android.R.drawable.ic_dialog_info);
+                builder.setSingleChoiceItems(types, mDefaultType, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        mDefaultType = which;
+                        binding.tvType.setText(types[mDefaultType]);
+                        showAndHideByType();
+                        dialog.dismiss();
+                    }
+                });
+                AlertDialog dialog = builder.create();
+                dialog.show();
+            }
+        });
         binding.tvBanks.setOnClickListener(new PerfectClickListener() {
             @Override
             protected void onNoDoubleClick(View v) {
@@ -79,7 +119,7 @@ public class WithdrawDepositActivity extends ToolBarBaseActivity<ActivityWithdra
                 withdrawDeposit();
             }
         });
-        loadUserData();
+        loadWithdrawUserData();
         getUserBankInfo();
     }
 
@@ -99,7 +139,10 @@ public class WithdrawDepositActivity extends ToolBarBaseActivity<ActivityWithdra
                 .doAfterTerminate(new Action0() {
                     @Override
                     public void call() {
-                        dismissProgressDialog();
+                        if (mProgressCount.incrementAndGet() == 2) {
+                            mProgressCount.set(0);
+                            dismissProgressDialog();
+                        }
                     }
                 })
                 .observeOn(AndroidSchedulers.mainThread())
@@ -111,6 +154,7 @@ public class WithdrawDepositActivity extends ToolBarBaseActivity<ActivityWithdra
 
                     @Override
                     public void onError(Throwable e) {
+
                     }
 
                     @Override
@@ -126,6 +170,100 @@ public class WithdrawDepositActivity extends ToolBarBaseActivity<ActivityWithdra
                         }
                     }
                 });
+    }
+
+    protected void loadWithdrawUserData() {
+        String userData = (String) SPUtil.get(Constant.Share_prf.USER_DATA, "");
+        if (!TextUtils.isEmpty(userData)) {
+            ArticleApiBean articleApiBean = GsonUtil.GsonToBean(userData, ArticleApiBean.class);
+            baseBinding.setApibean(articleApiBean);
+            binding.setUser(articleApiBean.getData());
+            if (mProgressCount.incrementAndGet() == 2) {
+                mProgressCount.set(0);
+                dismissProgressDialog();
+            }
+        } else {
+            HashMap<String, String> hashMap = new HashMap<>();
+            hashMap.put("cookie", (String) SPUtil.get(Constant.Share_prf.COOKIE, ""));
+            hashMap.put("sid", (String) SPUtil.get(Constant.Share_prf.SID, ""));
+            ApiFactory.getApi().article(Constant.Api.USER_DATA, hashMap)
+                    .lift(new BaseValueValidOperator<ArticleApiBean>())
+                    .subscribeOn(Schedulers.io())
+                    .doOnSubscribe(new Action0() {
+                        @Override
+                        public void call() {
+                            showProgressDialog();
+                        }
+                    })
+                    .doAfterTerminate(new Action0() {
+                        @Override
+                        public void call() {
+                            if (mProgressCount.incrementAndGet() == 2) {
+                                mProgressCount.set(0);
+                                dismissProgressDialog();
+                            }
+                        }
+                    })
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(new Subscriber<ArticleApiBean>() {
+                        @Override
+                        public void onCompleted() {
+
+                        }
+
+                        @Override
+                        public void onError(Throwable e) {
+                            Toast.makeText(WithdrawDepositActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+
+                        @Override
+                        public void onNext(ArticleApiBean apiBean) {
+                            baseBinding.setApibean(apiBean);
+                            binding.setUser(apiBean.getData());
+                            SPUtil.put(Constant.Share_prf.USER_DATA, GsonUtil.GsonString(apiBean));
+                        }
+                    });
+        }
+    }
+
+
+    private void showAndHideByType() {
+        switch (mDefaultType) {
+            case TYPE_BANK:
+                setBankVisible(View.VISIBLE);
+                setAlibabaVisible(View.GONE);
+                setTencentVisible(View.GONE);
+                break;
+            case TYPE_ALIBABA:
+                setBankVisible(View.GONE);
+                setAlibabaVisible(View.VISIBLE);
+                setTencentVisible(View.GONE);
+                break;
+            case TYPE_TENCENT:
+                setBankVisible(View.GONE);
+                setAlibabaVisible(View.GONE);
+                setTencentVisible(View.VISIBLE);
+                break;
+        }
+    }
+
+    private void setBankVisible(int state) {
+        binding.bank.setVisibility(state);
+        binding.bankDivide.setVisibility(state);
+        binding.accountName.setVisibility(state);
+        binding.accountDivide.setVisibility(state);
+        binding.card.setVisibility(state);
+        binding.cardDivide.setVisibility(state);
+    }
+
+    private void setTencentVisible(int state) {
+        binding.weixin.setVisibility(state);
+        binding.weixinDivide.setVisibility(state);
+    }
+
+    private void setAlibabaVisible(int state) {
+        binding.alipay.setVisibility(state);
+        binding.alipayDivide.setVisibility(state);
     }
 
     private void withdrawDeposit() {
@@ -147,11 +285,14 @@ public class WithdrawDepositActivity extends ToolBarBaseActivity<ActivityWithdra
             HashMap<String, String> hashMap = new HashMap<>();
             hashMap.put("cookie", (String) SPUtil.get(Constant.Share_prf.COOKIE, ""));
             hashMap.put("sid", (String) SPUtil.get(Constant.Share_prf.SID, ""));
-            hashMap.put("cid", mBankApiBean.getData().get(mDefaultChoice).getCid());
-            hashMap.put("account_name", mBankApiBean.getData().get(mDefaultChoice).getAccount_name());
             hashMap.put("money", money);
             hashMap.put("password", pwd);
-            ApiFactory.getApi().bank(Constant.Api.WITHDRAW_MONEY, hashMap)
+            if (mDefaultType == TYPE_BANK) {
+                hashMap.put("cid", mBankApiBean.getData().get(mDefaultChoice).getCid());
+                hashMap.put("account_name", mBankApiBean.getData().get(mDefaultChoice).getAccount_name());
+            }
+            hashMap.put("type", String.valueOf(mDefaultType));
+            ApiFactory.getApi().bank(Constant.Api.V2_WITHDRAW_MONEY, hashMap)
                     .lift(new BaseValueValidOperator<BankApiBean>())
                     .doOnSubscribe(new Action0() {
                         @Override
@@ -177,7 +318,8 @@ public class WithdrawDepositActivity extends ToolBarBaseActivity<ActivityWithdra
                             Toast.makeText(WithdrawDepositActivity.this, apiBean.getMsg(),
                                     Toast.LENGTH_SHORT).show();
                             if ("1".equals(apiBean.getCode())) {
-                                finish();
+                                binding.etWithdrawMoney.setText("");
+                                binding.etWithdrawPwd.setText("");
                             }
                         }
                     });

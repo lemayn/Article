@@ -44,6 +44,10 @@ public class Constant {
          */
         public static final String USER_INFO_EDIT = "UserInfoEdit";
         /**
+         * 修改基本资料
+         */
+        public static final String V2_USER_INFO_EDIT = "V2_UserInfoEdit";
+        /**
          * 文章上传
          */
         public static final String ART_ADD = "ArtAdd";
@@ -72,6 +76,10 @@ public class Constant {
          */
         public static final String WITHDRAW_MONEY = "WithdrawMoney";
         /**
+         * 提现V2
+         */
+        public static final String V2_WITHDRAW_MONEY = "V2_WithdrawMoney";
+        /**
          * 修改提现密码
          */
         public static final String EDIT_MONEY_PASSWORD = "EditMoneyPassword";
@@ -96,7 +104,7 @@ public class Constant {
         public static final String MONEY_CONFIG = "MoneyConfig";
 
         /**
-         * 我的账单接口
+         * 我的账单接口V2
          */
         public static final String V2_MONEY_CONFIG = "V2_MoneyConfig";
 

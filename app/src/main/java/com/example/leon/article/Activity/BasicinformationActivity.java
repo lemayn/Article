@@ -62,7 +62,8 @@ public class BasicinformationActivity extends ToolBarBaseActivity<ActivityBasici
             protected void onNoDoubleClick(View v) {
                 boolean shouldEdit = TextUtils.isEmpty(userData.getData().getNickname()) ||
                         TextUtils.isEmpty(userData.getData().getWeixin()) ||
-                        TextUtils.isEmpty(userData.getData().getEmail());
+                        TextUtils.isEmpty(userData.getData().getEmail()) ||
+                        TextUtils.isEmpty(userData.getData().getAlipay());
                 if (shouldEdit) {
                     editUserData();
                 } else {
@@ -150,6 +151,7 @@ public class BasicinformationActivity extends ToolBarBaseActivity<ActivityBasici
         final String nickName = binding.editUseraccount.getText().toString().trim();
         String weiXin = binding.editWeixin.getText().toString().trim();
         String email = binding.editEmail.getText().toString().trim();
+        String alipay = binding.editAlipay.getText().toString().trim();
 
         if (TextUtils.isEmpty(nickName)) {
             binding.editUseraccount.setError("昵称不能为空");
@@ -163,6 +165,9 @@ public class BasicinformationActivity extends ToolBarBaseActivity<ActivityBasici
             binding.editEmail.setError("邮箱不能为空");
             return;
         }
+        if (TextUtils.isEmpty(alipay)) {
+            binding.editAlipay.setError("支付宝不能为空");
+        }
 
         HashMap<String, String> hashMap = new HashMap<>();
         hashMap.put("cookie", (String) SPUtil.get(Constant.Share_prf.COOKIE, ""));
@@ -170,7 +175,8 @@ public class BasicinformationActivity extends ToolBarBaseActivity<ActivityBasici
         hashMap.put("nickname", nickName);
         hashMap.put("weixin", weiXin);
         hashMap.put("email", email);
-        ApiFactory.getApi().article(Constant.Api.USER_INFO_EDIT, hashMap)
+        hashMap.put("alipay", alipay);
+        ApiFactory.getApi().article(Constant.Api.V2_USER_INFO_EDIT, hashMap)
                 .lift(new BaseValueValidOperator<ArticleApiBean>())
                 .subscribeOn(Schedulers.io())
                 .doOnSubscribe(new Action0() {
@@ -194,11 +200,49 @@ public class BasicinformationActivity extends ToolBarBaseActivity<ActivityBasici
 
                     @Override
                     public void onNext(ArticleApiBean apiBean) {
+                        loadBasicUserData();
+                    }
+                });
+    }
+
+    protected void loadBasicUserData() {
+        HashMap<String, String> hashMap = new HashMap<>();
+        hashMap.put("cookie", (String) SPUtil.get(Constant.Share_prf.COOKIE, ""));
+        hashMap.put("sid", (String) SPUtil.get(Constant.Share_prf.SID, ""));
+        ApiFactory.getApi().article(Constant.Api.USER_DATA, hashMap)
+                .lift(new BaseValueValidOperator<ArticleApiBean>())
+                .subscribeOn(Schedulers.io())
+                .doOnSubscribe(new Action0() {
+                    @Override
+                    public void call() {
+                        showProgressDialog();
+                    }
+                })
+                .doAfterTerminate(new Action0() {
+                    @Override
+                    public void call() {
                         dismissProgressDialog();
+                    }
+                })
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<ArticleApiBean>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                    }
+
+                    @Override
+                    public void onNext(ArticleApiBean apiBean) {
+                        baseBinding.setApibean(apiBean);
+                        binding.setUserdata(apiBean);
+                        SPUtil.put(Constant.Share_prf.USER_DATA, GsonUtil.GsonString(apiBean));
                         Toast.makeText(BasicinformationActivity.this, "修改成功", Toast.LENGTH_SHORT).show();
                     }
                 });
-
     }
 
 }

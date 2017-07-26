@@ -6,9 +6,17 @@
 
         <import type="com.example.leon.article.api.bean.BankApiBean.DataBean"/>
 
+        <import
+            alias="User"
+            type="com.example.leon.article.api.bean.ArticleApiBean.DataBean"/>
+
         <variable
             name="bean"
             type="DataBean"/>
+
+        <variable
+            name="user"
+            type="User"/>
 
     </data>
 
@@ -20,6 +28,47 @@
         android:padding="@dimen/x5">
 
         <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x37"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="@dimen/x64"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="提现方式"
+                android:textSize="@dimen/x14"/>
+
+            <TextView
+                android:id="@+id/tv_type"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/x37"
+                android:layout_marginLeft="@dimen/x14"
+                android:layout_weight="1"
+                android:background="@null"
+                android:clickable="true"
+                android:gravity="center_vertical"
+                android:textColor="@color/red"
+                android:textSize="@dimen/x14"/>
+
+            <ImageView
+                android:layout_width="@dimen/x25"
+                android:layout_height="@dimen/x25"
+                android:layout_alignParentRight="true"
+                android:scaleType="centerInside"
+                android:src="@drawable/icon_goto"/>
+
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.2dp"
+            android:background="#ababab"/>
+
+        <LinearLayout
+            android:id="@+id/bank"
             android:layout_width="match_parent"
             android:layout_height="@dimen/x37"
             android:gravity="center_vertical"
@@ -56,11 +105,13 @@
         </LinearLayout>
 
         <View
+            android:id="@+id/bank_divide"
             android:layout_width="match_parent"
             android:layout_height="0.2dp"
             android:background="#ababab"/>
 
         <LinearLayout
+            android:id="@+id/account_name"
             android:layout_width="match_parent"
             android:layout_height="@dimen/x37"
             android:gravity="center_vertical"
@@ -88,11 +139,13 @@
         </LinearLayout>
 
         <View
+            android:id="@+id/account_divide"
             android:layout_width="match_parent"
             android:layout_height="0.2dp"
             android:background="#ababab"/>
 
         <LinearLayout
+            android:id="@+id/card"
             android:layout_width="match_parent"
             android:layout_height="@dimen/x37"
             android:gravity="center_vertical"
@@ -114,10 +167,72 @@
                 android:textSize="@dimen/x14"
                 app:bankcard="@{bean.card}"/>
 
+        </LinearLayout>
+
+        <View
+            android:id="@+id/card_divide"
+            android:layout_width="match_parent"
+            android:layout_height="0.2dp"
+            android:background="#ababab"/>
+
+        <LinearLayout
+            android:id="@+id/alipay"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x37"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="@dimen/x64"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="支 付 宝"
+                android:textSize="@dimen/x14"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/x37"
+                android:layout_marginLeft="@dimen/x14"
+                android:background="@null"
+                android:gravity="center_vertical"
+                android:text="@{user.alipay}"
+                android:textSize="@dimen/x14"/>
 
         </LinearLayout>
 
         <View
+            android:id="@+id/alipay_divide"
+            android:layout_width="match_parent"
+            android:layout_height="0.2dp"
+            android:background="#ababab"/>
+
+        <LinearLayout
+            android:id="@+id/weixin"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x37"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="@dimen/x64"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="微      信"
+                android:textSize="@dimen/x14"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/x37"
+                android:layout_marginLeft="@dimen/x14"
+                android:background="@null"
+                android:gravity="center_vertical"
+                android:text="@{user.weixin}"
+                android:textSize="@dimen/x14"/>
+
+        </LinearLayout>
+
+        <View
+            android:id="@+id/weixin_divide"
             android:layout_width="match_parent"
             android:layout_height="0.2dp"
             android:background="#ababab"/>

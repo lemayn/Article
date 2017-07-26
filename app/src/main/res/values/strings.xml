@@ -39,6 +39,7 @@
     <string name="user_qq">我的QQ</string>
     <string name="user_weixin">我的微信</string>
     <string name="secure_mailbox">安全邮箱</string>
+    <string name="user_alipay">我的支付宝</string>
     <string name="myarticle">我的文章</string>
     <string name="cue_words">请输入您的银行卡号</string>
     <string name="nav_ui">首页</string>

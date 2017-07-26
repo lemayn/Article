@@ -18,6 +18,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.drawable.GlideDrawable;
+import com.bumptech.glide.request.animation.GlideAnimation;
+import com.bumptech.glide.request.target.SimpleTarget;
 import com.example.leon.article.Activity.CustomerServiceActivity;
 import com.example.leon.article.R;
 import com.example.leon.article.api.bean.StatementBean;
@@ -26,8 +29,7 @@ import com.example.leon.article.widget.RadiusBackgroundSpan;
 
 public class DataBindingUtil {
 
-//    private static final String BASE_IMAGE_URL = "http://118.89.233.35:8989";
-    private static final String BASE_IMAGE_URL = "http://121.127.226.160";
+    private static final String BASE_IMAGE_URL = Constant.Api.BASE_URL;
 
     @BindingAdapter("android:src")
     public static void setImageSrc(ImageView imageView, int res) {
@@ -49,15 +51,22 @@ public class DataBindingUtil {
     }
 
     @BindingAdapter("image")
-    public static void imageLoader(ImageView imageView, String imageUrls) {
+    public static void imageLoader(final ImageView imageView, String imageUrls) {
         if (TextUtils.isEmpty(imageUrls)) {
             return;
         }
         Glide.with(imageView.getContext()).load(BASE_IMAGE_URL + imageUrls)
                 .crossFade()
-                //                .placeholder(R.drawable.timg)  不添加占位图，CircleImageView有问题，添加后第一次加载只显示占位图
+                .placeholder(R.drawable.timg) //不添加占位图，CircleImageView有问题，添加后第一次加载只显示占位图
                 .error(R.drawable.timg)
-                .into(imageView);
+                .into(new SimpleTarget<GlideDrawable>() {
+                    @Override
+                    public void onResourceReady(GlideDrawable resource,
+                                                GlideAnimation<? super GlideDrawable> glideAnimation) {
+                        //解决CircleImageView闪烁
+                        imageView.setImageDrawable(resource);
+                    }
+                });
     }
 
     @BindingAdapter("data")
