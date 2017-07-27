@@ -301,6 +301,18 @@ public class WithdrawDepositActivity extends ToolBarBaseActivity<ActivityWithdra
                         }
                     })
                     .subscribeOn(Schedulers.io())
+                    .doOnSubscribe(new Action0() {
+                        @Override
+                        public void call() {
+                            showProgressDialog();
+                        }
+                    })
+                    .doAfterTerminate(new Action0() {
+                        @Override
+                        public void call() {
+                            dismissProgressDialog();
+                        }
+                    })
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(new Subscriber<BankApiBean>() {
                         @Override
@@ -318,8 +330,7 @@ public class WithdrawDepositActivity extends ToolBarBaseActivity<ActivityWithdra
                             Toast.makeText(WithdrawDepositActivity.this, apiBean.getMsg(),
                                     Toast.LENGTH_SHORT).show();
                             if ("1".equals(apiBean.getCode())) {
-                                binding.etWithdrawMoney.setText("");
-                                binding.etWithdrawPwd.setText("");
+                                finish();
                             }
                         }
                     });

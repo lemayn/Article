@@ -34,6 +34,8 @@ import rx.schedulers.Schedulers;
 
 public class BasicinformationActivity extends ToolBarBaseActivity<ActivityBasicinformationBinding> {
 
+    private ArticleApiBean userData;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,7 +56,7 @@ public class BasicinformationActivity extends ToolBarBaseActivity<ActivityBasici
         loadUserData();
 
         String response = (String) SPUtil.get(Constant.Share_prf.USER_DATA, "");
-        final ArticleApiBean userData = GsonUtil.GsonToBean(response, ArticleApiBean.class);
+        userData = GsonUtil.GsonToBean(response, ArticleApiBean.class);
         binding.setUserdata(userData);
 
         binding.btnRegister.setOnClickListener(new PerfectClickListener() {
@@ -239,6 +241,7 @@ public class BasicinformationActivity extends ToolBarBaseActivity<ActivityBasici
                     public void onNext(ArticleApiBean apiBean) {
                         baseBinding.setApibean(apiBean);
                         binding.setUserdata(apiBean);
+                        userData = apiBean;
                         SPUtil.put(Constant.Share_prf.USER_DATA, GsonUtil.GsonString(apiBean));
                         Toast.makeText(BasicinformationActivity.this, "修改成功", Toast.LENGTH_SHORT).show();
                     }
