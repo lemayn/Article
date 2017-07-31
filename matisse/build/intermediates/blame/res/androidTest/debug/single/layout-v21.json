@@ -1,34 +1,18 @@
 [
     {
-        "merged": "D:\\AndroidWorkApp\\Article\\matisse\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout-v21\\notification_action_tombstone.xml",
-        "source": "D:\\AndroidWorkApp\\Article\\matisse\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.3.1\\res\\layout-v21\\notification_action_tombstone.xml"
+        "merged": "D:\\AndroidWorkApp\\Article_WCXW\\matisse\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout-v21\\notification_template_custom_big.xml",
+        "source": "D:\\AndroidWorkApp\\Article_WCXW\\matisse\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.3.1\\res\\layout-v21\\notification_template_custom_big.xml"
     },
     {
-        "merged": "E:\\WorkApp\\Arts\\Article\\matisse\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout-v21\\notification_template_icon_group.xml",
-        "source": "E:\\WorkApp\\Arts\\Article\\matisse\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.3.1\\res\\layout-v21\\notification_template_icon_group.xml"
+        "merged": "D:\\AndroidWorkApp\\Article_WCXW\\matisse\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout-v21\\notification_template_icon_group.xml",
+        "source": "D:\\AndroidWorkApp\\Article_WCXW\\matisse\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.3.1\\res\\layout-v21\\notification_template_icon_group.xml"
     },
     {
-        "merged": "D:\\AndroidWorkApp\\Article\\matisse\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout-v21\\notification_action.xml",
-        "source": "D:\\AndroidWorkApp\\Article\\matisse\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.3.1\\res\\layout-v21\\notification_action.xml"
+        "merged": "D:\\AndroidWorkApp\\Article_WCXW\\matisse\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout-v21\\notification_action_tombstone.xml",
+        "source": "D:\\AndroidWorkApp\\Article_WCXW\\matisse\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.3.1\\res\\layout-v21\\notification_action_tombstone.xml"
     },
     {
-        "merged": "E:\\WorkApp\\Arts\\Article\\matisse\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout-v21\\notification_template_custom_big.xml",
-        "source": "E:\\WorkApp\\Arts\\Article\\matisse\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.3.1\\res\\layout-v21\\notification_template_custom_big.xml"
-    },
-    {
-        "merged": "D:\\AndroidWorkApp\\Article\\matisse\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout-v21\\notification_template_custom_big.xml",
-        "source": "D:\\AndroidWorkApp\\Article\\matisse\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.3.1\\res\\layout-v21\\notification_template_custom_big.xml"
-    },
-    {
-        "merged": "E:\\WorkApp\\Arts\\Article\\matisse\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout-v21\\notification_action_tombstone.xml",
-        "source": "E:\\WorkApp\\Arts\\Article\\matisse\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.3.1\\res\\layout-v21\\notification_action_tombstone.xml"
-    },
-    {
-        "merged": "D:\\AndroidWorkApp\\Article\\matisse\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout-v21\\notification_template_icon_group.xml",
-        "source": "D:\\AndroidWorkApp\\Article\\matisse\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.3.1\\res\\layout-v21\\notification_template_icon_group.xml"
-    },
-    {
-        "merged": "E:\\WorkApp\\Arts\\Article\\matisse\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout-v21\\notification_action.xml",
-        "source": "E:\\WorkApp\\Arts\\Article\\matisse\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.3.1\\res\\layout-v21\\notification_action.xml"
+        "merged": "D:\\AndroidWorkApp\\Article_WCXW\\matisse\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout-v21\\notification_action.xml",
+        "source": "D:\\AndroidWorkApp\\Article_WCXW\\matisse\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.3.1\\res\\layout-v21\\notification_action.xml"
     }
 ]

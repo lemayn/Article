@@ -22,6 +22,21 @@
 
     <uses-permission-sdk-23 android:name="android.permission.CAMERA" />
 
+
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="true" />
+    <uses-feature
+        android:name="android.hardware.camera.autofocus"
+        android:required="false" />
+    <uses-feature
+        android:glEsVersion="0x00020000"
+        android:required="true" />
+
     <application
         android:name=".app"
         android:allowBackup="true"
@@ -107,6 +122,33 @@
         <activity android:name=".Activity.art.ArtEditorActivity03"
             android:windowSoftInputMode="adjustPan">
         </activity>
+
+        <!--录制界面-->
+        <activity
+            android:name=".Activity.record.camer.MediaRecorderActivity"
+            android:hardwareAccelerated="true"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/CameraTheme">
+        </activity>
+
+        <!--预览，准备界面-->
+        <activity
+            android:name=".Activity.record.camer.MediaPreviewActivity"
+            android:hardwareAccelerated="true"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/CameraTheme">
+        </activity>
+
+        <!--播放界面-->
+        <activity
+            android:name=".Activity.record.camer.VideoPlayerActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/CameraTheme">
+        </activity>
+        <!--读取Assets资源服务-->
+        <service android:name=".Activity.record.camer.service.AssertService" />
 
         <!--ArtEditorActivity imagePicker-->
         <activity

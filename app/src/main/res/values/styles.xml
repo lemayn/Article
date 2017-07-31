@@ -30,7 +30,7 @@
         <item name="android:gravity">center_vertical</item>
     </style>
 
-<!--dialog -->
+    <!--dialog -->
     <style name="loading_dialog" parent="android:style/Theme.Dialog">
         <item name="android:windowFrame">@null</item>
         <item name="android:windowNoTitle">true</item>
@@ -49,6 +49,18 @@
     <style name="Bottom_bar_icon">
         <item name="android:layout_centerHorizontal">true</item>
         <item name="android:scaleType">centerCrop</item>
+    </style>
+
+    <!-- activity style -->
+    <style name="ActivityAnimHorizontalSlide" parent="@android:style/Animation.Activity">
+        <item name="android:activityOpenEnterAnimation">@anim/slide_in_from_right</item>
+        <item name="android:activityOpenExitAnimation">@anim/slide_out_to_left</item>
+        <item name="android:activityCloseExitAnimation">@anim/slide_out_to_right</item>
+        <item name="android:activityCloseEnterAnimation">@anim/slide_in_from_left</item>
+    </style>
+
+    <style name="common_theme" parent="AppTheme">
+        <item name="android:windowAnimationStyle">@style/ActivityAnimHorizontalSlide</item>
     </style>
 
 </resources>

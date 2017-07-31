@@ -8,10 +8,11 @@ android {
     defaultConfig {
         applicationId "com.dasheng.article"
         minSdkVersion 16
-        targetSdkVersion 25
+        targetSdkVersion 22
         versionCode 1
         versionName "1.0.1"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
     }
 
     //dataBinding
@@ -39,6 +40,26 @@ android {
         assets.srcDirs = ['assets']
         jniLibs.srcDirs = ['libs']//指定jniLibs文件夹路径
         jni.srcDirs = []//不编译jni
+    }
+
+    defaultConfig {
+        ndk {
+            abiFilters "armeabi-v7a"
+        }
+    }
+
+    afterEvaluate {
+        tasks.matching {
+            it.name.startsWith('dex')
+        }.each { dx ->
+            if (dx.additionalParameters == null) {
+                dx.additionalParameters = []
+            }
+            dx.additionalParameters += '--multi-dex' // enable multidex
+
+            // optional
+            // dx.additionalParameters += "--main-dex-list=$projectDir/<filename>".toString() // enable the main-dex-list
+        }
     }
 
     buildTypes {
@@ -119,5 +140,6 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile project(':xrichtext')
     compile project(':matisse')
+    compile project(':library-VitamioRecorder')
     compile project(':AndroidVideoCacheLibrary')
 }

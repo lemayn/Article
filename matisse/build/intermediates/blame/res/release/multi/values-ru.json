@@ -1,6 +1,6 @@
 [
     {
-        "outputFile": "E:\\WorkApp\\Arts\\Article\\matisse\\build\\intermediates\\incremental\\mergeReleaseResources\\merged.dir\\values-ru\\values-ru.xml",
+        "outputFile": "D:\\AndroidWorkApp\\Article_WCXW\\matisse\\build\\intermediates\\incremental\\mergeReleaseResources\\merged.dir\\values-ru\\values-ru.xml",
         "map": [
             {
                 "to": {
@@ -12,14 +12,14 @@
                     "endOffset": 389
                 },
                 "from": {
-                    "file": "E:\\WorkApp\\Arts\\Article\\matisse\\src\\main\\res\\values-ru\\strings.xml",
+                    "file": "D:\\AndroidWorkApp\\Article_WCXW\\matisse\\src\\main\\res\\values-ru\\strings.xml",
                     "position": {
                         "startLine": 28,
                         "startColumn": 4,
-                        "startOffset": 1135,
+                        "startOffset": 1163,
                         "endLine": 33,
                         "endColumn": 14,
-                        "endOffset": 1469
+                        "endOffset": 1502
                     }
                 }
             },
@@ -32,7 +32,7 @@
                     "endOffset": 504
                 },
                 "from": {
-                    "file": "E:\\WorkApp\\Arts\\Article\\matisse\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.3.1\\res\\values-ru\\values-ru.xml",
+                    "file": "D:\\AndroidWorkApp\\Article_WCXW\\matisse\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.3.1\\res\\values-ru\\values-ru.xml",
                     "position": {
                         "startLine": 2,
                         "startColumn": 4,
@@ -51,7 +51,7 @@
                     "endOffset": 612
                 },
                 "from": {
-                    "file": "E:\\WorkApp\\Arts\\Article\\matisse\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.3.1\\res\\values-ru\\values-ru.xml",
+                    "file": "D:\\AndroidWorkApp\\Article_WCXW\\matisse\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.3.1\\res\\values-ru\\values-ru.xml",
                     "position": {
                         "startLine": 3,
                         "startColumn": 4,
@@ -70,7 +70,7 @@
                     "endOffset": 735
                 },
                 "from": {
-                    "file": "E:\\WorkApp\\Arts\\Article\\matisse\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.3.1\\res\\values-ru\\values-ru.xml",
+                    "file": "D:\\AndroidWorkApp\\Article_WCXW\\matisse\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.3.1\\res\\values-ru\\values-ru.xml",
                     "position": {
                         "startLine": 4,
                         "startColumn": 4,
@@ -89,7 +89,7 @@
                     "endOffset": 837
                 },
                 "from": {
-                    "file": "E:\\WorkApp\\Arts\\Article\\matisse\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.3.1\\res\\values-ru\\values-ru.xml",
+                    "file": "D:\\AndroidWorkApp\\Article_WCXW\\matisse\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.3.1\\res\\values-ru\\values-ru.xml",
                     "position": {
                         "startLine": 5,
                         "startColumn": 4,
@@ -108,7 +108,7 @@
                     "endOffset": 949
                 },
                 "from": {
-                    "file": "E:\\WorkApp\\Arts\\Article\\matisse\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.3.1\\res\\values-ru\\values-ru.xml",
+                    "file": "D:\\AndroidWorkApp\\Article_WCXW\\matisse\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.3.1\\res\\values-ru\\values-ru.xml",
                     "position": {
                         "startLine": 6,
                         "startColumn": 4,
@@ -127,7 +127,7 @@
                     "endOffset": 1035
                 },
                 "from": {
-                    "file": "E:\\WorkApp\\Arts\\Article\\matisse\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.3.1\\res\\values-ru\\values-ru.xml",
+                    "file": "D:\\AndroidWorkApp\\Article_WCXW\\matisse\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.3.1\\res\\values-ru\\values-ru.xml",
                     "position": {
                         "startLine": 7,
                         "startColumn": 4,
@@ -146,7 +146,7 @@
                     "endOffset": 1140
                 },
                 "from": {
-                    "file": "E:\\WorkApp\\Arts\\Article\\matisse\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.3.1\\res\\values-ru\\values-ru.xml",
+                    "file": "D:\\AndroidWorkApp\\Article_WCXW\\matisse\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.3.1\\res\\values-ru\\values-ru.xml",
                     "position": {
                         "startLine": 8,
                         "startColumn": 4,
@@ -165,7 +165,7 @@
                     "endOffset": 1260
                 },
                 "from": {
-                    "file": "E:\\WorkApp\\Arts\\Article\\matisse\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.3.1\\res\\values-ru\\values-ru.xml",
+                    "file": "D:\\AndroidWorkApp\\Article_WCXW\\matisse\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.3.1\\res\\values-ru\\values-ru.xml",
                     "position": {
                         "startLine": 9,
                         "startColumn": 4,
@@ -184,7 +184,7 @@
                     "endOffset": 1339
                 },
                 "from": {
-                    "file": "E:\\WorkApp\\Arts\\Article\\matisse\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.3.1\\res\\values-ru\\values-ru.xml",
+                    "file": "D:\\AndroidWorkApp\\Article_WCXW\\matisse\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.3.1\\res\\values-ru\\values-ru.xml",
                     "position": {
                         "startLine": 10,
                         "startColumn": 4,
@@ -203,7 +203,7 @@
                     "endOffset": 1417
                 },
                 "from": {
-                    "file": "E:\\WorkApp\\Arts\\Article\\matisse\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.3.1\\res\\values-ru\\values-ru.xml",
+                    "file": "D:\\AndroidWorkApp\\Article_WCXW\\matisse\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.3.1\\res\\values-ru\\values-ru.xml",
                     "position": {
                         "startLine": 11,
                         "startColumn": 4,
@@ -222,7 +222,7 @@
                     "endOffset": 1497
                 },
                 "from": {
-                    "file": "E:\\WorkApp\\Arts\\Article\\matisse\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.3.1\\res\\values-ru\\values-ru.xml",
+                    "file": "D:\\AndroidWorkApp\\Article_WCXW\\matisse\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.3.1\\res\\values-ru\\values-ru.xml",
                     "position": {
                         "startLine": 12,
                         "startColumn": 4,
@@ -241,7 +241,7 @@
                     "endOffset": 1603
                 },
                 "from": {
-                    "file": "E:\\WorkApp\\Arts\\Article\\matisse\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.3.1\\res\\values-ru\\values-ru.xml",
+                    "file": "D:\\AndroidWorkApp\\Article_WCXW\\matisse\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.3.1\\res\\values-ru\\values-ru.xml",
                     "position": {
                         "startLine": 13,
                         "startColumn": 4,
@@ -260,7 +260,7 @@
                     "endOffset": 1711
                 },
                 "from": {
-                    "file": "E:\\WorkApp\\Arts\\Article\\matisse\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.3.1\\res\\values-ru\\values-ru.xml",
+                    "file": "D:\\AndroidWorkApp\\Article_WCXW\\matisse\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.3.1\\res\\values-ru\\values-ru.xml",
                     "position": {
                         "startLine": 14,
                         "startColumn": 4,
@@ -279,7 +279,7 @@
                     "endOffset": 1809
                 },
                 "from": {
-                    "file": "E:\\WorkApp\\Arts\\Article\\matisse\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.3.1\\res\\values-ru\\values-ru.xml",
+                    "file": "D:\\AndroidWorkApp\\Article_WCXW\\matisse\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.3.1\\res\\values-ru\\values-ru.xml",
                     "position": {
                         "startLine": 15,
                         "startColumn": 4,
@@ -298,7 +298,7 @@
                     "endOffset": 1918
                 },
                 "from": {
-                    "file": "E:\\WorkApp\\Arts\\Article\\matisse\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.3.1\\res\\values-ru\\values-ru.xml",
+                    "file": "D:\\AndroidWorkApp\\Article_WCXW\\matisse\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.3.1\\res\\values-ru\\values-ru.xml",
                     "position": {
                         "startLine": 16,
                         "startColumn": 4,
@@ -317,7 +317,7 @@
                     "endOffset": 2024
                 },
                 "from": {
-                    "file": "E:\\WorkApp\\Arts\\Article\\matisse\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.3.1\\res\\values-ru\\values-ru.xml",
+                    "file": "D:\\AndroidWorkApp\\Article_WCXW\\matisse\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.3.1\\res\\values-ru\\values-ru.xml",
                     "position": {
                         "startLine": 17,
                         "startColumn": 4,
@@ -336,7 +336,7 @@
                     "endOffset": 2132
                 },
                 "from": {
-                    "file": "E:\\WorkApp\\Arts\\Article\\matisse\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.3.1\\res\\values-ru\\values-ru.xml",
+                    "file": "D:\\AndroidWorkApp\\Article_WCXW\\matisse\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.3.1\\res\\values-ru\\values-ru.xml",
                     "position": {
                         "startLine": 18,
                         "startColumn": 4,
@@ -355,7 +355,7 @@
                     "endOffset": 2268
                 },
                 "from": {
-                    "file": "E:\\WorkApp\\Arts\\Article\\matisse\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.3.1\\res\\values-ru\\values-ru.xml",
+                    "file": "D:\\AndroidWorkApp\\Article_WCXW\\matisse\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.3.1\\res\\values-ru\\values-ru.xml",
                     "position": {
                         "startLine": 19,
                         "startColumn": 4,
@@ -374,7 +374,7 @@
                     "endOffset": 2368
                 },
                 "from": {
-                    "file": "E:\\WorkApp\\Arts\\Article\\matisse\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.3.1\\res\\values-ru\\values-ru.xml",
+                    "file": "D:\\AndroidWorkApp\\Article_WCXW\\matisse\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.3.1\\res\\values-ru\\values-ru.xml",
                     "position": {
                         "startLine": 20,
                         "startColumn": 4,
@@ -393,13 +393,13 @@
                     "endOffset": 2415
                 },
                 "from": {
-                    "file": "E:\\WorkApp\\Arts\\Article\\matisse\\src\\main\\res\\values-ru\\strings.xml",
+                    "file": "D:\\AndroidWorkApp\\Article_WCXW\\matisse\\src\\main\\res\\values-ru\\strings.xml",
                     "position": {
                         "startLine": 17,
                         "startColumn": 4,
-                        "startOffset": 633,
+                        "startOffset": 650,
                         "endColumn": 46,
-                        "endOffset": 675
+                        "endOffset": 692
                     }
                 }
             },
@@ -412,13 +412,13 @@
                     "endOffset": 2472
                 },
                 "from": {
-                    "file": "E:\\WorkApp\\Arts\\Article\\matisse\\src\\main\\res\\values-ru\\strings.xml",
+                    "file": "D:\\AndroidWorkApp\\Article_WCXW\\matisse\\src\\main\\res\\values-ru\\strings.xml",
                     "position": {
                         "startLine": 21,
                         "startColumn": 4,
-                        "startOffset": 796,
+                        "startOffset": 817,
                         "endColumn": 56,
-                        "endOffset": 848
+                        "endOffset": 869
                     }
                 }
             },
@@ -431,13 +431,13 @@
                     "endOffset": 2531
                 },
                 "from": {
-                    "file": "E:\\WorkApp\\Arts\\Article\\matisse\\src\\main\\res\\values-ru\\strings.xml",
+                    "file": "D:\\AndroidWorkApp\\Article_WCXW\\matisse\\src\\main\\res\\values-ru\\strings.xml",
                     "position": {
                         "startLine": 20,
                         "startColumn": 4,
-                        "startOffset": 737,
+                        "startOffset": 757,
                         "endColumn": 58,
-                        "endOffset": 791
+                        "endOffset": 811
                     }
                 }
             },
@@ -450,13 +450,13 @@
                     "endOffset": 2577
                 },
                 "from": {
-                    "file": "E:\\WorkApp\\Arts\\Article\\matisse\\src\\main\\res\\values-ru\\strings.xml",
+                    "file": "D:\\AndroidWorkApp\\Article_WCXW\\matisse\\src\\main\\res\\values-ru\\strings.xml",
                     "position": {
                         "startLine": 22,
                         "startColumn": 4,
-                        "startOffset": 853,
+                        "startOffset": 875,
                         "endColumn": 45,
-                        "endOffset": 894
+                        "endOffset": 916
                     }
                 }
             },
@@ -469,13 +469,13 @@
                     "endOffset": 2618
                 },
                 "from": {
-                    "file": "E:\\WorkApp\\Arts\\Article\\matisse\\src\\main\\res\\values-ru\\strings.xml",
+                    "file": "D:\\AndroidWorkApp\\Article_WCXW\\matisse\\src\\main\\res\\values-ru\\strings.xml",
                     "position": {
                         "startLine": 25,
                         "startColumn": 4,
-                        "startOffset": 998,
+                        "startOffset": 1023,
                         "endColumn": 40,
-                        "endOffset": 1034
+                        "endOffset": 1059
                     }
                 }
             },
@@ -488,13 +488,13 @@
                     "endOffset": 2674
                 },
                 "from": {
-                    "file": "E:\\WorkApp\\Arts\\Article\\matisse\\src\\main\\res\\values-ru\\strings.xml",
+                    "file": "D:\\AndroidWorkApp\\Article_WCXW\\matisse\\src\\main\\res\\values-ru\\strings.xml",
                     "position": {
                         "startLine": 19,
                         "startColumn": 4,
-                        "startOffset": 681,
+                        "startOffset": 700,
                         "endColumn": 55,
-                        "endOffset": 732
+                        "endOffset": 751
                     }
                 }
             },
@@ -507,13 +507,13 @@
                     "endOffset": 2719
                 },
                 "from": {
-                    "file": "E:\\WorkApp\\Arts\\Article\\matisse\\src\\main\\res\\values-ru\\strings.xml",
+                    "file": "D:\\AndroidWorkApp\\Article_WCXW\\matisse\\src\\main\\res\\values-ru\\strings.xml",
                     "position": {
                         "startLine": 24,
                         "startColumn": 4,
-                        "startOffset": 953,
+                        "startOffset": 977,
                         "endColumn": 44,
-                        "endOffset": 993
+                        "endOffset": 1017
                     }
                 }
             },
@@ -526,13 +526,13 @@
                     "endOffset": 2790
                 },
                 "from": {
-                    "file": "E:\\WorkApp\\Arts\\Article\\matisse\\src\\main\\res\\values-ru\\strings.xml",
+                    "file": "D:\\AndroidWorkApp\\Article_WCXW\\matisse\\src\\main\\res\\values-ru\\strings.xml",
                     "position": {
                         "startLine": 36,
                         "startColumn": 4,
-                        "startOffset": 1618,
+                        "startOffset": 1654,
                         "endColumn": 70,
-                        "endOffset": 1684
+                        "endOffset": 1720
                     }
                 }
             },
@@ -545,13 +545,13 @@
                     "endOffset": 2888
                 },
                 "from": {
-                    "file": "E:\\WorkApp\\Arts\\Article\\matisse\\src\\main\\res\\values-ru\\strings.xml",
+                    "file": "D:\\AndroidWorkApp\\Article_WCXW\\matisse\\src\\main\\res\\values-ru\\strings.xml",
                     "position": {
                         "startLine": 38,
                         "startColumn": 4,
-                        "startOffset": 1789,
+                        "startOffset": 1827,
                         "endColumn": 97,
-                        "endOffset": 1882
+                        "endOffset": 1920
                     }
                 }
             },
@@ -564,13 +564,13 @@
                     "endOffset": 2983
                 },
                 "from": {
-                    "file": "E:\\WorkApp\\Arts\\Article\\matisse\\src\\main\\res\\values-ru\\strings.xml",
+                    "file": "D:\\AndroidWorkApp\\Article_WCXW\\matisse\\src\\main\\res\\values-ru\\strings.xml",
                     "position": {
                         "startLine": 27,
                         "startColumn": 4,
-                        "startOffset": 1040,
+                        "startOffset": 1067,
                         "endColumn": 94,
-                        "endOffset": 1130
+                        "endOffset": 1157
                     }
                 }
             },
@@ -583,13 +583,13 @@
                     "endOffset": 3055
                 },
                 "from": {
-                    "file": "E:\\WorkApp\\Arts\\Article\\matisse\\src\\main\\res\\values-ru\\strings.xml",
+                    "file": "D:\\AndroidWorkApp\\Article_WCXW\\matisse\\src\\main\\res\\values-ru\\strings.xml",
                     "position": {
                         "startLine": 35,
                         "startColumn": 4,
-                        "startOffset": 1546,
+                        "startOffset": 1581,
                         "endColumn": 71,
-                        "endOffset": 1613
+                        "endOffset": 1648
                     }
                 }
             },
@@ -602,13 +602,13 @@
                     "endOffset": 3155
                 },
                 "from": {
-                    "file": "E:\\WorkApp\\Arts\\Article\\matisse\\src\\main\\res\\values-ru\\strings.xml",
+                    "file": "D:\\AndroidWorkApp\\Article_WCXW\\matisse\\src\\main\\res\\values-ru\\strings.xml",
                     "position": {
                         "startLine": 37,
                         "startColumn": 4,
-                        "startOffset": 1689,
+                        "startOffset": 1726,
                         "endColumn": 99,
-                        "endOffset": 1784
+                        "endOffset": 1821
                     }
                 }
             },
@@ -621,13 +621,13 @@
                     "endOffset": 3227
                 },
                 "from": {
-                    "file": "E:\\WorkApp\\Arts\\Article\\matisse\\src\\main\\res\\values-ru\\strings.xml",
+                    "file": "D:\\AndroidWorkApp\\Article_WCXW\\matisse\\src\\main\\res\\values-ru\\strings.xml",
                     "position": {
                         "startLine": 34,
                         "startColumn": 4,
-                        "startOffset": 1474,
+                        "startOffset": 1508,
                         "endColumn": 71,
-                        "endOffset": 1541
+                        "endOffset": 1575
                     }
                 }
             },
@@ -640,13 +640,13 @@
                     "endOffset": 3281
                 },
                 "from": {
-                    "file": "E:\\WorkApp\\Arts\\Article\\matisse\\src\\main\\res\\values-ru\\strings.xml",
+                    "file": "D:\\AndroidWorkApp\\Article_WCXW\\matisse\\src\\main\\res\\values-ru\\strings.xml",
                     "position": {
                         "startLine": 23,
                         "startColumn": 4,
-                        "startOffset": 899,
+                        "startOffset": 922,
                         "endColumn": 53,
-                        "endOffset": 948
+                        "endOffset": 971
                     }
                 }
             },
@@ -659,7 +659,7 @@
                     "endOffset": 3362
                 },
                 "from": {
-                    "file": "E:\\WorkApp\\Arts\\Article\\matisse\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.3.1\\res\\values-ru\\values-ru.xml",
+                    "file": "D:\\AndroidWorkApp\\Article_WCXW\\matisse\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.3.1\\res\\values-ru\\values-ru.xml",
                     "position": {
                         "startLine": 21,
                         "startColumn": 4,
@@ -678,7 +678,7 @@
                     "endOffset": 3463
                 },
                 "from": {
-                    "file": "E:\\WorkApp\\Arts\\Article\\matisse\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.3.1\\res\\values-ru\\values-ru.xml",
+                    "file": "D:\\AndroidWorkApp\\Article_WCXW\\matisse\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.3.1\\res\\values-ru\\values-ru.xml",
                     "position": {
                         "startLine": 22,
                         "startColumn": 4,

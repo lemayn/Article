@@ -1,7 +1,6 @@
 package com.example.leon.article;
 
 import android.app.Activity;
-import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
@@ -13,6 +12,10 @@ import android.support.v4.content.FileProvider;
 import android.widget.Toast;
 
 import com.danikula.videocache.HttpProxyCacheServer;
+import com.example.leon.article.Activity.record.BaseApplication;
+import com.example.leon.article.Activity.record.camer.commonutil.utils.CrashHandler;
+import com.example.leon.article.Activity.record.camer.commonutil.utils.DeviceUtil;
+import com.example.leon.article.Activity.record.camer.utils.VCameraUtils;
 import com.example.leon.article.sql.bean.DaoMaster;
 import com.example.leon.article.sql.bean.DaoSession;
 
@@ -21,7 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class app extends Application {
+public class app extends BaseApplication {
     private static app mInstance;
     private static DaoSession daoSession;
     private Activity top_activity;
@@ -31,6 +34,9 @@ public class app extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+      /*  Toast.makeText(this, "install 0", Toast.LENGTH_SHORT).show();
+        install(this);
+        Toast.makeText(this, "install 3", Toast.LENGTH_SHORT).show();*/
 
         mInstance = this;
 
@@ -38,7 +44,12 @@ public class app extends Application {
 
         initGlobeActivity();
 
-
+        //初始化VCamera
+        VCameraUtils.initVitamioRecoder(this);
+        //初始化Android设备信息
+        DeviceUtil.init(this);
+        //初始化CrashHandler
+        CrashHandler.getInstance().init(this);
     }
 
     public static HttpProxyCacheServer getProxy() {

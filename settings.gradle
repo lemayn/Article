@@ -1,2 +1,2 @@
-include ':app', ':FFmpegAndroid', ':xrichtext', ':matisse', ':AndroidVideoCacheLibrary'
+include ':app', ':FFmpegAndroid', ':xrichtext', ':matisse', ':AndroidVideoCacheLibrary', ':library-VitamioRecorder'
 
