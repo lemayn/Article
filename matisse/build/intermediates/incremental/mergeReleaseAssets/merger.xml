@@ -1,2 +1,2 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merger version="3"><dataSet config="main"><source path="E:\WorkApp\Arts\Article\matisse\src\main\assets"/><source path="E:\WorkApp\Arts\Article\matisse\build\generated\assets\shaders\release"/></dataSet><dataSet config="release"><source path="E:\WorkApp\Arts\Article\matisse\src\release\assets"/></dataSet></merger>
+<merger version="3"><dataSet config="main"><source path="D:\AndroidWorkApp\Article\matisse\src\main\assets"/><source path="D:\AndroidWorkApp\Article\matisse\build\generated\assets\shaders\release"/></dataSet><dataSet config="release"><source path="D:\AndroidWorkApp\Article\matisse\src\release\assets"/></dataSet></merger>
