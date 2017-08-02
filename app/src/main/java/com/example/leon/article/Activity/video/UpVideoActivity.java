@@ -439,7 +439,6 @@ public class UpVideoActivity extends AppCompatActivity implements View.OnClickLi
         String c = et_videoContent.getText().toString();
         startActivity(new Intent(this, MediaRecorderActivity.class).putExtra(CommonIntentExtra.VIDEO_TITLE,t)
                 .putExtra(CommonIntentExtra.VIDEO_CONTENT,c));
-        finish();
     }
 
     @PermissionSuccess(requestCode = VIDEO_KU)

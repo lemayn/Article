@@ -652,9 +652,10 @@ public class MediaPreviewActivity extends BaseActivity implements
                     mMediaObject.mThemeObject.mMVThemeName = theme.themeName;
                     mMediaObject.mThemeObject.mMusicThemeName = theme.musicName;
                     mThemeSufaceView.reset();
+//                    mThemeSufaceView.setWatermarkPath();
                     mThemeSufaceView.setMVPath(theme.themeFolder);
                     mThemeSufaceView.setTheme(theme);
-                    mThemeSufaceView.setVideoEndPath(mAuthorBitmapPath);// 签名
+                    mThemeSufaceView.setVideoEndPath(mAuthorBitmapPath);//签名
                     mThemeSufaceView.setInputPath(mVideoTempPath);// 输入文件
                     // 添加音乐
                     mCurrentMusicPath = mCurrentTheme.musicPath;

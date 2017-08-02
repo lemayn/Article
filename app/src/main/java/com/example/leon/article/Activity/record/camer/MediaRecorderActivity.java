@@ -736,7 +736,6 @@ public class MediaRecorderActivity extends BaseActivity implements
         mRebuild = false;
 
 
-
         // finish();
         // overridePendingTransition(R.anim.push_bottom_in,
         // R.anim.push_bottom_out);
