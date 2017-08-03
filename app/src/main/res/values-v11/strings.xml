@@ -44,7 +44,7 @@
     <string name="record_preview_theme_original">原始</string>
     <string name="record_preview_theme_load_faild">主题加载失败</string>
     <string name="record_preview_encoding">正在转码…</string>
-    <string name="record_preview_encoding_format">转码中\t%d%%</string>
+    <string name="record_preview_encoding_format">准备中\t%d%%</string>
     <string name="record_preview_music_nothing">无</string>
     <string name="record_preview_tab_theme">主题</string>
     <string name="record_preview_tab_filter">滤镜</string>
