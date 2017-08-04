@@ -45,7 +45,6 @@
                 android:id="@+id/lv_sql_empty"
                 android:layout_width="150dp"
                 android:layout_height="150dp"
-                android:src="@drawable/nodate"
                 android:layout_centerInParent="true"
                 android:visibility="gone"/>
 

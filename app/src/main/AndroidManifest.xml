@@ -113,12 +113,6 @@
         <activity android:name=".Activity.video.UpUserVideoActivity" />
         <activity android:name=".Activity.video.permission.PermissionsActivity" />
         <activity android:name=".Activity.video.videorecord.CameraActivity" />
-        <activity android:name=".Activity.art.ArtEditorActivity"
-            android:windowSoftInputMode="adjustPan">
-        </activity>
-        <activity android:name=".Activity.art.ArtEditorActivity02"
-            android:windowSoftInputMode="adjustPan">
-        </activity>
         <activity android:name=".Activity.art.ArtEditorActivity03"
             android:windowSoftInputMode="adjustPan">
         </activity>
@@ -150,7 +144,7 @@
         <!--读取Assets资源服务-->
         <service android:name=".Activity.record.camer.service.AssertService" />
 
-        <!--ArtEditorActivity imagePicker-->
+       <!-- ArtEditorActivity imagePicker
         <activity
             android:name="me.iwf.photopicker.PhotoPickerActivity"
             android:screenOrientation="portrait" />
@@ -158,9 +152,9 @@
             android:name="me.iwf.photopicker.PhotoPagerActivity"
             android:screenOrientation="portrait" />
 
-        <!--ArtEditorActivity02  ImgPicker-->
-        <activity android:name="com.zzti.fengyongge.imagepicker.PhotoSelectorActivity"></activity><!--选择图片-->
-        <activity android:name="com.zzti.fengyongge.imagepicker.PhotoPreviewActivity"></activity><!--//预览图片-->
+        ArtEditorActivity02  ImgPicker
+        <activity android:name="com.zzti.fengyongge.imagepicker.PhotoSelectorActivity"></activity>选择图片
+        <activity android:name="com.zzti.fengyongge.imagepicker.PhotoPreviewActivity"></activity>//预览图片-->
 
         <!--ArtEditorActivity03  知乎FileProvider-->
         <provider

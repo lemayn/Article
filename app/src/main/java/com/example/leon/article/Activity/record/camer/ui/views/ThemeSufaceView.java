@@ -17,8 +17,8 @@ import com.example.leon.article.Activity.record.camer.preference.PreferenceUtils
 import com.example.leon.article.Activity.record.camer.ui.helper.RecorderHelper;
 import com.yixia.camera.model.MediaObject;
 import com.yixia.camera.util.FileUtils;
+import com.yixia.camera.util.StringUtils;
 import com.yixia.videoeditor.adapter.UtilityAdapter;
-import com.zzti.fengyongge.imagepicker.util.StringUtils;
 
 
 /**

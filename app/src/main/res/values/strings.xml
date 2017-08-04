@@ -41,19 +41,10 @@
     <string name="secure_mailbox">安全邮箱</string>
     <string name="user_alipay">我的支付宝</string>
     <string name="myarticle">我的文章</string>
-    <string name="cue_words">请输入您的银行卡号</string>
-    <string name="nav_ui">首页</string>
     <string name="editor_title">请输入标题</string>
-    <string name="titlenotnull">标题不能为空哦</string>
-    <string name="lv_article_empty">快去发表您的文章吧</string>
     <string name="upload_content">上传内容</string>
-    <string name="status">审核状态</string>
     <string name="notes">注意事项：</string>
-    <string name="create_newArt">新建</string>
     <string name="article_detail">文章详情</string>
-    <string name="depositBank">开户银行</string>
-    <string name="save">保存</string>
-    <string name="issue">发送</string>
     <string name="addImg">添加图片</string>
     <string name="newslist">新闻列表</string>
     <string name="send">发送</string>
@@ -63,7 +54,6 @@
     <string name="withdraw_deposit_attentions">1.每个账号每天有3次取款，单笔不少于50元，提现账号不正确的情况
         请及时联系我们的客服，提现密码默认是账号登录密码。\n2.提现时间:24小时，3-10分钟内到账，忙时不超过30分钟，
         若超过时间，请及时联系客服。\n3.偶尔提款高峰期会出现短时间的延时，但平台保证资金会一一到达客户银行账户。</string>
-    <string name="matters_needing_attention">注意事项:</string>
     <string name="matters_needing_attention1">1.一个游戏账户最多绑定两张银行卡</string>
     <string name="matters_needing_attention2">2.银行卡信息完成后，已绑定的银行卡信息不能进行修改和删除</string>
     <string name="matters_needing_attention3">3.所绑定的银行卡必须在使用中</string>
@@ -79,7 +69,6 @@
 
     <string name="recommend_article">优秀文章(默认)</string>
     <string name="recommend_video">推荐视频</string>
-    <string name="contentnotbull">您还没有输入内容</string>
     <string name="please_fill_in">请确认您填写的是否有误</string>
     <string name="confirm_your_bans">请确定您的所属银行</string>
     <string name="please_choose_yourbank">请选择您的银行</string>
@@ -116,17 +105,9 @@
 
 
     <!-- 压缩-->
-    <string name="compress_load_library_succeed">load library success</string>
-    <string name="compress_load_library_failed">load library failed,reason:%1$s</string>
     <string name="compress_succeed">compress success</string>
-    <string name="compress_failed">compress failed, reason: %1$s</string>
-    <string name="compress_progress">progress: %1$s</string>
-    <string name="compree_please_input_command">please input command</string>
 
     <!-- 录制视频-->
-    <string name="record_video">record video</string>
-    <string name="run_compress_command">run compress command</string>
-    <string name="no_video_tips">video file not found, please record first</string>
     <string name="fail_when_camera_try_autofocus">autofocus failed:%1$s</string>
     <string name="dont_have_camera_error">camera not found!</string>
     <string name="only_have_one_camera">camera cannot switch</string>
@@ -134,11 +115,6 @@
     <string name="camera_init_fail">camera initialization failed</string>
     <string name="dont_have_front_camera">front camera not found</string>
     <string name="changing_flashLight_mode">flashlisht mode</string>
-    <string name="open_video">open video</string>
-    <string name="confirm">confirm</string>
     <string name="cancel">cancel</string>
-    <string name="compress_result_input_output">input:%1$s,size:%2$s,output:%3$s,size:%4$s</string>
-    <string name="path">video path:%1$s,size:%2$s</string>
-    <string name="dont_have_app_to_open_file">cannot open file</string>
 
 </resources>

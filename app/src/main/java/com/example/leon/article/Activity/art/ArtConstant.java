@@ -26,11 +26,14 @@ public class ArtConstant {
     public static final String SHOW_ARTICLEFRAGMENT = "SHOW_ARTICLE";
     public static final String SHOW_ARTICLE_VIDEOFRAGMENT = "SHOW_VideoFragment";
 
-    //BaseURL
+    //BaseURL(正式)
     public static final String BASE_URL = "http://121.127.226.160/api/";
-    //    public static final String BASE_URL = "http://118.89.233.35:8989/api/";
+    //(测试)
+//    public static final String BASE_URL = "http://118.89.233.35:8989/api/";
 
+    //正式
     public static final String BASE_IMGURL = "http://121.127.226.160";
+    //测试
     //    public static final String BASE_IMGURL = "http://118.89.233.35:8989";
 
     public static final String AddVideo = "?Key=55a50c1a06f9c1032014112cbd68f34b&Action=AddVideo";

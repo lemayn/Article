@@ -9,7 +9,6 @@ import android.media.MediaPlayer.OnInfoListener;
 import android.media.MediaPlayer.OnPreparedListener;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -172,7 +171,6 @@ public class VideoPlayerActivity extends BaseActivity implements
 			startActivity(new Intent(VideoPlayerActivity.this, UpVideoActivity.class).putExtra(UpVideoActivity.RECORD_VIDEO_PATH,mPath)
 			.putExtra(CommonIntentExtra.VIDEO_TITLE,videoTitle)
 			.putExtra(CommonIntentExtra.VIDEO_CONTENT,videoContent));
-			Log.i("FiDo", "添加滤镜后的视频地址为："+mPath);
 			finish();
 			// MeiPaiApplication.getInstance().exit();
 			break;

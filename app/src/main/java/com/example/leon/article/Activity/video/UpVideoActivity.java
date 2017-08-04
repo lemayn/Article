@@ -143,7 +143,7 @@ public class UpVideoActivity extends AppCompatActivity implements View.OnClickLi
         if (intent != null) {
             mRecordPath = intent.getStringExtra(UpVideoActivity.RECORD_VIDEO_PATH);
             if (!TextUtils.isEmpty(mRecordPath)) {
-                Log.i("FiDo", "GetRecordPath: "+ mRecordPath);
+//                Log.i("FiDo", "GetRecordPath: "+ mRecordPath);
                 //显示图片和播放地址
                 firstBitmap = CreateBitmap.getLocalVideoThumbnail(mRecordPath);
                 iv_cover.setImageBitmap(firstBitmap);
@@ -484,7 +484,6 @@ public class UpVideoActivity extends AppCompatActivity implements View.OnClickLi
                     String time = retr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION);//获取视频时长
                     String mWidth = retr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_VIDEO_WIDTH);//宽
                     String mHeight = retr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_VIDEO_HEIGHT);//高
-                    Log.i("FiDo", "上传前文件宽为: " + mWidth + " 高为：" + mHeight);
                     double scale = Double.parseDouble(mWidth) / Double.parseDouble(mHeight);
                     execCommand("-y -i " + currentInputVideoPath + " -strict -2 -vcodec libx264 -preset ultrafast " +
                             "-crf 19 -acodec aac -ar 44100 -ac 2 -b:a 96k -s " + getUploadScale(Double.parseDouble(mWidth), Double.parseDouble(mHeight), scale) + " -aspect 16:9 " + currentOutputVideoPath);
@@ -506,13 +505,12 @@ public class UpVideoActivity extends AppCompatActivity implements View.OnClickLi
                     uri = data.getData();
 //                    currentInputVideoPath = UriAllUriUtils.getPath(this, uri);
                     mRecordPath = UriAllUriUtils.getPath(this, uri);
-                    Log.i("FiDo", "选取相册文件压缩路径为: "+mRecordPath);
+//                    Log.i("FiDo", "选取相册文件压缩路径为: "+mRecordPath);
                     MediaMetadataRetriever retr = new MediaMetadataRetriever();
                     retr.setDataSource(mRecordPath);
-                    String time = retr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION);//获取视频时长
+//                    String time = retr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION);//获取视频时长
                     String mWidth = retr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_VIDEO_WIDTH);//宽
                     String mHeight = retr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_VIDEO_HEIGHT);//高
-                    Log.i("FiDo", "上传前文件宽为: " + mWidth + " 高为：" + mHeight);
                     double scale = Double.parseDouble(mWidth) / Double.parseDouble(mHeight);
                     if (uri != null) {
                         execCommand("-y -i " + mRecordPath + " -strict -2 -vcodec libx264 -preset ultrafast " +

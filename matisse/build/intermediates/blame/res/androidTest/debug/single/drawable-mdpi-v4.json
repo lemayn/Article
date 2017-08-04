@@ -180,12 +180,12 @@
         "source": "D:\\AndroidWorkApp\\Article_WCXW\\matisse\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.3.1\\res\\drawable-mdpi-v4\\abc_btn_radio_to_on_mtrl_015.png"
     },
     {
-        "merged": "D:\\AndroidWorkApp\\Article_WCXW\\matisse\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-mdpi-v4\\abc_spinner_mtrl_am_alpha.9.png",
-        "source": "D:\\AndroidWorkApp\\Article_WCXW\\matisse\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.3.1\\res\\drawable-mdpi-v4\\abc_spinner_mtrl_am_alpha.9.png"
-    },
-    {
         "merged": "D:\\AndroidWorkApp\\Article_WCXW\\matisse\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-mdpi-v4\\abc_menu_hardkey_panel_mtrl_mult.9.png",
         "source": "D:\\AndroidWorkApp\\Article_WCXW\\matisse\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.3.1\\res\\drawable-mdpi-v4\\abc_menu_hardkey_panel_mtrl_mult.9.png"
+    },
+    {
+        "merged": "D:\\AndroidWorkApp\\Article_WCXW\\matisse\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-mdpi-v4\\abc_spinner_mtrl_am_alpha.9.png",
+        "source": "D:\\AndroidWorkApp\\Article_WCXW\\matisse\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.3.1\\res\\drawable-mdpi-v4\\abc_spinner_mtrl_am_alpha.9.png"
     },
     {
         "merged": "D:\\AndroidWorkApp\\Article_WCXW\\matisse\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-mdpi-v4\\abc_ic_star_black_48dp.png",

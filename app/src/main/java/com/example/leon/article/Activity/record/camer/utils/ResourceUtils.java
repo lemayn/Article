@@ -5,7 +5,7 @@ import android.graphics.drawable.Drawable;
 import android.widget.ImageView;
 
 import com.example.leon.article.Activity.record.camer.log.Logger;
-import com.zzti.fengyongge.imagepicker.util.StringUtils;
+import com.yixia.camera.util.StringUtils;
 
 import java.io.File;
 import java.io.FileOutputStream;

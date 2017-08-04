@@ -54,9 +54,11 @@ public class PublishFragment extends Fragment implements View.OnClickListener {
                         break;
                     case 1:  //点击发表文章
                         GoEditorActivity();
+                        mSpinner.setSelectedIndex(0);
                         break;
                     case 2: //点击发表视频
                         GoVideoActivity();
+                        mSpinner.setSelectedIndex(0);
                         break;
                 }
             }

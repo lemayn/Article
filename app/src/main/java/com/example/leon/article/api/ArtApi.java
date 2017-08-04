@@ -126,11 +126,9 @@ public interface ArtApi {
                                                @Field("type") int type);
 
     /**
-     * 测试多图片上传
+     * 多图片上传
      */
     @Multipart
     @POST("?Key=55a50c1a06f9c1032014112cbd68f34b&Action=AddImg")
-//    Observable<ResponseBody> upLoadMuiltImgs(@PartMap Map<String , RequestBody> params);
-//    Observable<ResponseBody> upLoadMuiltImgs(@PartMap MultipartBody.Part file);
     Observable<ImgTagBean> upLoadMuiltImgs(@PartMap Map<String, RequestBody> params, @Part List<MultipartBody.Part> files);
 }

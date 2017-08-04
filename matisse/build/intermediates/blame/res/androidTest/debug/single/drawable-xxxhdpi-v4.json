@@ -60,12 +60,12 @@
         "source": "D:\\AndroidWorkApp\\Article_WCXW\\matisse\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.3.1\\res\\drawable-xxxhdpi-v4\\abc_btn_radio_to_on_mtrl_000.png"
     },
     {
-        "merged": "D:\\AndroidWorkApp\\Article_WCXW\\matisse\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxxhdpi-v4\\ic_check_white_18dp.png",
-        "source": "D:\\AndroidWorkApp\\Article_WCXW\\matisse\\build\\intermediates\\bundles\\debug\\res\\drawable-xxxhdpi-v4\\ic_check_white_18dp.png"
-    },
-    {
         "merged": "D:\\AndroidWorkApp\\Article_WCXW\\matisse\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxxhdpi-v4\\abc_ic_menu_copy_mtrl_am_alpha.png",
         "source": "D:\\AndroidWorkApp\\Article_WCXW\\matisse\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\25.3.1\\res\\drawable-xxxhdpi-v4\\abc_ic_menu_copy_mtrl_am_alpha.png"
+    },
+    {
+        "merged": "D:\\AndroidWorkApp\\Article_WCXW\\matisse\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxxhdpi-v4\\ic_check_white_18dp.png",
+        "source": "D:\\AndroidWorkApp\\Article_WCXW\\matisse\\build\\intermediates\\bundles\\debug\\res\\drawable-xxxhdpi-v4\\ic_check_white_18dp.png"
     },
     {
         "merged": "D:\\AndroidWorkApp\\Article_WCXW\\matisse\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xxxhdpi-v4\\abc_btn_check_to_on_mtrl_015.png",
